@@ -7,7 +7,7 @@ gem 'rails', '4.0.0.rc1'
 gem 'sqlite3'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0.rc1'
+#gem 'sass-rails', '~> 4.0.0.rc1'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 1.0.1'
 
 # Use twitter bootstrap as ui framework
 gem 'twitter-bootstrap-rails'
+
+gem "less-rails"
 
 # Javascript runtime for bootstrap's LESS files to compile to CSS.
 gem 'therubyracer', :platforms => :ruby

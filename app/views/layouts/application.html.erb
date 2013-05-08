@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Attendance</title>
+  <title><%= content_for?(:title) ? yield(:title) : "Padma Attendance" %></title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-<%= yield %>
+<%= render 'layouts/navbar' %>
+<div class="container">
+  <div class="content">
+    <div class="row">
+      <div class="span12" id="flash_messages">
+        <%= render 'layouts/flash_messages' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span12">
+        <%= yield %>
+      </div>
+
+    </div><!--/row-->
+  </div><!--/content-->
+
+  <footer>
+    <p>&copy; PADMA 2012</p>
+  </footer>
+
+</div>
+
 
 </body>
 </html>
