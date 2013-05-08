@@ -1,0 +1,14 @@
+es:
+  layouts:
+    navbar:
+      time_slots: "Horarios"
+  time_slots:
+    index:
+      title: "Horarios"
+  activerecord:
+    attributes:
+      time_slot:
+        name: "Nombre"
+        start_at: "Inicio"
+        end_at: "Fin"
+        padma_uid: "Instructor"	

@@ -20,4 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  time_slots:
+    index:
+      title: "Time Slots"
+  activerecord:
+    attributes:
+      time_slot:
+        padma_uid: "Instructor"	

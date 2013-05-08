@@ -47,6 +47,9 @@ gem 'protected_attributes'
 gem 'devise', github: 'plataformatec/devise', :branch => 'rails4'
 gem 'devise_cas_authenticatable'
 
+# authorization
+gem 'cancan'
+
 # Padma Clients
 gem 'activity_stream_client'
 gem 'contacts_client'

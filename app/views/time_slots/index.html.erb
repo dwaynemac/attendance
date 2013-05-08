@@ -1,0 +1,24 @@
+<h1><%= t('time_slots.index.title') %></h1>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <td><%= TimeSlot.human_attribute_name(:name) %></td>
+    <td><%= TimeSlot.human_attribute_name(:padma_uid) %></td>
+    <td><%= TimeSlot.human_attribute_name(:start_at) %></td>
+    <td><%= TimeSlot.human_attribute_name(:end_at) %></td>
+  </tr>
+  </thead>
+  <tbody>
+  <% @time_slots.each do |ts| %>
+    <tr>
+      <td><%= ts.name %></td>
+      <td><%= ts.padma_uid %></td>
+      <td><%= ts.start_at.strftime('%H:%M') %></td>
+      <td><%= ts.end_at.strftime('%H:%M') %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New', "#", :class => 'btn btn-primary' %>
