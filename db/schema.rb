@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130508005510) do
+ActiveRecord::Schema.define(version: 20130508035220) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
+  end
+
+  create_table "time_slots", force: true do |t|
+    t.string   "padma_uid"
+    t.integer  "account_id"
+    t.string   "name"
+    t.time     "start_at"
+    t.time     "end_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

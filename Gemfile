@@ -65,5 +65,8 @@ gem 'accounts_client'
 # gem 'debugger', group: [:development, :test]
 
 group :test, :development do
-  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
+
+gem 'validates_timeliness'

@@ -68,6 +68,11 @@ GEM
       mime-types (~> 1.18)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
     ffi (1.0.11)
     gravtastic (3.2.6)
     hike (1.2.2)
@@ -125,14 +130,17 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.4)
-    rspec (2.13.0)
-      rspec-core (~> 2.13.0)
-      rspec-expectations (~> 2.13.0)
-      rspec-mocks (~> 2.13.0)
     rspec-core (2.13.1)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.13.1)
+    rspec-rails (2.13.1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 2.13.0)
+      rspec-expectations (~> 2.13.0)
+      rspec-mocks (~> 2.13.0)
     rubycas-client (2.3.9)
       activesupport
     sdoc (0.3.20)
@@ -155,6 +163,7 @@ GEM
     thread_safe (0.1.0)
       atomic
     tilt (1.4.0)
+    timeliness (0.3.7)
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
@@ -170,6 +179,8 @@ GEM
     uglifier (2.0.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    validates_timeliness (3.0.14)
+      timeliness (~> 0.3.6)
     warden (1.2.1)
       rack (>= 1.0)
 
@@ -183,15 +194,17 @@ DEPENDENCIES
   contacts_client
   devise!
   devise_cas_authenticatable
+  factory_girl_rails
   jbuilder (~> 1.0.1)
   jquery-rails
   less-rails
   protected_attributes
   rails (= 4.0.0.rc1)
-  rspec
+  rspec-rails
   sdoc
   sqlite3
   therubyracer
   turbolinks
   twitter-bootstrap-rails
   uglifier (>= 1.3.0)
+  validates_timeliness
