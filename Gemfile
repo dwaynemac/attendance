@@ -61,3 +61,7 @@ gem 'accounts_client'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+group :test, :development do
+  gem 'rspec'
+end
