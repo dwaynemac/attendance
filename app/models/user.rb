@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  attr_accessible :username, :current_account_id
+
   devise :cas_authenticatable
 
   validates_uniqueness_of :username
