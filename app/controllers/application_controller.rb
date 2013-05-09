@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 
   def set_current_account
     if signed_in? && current_user.padma_enabled?
-      current_user.current_account = Account.find_or_create_by(name: current_user.padma.enabled_accounts.first.name)
+      current_user.current_account = Account.find_or_create_by(name: current_user.enabled_accounts.first.name)
     end
   end
 

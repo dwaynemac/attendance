@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<legend><%= t('time_slots.show.title') %></legend>
+
+<p>
+  <b><%=TimeSlot.human_attribute_name :name %></b><br>
+  <%= @time_slot.name %>
+</p>
+
+<p>
+  <b><%=TimeSlot.human_attribute_name :padma_uid %></b><br>
+  <%= @time_slot.padma_uid %>
+</p>
+
+
+<p>
+  <b><%=TimeSlot.human_attribute_name :start_at %></b><br>
+  <%= @time_slot.start_at.strftime('%H:%M') %>
+</p>
+
+<p>
+  <b><%=TimeSlot.human_attribute_name :end_at %></b><br>
+  <%= @time_slot.end_at.strftime('%H:%M') %>
+</p>
+
+<%= link_to 'Edit', edit_time_slot_path(@time_slot), :class => 'btn' %>
+<%= link_to 'Back', time_slots_path, :class => 'btn' %>
+<%= link_to t('destroy'), @time_slot, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger' %>

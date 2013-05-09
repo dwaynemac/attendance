@@ -1,0 +1,48 @@
+<%= form_for @time_slot, :html => { :class => 'form-horizontal' } do |f| %>
+  <% if @time_slot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@time_slot.errors.count, "error") %> prohibited this time_slot from being saved:</h2>
+
+      <ul>
+      <% @time_slot.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset>
+    <legend><%= t("time_slots.#{controller.action_name}.title") %></legend>
+
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :start_at, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.time_select :start_at %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :end_at, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.time_select :end_at %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :padma_uid, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :padma_uid, current_user.current_account.usernames %>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to 'Show', @time_slot, :class => 'btn' if @time_slot.persisted? %>
+    <%= link_to t('destroy'), @time_slot, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+    <%= link_to 'Cancel', time_slots_path, :class => 'btn' %>
+  </div>
+<% end %>

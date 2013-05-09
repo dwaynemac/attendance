@@ -23,6 +23,13 @@ en:
   time_slots:
     index:
       title: "Time Slots"
+    new:
+      title: "New Time Slot"
+    edit:
+      title: "Editing Time Slot"
+    show:
+      title: "Time Slot"
+
   activerecord:
     attributes:
       time_slot:
