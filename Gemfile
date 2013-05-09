@@ -73,3 +73,9 @@ group :test, :development do
 end
 
 gem 'validates_timeliness'
+
+group :development do
+  # for easier error debugging in development.
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
