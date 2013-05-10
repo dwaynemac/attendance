@@ -20,7 +20,7 @@
       <td>
         <%= link_to 'Show', ts, :class => 'btn btn-mini' %>
         <%= link_to 'Edit', edit_time_slot_path(ts), :class => 'btn btn-mini' %>
-        <%= link_to t('destroy'), time_slot_path(ts), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        <%= link_to t('destroy'), time_slot_path(ts), :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
       </td>
     </tr>
   <% end %>

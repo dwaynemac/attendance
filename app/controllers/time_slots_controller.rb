@@ -19,7 +19,7 @@ class TimeSlotsController < ApplicationController
 
   def update
     # @time_slot initialized by load_and_authorize_resource
-    if @time_slot.update_attributes(params[:time_slot])
+    if @time_slot.update(params[:time_slot])
       redirect_to @time_slot, notice: 'Time slot was successfully updated.'
     else
       render action: 'edit'

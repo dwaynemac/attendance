@@ -42,7 +42,7 @@
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to 'Show', @time_slot, :class => 'btn' if @time_slot.persisted? %>
-    <%= link_to t('destroy'), @time_slot, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+    <%= link_to t('destroy'), @time_slot, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
     <%= link_to 'Cancel', time_slots_path, :class => 'btn' %>
   </div>
 <% end %>

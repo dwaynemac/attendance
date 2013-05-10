@@ -25,4 +25,4 @@
 
 <%= link_to 'Edit', edit_time_slot_path(@time_slot), :class => 'btn' %>
 <%= link_to 'Back', time_slots_path, :class => 'btn' %>
-<%= link_to t('destroy'), @time_slot, :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+<%= link_to t('destroy'), @time_slot, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
