@@ -5,10 +5,22 @@ es:
   time_slots:
     index:
       title: "Horarios"
+  attendance:
+    index:
+      title: "Asistencias"
   activerecord:
     attributes:
       time_slot:
         name: "Nombre"
         start_at: "Inicio"
         end_at: "Fin"
-        padma_uid: "Instructor"	
+        padma_uid: "Instructor"
+  flash:
+    actions:
+      create:
+        notice: "{resource_name} se creó exitosamente"
+      update:
+        notice: "{resource_name} se actualizó exitosamente"
+      destroy:
+        notice: "{resource_name} se destruyó exitosamente"
+        alert: "{resource_name} no pudo ser destruido"	

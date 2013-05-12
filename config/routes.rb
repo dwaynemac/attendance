@@ -1,4 +1,5 @@
 Assistance::Application.routes.draw do
+
   devise_for :users 
   devise_scope :user do
     get "/login", :to => "devise/cas_sessions#new"
@@ -8,7 +9,7 @@ Assistance::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'time_slots#index'
+  root 'attendances#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -18,7 +19,7 @@ Assistance::Application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :time_slots
-
+  resources :attendances
   # Example resource route with options:
   #   resources :products do
   #     member do
