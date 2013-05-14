@@ -18,3 +18,4 @@
 # Ignore .rvmrc
 .rvmrc
 .ruby-version
+Procfile.dev

@@ -77,6 +77,8 @@ end
 gem 'validates_timeliness'
 
 group :development do
+  gem 'foreman'
+
   # for easier error debugging in development.
   gem 'better_errors'
   gem 'binding_of_caller'
