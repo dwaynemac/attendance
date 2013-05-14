@@ -1,3 +1,20 @@
-<h3><%= t('attendance.index.title') %></h3>
-
-<p>Find me in app/views/attendance/index.html.erb</p>
+<h3><%= t('attendances.index.title') %></h3>
+<ul>
+<% (0..7).each do |n| %>
+	<li>
+		<%= date = n.days.ago.to_date %>
+		<ul>
+			<% current_user.current_account.time_slots.each do |time_slot| %>
+				<li>
+					<%= time_slot.name %>
+					<% if att = @attendances.select {|a| a.attendance_on == date && a.time_slot == time_slot}.first %>
+						<%= link_to 'View', att, :class => 'btn btn-mini' %>
+					<% else %>
+						<%= link_to 'New', new_attendance_path(:attendance_on => date, :time_slot_id => time_slot.id), :class => 'btn btn-mini' %>
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+	</li>	
+<% end %>
+</ul>

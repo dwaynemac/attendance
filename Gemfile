@@ -35,6 +35,8 @@ gem "less-rails"
 # Javascript runtime for bootstrap's LESS files to compile to CSS.
 gem 'therubyracer', :platforms => :ruby
 
+gem 'angularjs-rails'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

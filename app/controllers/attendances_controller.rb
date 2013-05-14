@@ -1,7 +1,6 @@
 class AttendancesController < ApplicationController
   load_and_authorize_resource
-  respond_to :json
-  respond_to :html, :only => [:index]
+  respond_to :html
 
   def index
     respond_with @attendances

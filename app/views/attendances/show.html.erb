@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<legend><%= t('attendances.show.title') %></legend>
+
+<p>
+  <b><%=Attendance.human_attribute_name :attendance_on %></b><br>
+  <%= @attendance.attendance_on %>
+</p>
+
+<p>
+  <b><%=Attendance.human_attribute_name :time_slot %></b><br>
+  <%= @attendance.time_slot.name %>
+</p>
+
+<%= link_to 'Edit', edit_attendance_path(@attendance), :class => 'btn' %>
+<%= link_to 'Back', attendances_path, :class => 'btn' %>
+<%= link_to t('destroy'), @attendance, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
