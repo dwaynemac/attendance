@@ -55,7 +55,7 @@ gem 'cancan'
 # Padma Clients
 gem 'activity_stream_client'
 gem 'contacts_client'
-gem 'accounts_client'
+gem 'accounts_client', '>= 0.0.16'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
