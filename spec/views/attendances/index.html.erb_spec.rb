@@ -2,9 +2,16 @@ require 'spec_helper'
 
 describe "attendances/index" do
   before(:each) do
+    account = create(:account)
+    
     assign(:attendances, [
-      create(:attendance),
-      create(:attendance)
+      create(:attendance, :account => account),
+      create(:attendance, :account => account)
+    ])
+
+    assign(:time_slots, [
+      create(:time_slot, :account => account),
+      create(:time_slot, :account => account)
     ])
   end
 

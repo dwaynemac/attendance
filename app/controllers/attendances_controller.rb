@@ -3,6 +3,7 @@ class AttendancesController < ApplicationController
   respond_to :html
 
   def index
+    @time_slots = current_user.current_account.time_slots
     respond_with @attendances
   end
 

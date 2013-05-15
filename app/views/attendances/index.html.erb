@@ -4,7 +4,7 @@
 	<li>
 		<%= date = n.days.ago.to_date %>
 		<ul>
-			<% current_user.current_account.time_slots.each do |time_slot| %>
+			<% @time_slots.each do |time_slot| %>
 				<li>
 					<%= time_slot.name %>
 					<% if att = @attendances.select {|a| a.attendance_on == date && a.time_slot == time_slot}.first %>

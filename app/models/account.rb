@@ -4,6 +4,7 @@ class Account < ActiveRecord::Base
   validates_uniqueness_of :name
 
   has_many :time_slots
+  has_many :contacts
 
   # Hook to Padma Account API
   # @param [TrueClass] cache: Specify if Cache should be used. default: true
