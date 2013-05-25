@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   def mock_login
     if Rails.env.development?
       a = Account.find_or_create_by(name: "development")
-      user = User.find_or_create_by(username: "mocked.user", current_account_id: a.id)
+      user = User.find_or_create_by(username: "luis.perichon", current_account_id: a.id)
 
       sign_in(user)
     end

@@ -12,6 +12,12 @@
   <%= @attendance.time_slot.name %>
 </p>
 
+<ul>
+<% @attendance.contacts.each do |c| %>
+	<li><%= c.padma_id %></li>	
+<% end %>
+</ul>
+
 <%= link_to 'Edit', edit_attendance_path(@attendance), :class => 'btn' %>
 <%= link_to 'Back', attendances_path, :class => 'btn' %>
 <%= link_to t('destroy'), @attendance, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>

@@ -11,11 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130515123115) do
+ActiveRecord::Schema.define(version: 20130525174310) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
   end
+
+  create_table "attendance_contacts", force: true do |t|
+    t.integer "attendance_id"
+    t.integer "contact_id"
+  end
+
+  add_index "attendance_contacts", ["attendance_id"], name: "index_attendance_contacts_on_attendance_id"
+  add_index "attendance_contacts", ["contact_id"], name: "index_attendance_contacts_on_contact_id"
 
   create_table "attendances", force: true do |t|
     t.integer  "account_id"

@@ -25,4 +25,8 @@ class User < ActiveRecord::Base
     self.current_account_id_changed?
   end
 
+  def students
+    PadmaContact.paginate(where: {local_status: :student, local_teacher: self.padma_id}, username: self.padma_id, account_name: self.current_account.padma_id)
+  end
+
 end
