@@ -19,3 +19,4 @@
 .rvmrc
 .ruby-version
 Procfile.dev
+/config/padma_api.yml
