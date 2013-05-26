@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130525174310) do
+ActiveRecord::Schema.define(version: 20130526013336) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -54,6 +54,20 @@ ActiveRecord::Schema.define(version: 20130525174310) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "trial_lessons", force: true do |t|
+    t.integer  "account_id"
+    t.integer  "contact_id"
+    t.integer  "time_slot_id"
+    t.date     "trial_on"
+    t.string   "padma_uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "trial_lessons", ["account_id"], name: "index_trial_lessons_on_account_id"
+  add_index "trial_lessons", ["contact_id"], name: "index_trial_lessons_on_contact_id"
+  add_index "trial_lessons", ["time_slot_id"], name: "index_trial_lessons_on_time_slot_id"
 
   create_table "users", force: true do |t|
     t.string   "username"
