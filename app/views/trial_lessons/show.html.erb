@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<legend><%= t('trial_lessons.show.title') %></legend>
+
+<p>
+  <b><%= TrialLesson.human_attribute_name :trial_on %></b><br>
+  <%= @trial_lesson.trial_on %>
+</p>
+
+<p>
+  <b><%= TrialLesson.human_attribute_name :time_slot %></b><br>
+  <%= @trial_lesson.time_slot.name %>
+</p>
+
+<p>
+  <b><%= TrialLesson.human_attribute_name :contact %></b><br>
+  <%= @trial_lesson.contact.padma_id %>
+</p>
+
+<p>
+  <b><%= TrialLesson.human_attribute_name :padma_uid %></b><br>
+  <%= @trial_lesson.padma_uid %>
+</p>
+
+<%= link_to 'Edit', edit_trial_lesson_path(@trial_lesson) %> |
+<%= link_to 'Back', trial_lessons_path %>

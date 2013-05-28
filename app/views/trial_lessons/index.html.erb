@@ -1,0 +1,20 @@
+<h1>Listing trial_lessons</h1>
+
+<ul>
+    <% @trial_lessons.group_by { |t| t.trial_on }.each do |date, trial_lessons| %>
+      <h3><%= date %></h3>
+      <% trial_lessons.each do |trial_lesson| %>
+      <li>
+        <%= trial_lesson.time_slot.name %> - <%= trial_lesson.contact.padma_id %>
+        <%= link_to 'Show', trial_lesson %>
+        <%= link_to 'Edit', edit_trial_lesson_path(trial_lesson) %>
+        <%= link_to 'Destroy', trial_lesson, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </li>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Trial lesson', new_trial_lesson_path %>

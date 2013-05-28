@@ -20,6 +20,7 @@ Assistance::Application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :time_slots
   resources :attendances
+  resources :trial_lessons
   # Example resource route with options:
   #   resources :products do
   #     member do

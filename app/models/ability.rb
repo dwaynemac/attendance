@@ -14,6 +14,7 @@ class Ability
     # user can do everything on templates of his account.
     can :manage, TimeSlot, account_id: user.current_account_id
     can :manage, Attendance, account_id: user.current_account_id
+    can :manage, TrialLesson, account_id: user.current_account_id
     #
     # The first argument to `can` is the action you are giving the user 
     # permission to do.
