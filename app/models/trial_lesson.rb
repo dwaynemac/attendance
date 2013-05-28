@@ -8,7 +8,6 @@ class TrialLesson < ActiveRecord::Base
   validates :time_slot, presence: true
   validates :padma_uid, presence: true
   validates :trial_on, presence: true
-  validates_date :trial_on, on_or_after: :today
 
   attr_accessor :padma_contact_id
 

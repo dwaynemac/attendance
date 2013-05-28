@@ -20,8 +20,4 @@ describe TrialLesson do
 	it "should require a user" do
 	  build(:trial_lesson, :padma_uid => nil).should_not be_valid
 	end
-
-	it "should have a date in future" do
-	  build(:trial_lesson, :trial_on => Date.yesterday).should_not be_valid
-	end
 end
