@@ -19,6 +19,6 @@ class TrialLesson < ActiveRecord::Base
   end
 
   def padma_contact_id
-    self.contact.padma_id
+    self.contact.try(:padma_id)
   end
 end

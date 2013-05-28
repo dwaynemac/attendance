@@ -14,7 +14,7 @@
 
 <ul>
 <% @attendance.contacts.each do |c| %>
-	<li><%= c.padma_id %></li>	
+	<li><%= c.padma_contact.first_name %> <%= c.padma_contact.last_name %></li>	
 <% end %>
 </ul>
 
