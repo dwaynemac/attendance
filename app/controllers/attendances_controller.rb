@@ -8,6 +8,12 @@ class AttendancesController < ApplicationController
   end
 
   def new
+    @padma_contacts = current_user.current_account.students
+    respond_with @attendance
+  end
+
+  def edit
+    @padma_contacts = current_user.current_account.students
     respond_with @attendance
   end
   

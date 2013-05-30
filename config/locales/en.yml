@@ -29,9 +29,12 @@ en:
       title: "Editing Time Slot"
     show:
       title: "Time Slot"
-  attendance:
+  attendances:
     index:
       title: "Attendance"
+      new: "Create attendance"
+      view: "View attendance"
+      new_empty: "No one came"
   activerecord:
     attributes:
       time_slot:

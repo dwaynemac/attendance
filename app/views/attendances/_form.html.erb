@@ -27,7 +27,7 @@
   </fieldset>
   <fieldset>
     <ul>
-    <% current_user.current_account.students.each do |c| %>
+    <% @padma_contacts.each do |c| %>
       <li><%= check_box_tag "attendance[padma_contacts][]", c._id, @attendance.contacts.collect(&:padma_id).include?(c._id) %><%= label_tag "attendance[padma_contacts][]", "#{c.first_name} #{c.last_name}", :for => "attendance[padma_contacts][]" %></li>
     <% end%>
     </ul>

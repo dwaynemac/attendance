@@ -5,7 +5,7 @@ es:
   time_slots:
     index:
       title: "Horarios"
-  attendance:
+  attendances:
     index:
       title: "Asistencias"
   activerecord:
