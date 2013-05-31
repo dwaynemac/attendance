@@ -14,10 +14,12 @@ class Attendance < ActiveRecord::Base
 
   attr_accessible :account_id, :time_slot_id, :attendance_on, :padma_contacts
 
+  accepts_nested_attributes_for :attendance_contacts
+
   def padma_contacts= padma_contacts
   	contact_ids = []
   	padma_contacts.each do |padma_contact_id|
-    	contact = Contact.find_or_create_by_padma_id(padma_contact_id, account_id: self.account.id)
+    	contact = Contact.find_or_create_by(padma_id: padma_contact_id, account_id: time_slot.account.id)
     	contact_ids << contact.id
     end
     self.contact_ids = contact_ids

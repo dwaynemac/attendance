@@ -8,12 +8,12 @@ class AttendancesController < ApplicationController
   end
 
   def new
-    @padma_contacts = current_user.current_account.students
+    @padma_contacts = @attendance.time_slot.recurrent_contacts
     respond_with @attendance
   end
 
   def edit
-    @padma_contacts = current_user.current_account.students
+    @padma_contacts = @attendance.time_slot.recurrent_contacts
     respond_with @attendance
   end
   
@@ -22,7 +22,9 @@ class AttendancesController < ApplicationController
   end
 
   def create
+    @attendance.account = current_user.current_account
     @attendance.save
+    @padma_contacts = @attendance.time_slot.recurrent_contacts
     respond_with @attendance
   end
 

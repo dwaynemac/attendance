@@ -1,0 +1,1 @@
+$('#padma_contacts').replaceWith("<%= escape_javascript(render(:partial => 'attendances/padma_contacts'))  %>")
