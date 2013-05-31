@@ -25,11 +25,7 @@ class AttendancesController < ApplicationController
   end
 
   def create
-    params[:trial_lessons].each do |id|
-      tl = TrialLesson.where(:account_id => current_user.current_account.id).find(id)
-      tl.update_attribute(:assisted, true)
-    end 
-
+    update_trial_lessons params[:trial_lessons] if params[:trial_lessons]
     @attendance.account = current_user.current_account
     @attendance.save
     @padma_contacts = @attendance.time_slot.recurrent_contacts
@@ -37,10 +33,7 @@ class AttendancesController < ApplicationController
   end
 
   def update
-    params[:trial_lessons].each do |id|
-      tl = TrialLesson.where(:account_id => current_user.current_account.id).find(id)
-      tl.update_attribute(:assisted, true)
-    end 
+    update_trial_lessons params[:trial_lessons] if params[:trial_lessons]
     @attendance.update(params[:attendance])
     respond_with @attendance
   end
@@ -50,4 +43,13 @@ class AttendancesController < ApplicationController
     respond_with @attendance
   end
   
+  private
+  
+  def update_trial_lessons trial_lesson_ids
+    trial_lesson_ids.each do |id|
+      tl = TrialLesson.where(:account_id => current_user.current_account.id).find(id)
+      tl.update_attribute(:assisted, true)
+    end
+  end
+
 end
