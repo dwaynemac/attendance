@@ -12,10 +12,22 @@
   <%= @attendance.time_slot.name %>
 </p>
 
+<b><%= Attendance.human_attribute_name :trial_lessons %></b><br>
 <ul>
-<% @attendance.contacts.each do |c| %>
-	<li><%= c.padma_contact.first_name %> <%= c.padma_contact.last_name %></li>	
-<% end %>
+	<% @trial_lessons.each do |tl| %>
+	  <li>
+	  	<%= tl.contact.padma_contact.first_name %> <%= tl.contact.padma_contact.last_name %>
+	  	<%= content_tag :span, "Assisted", :class => "label label-success" if tl.assisted? %>
+	  	<%= content_tag :span, "Absent", :class => "label label-important" unless tl.assisted? %>
+	  </li>	
+	<% end %>
+</ul>
+
+<b><%=Attendance.human_attribute_name :contacts %></b><br>	
+<ul>
+	<% @attendance.contacts.each do |c| %>
+	  <li><%= c.padma_contact.first_name %> <%= c.padma_contact.last_name %></li>	
+	<% end %>
 </ul>
 
 <%= link_to 'Edit', edit_attendance_path(@attendance), :class => 'btn' %>

@@ -9,19 +9,27 @@ class AttendancesController < ApplicationController
 
   def new
     @padma_contacts = @attendance.time_slot.recurrent_contacts
+    @trial_lessons = TrialLesson.where(time_slot_id: @attendance.time_slot_id, trial_on: @attendance.attendance_on)
     respond_with @attendance
   end
 
   def edit
     @padma_contacts = @attendance.time_slot.recurrent_contacts
+    @trial_lessons = TrialLesson.where(time_slot_id: @attendance.time_slot_id, trial_on: @attendance.attendance_on)
     respond_with @attendance
   end
   
   def show
+    @trial_lessons = TrialLesson.where(time_slot_id: @attendance.time_slot_id, trial_on: @attendance.attendance_on)
     respond_with @attendance
   end
 
   def create
+    params[:trial_lessons].each do |id|
+      tl = TrialLesson.where(:account_id => current_user.current_account.id).find(id)
+      tl.update_attribute(:assisted, true)
+    end 
+
     @attendance.account = current_user.current_account
     @attendance.save
     @padma_contacts = @attendance.time_slot.recurrent_contacts
@@ -29,6 +37,10 @@ class AttendancesController < ApplicationController
   end
 
   def update
+    params[:trial_lessons].each do |id|
+      tl = TrialLesson.where(:account_id => current_user.current_account.id).find(id)
+      tl.update_attribute(:assisted, true)
+    end 
     @attendance.update(params[:attendance])
     respond_with @attendance
   end

@@ -11,7 +11,7 @@ class TrialLesson < ActiveRecord::Base
 
   attr_accessor :padma_contact_id
 
-  attr_accessible :trial_on, :time_slot_id, :padma_uid, :padma_contact_id
+  attr_accessible :trial_on, :time_slot_id, :padma_uid, :padma_contact_id, :assisted
 
   def padma_contact_id= padma_contact_id
   	self.contact = Contact.find_or_create_by_padma_id(padma_contact_id, account_id: self.time_slot.account.id)

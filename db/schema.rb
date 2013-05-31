@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130526013336) do
+ActiveRecord::Schema.define(version: 20130531191556) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20130526013336) do
     t.string   "padma_uid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "assisted"
   end
 
   add_index "trial_lessons", ["account_id"], name: "index_trial_lessons_on_account_id"

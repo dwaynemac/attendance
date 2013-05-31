@@ -25,6 +25,18 @@
       </div>
     </div>
     <div class="control-group">
+      <%= f.label :trial_lessons, :class => 'control-label' %>
+      <div class="controls">
+        <ul id="trial_lessons">
+          <% @trial_lessons.each do |tl| %>
+            <li>
+              <%= check_box_tag "trial_lessons[]", tl.id, tl.assisted? %><%= label_tag "trial_lessons[]", "#{tl.contact.padma_contact.first_name} #{tl.contact.padma_contact.last_name}" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>  
+    </div> 
+    <div class="control-group">
       <%= f.label :padma_contacts, :class => 'control-label' %>
       <div class="controls">
         <ul id="attendance_contacts">
