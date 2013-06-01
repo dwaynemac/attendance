@@ -1,6 +1,10 @@
 HYDRA = Typhoeus::Hydra.new
 
-CONFIG = YAML.load_file("#{Rails.root}/config/padma_api.yml")
+if Rails.env == 'development'
+	CONFIG = YAML.load_file("#{Rails.root}/config/padma_api.yml")
+else
+	CONFIG = {}
+end
 
 module Accounts
   API_KEY = ENV['accounts_key'] || CONFIG['accounts_key']
