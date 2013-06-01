@@ -222,7 +222,6 @@ DEPENDENCIES
   rails (= 4.0.0.rc1)
   rspec-rails
   sdoc
-  sprockets (~> 2.0)
   sqlite3
   therubyracer
   turbolinks

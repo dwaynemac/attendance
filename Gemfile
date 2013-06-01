@@ -33,8 +33,6 @@ gem "less-rails"
 # Javascript runtime for bootstrap's LESS files to compile to CSS.
 gem 'therubyracer', :platforms => :ruby
 
-gem 'sprockets', '~> 2.0'
-
 gem 'angularjs-rails'
 
 group :doc do
