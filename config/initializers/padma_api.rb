@@ -13,3 +13,8 @@ end
 module Contacts
   API_KEY = ENV['contacts_key3'] || CONFIG['contacts_key']
 end
+
+module ActivityStream
+  API_KEY = ENV['activities_key'] || CONFIG['activities_key']
+  LOCAL_APP_NAME = 'mailing'
+end
