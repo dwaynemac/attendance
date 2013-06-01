@@ -4,9 +4,6 @@ ruby "2.0.0"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0.rc1'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
 # Use SCSS for stylesheets
 #gem 'sass-rails', '~> 4.0.0.rc1'
 
@@ -79,8 +76,14 @@ gem 'validates_timeliness'
 
 group :development do
   gem 'foreman'
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
 
   # for easier error debugging in development.
   gem 'better_errors'
   gem 'binding_of_caller'
+end
+
+group :production do
+  gem 'pg'
 end
