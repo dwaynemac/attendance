@@ -6,10 +6,13 @@ class TimeSlotsController < ApplicationController
 
   def new
   end
+
+  def edit
+    @padma_contacts = current_user.current_account.students
+  end  
   
   def create
-    # @time_slot initialized by load_and_authorize_resource
-    # @time_slot.update_attribute("account_id", current_user.current_account.id)
+    @time_slot.account = current_user.current_account
     if @time_slot.save
       redirect_to @time_slot, notice: 'Time slot was successfully created.'
     else
@@ -18,7 +21,7 @@ class TimeSlotsController < ApplicationController
   end
 
   def update
-    # @time_slot initialized by load_and_authorize_resource
+    @time_slot.account = current_user.current_account
     if @time_slot.update(params[:time_slot])
       redirect_to @time_slot, notice: 'Time slot was successfully updated.'
     else
