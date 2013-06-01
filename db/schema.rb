@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130531191556) do
+ActiveRecord::Schema.define(version: 20130601220234) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -41,9 +41,11 @@ ActiveRecord::Schema.define(version: 20130531191556) do
     t.string   "padma_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "time_slot_id"
   end
 
   add_index "contacts", ["account_id"], name: "index_contacts_on_account_id"
+  add_index "contacts", ["time_slot_id"], name: "index_contacts_on_time_slot_id"
 
   create_table "time_slots", force: true do |t|
     t.string   "padma_uid"

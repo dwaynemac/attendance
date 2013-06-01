@@ -1,5 +1,6 @@
 class Contact < ActiveRecord::Base
 	belongs_to :account
+	belongs_to :time_slot
 
 	validates :account, :presence => true
 
