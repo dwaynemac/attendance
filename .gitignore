@@ -18,5 +18,6 @@
 # Ignore .rvmrc
 .rvmrc
 .ruby-version
+.ruby-gemset
 Procfile.dev
 /config/padma_api.yml
