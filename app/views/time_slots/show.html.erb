@@ -23,6 +23,11 @@
   <%= @time_slot.end_at.strftime('%H:%M') %>
 </p>
 
+<p>
+  <b><%=TimeSlot.human_attribute_name :cultural_activity %></b><br>
+  <%= @time_slot.cultural_activity %>
+</p>
+
 <b><%= TimeSlot.human_attribute_name :schedule %></b><br>	
 <ul>
 	<% Date::DAYNAMES.each do |dayname| %>

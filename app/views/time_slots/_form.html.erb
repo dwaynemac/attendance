@@ -37,6 +37,14 @@
         <%= f.select :padma_uid, current_user.current_account.usernames %>
       </div>
     </div>
+
+    <div class="control-group">
+      <%= f.label :cultural_activity, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.check_box :cultural_activity %>
+      </div>
+    </div>
+
     <div class="control-group">
       <%= f.label :schedule, :class => 'control-label' %>
       <div class="controls">
