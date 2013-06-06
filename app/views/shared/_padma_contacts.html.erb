@@ -1,0 +1,5 @@
+<ul id="padma_contacts">
+    <% @padma_contacts.each do |c| %>
+      <li><%= link_to "#{c.first_name} #{c.last_name}", "#", :class => 'add', :data => {:padma_id => c._id} %></li>
+    <% end%>
+</ul>

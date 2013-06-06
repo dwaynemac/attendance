@@ -64,7 +64,7 @@
         <ul id="time_slot_students">
           <% @time_slot.contacts.each do |c| %>
             <li>
-              <%= hidden_field_tag "time_slot[padma_contacts][]", c.padma_id %><%= link_to "#{c.padma_contact.first_name} #{c.padma_contact.last_name}", "#", :class => "delete_student" %>
+              <%= hidden_field_tag "time_slot[padma_contacts][]", c.padma_id %><%= link_to "#{c.padma_contact.first_name} #{c.padma_contact.last_name}", "#", :class => "delete" %>
             </li>
           <% end %>
         </ul>
@@ -74,8 +74,8 @@
   </fieldset>
   <% if @time_slot.persisted? %>
   <%= select_tag :padma_contacts_select, options_for_select({"All students" => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| ["#{username}'s students", username].flatten}])) %> 
-  <fieldset>
-    <%= render :partial => 'padma_contacts' %>
+  <fieldset id="time_slot_padma_contacts">
+    <%= render :partial => 'shared/padma_contacts' %>
   </fieldset>
   <% end %>
   <div class="form-actions">

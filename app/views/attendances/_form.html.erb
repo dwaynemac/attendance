@@ -42,7 +42,7 @@
         <ul id="attendance_contacts">
           <% @attendance.contacts.each do |c| %>
             <li>
-              <%= hidden_field_tag "attendance[padma_contacts][]", c.padma_id %><%= link_to "#{c.padma_contact.first_name} #{c.padma_contact.last_name}", "#", :class => "delete_attendance" %>
+              <%= hidden_field_tag "attendance[padma_contacts][]", c.padma_id %><%= link_to "#{c.padma_contact.first_name} #{c.padma_contact.last_name}", "#", :class => "delete" %>
             </li>
           <% end %>
         </ul>
@@ -50,8 +50,8 @@
     </div> 
   </fieldset>
   <%= select_tag :padma_contacts_select, options_for_select({"This time slot's recurrent contacts" => :recurrent_contacts}.merge(Hash[current_user.current_account.usernames.map {|username| ["#{username}'s students", username].flatten}])) %> 
-  <fieldset>
-    <%= render :partial => 'padma_contacts' %>
+  <fieldset id="attendance_padma_contacts">
+    <%= render :partial => 'shared/padma_contacts' %>
   </fieldset>
 
   <div class="form-actions">
