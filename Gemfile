@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+
 ruby "2.0.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -86,6 +87,6 @@ end
 
 group :production do
   gem 'pg'
-  gem 'rails_log_stdout',           github: 'heroku/rails_log_stdout'
-  gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
+  gem 'rails_log_stdout',           git: 'git://github.com/heroku/rails_log_stdout.git'
+  gem 'rails3_serve_static_assets', git: 'git://github.com/heroku/rails3_serve_static_assets.git'
 end
