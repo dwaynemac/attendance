@@ -23,6 +23,12 @@
   <%= @time_slot.end_at.strftime('%H:%M') %>
 </p>
 
+<b><%= TimeSlot.human_attribute_name :schedule %></b><br>	
+<ul>
+	<% Date::DAYNAMES.each do |dayname| %>
+	  <%= content_tag :li, dayname if @time_slot.send(dayname.downcase.to_sym) %>
+	<% end %>
+</ul>
 <%= link_to 'Edit', edit_time_slot_path(@time_slot), :class => 'btn' %>
 <%= link_to 'Back', time_slots_path, :class => 'btn' %>
 <%= link_to t('destroy'), @time_slot, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>

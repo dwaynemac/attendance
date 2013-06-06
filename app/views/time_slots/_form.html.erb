@@ -37,6 +37,18 @@
         <%= f.select :padma_uid, current_user.current_account.usernames %>
       </div>
     </div>
+    <div class="control-group">
+      <%= f.label :schedule, :class => 'control-label' %>
+      <div class="controls">
+        <% Date::DAYNAMES.each do |dayname| %>
+          <%= f.label dayname.downcase.to_sym, :class => 'checkbox inline' do %>
+            <%= dayname %>
+            <%= f.check_box dayname.downcase.to_sym %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
     <% if @time_slot.persisted? %>
     <div class="control-group">
       <%= f.label :padma_contacts, :class => 'control-label' %>

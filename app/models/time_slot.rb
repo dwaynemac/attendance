@@ -5,7 +5,7 @@ class TimeSlot < ActiveRecord::Base
   validates :name,  :presence => true
   validates_time :end_at, :after => :start_at
 
-  attr_accessible :padma_uid, :name, :start_at, :end_at, :padma_contacts
+  attr_accessible :padma_uid, :name, :start_at, :end_at, :padma_contacts, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday
 
   def recurrent_contacts
   	padma_contact_ids = AttendanceContact.joins(:attendance).joins(:contact).where('attendances.time_slot_id' => self.id).group('contacts.padma_id').count().keys
