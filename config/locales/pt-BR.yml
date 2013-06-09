@@ -1,0 +1,43 @@
+pt-BR:
+  activerecord:
+    attributes:
+      time_slot:
+        end_at: Final
+        name: Nome
+        padma_uid: Instrutor
+        start_at: Começo
+  attendances:
+    index:
+      new: Marcar presença
+      new_empty: Ninguém veio
+      title: Presenças
+      view: Ver presenças
+  flash:
+    actions:
+      create:
+        notice: '{resource_name} criado.'
+      destroy:
+        alert: 'Nāo conseguimos apagar {resource_name} '
+        notice: '{resource_name} apagado'
+      update:
+        notice: '{resource_name} atualiçado'
+  layouts:
+    navbar:
+      time_slots: Turmas
+      trial_lessons: "Aulas Experimentais"
+  time_slots:
+    edit:
+      title: Atualizando turma
+    index:
+      title: Turma
+      new: "Nova turma"
+    new:
+      title: Nova turma
+    show:
+      title: Turma
+  trial_lessons:
+    index:
+      new: "Cadastrar aula experimental"
+  new: "Novo"
+  edit: "Alterar"
+  back: "voltar"
