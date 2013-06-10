@@ -38,6 +38,7 @@ es:
   trial_lessons:
     index:
       new: "Marcar clase de prueba"
+    search_contact: "Buscar contacto"
   new: "Nuevo"
   edit: "Editar"
   back: "volver"

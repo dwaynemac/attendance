@@ -53,7 +53,7 @@
       }
 
       $("#trial_lesson_padma_contact_id").select2({
-        placeholder: "Search for a contact",
+        placeholder: "<%= t('trial_lessons.search_contact') %>",
         minimumInputLength: 3,
         ajax: {
           url: "http://localhost:3002/v0/contacts/search_for_select",

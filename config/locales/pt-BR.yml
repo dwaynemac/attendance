@@ -38,6 +38,7 @@ pt-BR:
   trial_lessons:
     index:
       new: "Cadastrar aula experimental"
+    search_contact: "Buscar contato"
   new: "Novo"
   edit: "Alterar"
   back: "voltar"

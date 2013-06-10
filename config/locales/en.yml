@@ -38,6 +38,7 @@ en:
   trial_lessons:
     index:
       new: "New Trial lesson"
+    search_contact: "Search for a contact"
   new: "New"
   edit: "Edit"
   back: "Back"
