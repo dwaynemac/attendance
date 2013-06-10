@@ -29,7 +29,7 @@ class TrialLesson < ActiveRecord::Base
       a = ActivityStream::Activity.new(target_id: self.contact.padma_id, target_type: 'Contact',
                                  object_id: self.id, object_type: 'TrialLesson',
                                  generator: ActivityStream::LOCAL_APP_NAME,
-                                 content: "Trial Lesson created",
+                                 content: t('trial_lesson.activity_content.create'),
                                  public: false,
                                  username: self.padma_uid,
                                  account_name: self.account.name,
