@@ -16,4 +16,5 @@
 //= require twitter/bootstrap
 //= require angular
 //= require angular-resource
+//= require select2
 //= require_tree .
