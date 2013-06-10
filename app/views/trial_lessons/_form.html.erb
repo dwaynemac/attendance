@@ -56,7 +56,7 @@
         placeholder: "<%= t('trial_lessons.search_contact') %>",
         minimumInputLength: 3,
         ajax: {
-          url: "http://localhost:3002/v0/contacts/search_for_select",
+          url: "http://<%= Contacts::HOST %>/v0/contacts/search_for_select",
           type: 'POST',
           dataType: 'jsonp',
           quietMillis: 100,
