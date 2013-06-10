@@ -8,8 +8,18 @@ class ApplicationController < ActionController::Base
   before_filter :require_padma_account
   before_filter :set_current_account
   before_filter :set_timezone
+  before_filter :set_locale
 
   private
+
+  def set_locale
+    if signed_in?
+      I18n.locale = current_user.locale
+    end
+    if params[:locale]
+      I18n.locale = params[:locale]
+    end
+  end
 
   # Mocks CAS login in development
   def mock_login

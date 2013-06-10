@@ -1,26 +1,43 @@
 es:
   layouts:
     navbar:
-      time_slots: "Horarios"
+      time_slots: Horarios
+      trial_lessons: "Clases de prueba"
   time_slots:
     index:
-      title: "Horarios"
+      title: Horarios
+      new: "Nuevo horario"
+    edit:
+      title: Editando horario
+    new:
+      title: 
+    show:
+      title: Horario
   attendances:
     index:
-      title: "Asistencias"
+      title: Asistencias
+      new: Marcar asistencia
+      new_empty: No vino nadie
+      view: Ver asistencia
   activerecord:
     attributes:
       time_slot:
-        name: "Nombre"
-        start_at: "Inicio"
-        end_at: "Fin"
-        padma_uid: "Instructor"
+        name: Nombre
+        start_at: Inicio
+        end_at: Fin
+        padma_uid: Instructor
   flash:
     actions:
       create:
-        notice: "{resource_name} se creó exitosamente"
+        notice: '{resource_name} se creó exitosamente'
       update:
-        notice: "{resource_name} se actualizó exitosamente"
+        notice: '{resource_name} se actualizó exitosamente'
       destroy:
-        notice: "{resource_name} se destruyó exitosamente"
-        alert: "{resource_name} no pudo ser destruido"	
+        notice: '{resource_name} se destruyó exitosamente'
+        alert: '{resource_name} no pudo ser destruido'
+  trial_lessons:
+    index:
+      new: "Marcar clase de prueba"
+  new: "Nuevo"
+  edit: "Editar"
+  back: "volver"
