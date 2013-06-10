@@ -42,3 +42,8 @@ es:
   new: "Nuevo"
   edit: "Editar"
   back: "volver"
+  date:
+    order:
+      - :day
+      - :month
+      - :year
