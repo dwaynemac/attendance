@@ -3,6 +3,7 @@ class Account < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
+  has_many :trial_lessons
   has_many :time_slots
   has_many :contacts
 

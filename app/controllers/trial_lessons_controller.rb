@@ -1,5 +1,5 @@
 class TrialLessonsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :through => :current_account, :except => [:new]
 
   # GET /trial_lessons
   def index
@@ -11,6 +11,8 @@ class TrialLessonsController < ApplicationController
 
   # GET /trial_lessons/new
   def new
+    @trial_lesson = current_account.trial_lessons.build
+    @trial_lesson.attributes=params[:trial_lesson]
   end
 
   # GET /trial_lessons/1/edit

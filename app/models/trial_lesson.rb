@@ -16,7 +16,7 @@ class TrialLesson < ActiveRecord::Base
   after_create :create_activity
 
   def padma_contact_id= padma_contact_id
-  	self.contact = Contact.find_or_create_by_padma_id(padma_contact_id, account_id: self.time_slot.account.id)
+  	self.contact = Contact.find_or_create_by_padma_id(padma_contact_id, account_id: self.account_id)
   end
 
   def padma_contact_id

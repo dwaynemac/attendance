@@ -46,6 +46,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def current_account
+    current_user.current_account
+  end  
+
   def set_timezone
     if signed_in? && current_user.padma_enabled?
       Time.zone = current_user.current_account.padma.timezone

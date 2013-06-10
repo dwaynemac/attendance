@@ -31,7 +31,9 @@
       <%= f.label :padma_contact_id, :class => 'control-label' %>
       <div class="controls">
         <% initialize_select = 
-            if @trial_lesson.contact 
+            if @trial_lesson.contact_id && !@trial_lesson.persisted?
+              {:data => {:name => params[:padma_contact_name]}} 
+            elsif @trial_lesson.contact 
               {:data => {:name => "#{@trial_lesson.contact.padma_contact.first_name} #{@trial_lesson.contact.padma_contact.last_name}"}} 
             else
               {}
