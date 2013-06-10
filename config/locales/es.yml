@@ -47,3 +47,6 @@ es:
       - :day
       - :month
       - :year
+  trial_lesson:
+    activity_content:
+      create: "Clase de prueba creada"

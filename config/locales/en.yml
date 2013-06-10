@@ -42,3 +42,6 @@ en:
   new: "New"
   edit: "Edit"
   back: "Back"
+  trial_lesson:
+    activity_content:
+      create: "Trial Lesson created"

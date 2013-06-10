@@ -42,3 +42,6 @@ pt-BR:
   new: "Novo"
   edit: "Alterar"
   back: "voltar"
+  trial_lesson:
+    activity_content:
+      create: "Aula experimental criada."
