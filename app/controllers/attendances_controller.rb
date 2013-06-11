@@ -29,7 +29,7 @@ class AttendancesController < ApplicationController
     @attendance.account = current_user.current_account
     @attendance.save
     @padma_contacts = @attendance.time_slot.recurrent_contacts
-    respond_with @attendance
+    redirect_to attendances_url
   end
 
   def update
