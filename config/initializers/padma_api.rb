@@ -11,7 +11,7 @@ module Accounts
 end
 
 module Contacts
-  API_KEY = ENV['contacts_key3'] || CONFIG['contacts_key']
+  API_KEY = ENV['contacts_key'] || CONFIG['contacts_key']
 end
 
 module ActivityStream
