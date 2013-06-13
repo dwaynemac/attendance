@@ -18,3 +18,9 @@ module ActivityStream
   API_KEY = ENV['activities_key'] || CONFIG['activities_key']
   LOCAL_APP_NAME = 'attendance'
 end
+
+
+module Messaging
+  HYDRA = ::HYDRA
+  API_KEY = ENV['messaging_key'] || CONFIG['messaging_key']
+end

@@ -57,6 +57,7 @@ gem 'cancan'
 gem 'activity_stream_client'
 gem 'contacts_client'
 gem 'accounts_client', '>= 0.0.16'
+gem 'messaging_client','~> 0.0.2'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

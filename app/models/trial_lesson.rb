@@ -13,7 +13,7 @@ class TrialLesson < ActiveRecord::Base
 
   attr_accessible :trial_on, :time_slot_id, :padma_uid, :padma_contact_id, :assisted
 
-  after_create :create_activity
+  after_create :create_activity, :broadcast_create
 
   def padma_contact_id= padma_contact_id
   	self.contact = Contact.find_or_create_by_padma_id(padma_contact_id, account_id: self.account_id)
@@ -38,4 +38,19 @@ class TrialLesson < ActiveRecord::Base
       a.create(username: self.padma_uid, account_name: self.account.name)
     end
   end
+
+  def broadcast_create
+    # Send notification using the messaging system
+    if Messaging::Client.post_message('trial_lesson',self.as_json_for_messaging)
+      # self.update_attribute :posted_to_messaging, true
+    end
+  end  
+
+  def as_json_for_messaging
+    json = as_json
+    json["recipient_email"] = contact.padma_contact.email
+    json["username"] = padma_uid
+    json["account_name"] = account.name
+    json
+  end  
 end
