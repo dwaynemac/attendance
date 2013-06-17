@@ -47,10 +47,8 @@ class TrialLesson < ActiveRecord::Base
 
   def broadcast_create
     # Send notification using the messaging system
-    if Messaging::Client.post_message('trial_lesson',self.as_json_for_messaging)
-      # self.update_attribute :posted_to_messaging, true
-    end
-  end  
+    Messaging::Client.post_message('trial_lesson',self.as_json_for_messaging)
+  end
 
   def as_json_for_messaging
     json = as_json
