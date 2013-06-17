@@ -48,6 +48,7 @@ class TrialLesson < ActiveRecord::Base
 
   def as_json_for_messaging
     json = as_json
+    json["contact_id"] = contact.padma_id
     json["recipient_email"] = contact.padma_contact.email
     json["username"] = padma_uid
     json["account_name"] = account.name
