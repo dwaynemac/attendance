@@ -45,3 +45,9 @@ pt-BR:
   trial_lesson:
     activity_content:
       create: "Aula experimental criada."
+    status:
+      assisted: "participou"
+      absent: "ausente"
+      pending: "pendente"
+  destroy: "excluir"
+  confirm: "Tem certeza?"

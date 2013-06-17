@@ -45,3 +45,9 @@ en:
   trial_lesson:
     activity_content:
       create: "Trial Lesson created"
+    status:
+      assisted: "Assisted"
+      absent: "absent"
+      pending: "pending"
+  destroy: "delete"
+  confirm: "Are you sure?"

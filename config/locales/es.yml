@@ -50,3 +50,9 @@ es:
   trial_lesson:
     activity_content:
       create: "Clase de prueba creada"
+    status:
+      assisted: "asistió"
+      absent: "ausente"
+      pending: "pendiente"
+  destroy: "eliminar"
+  confirm: "¿Está seguro?"

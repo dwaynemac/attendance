@@ -1,21 +1,24 @@
 <h1>Listing trial_lessons</h1>
 
 <ul>
-    <% @trial_lessons.group_by { |t| t.trial_on }.each do |date, trial_lessons| %>
-      <h3><%= date %></h3>
-      <% trial_lessons.each do |trial_lesson| %>
-      <li>
-        <%= trial_lesson.contact.padma_contact.first_name %> <%= trial_lesson.contact.padma_contact.last_name %> @ <%= trial_lesson.time_slot.name %>
-        <%= content_tag :span, "Assisted", :class => "label label-success" if trial_lesson.assisted? %>
-        <%= content_tag :span, "Absent", :class => "label label-important" unless trial_lesson.assisted? %>
-        <%= link_to 'Show', trial_lesson, :class => 'btn btn-mini'  %>
-        <%= link_to 'Edit', edit_trial_lesson_path(trial_lesson), :class => 'btn btn-mini' %>
-        <%= link_to 'Destroy', trial_lesson, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
-      </li>
-      <% end %>
+  <% @trial_lessons.group_by { |t| t.trial_on }.each do |date, trial_lessons| %>
+    <h3><%= date %></h3>
+    <% trial_lessons.each do |trial_lesson| %>
+    <li>
+      <%= trial_lesson.contact.padma_contact.first_name %> <%= trial_lesson.contact.padma_contact.last_name %> @ <%= trial_lesson.time_slot.name %>
+      <%- if trial_lesson.assisted? -%>
+        <span class="label label-success"><%= t('trial_lesson.status.assisted') %></span>
+      <%- else -%>
+        <span class="label label-important">
+          <%= (trial_lesson.trial_at < Time.zone.now)? t('trial_lesson.status.absent') : t('trial_lesson.status.pending') %>
+        </span>
+      <%- end -%>
+      <%= link_to t('edit'), edit_trial_lesson_path(trial_lesson), :class => 'btn btn-mini' %>
+      <%= link_to t('destroy'), trial_lesson, method: :delete, data: { confirm: t('confirm')}, :class => 'btn btn-mini btn-danger' %>
+    </li>
     <% end %>
-  </tbody>
-</table>
+  <% end %>
+</ul>
 
 <br>
 
