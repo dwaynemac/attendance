@@ -45,6 +45,7 @@ en:
   trial_lesson:
     activity_content:
       create: "Trial Lesson created"
+      deleted: "Trial lesson canceled"
     status:
       assisted: "Assisted"
       absent: "absent"

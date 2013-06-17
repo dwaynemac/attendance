@@ -14,6 +14,7 @@ class TrialLesson < ActiveRecord::Base
   attr_accessible :trial_on, :time_slot_id, :padma_uid, :padma_contact_id, :assisted
 
   after_create :create_activity, :broadcast_create
+  after_destroy :destroy_activity
 
   # Day of trial and Time of trial according to TimeSlot's time
   # @return [DateTime]
@@ -30,7 +31,7 @@ class TrialLesson < ActiveRecord::Base
   end
 
   def create_activity
-      # Send notification to activities
+    # Send notification to activities
     if !self.contact_id.nil?
       a = ActivityStream::Activity.new(target_id: self.contact.padma_id, target_type: 'Contact',
                                  object_id: self.id, object_type: 'TrialLesson',
@@ -45,6 +46,22 @@ class TrialLesson < ActiveRecord::Base
     end
   end
 
+  def destroy_activity
+    # Send notification to activities
+    if !self.contact_id.nil?
+      a = ActivityStream::Activity.new(target_id: self.contact.padma_id, target_type: 'Contact',
+                                       object_id: self.id, object_type: 'TrialLesson',
+                                       generator: ActivityStream::LOCAL_APP_NAME,
+                                       content: I18n.t('trial_lesson.activity_content.deleted'),
+                                       verb: 'deleted',
+                                       public: false,
+                                       username: self.padma_uid,
+                                       account_name: self.account.name,
+                                       created_at: Time.zone.now.to_s,
+                                       updated_at: Time.zone.now.to_s )
+      a.create(username: self.padma_uid, account_name: self.account.name)
+    end
+  end
   def broadcast_create
     # Send notification using the messaging system
     Messaging::Client.post_message('trial_lesson',self.as_json_for_messaging)

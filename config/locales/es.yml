@@ -50,6 +50,7 @@ es:
   trial_lesson:
     activity_content:
       create: "Clase de prueba creada"
+      deleted: "Clase de prueba cancelada."
     status:
       assisted: "asistió"
       absent: "ausente"

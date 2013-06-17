@@ -45,6 +45,7 @@ pt-BR:
   trial_lesson:
     activity_content:
       create: "Aula experimental criada."
+      deleted: "Aula experimental cancelada"
     status:
       assisted: "participou"
       absent: "ausente"
