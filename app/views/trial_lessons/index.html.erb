@@ -10,7 +10,7 @@
         <span class="label label-success"><%= t('trial_lesson.status.assisted') %></span>
       <%- else -%>
         <span class="label label-important">
-          <%= (trial_lesson.trial_at < Time.zone.now)? t('trial_lesson.status.absent') : t('trial_lesson.status.pending') %>
+          <%= t('trial_lesson.status.absent') if trial_lesson.trial_at < Time.zone.now %>
         </span>
       <%- end -%>
       <%= link_to t('edit'), edit_trial_lesson_path(trial_lesson), :class => 'btn btn-mini' %>
