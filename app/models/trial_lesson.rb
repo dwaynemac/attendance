@@ -15,6 +15,12 @@ class TrialLesson < ActiveRecord::Base
 
   after_create :create_activity, :broadcast_create
 
+  # Day of trial and Time of trial according to TimeSlot's time
+  # @return [DateTime]
+  def trial_at
+    DateTime.civil(trial_on.year,trial_on.month,trial_on.day,time_slot.start_at.hour,time_slot.start_at.min)
+  end
+
   def padma_contact_id= padma_contact_id
   	self.contact = Contact.find_or_create_by_padma_id(padma_contact_id, account_id: self.account_id)
   end
@@ -48,6 +54,7 @@ class TrialLesson < ActiveRecord::Base
 
   def as_json_for_messaging
     json = as_json
+    json["trial_at"] = trial_at
     json["contact_id"] = contact.padma_id
     json["recipient_email"] = contact.padma_contact.email
     json["username"] = padma_uid
