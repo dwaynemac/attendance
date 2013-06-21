@@ -8,7 +8,6 @@ class TimeSlotsController < ApplicationController
   end
 
   def edit
-    @padma_contacts = current_user.current_account.students
   end  
   
   def create
