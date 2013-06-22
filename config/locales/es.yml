@@ -26,6 +26,10 @@ es:
         start_at: Inicio
         end_at: Fin
         padma_uid: Instructor
+        cultural_activity: Actividad Cultural
+        schedule: Cronograma
+        padma_contacts: Alumnos
+        add_a_contact: Agregar un alumno
   flash:
     actions:
       create:

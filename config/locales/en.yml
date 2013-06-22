@@ -22,6 +22,8 @@ en:
         end_at: End
         name: Name
         start_at: Starts
+        padma_contacts: Students
+        add_a_contact: Add a student
   flash:
     actions:
       create:
