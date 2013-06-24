@@ -23,7 +23,7 @@ class StatsSQLBuilder
 			GROUP BY contacts.id
 
 			#{time_slot_queries}
-		)
+		) AS attendance_distribution
 		GROUP BY id
 	  )
 	end	
