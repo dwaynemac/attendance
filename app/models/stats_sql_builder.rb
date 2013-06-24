@@ -16,7 +16,7 @@ class StatsSQLBuilder
 
 	def sql
 	  %(
-	  	SELECT *, #{time_slots_sum_select} FROM (
+	  	SELECT id, account_id, padma_id, #{time_slots_sum_select} FROM (
 			SELECT contacts.*, #{time_slots_count_select nil}
 			FROM contacts
 			WHERE #{account_condition}
@@ -24,7 +24,7 @@ class StatsSQLBuilder
 
 			#{time_slot_queries}
 		) AS attendance_distribution
-		GROUP BY id
+		GROUP BY id, account_id, padma_id
 	  )
 	end	
 
