@@ -67,7 +67,7 @@ class StatsSQLBuilder
 			if ts == time_slot
 				ts_select = "count(*) as time_slot_#{ts.id}"
 			else
-				ts_select = "CAST(NULL AS INTEGER)  as time_slot_#{ts.id}"
+				ts_select = "0 as time_slot_#{ts.id}"
 			end
 
 			ts_select << ", " unless ts == time_slots.last
