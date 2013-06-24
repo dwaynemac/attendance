@@ -2,6 +2,9 @@ class Contact < ActiveRecord::Base
 	belongs_to :account
 	belongs_to :time_slot
 
+	has_many :attendance_contacts
+	has_many :attendances, :through => :attendance_contacts
+
 	validates :account, :presence => true
 
 	attr_accessible :account_id, :padma_id

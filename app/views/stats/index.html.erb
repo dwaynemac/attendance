@@ -1,0 +1,24 @@
+<h1>Attendance Stats</h1>
+
+<table class="table table-striped table-bordered table-hover table-condensed">
+  <thead>
+  	<tr>
+  	  <th>Name</th>
+  	  <th>Total</th>
+  	  <% @time_slots.each do |time_slot| %>
+  	  	<th><%= time_slot.name %></th>
+  	  <% end %>	
+  	</tr>
+  </thead>
+  <tbody>
+  <% @contacts.each do |contact| %>
+  	<tr>
+  	  <td><%= contact.padma_contact.try :first_name %> <%= contact.padma_contact.try :last_name %></td>
+  	  <td><%= contact.attendance_total || 0 %></td>	
+  	  <% @time_slots.each do |time_slot| %>
+  	  	<td><%= number_to_percentage contact.attendance_total ? contact.send("sum_time_slot_#{time_slot.id}")/contact.attendance_total.to_f*100 : 0, :strip_insignificant_zeros => true %></td>
+  	  <% end %>	
+  	</tr>
+  <% end %>
+  </tbody>
+</table>

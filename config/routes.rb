@@ -22,6 +22,7 @@ Assistance::Application.routes.draw do
   resources :attendances
   resources :trial_lessons
   resources :contacts, :only => [:index]
+  resources :stats, :only => [:index]
   # Example resource route with options:
   #   resources :products do
   #     member do
