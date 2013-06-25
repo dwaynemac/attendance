@@ -11,7 +11,7 @@ class PadmaContactsSynchronizer
     while(more_contacts)
       padma_contacts = PadmaContact.search(:where => {:updated_at =>  account.synchronized_at},
                         :account_name => account.name,
-                        :per_page => 100,
+                        :per_page => 50,
                         :page => page)
       unless padma_contacts.blank?
         padma_contacts.each do |padma_contact|
