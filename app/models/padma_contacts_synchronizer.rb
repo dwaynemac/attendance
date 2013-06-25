@@ -13,7 +13,7 @@ class PadmaContactsSynchronizer
                         :account_name => account.name,
                         :per_page => 50,
                         :page => page)
-      unless padma_contacts.blank?
+      if more_contacts = !padma_contacts.blank?
         padma_contacts.each do |padma_contact|
           contact = Contact.find_by_padma_id(padma_contact.id)
           if contact
@@ -21,9 +21,8 @@ class PadmaContactsSynchronizer
             contact.update_attribute(:name, contact_name) unless contact.name == contact_name
           end  
         end
-        more_contacts = !padma_contacts.empty?
-        page = page + 1
       end
+      page = page + 1
     end
     account.update_attribute(:synchronized_at, Time.now)
   end
