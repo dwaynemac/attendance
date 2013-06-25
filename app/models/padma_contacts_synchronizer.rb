@@ -13,7 +13,7 @@ class PadmaContactsSynchronizer
                         :account_name => account.name,
                         :per_page => 100,
                         :page => page)
-      unless padma_contacts.empty?
+      unless padma_contacts.blank?
         padma_contacts.each do |padma_contact|
           contact = Contact.find_by_padma_id(padma_contact.id)
           if contact
