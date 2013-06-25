@@ -3,12 +3,15 @@ class StatsSQLBuilder
 	attr_accessor :start_on, :end_on, :account, :include_cultural_activities
 
 	DEFAULTS = {
+		# include/exclude cultural activities from stats. excluded by default
 		:include_cultural_activities => false,
+		# start/end date. defaults to this month.
 		:start_on => Date.today.beginning_of_month,
 		:end_on => Date.today.end_of_month
 	}
 
 	def initialize options = {}
+		# initialize builder using defaults
 		DEFAULTS.merge(options).each do |attr_name, value|
 			self.send("#{attr_name}=", value)
 		end	
@@ -16,18 +19,23 @@ class StatsSQLBuilder
 
 	def sql
 	  %(
+	  	-- select contact attributes and stats
 	  	SELECT id, account_id, padma_id, name, #{time_slots_sum_select} FROM (
+
+	  		-- select all contacts for that account
 			SELECT contacts.*, #{time_slots_count_select nil}
 			FROM contacts
 			WHERE #{account_condition}
 			GROUP BY contacts.id
 
+			-- unions for each time slot
 			#{time_slot_queries}
 		) AS attendance_distribution
 		GROUP BY id, account_id, padma_id, name
 	  )
 	end	
 
+	# filters contacts by account_id
 	def account_condition
 		condition = ""
 		if account.present?
@@ -36,10 +44,12 @@ class StatsSQLBuilder
 		condition
 	end
 
+	# filters attendances by start/end dates
 	def attendance_between_dates_condition
 		"attendances.attendance_on BETWEEN '#{start_on}' AND '#{end_on}'"
 	end
 
+	# unions for each time slot.
 	def time_slot_queries
 		query = ""
 
@@ -47,6 +57,7 @@ class StatsSQLBuilder
 			query << %(
 				UNION
 
+				-- select contact attributes and count attendances on a time slot
 				SELECT contacts.*, #{time_slots_count_select time_slot}
 				FROM contacts
 				INNER JOIN attendance_contacts ON contacts.id = attendance_contacts.contact_id
@@ -61,6 +72,7 @@ class StatsSQLBuilder
 		query	
 	end
 
+	# select count for the specified time slot and 0 otherwise
 	def time_slots_count_select time_slot
 		select = ""
 		time_slots.each do |ts|
@@ -77,6 +89,7 @@ class StatsSQLBuilder
 		select
 	end
 
+	# sum time slot counts and calculate total.
 	def time_slots_sum_select
 		select = ""
 		total = ""
@@ -89,6 +102,7 @@ class StatsSQLBuilder
 		select
 	end
 
+	# include/exclude cultural activities
 	def time_slots
 		time_slots = []
 		if include_cultural_activities
