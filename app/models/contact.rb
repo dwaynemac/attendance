@@ -7,7 +7,7 @@ class Contact < ActiveRecord::Base
 
 	validates :account, :presence => true
 
-	attr_accessible :account_id, :padma_id
+	attr_accessible :account_id, :padma_id, :name
 
 	attr_accessor :padma_contact
 

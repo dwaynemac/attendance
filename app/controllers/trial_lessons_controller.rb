@@ -1,5 +1,5 @@
 class TrialLessonsController < ApplicationController
-  load_and_authorize_resource :through => :current_account, :except => [:new]
+  load_and_authorize_resource :through => :current_account, :except => [:new, :create]
 
   # GET /trial_lessons
   def index
@@ -21,6 +21,8 @@ class TrialLessonsController < ApplicationController
 
   # POST /trial_lessons
   def create
+    @trial_lesson = current_account.trial_lessons.build
+    @trial_lesson.attributes = params[:trial_lesson]
     if @trial_lesson.save
       redirect_to @trial_lesson, notice: 'Trial lesson was successfully created.'
     else
