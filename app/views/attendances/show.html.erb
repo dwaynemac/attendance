@@ -16,7 +16,7 @@
 <ul>
 	<% @trial_lessons.each do |tl| %>
 	  <li>
-	  	<%= tl.contact.padma_contact.first_name %> <%= tl.contact.padma_contact.last_name %>
+	  	<%= tl.contact.name %>
 	  	<%= content_tag :span, "Assisted", :class => "label label-success" if tl.assisted? %>
 	  	<%= content_tag :span, "Absent", :class => "label label-important" unless tl.assisted? %>
 	  </li>	
@@ -26,7 +26,7 @@
 <b><%=Attendance.human_attribute_name :contacts %></b><br>	
 <ul>
 	<% @attendance.contacts.each do |c| %>
-	  <li><%= c.padma_contact.first_name %> <%= c.padma_contact.last_name %></li>	
+	  <li><%= c.name %></li>	
 	<% end %>
 </ul>
 

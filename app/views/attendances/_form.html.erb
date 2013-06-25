@@ -30,7 +30,7 @@
         <ul id="trial_lessons">
           <% @trial_lessons.each do |tl| %>
             <li>
-              <%= check_box_tag "trial_lessons[]", tl.id, tl.assisted? %><%= label_tag "trial_lessons[]", "#{tl.contact.padma_contact.first_name} #{tl.contact.padma_contact.last_name}" %>
+              <%= check_box_tag "trial_lessons[]", tl.id, tl.assisted? %><%= label_tag "trial_lessons[]", "#{tl.contact.name}" %>
             </li>
           <% end %>
         </ul>
@@ -42,7 +42,7 @@
         <ul id="attendance_contacts">
           <% @attendance.contacts.each do |c| %>
             <li>
-              <%= hidden_field_tag "attendance[padma_contacts][]", c.padma_id %><%= link_to "#{c.padma_contact.first_name} #{c.padma_contact.last_name}", "#", :class => "delete" %>
+              <%= hidden_field_tag "attendance[padma_contacts][]", c.padma_id %><%= link_to "#{c.name}", "#", :class => "delete" %>
             </li>
           <% end %>
         </ul>

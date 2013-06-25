@@ -34,7 +34,7 @@
             if @trial_lesson.contact_id && !@trial_lesson.persisted?
               {:data => {:name => params[:padma_contact_name]}} 
             elsif @trial_lesson.contact 
-              {:data => {:name => "#{@trial_lesson.contact.padma_contact.first_name} #{@trial_lesson.contact.padma_contact.last_name}"}} 
+              {:data => {:name => "#{@trial_lesson.contact.name}"}} 
             else
               {}
             end 
