@@ -5,8 +5,8 @@
   	<tr>
   	  <th>Name</th>
   	  <th>Total</th>
-  	  <% @time_slots.each do |time_slot| %>
-  	  	<th><%= time_slot.name %></th>
+  	  <% @distribution.each do |name| %>
+  	  	<th><%= name %></th>
   	  <% end %>	
   	</tr>
   </thead>
@@ -15,8 +15,8 @@
   	<tr>
   	  <td><%= contact.name %></td>
   	  <td><%= contact.attendance_total || 0 %></td>	
-  	  <% @time_slots.each do |time_slot| %>
-  	  	<td><%= number_to_percentage contact.attendance_total > 0 ? contact.send("sum_time_slot_#{time_slot.id}")/contact.attendance_total.to_f*100 : 0, :precision => 2, :strip_insignificant_zeros => true %></td>
+  	  <% @distribution.each do |name| %>
+  	  	<td><%= number_to_percentage contact.attendance_total > 0 ? contact.send("sum_#{name}")/contact.attendance_total.to_f*100 : 0, :precision => 2, :strip_insignificant_zeros => true %></td>
   	  <% end %>	
   	</tr>
   <% end %>

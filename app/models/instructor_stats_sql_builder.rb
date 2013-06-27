@@ -1,4 +1,4 @@
-class StatsSQLBuilder
+class InstructorStatsSQLBuilder
 
 	attr_accessor :start_on, :end_on, :account, :include_cultural_activities
 
@@ -20,16 +20,15 @@ class StatsSQLBuilder
 	def sql
 	  %(
 	  	-- select contact attributes and stats
-	  	SELECT id, account_id, padma_id, name, #{time_slots_sum_select} FROM (
-
+	  	SELECT id, account_id, padma_id, name, #{instructors_sum_select} FROM (
 	  		-- select all contacts for that account
-			SELECT contacts.*, #{time_slots_count_select nil}
+			SELECT contacts.*, #{instructors_count_select nil}
 			FROM contacts
 			WHERE #{account_condition}
 			GROUP BY contacts.id
 
-			-- unions for each time slot
-			#{time_slot_queries}
+			-- unions for each instructor
+			#{instructor_queries}
 		) AS attendance_distribution
 		GROUP BY id, account_id, padma_id, name
 	  )
@@ -49,22 +48,27 @@ class StatsSQLBuilder
 		"attendances.attendance_on BETWEEN '#{start_on}' AND '#{end_on}'"
 	end
 
-	# unions for each time slot.
-	def time_slot_queries
+	def cultural_activity_condition
+		"AND time_slots.cultural_activity = 'f'" unless include_cultural_activities
+	end	
+
+	# unions for each instructor.
+	def instructor_queries
 		query = ""
 
-		time_slots.each do |time_slot|
+		distribution.each do |username|
 			query << %(
 				UNION
-
 				-- select contact attributes and count attendances on a time slot
-				SELECT contacts.*, #{time_slots_count_select time_slot}
+				SELECT contacts.*, #{instructors_count_select username}
 				FROM contacts
 				INNER JOIN attendance_contacts ON contacts.id = attendance_contacts.contact_id
 				INNER JOIN attendances ON attendance_contacts.attendance_id = attendances.id
-				WHERE attendances.time_slot_id = #{time_slot.id} 
+				INNER JOIN time_slots ON attendances.time_slot_id = time_slots.id
+				WHERE time_slots.padma_uid = '#{username.tr("_",".")}' 
 				AND #{account_condition}
 				AND #{attendance_between_dates_condition}
+				#{cultural_activity_condition}
 				GROUP BY contacts.id
 			)
 		end
@@ -73,30 +77,30 @@ class StatsSQLBuilder
 	end
 
 	# select count for the specified time slot and 0 otherwise
-	def time_slots_count_select time_slot
+	def instructors_count_select username
 		select = ""
-		time_slots.each do |ts|
-			if ts == time_slot
-				ts_select = "count(*) as time_slot_#{ts.id}"
+		distribution.each do |u|
+			if u == username
+				u_select = "count(*) as #{username}"
 			else
-				ts_select = "0 as time_slot_#{ts.id}"
+				u_select = "0 as #{u}"
 			end
 
-			ts_select << ", " unless ts == time_slots.last
+			u_select << ", " unless u.tr("_", ".") == account.usernames.last
 
-			select << ts_select
+			select << u_select
 		end
 		select
 	end
 
 	# sum time slot counts and calculate total.
-	def time_slots_sum_select
+	def instructors_sum_select
 		select = ""
 		total = ""
-		time_slots.each do |ts|
-			select << "SUM(time_slot_#{ts.id}) as sum_time_slot_#{ts.id}, "
-			total << "time_slot_#{ts.id}"
-			total << " + " unless ts == time_slots.last			
+		distribution.each do |username|
+			select << "SUM(#{username}) as sum_#{username}, "
+			total << "#{username}"
+			total << " + " unless username.tr("_",".") == account.usernames.last			
 		end
 		select << "SUM(#{total}) as attendance_total"
 		select
@@ -111,5 +115,9 @@ class StatsSQLBuilder
 			time_slots = account.time_slots.where(:cultural_activity => false)
 		end
 		time_slots
+	end
+
+	def distribution
+		account.usernames.collect {|username| username.tr(".", "_")}
 	end
 end

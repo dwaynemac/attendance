@@ -3,8 +3,14 @@ class StatsController < ApplicationController
 
   # GET /stats
   def index
-    sql_builder = StatsSQLBuilder.new :account => current_user.current_account
+  	distribution = params.delete(:distribution)
+  	if distribution == "instructor"
+  		builder_clazz = InstructorStatsSQLBuilder
+  	else
+  		builder_clazz = TimeSlotStatsSQLBuilder
+  	end	
+    sql_builder = builder_clazz.new :account => current_user.current_account, :include_cultural_activities => params[:include_cultural_activities]
     @contacts = Contact.find_by_sql(sql_builder.sql)
-    @time_slots = sql_builder.time_slots
+    @distribution = sql_builder.distribution
   end
 end
