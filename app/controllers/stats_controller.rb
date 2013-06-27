@@ -3,14 +3,16 @@ class StatsController < ApplicationController
 
   # GET /stats
   def index
-  	distribution = params.delete(:distribution)
-  	if distribution == "instructor"
+  	params[:stats] ||= {}
+  	params[:distribution] ||= "instructor"
+
+  	if params[:distribution] == "instructor"
   		builder_clazz = InstructorStatsSQLBuilder
   	else
   		builder_clazz = TimeSlotStatsSQLBuilder
-  	end	
-    sql_builder = builder_clazz.new :account => current_user.current_account, :include_cultural_activities => params[:include_cultural_activities]
-    @contacts = Contact.find_by_sql(sql_builder.sql)
-    @distribution = sql_builder.distribution
+  	end
+    @stats = builder_clazz.new params[:stats].merge({:account => current_user.current_account})
+    @contacts = Contact.find_by_sql(@stats.sql)
+    @distribution = @stats.distribution
   end
 end

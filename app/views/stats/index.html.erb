@@ -1,5 +1,38 @@
 <h1>Attendance Stats</h1>
 
+<%= form_for :stats, method: :get, html: { class: 'form-horizontal' } do |f| %>
+  <fieldset>
+    <div class="control-group">
+      <%= f.label :distribution, :class => 'control-label' %>
+      <div class="controls">
+        <%= select_tag :distribution, options_for_select({:instructor => :instructor, :time_slot => :time_slot}, params[:distribution]) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :start_on, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.date_select :start_on %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :end_on, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.date_select :end_on %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :include_cultural_activities, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.check_box :include_cultural_activities %>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="form-actions">
+    <%= f.submit "Calculate Stats", :class => 'btn btn-primary' %>
+  </div>
+<% end %>
+  
 <table class="table table-striped table-bordered table-hover table-condensed">
   <thead>
   	<tr>
