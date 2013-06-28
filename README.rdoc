@@ -20,6 +20,9 @@ Things you may want to cover:
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
+A rake task is required to run periodically in order to keep in sync contact names with the contacts webservice.
+
+it can be run by executing "rake synchronize"
 
 * ...
 
