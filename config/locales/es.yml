@@ -19,6 +19,15 @@ es:
       new: Marcar asistencia
       new_empty: No vino nadie
       view: Ver asistencia
+  stats:
+    index:
+      title: "Estadisticas de asistencia"
+      calculate_stats: "Calcular estadisticas"
+      by_instructor: "Por instructor"
+      by_time_slot: "Por horario"
+    table:
+      name: "Nombre"
+      total: "Total"    
   activerecord:
     attributes:
       time_slot:
@@ -30,6 +39,11 @@ es:
         schedule: Cronograma
         padma_contacts: Alumnos
         add_a_contact: Agregar un alumno
+      stat:
+        distribution: "Distribución"
+        start_on: "Desde"
+        end_on: "Hasta"
+        include_cultural_activities: "Incluir actividades culturales"
   flash:
     actions:
       create:

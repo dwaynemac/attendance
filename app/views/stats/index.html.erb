@@ -1,27 +1,29 @@
-<h1>Attendance Stats</h1>
+<h3><%= t('stats.index.title') %></h3>
 
-<%= form_for :stats, method: :get, html: { class: 'form-horizontal' } do |f| %>
+<%= form_for :stat, method: :get, html: { class: 'form-horizontal' } do |f| %>
   <fieldset>
     <div class="control-group">
-      <%= f.label :distribution, :class => 'control-label' %>
+      <%= f.label :distribution,t('activerecord.attributes.stat.distribution'), :class => 'control-label' %>
       <div class="controls">
-        <%= select_tag :distribution, options_for_select({:instructor => :instructor, :time_slot => :time_slot}, params[:distribution]) %>
+        <%= select_tag :distribution, options_for_select({
+              t('stats.index.by_instructor') => :instructor, 
+              t('stats.index.by_time_slot') => :time_slot}, params[:distribution]) %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :start_on, :class => 'control-label' %>
+      <%= f.label :start_on,t('activerecord.attributes.stat.start_on'), :class => 'control-label' %>
       <div class="controls">
         <%= f.date_select :start_on %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :end_on, :class => 'control-label' %>
+      <%= f.label :end_on,t('activerecord.attributes.stat.end_on'), :class => 'control-label' %>
       <div class="controls">
         <%= f.date_select :end_on %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :include_cultural_activities, :class => 'control-label' %>
+      <%= f.label :include_cultural_activities,t('activerecord.attributes.stat.include_cultural_activities'), :class => 'control-label' %>
       <div class="controls">
         <%= f.check_box :include_cultural_activities %>
       </div>
@@ -29,16 +31,16 @@
   </fieldset>
 
   <div class="form-actions">
-    <%= f.submit "Calculate Stats", :class => 'btn btn-primary' %>
+    <%= f.submit t('stats.index.calculate_stats'), :class => 'btn btn-primary' %>
   </div>
 <% end %>
   
 <table class="table table-striped table-bordered table-hover table-condensed">
   <thead>
   	<tr>
-  	  <th>Name</th>
-  	  <th>Total</th>
-  	  <% @distribution.each do |name| %>
+  	  <th><%= t('stats.table.name')%></th>
+  	  <th><%= t('stats.table.total')%></th>
+  	  <% @distribution_names.each do |name| %>
   	  	<th><%= name %></th>
   	  <% end %>	
   	</tr>

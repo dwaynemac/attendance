@@ -127,6 +127,18 @@ class InstructorStatsSQLBuilder
 	end
 
 	def distribution
-		account.usernames.collect {|username| username.tr(".", "_")}
+		unless @distribution
+			@distribution = account.usernames
+		end
+
+		@distribution.collect {|username| username.tr(".", "_")}
+	end
+
+	def distribution_names
+		unless @distribution
+			@distribution = account.usernames
+		end
+
+		@distribution
 	end
 end

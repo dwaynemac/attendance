@@ -115,16 +115,21 @@ class TimeSlotStatsSQLBuilder
 
 	# include/exclude cultural activities
 	def time_slots
-		time_slots = []
+		return @time_slots if @time_slots
+
 		if include_cultural_activities
-			time_slots = account.time_slots
+			@time_slots = account.time_slots
 		else
-			time_slots = account.time_slots.where(:cultural_activity => false)
+			@time_slots = account.time_slots.where(:cultural_activity => false)
 		end
-		time_slots
+		@time_slots
 	end
 
 	def distribution
 		time_slots.collect {|ts| "ts_#{ts.name.tr(" ","").underscore}"}
+	end
+
+	def distribution_names
+		time_slots.collect {|ts| ts.name}
 	end
 end

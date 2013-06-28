@@ -41,6 +41,10 @@ en:
     index:
       new: "New Trial lesson"
     search_contact: "Search for a contact"
+  stats:
+    index:
+      title: "Attendance Stats"
+      calculate_stats: "Calculate Stats"  
   new: "New"
   edit: "Edit"
   back: "Back"
