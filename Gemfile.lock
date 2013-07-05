@@ -195,6 +195,7 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     sqlite3 (1.3.7)
+    subcontractor (0.6.1)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
@@ -254,6 +255,7 @@ DEPENDENCIES
   sdoc
   select2-rails
   sqlite3
+  subcontractor (= 0.6.1)
   therubyracer
   turbolinks
   twitter-bootstrap-rails
