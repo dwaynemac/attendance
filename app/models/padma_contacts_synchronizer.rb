@@ -9,7 +9,7 @@ class PadmaContactsSynchronizer
     page = 1
     more_contacts = true
     while(more_contacts)
-      padma_contacts = PadmaContact.search(:where => {:updated_at =>  account.synchronized_at},
+      padma_contacts = PadmaContact.search(:select => [:first_name, :last_name], :where => {:updated_at =>  account.synchronized_at},
                         :account_name => account.name,
                         :per_page => 50,
                         :page => page)

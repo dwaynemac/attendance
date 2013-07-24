@@ -29,6 +29,6 @@ class Account < ActiveRecord::Base
   # Returns Students of this account
   # @return [Array <String>]
   def students
-    PadmaContact.paginate(where: {local_status: :student}, account_name: self.name, per_page: 1000)
+    PadmaContact.paginate(select: [:first_name, :last_name], where: {local_status: :student}, account_name: self.name, per_page: 1000)
   end
 end

@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   end
 
   def students
-    PadmaContact.paginate(where: {local_status: :student, local_teacher: self.padma_id}, username: self.padma_id, account_name: self.current_account.padma_id)
+    PadmaContact.paginate(select: [:first_name, :last_name], where: {local_status: :student, local_teacher: self.padma_id}, username: self.padma_id, account_name: self.current_account.padma_id)
   end
 
 end
