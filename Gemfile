@@ -58,7 +58,7 @@ gem 'cancan'
 
 # Padma Clients
 gem 'activity_stream_client'
-gem 'contacts_client'
+gem 'contacts_client', '~> 0.0.17'
 gem 'accounts_client', '>= 0.0.16'
 gem 'messaging_client','~> 0.0.2'
 
