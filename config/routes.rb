@@ -23,6 +23,13 @@ Assistance::Application.routes.draw do
   resources :trial_lessons
   resources :contacts, :only => [:index]
   resources :stats, :only => [:index]
+
+  namespace 'api' do
+    namespace 'v0' do
+      resources :imports
+    end
+  end
+  
   # Example resource route with options:
   #   resources :products do
   #     member do
