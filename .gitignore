@@ -21,3 +21,6 @@
 .ruby-gemset
 Procfile.dev
 /config/padma_api.yml
+
+# Ignore vim files
+*.swp
