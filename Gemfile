@@ -76,6 +76,7 @@ gem 'messaging_client','~> 0.0.2'
 
 group :test, :development do
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
   gem 'factory_girl_rails'
 end
 
@@ -84,6 +85,8 @@ gem 'validates_timeliness'
 group :development do
   gem 'foreman'
   gem 'subcontractor', '0.6.1'
+
+  gem 'debugger'
 
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
