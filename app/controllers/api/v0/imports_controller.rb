@@ -15,7 +15,7 @@ class Api::V0::ImportsController < Api::V0::ApiController
   #
   def create
     if @account
-      @import = @account.imports.new
+      @import = @account.imports.new(import_params)
       if @import.save
         render json: { id: @import.id }, status: 201
       else
@@ -29,7 +29,12 @@ class Api::V0::ImportsController < Api::V0::ApiController
   private
 
   def get_account
-    @account = Account.find_by_name(params[:import][:account_name])
+    account_name = params[:import].delete(:account_name)
+    @account = Account.find_by_name(account_name)
+  end
+
+  def import_params
+    params.require(:import)
   end
 
 end

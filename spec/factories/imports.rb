@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :import do
+    account { Account.last || create(:account) }
+    headers []
   end
 end
