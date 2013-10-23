@@ -7,16 +7,30 @@ describe Api::V0::ImportsController do
     end
   end
 
-  def post_req
-    post :create, import: { file: 'x',
-                            headers: 'x',
-                            account_name: 'belgrano'
+
+  def post_req(options = {})
+    parameters = {
+      import: { file: 'x',
+                headers: 'x',
+                account_name: 'belgrano'
+      },
+      app_key: ENV['app_key']
     }
+    if options[:wout_app_key]
+      parameters.delete(:app_key)
+    end
+    post :create, parameters
   end
   
   describe "#create" do
 
-    it "requires a valid app_key"
+    it "requires a valid app_key" do
+      post_req(wout_app_key: true)
+      should respond_with 401
+
+      post_req
+      should respond_with 201
+    end
 
     it "should return status 201" do
       post_req

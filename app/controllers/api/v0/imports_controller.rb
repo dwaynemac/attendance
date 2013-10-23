@@ -6,6 +6,7 @@ class Api::V0::ImportsController < Api::V0::ApiController
   # @url /api/v0/imports
   # @action POST
   #
+  # @required import[object] valid values: TimeSlot, Attendance
   # @required import[file] CSV file
   # @required import[headers] 
   # @required import[account_name]
