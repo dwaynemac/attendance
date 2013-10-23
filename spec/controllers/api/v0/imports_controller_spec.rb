@@ -7,7 +7,6 @@ describe Api::V0::ImportsController do
     end
   end
 
-
   def post_req(options = {})
     parameters = {
       import: { file: 'x',
