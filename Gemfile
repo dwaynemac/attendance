@@ -62,6 +62,9 @@ gem 'contacts_client', '~> 0.0.17'
 gem 'accounts_client', '>= 0.0.16'
 gem 'messaging_client','~> 0.0.2'
 
+gem 'carrierwave'
+gem 'fog'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

@@ -1,0 +1,27 @@
+id,nombre,instructor_id,ini,fin,d,l,m,x,j,v,s,observaciones,vacantes,school_id
+50001,0800,daniela.massa,Sat Jan 01 08:00:00 UTC 2000,Sat Jan 01 09:00:00 UTC 2000,false,false,true,true,true,true,false,"",12,1
+50002,0900,gabriela.marinescu,Sat Jan 01 09:00:00 UTC 2000,Sat Jan 01 10:00:00 UTC 2000,false,false,true,true,true,true,false,"",12,1
+50003,1100,lucia.gagliardini,Sat Jan 01 11:00:00 UTC 2000,Sat Jan 01 12:00:00 UTC 2000,false,false,false,false,false,false,false,"",12,1
+50006,1500,alex.falke,Sat Jan 01 15:00:00 UTC 2000,Sat Jan 01 16:00:00 UTC 2000,false,false,false,false,false,false,false,"",12,1
+50007,1600 ini,dwayne.macgowan,Sat Jan 01 16:00:00 UTC 2000,Sat Jan 01 17:00:00 UTC 2000,false,false,false,true,false,true,false,"",12,1
+50009,1800,alex.falke,Sat Jan 01 18:00:00 UTC 2000,Sat Jan 01 19:00:00 UTC 2000,false,false,false,false,false,false,false,"",12,1
+50010,1900,lucia.gagliardini,Sat Jan 01 19:00:00 UTC 2000,Sat Jan 01 20:00:00 UTC 2000,false,false,false,false,false,false,false,"",12,1
+50011,2000,gabriel .abraham,Sat Jan 01 20:00:00 UTC 2000,Sat Jan 01 21:00:00 UTC 2000,false,false,false,false,false,false,false,"",12,1
+50012,2100 ini,leda.bianucci,Sat Jan 01 21:00:00 UTC 2000,Sat Jan 01 22:00:00 UTC 2000,false,true,false,true,false,false,false,"",12,1
+50013,1000,daniela.massa,Sat Jan 01 10:00:00 UTC 2000,Sat Jan 01 11:00:00 UTC 2000,false,false,true,true,true,true,false,"",12,1
+50014,Iniciantes sabado,pablo. lewin,Sat Jan 01 12:00:00 UTC 2000,Sat Jan 01 13:00:00 UTC 2000,false,false,false,false,false,false,true,instructor rotativo,12,1
+50016,SwáSthya sabado,pablo. lewin,Sat Jan 01 13:15:00 UTC 2000,Sat Jan 01 14:15:00 UTC 2000,false,false,false,false,false,false,true,"",12,1
+50019,Mantra,daniela.massa,Sat Jan 01 21:30:00 UTC 2000,Sat Jan 01 22:00:00 UTC 2000,false,false,false,true,false,false,false,"",12,1
+50022,Samyama,alex.falke,Sat Jan 01 19:00:00 UTC 2000,Sat Jan 01 20:00:00 UTC 2000,false,false,false,true,false,false,false,"",12,1
+50025,Coreo niv2,lucia.lopez,Sat Jan 01 19:00:00 UTC 2000,,false,false,false,true,false,false,false,"",12,1
+50028,Coreo niv1 sab,lucia.lopez,Sat Jan 01 14:00:00 UTC 2000,Sat Jan 01 15:00:00 UTC 2000,false,false,false,false,false,false,true,"",12,1
+50031,Ásana,gabriela.marinescu,Sat Jan 01 17:00:00 UTC 2000,Sat Jan 01 18:00:00 UTC 2000,false,true,false,false,false,false,false,"",12,1
+50034,Curso Básico,alex.falke,Sat Jan 01 20:00:00 UTC 2000,Sat Jan 01 21:00:00 UTC 2000,false,false,false,true,false,false,false,"",12,1
+50037,Sat-Chakra,lucia.gagliardini,Sat Jan 01 21:00:00 UTC 2000,Sat Jan 01 22:00:00 UTC 2000,false,false,false,true,false,false,false,"",12,1
+50040,Gourmet,gabriel .abraham,Sat Jan 01 22:00:00 UTC 2000,,false,true,false,false,false,true,false,"",12,1
+50043,Circulo Lectura Mañana,alex.falke,Sat Jan 01 11:00:00 UTC 2000,,false,false,false,false,true,false,false,"",12,1
+50046,Circulo Lectura Tarde,lucia.gagliardini,Sat Jan 01 20:00:00 UTC 2000,Sat Jan 01 21:00:00 UTC 2000,false,false,false,false,false,true,false,"",12,1
+1650412,Coreo niv1,daniela.massa,Sat Jan 01 20:00:00 UTC 2000,Sat Jan 01 21:00:00 UTC 2000,false,true,false,false,false,false,false,"",12,1
+1651872,2100 sw,leda.bianucci,Sat Jan 01 21:00:00 UTC 2000,Sat Jan 01 22:00:00 UTC 2000,false,true,false,false,true,false,false,"",12,1
+1651873,1600 sw,dwayne.macgowan,Sat Jan 01 16:00:00 UTC 2000,Sat Jan 01 17:00:00 UTC 2000,false,true,false,true,false,false,false,"",12,1
+1653136,Entrenamiento de respiración,leda.bianucci,Sat Jan 01 20:00:00 UTC 2000,Sat Jan 01 21:00:00 UTC 2000,false,true,false,false,false,false,false,"",12,1
