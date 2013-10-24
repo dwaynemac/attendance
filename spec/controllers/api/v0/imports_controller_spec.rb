@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe Api::V0::ImportsController do
+  let(:csv_file) do
+    extend ActionDispatch::TestProcess
+    fixture_file_upload("/files/belgrano_horarios.csv","text/csv")
+  end
+
   before do
     unless @belgrano = Account.find_by_name('belgrano')
       @belgrano = create(:account, name: 'belgrano') 
@@ -9,9 +14,10 @@ describe Api::V0::ImportsController do
 
   def post_req(options = {})
     parameters = {
-      import: { file: 'x',
-                headers: 'x',
-                account_name: 'belgrano'
+      import: { csv_file: csv_file,
+                headers: ['name'],
+                account_name: 'belgrano',
+                object: 'TimeSlot'
       },
       app_key: ENV['app_key']
     }
@@ -39,7 +45,7 @@ describe Api::V0::ImportsController do
     end
     describe "with import[object] Attendance" do
       it "creates an AttendanceImport instance" do
-        expect{ post_req(import: {object: 'Attendance'}) }.to change{AttendanceImport.count}.by 1
+        expect{ post_req(import: {object: 'Attendance', headers: nil}) }.to change{AttendanceImport.count}.by 1
       end
     end
 

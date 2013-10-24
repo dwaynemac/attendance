@@ -15,13 +15,8 @@ class Api::V0::ImportsController < Api::V0::ApiController
   #
   def create
     if @account
-      scope = case params[:import][:object]
-      when 'TimeSlot', 'Attendance'
-        @account.send("#{params[:import][:object].underscore}_imports")
-      else
-        @account.imports
-      end
-      @import = scope.new(import_params)
+
+      @import = initialize_import
 
       if @import.save
         render json: { id: @import.id }, status: 201
@@ -34,6 +29,17 @@ class Api::V0::ImportsController < Api::V0::ApiController
   end
 
   private
+
+  def initialize_import
+    scope = case params[:import][:object]
+    when 'TimeSlot', 'Attendance'
+      @account.send("#{params[:import][:object].underscore}_imports")
+    else
+      @account.imports
+    end
+    scope.new(import_params)
+  end
+
 
   def get_account
     account_name = params[:import].delete(:account_name)
