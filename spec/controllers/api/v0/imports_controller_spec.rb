@@ -18,10 +18,30 @@ describe Api::V0::ImportsController do
     if options[:wout_app_key]
       parameters.delete(:app_key)
     end
+    if options[:import]
+      parameters[:import] = parameters[:import].merge(options[:import])
+    end
     post :create, parameters
   end
   
   describe "#create" do
+
+    it "create an import instance" do
+      expect{ post_req }.to change{Import.count}.by 1
+    end
+    describe "with import[object] TimeSlot" do
+      it "creates an TimeSlotImport instance" do
+        expect{ post_req(import: {object: 'TimeSlot'}) }.to change{TimeSlotImport.count}.by 1
+      end
+      it "wont create an AttendanceImport instance" do
+        expect{ post_req(import: {object: 'TimeSlot'}) }.not_to change{AttendanceImport.count}.by 1
+      end
+    end
+    describe "with import[object] Attendance" do
+      it "creates an AttendanceImport instance" do
+        expect{ post_req(import: {object: 'Attendance'}) }.to change{AttendanceImport.count}.by 1
+      end
+    end
 
     it "requires a valid app_key" do
       post_req(wout_app_key: true)
@@ -34,10 +54,6 @@ describe Api::V0::ImportsController do
     it "should return status 201" do
       post_req
       should respond_with 201
-    end
-
-    it "create an import instance" do
-      expect{ post_req }.to change{Import.count}.by 1
     end
 
     describe "created import" do

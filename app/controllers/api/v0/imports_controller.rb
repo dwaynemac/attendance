@@ -7,7 +7,7 @@ class Api::V0::ImportsController < Api::V0::ApiController
   # @action POST
   #
   # @required import[object] valid values: TimeSlot, Attendance
-  # @required import[file] CSV file
+  # @required import[csv_file] CSV file
   # @required import[headers] 
   # @required import[account_name]
   #
@@ -15,7 +15,14 @@ class Api::V0::ImportsController < Api::V0::ApiController
   #
   def create
     if @account
-      @import = @account.imports.new(import_params)
+      scope = case params[:import][:object]
+      when 'TimeSlot', 'Attendance'
+        @account.send("#{params[:import][:object].underscore}_imports")
+      else
+        @account.imports
+      end
+      @import = scope.new(import_params)
+
       if @import.save
         render json: { id: @import.id }, status: 201
       else
