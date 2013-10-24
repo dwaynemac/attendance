@@ -2,21 +2,54 @@ require 'spec_helper'
 
 describe TimeSlotImport do
 
-  let(:headers){ [nil, name] }
+  let(:headers){ [nil,
+                  'name',
+                  'padma_uid',
+                  'start_at',
+                  'end_at',
+                  'sunday',
+                  'monday',
+                  'tuesday',
+                  'wednesday',
+                  'thursday',
+                  'friday',
+                  'saturday',
+                  'observations',
+                  nil,
+                  nil] }
 
   let(:csv_file) do
     extend ActionDispatch::TestProcess
     fixture_file_upload("/files/belgrano_horarios.csv","text/csv")
   end
 
+  let(:time_slot_import){ create(:time_slot_import, csv_file: csv_file, headers: headers, account: (Account.first || create(:account))) }
+
   describe "#process_CSV" do
-    it "wont run if status is not :ready"
     it "creates a TimeSlot for every valid row" do
-      create(:import, csv_file: csv_file)
+      expect{time_slot_import.process_CSV}.to change{time_slot_import.imported_ids.size}.by 25
     end
-    it "stores imported rows ids"
-    it "stores failed rows numbers"
-    it "sets status to :finished"
+    it "sets TimeSlots attributes from rows" do
+      time_slot_import.process_CSV
+      t = TimeSlot.last
+      t.name.should == "Entrenamiento de respiracion"
+      t.padma_uid.should == 'leda.bianucci'
+      t.monday.should be_true
+      t.sunday.should be_false
+    end
+    it "stores imported rows ids" do
+      expect{time_slot_import.process_CSV}.to change{TimeSlot.count}.by 25
+      time_slot_import.imported_ids.should include(TimeSlot.last.id)
+    end
+    it "stores failed rows numbers" do
+      expect{time_slot_import.process_CSV}.to change{time_slot_import.failed_rows.size}.by 1
+      time_slot_import.failed_rows.should == [4]
+    end
+    it "sets status to :finished" do
+      time_slot_import.status.should == :ready
+      time_slot_import.process_CSV
+      time_slot_import.status.should == :finished
+    end
   end
 
   describe "only accepts VALID_HEADERS" do

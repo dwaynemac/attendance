@@ -6,11 +6,11 @@ class Import < ActiveRecord::Base
 
   serialize :failed_rows, Array
   serialize :headers, Array
-  serialize :imported_rows, Array
+  serialize :imported_ids, Array
 
   VALID_STATUS = [:ready, :working, :finished]
 
-  before_save :default_status
+  before_create :set_defaults
   validate :validate_headers
 
   mount_uploader :csv_file, CsvUploader
@@ -33,9 +33,15 @@ class Import < ActiveRecord::Base
 
   private
 
-  def default_status
+  def set_defaults
     if self.status.nil?
-      self.status = 'ready'
+      self.status = :ready
+    end
+    if self.imported_ids.nil?
+      self.imported_ids = []
+    end
+    if self.failed_rows.nil?
+      self.failed_rows = []
     end
   end
 
