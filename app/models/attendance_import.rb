@@ -1,0 +1,2 @@
+class AttendanceImport < Import
+end
