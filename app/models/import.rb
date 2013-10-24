@@ -1,6 +1,6 @@
 class Import < ActiveRecord::Base
 
-  # attr_accessible :failed_rows, :headers, :imported_rows, :status, :account_name
+  attr_accessible :headers, :csv_file
 
   belongs_to :account
 
