@@ -1,11 +1,12 @@
 require 'csv'
-require 'open-uri'
+require 'open-uri' # todo do we need this here?
 
 # header nil is used to ignore a column
 class TimeSlotImport < Import
 
   def valid_headers
     %W(
+      external_id
       name
       padma_uid
       start_at
@@ -59,10 +60,6 @@ class TimeSlotImport < Import
     end
 
     t
-  end
-
-  def value_for(row,attribute_name)
-    row[index_for(attribute_name)]
   end
 
   # @params [TimeSlot]

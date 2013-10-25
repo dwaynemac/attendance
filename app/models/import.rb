@@ -27,6 +27,13 @@ class Import < ActiveRecord::Base
     self.headers.index(attribute_name)
   end
 
+
+  # @param [CSV::Row] row
+  # @param [String] attribute_name
+  def value_for(row,attribute_name)
+    row[index_for(attribute_name)]
+  end
+
   # overrride this method on child class
   def valid_headers
   end

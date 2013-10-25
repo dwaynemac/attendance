@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe TimeSlotImport do
 
-  let(:headers){ [nil,
+  let(:headers){ ['external_id',
                   'name',
                   'padma_uid',
                   'start_at',
