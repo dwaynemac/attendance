@@ -17,10 +17,7 @@ class TimeSlot < ActiveRecord::Base
   def padma_contacts= padma_contacts
   	contact_ids = []
   	padma_contacts.each do |padma_contact_id|
-    	unless contact = Contact.find_by_padma_id(padma_contact_id)
-        padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name])
-        contact = Contact.create(padma_id: padma_contact_id, account_id: self.account.id, name: "#{padma_contact.first_name} #{padma_contact.last_name}")
-      end
+      contact = Contact.get_by_padma_id(padma_contact_id,self.account_id)
     	contact_ids << contact.id
     end
     self.contact_ids = contact_ids

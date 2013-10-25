@@ -17,4 +17,22 @@ class Contact < ActiveRecord::Base
 	    end
 	    @padma_contact
 	end
+
+  # Find or create a local contact by given padma_contact_id
+  # @param [String] padma_contact_id ID of contact @ contacts-ws
+  # @param [Integer] account_id 
+  # @param [PadmaContact] padma_contact (nil)
+  # @return [Contact]
+  def self.get_by_padma_id(padma_contact_id,account_id,padma_contact=nil)
+    unless contact = Contact.find_by_padma_id(padma_contact_id)
+      if padma_contact.nil?
+        padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name])
+      end
+      contact = Contact.create(padma_id: padma_contact_id,
+                               account_id: account_id,
+                               name: "#{padma_contact.first_name} #{padma_contact.last_name}")
+    end
+    contact
+  end
+
 end
