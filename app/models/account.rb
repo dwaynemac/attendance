@@ -6,6 +6,7 @@ class Account < ActiveRecord::Base
   has_many :trial_lessons
   has_many :time_slots
   has_many :contacts
+  has_many :attendances
 
   has_many :imports
   has_many :attendance_imports
