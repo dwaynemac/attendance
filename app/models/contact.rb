@@ -28,7 +28,7 @@ class Contact < ActiveRecord::Base
       if padma_contact.nil?
         padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name])
       end
-      contact = Contact.create(padma_id: padma_contact_id,
+      contact = Contact.create!(padma_id: padma_contact_id,
                                account_id: account_id,
                                name: "#{padma_contact.first_name} #{padma_contact.last_name}")
     end
