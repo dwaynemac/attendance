@@ -42,18 +42,18 @@ class AttendanceImport < Import
     attendance = Attendance.find_or_create_by(attendance_on: attendance_on,
                                               time_slot_id: time_slot_id,
                                               account_id: self.account.id)
-    unless attendance.nil?
-      contact = map_contact(row)
-      if contact
-        attendance.attendance_contacts.new(contact_id: contact.id,
-                                           attendance_id: attendance.id)
-      else
-        # fail -- didn't find contact
-        nil
-      end
-    else
+    if attendance.nil?
       # fail -- didn't find and couldnt create attendance
       nil
+    else
+      contact = map_contact(row)
+      if contact.nil?
+        # fail -- didn't find contact
+        nil
+      else
+        attendance.attendance_contacts.new(contact_id: contact.id,
+                                           attendance_id: attendance.id)
+      end
     end
   end
 

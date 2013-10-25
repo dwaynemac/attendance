@@ -6,6 +6,9 @@ describe AttendanceImport do
     PadmaContact.stub!(:find_by_kshema_id).and_return(
       PadmaContact.new(first_name: 'fn', last_name: 'ln')
     )
+
+    # ensure there are no Attendances
+    Attendance.destroy_all
   end
 
   let(:headers){[
@@ -24,22 +27,22 @@ describe AttendanceImport do
 
   describe "#process_CSV" do
     it "sets AttendanceContact for every valid row" do
-      expect{attendance_import.process_CSV}.to change{AttendanceContact.count}.by 18
+      expect{attendance_import.process_CSV}.to change{AttendanceContact.count}.by 17
     end
     it "sets Attendance for every [time_slot_external_id,attendance_on] in rows" do
-      expect{attendance_import.process_CSV}.to change{Attendance.count}.by 1
+      expect{attendance_import.process_CSV}.to change{Attendance.count}.by 7
     end
     it "stores in imported_ids ids of created Attendances" do
       attendance_import.process_CSV
       attendance_import.imported_ids.should include Attendance.last.id
     end
     it "stores failed rows numbers" do
-      expect{attendance_import.process_CSV}.not_to change{attendance_import.failed_rows.count}
+      expect{attendance_import.process_CSV}.to change{attendance_import.failed_rows.count}.by 1
     end
     it "sets status to :finished" do
-      attendance_import.status.should == :'ready'
+      attendance_import.status.should == :ready
       attendance_import.process_CSV
-      attendance_import.status.should == :'finished'
+      attendance_import.status.should == :finished
     end
   end
 
