@@ -65,6 +65,9 @@ GEM
     binding_of_caller (0.7.1)
       debug_inspector (>= 0.0.1)
     builder (3.1.4)
+    byebug (2.3.1)
+      columnize (~> 0.3.6)
+      debugger-linecache (~> 1.2.0)
     cancan (1.6.10)
     carrierwave (0.9.0)
       activemodel (>= 3.2.0)
@@ -84,12 +87,7 @@ GEM
       logical_model (~> 0.5.8)
       railties (>= 3.1)
     debug_inspector (0.0.2)
-    debugger (1.6.2)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.2.3)
     debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.2.3)
     devise_cas_authenticatable (1.2.1)
       devise (>= 1.0.6)
       rubycas-client (>= 2.2.1)
@@ -267,11 +265,11 @@ DEPENDENCIES
   angularjs-rails
   better_errors
   binding_of_caller
+  byebug
   cancan
   carrierwave
   coffee-rails (~> 4.0.0)
   contacts_client (~> 0.0.20)
-  debugger
   devise!
   devise_cas_authenticatable
   factory_girl_rails
