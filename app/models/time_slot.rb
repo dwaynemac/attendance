@@ -5,7 +5,7 @@ class TimeSlot < ActiveRecord::Base
   validates :name,  :presence => true
   validates_time :end_at, :after => :start_at
 
-  attr_accessible :padma_uid, :name, :start_at, :end_at, :padma_contacts, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :cultural_activity
+  attr_accessible :padma_uid, :name, :start_at, :end_at, :padma_contacts, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :cultural_activity, :external_id
 
   def recurrent_contacts
     #TODO: Aprovechar el cache de name y no ir a buscar la lista a contacts.

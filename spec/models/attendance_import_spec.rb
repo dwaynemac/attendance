@@ -11,21 +11,54 @@ describe AttendanceImport do
     Attendance.destroy_all
   end
 
-  let(:headers){[
-    nil,
+  let(:headers_time_slot) {
+    [ 'external_id',
+      'name',
+      'padma_uid',
+      'start_at',
+      'end_at',
+      'sunday',
+      'monday',
+      'tuesday',
+      'wednesday',
+      'thursday',
+      'friday',
+      'saturday',
+      'observations',
+      nil,
+      nil ]
+  }
+
+  let(:csv_file_time_slot) do
+    extend ActionDispatch::TestProcess
+    fixture_file_upload("/files/belgrano_horarios.csv","text/csv")
+  end
+
+  let(:time_slot_import) {
+    create(:time_slot_import, csv_file: csv_file_time_slot, headers: headers_time_slot, account: (Account.first || create(:account)))
+  } 
+
+  let(:headers_attedance) {
+  [ nil,
     'time_slot_external_id',
     'contact_external_id',
     'attendance_on',
     nil,
-    nil
-  ]}
-  let(:csv_file) do
+    nil ]
+  }
+  
+  let(:csv_file_attendance) do
     extend ActionDispatch::TestProcess
     fixture_file_upload("/files/belgrano_asistencias.csv","text/csv")
   end
-  let(:attendance_import){create(:attendance_import, headers: headers, csv_file: csv_file)}
+
+  let(:attendance_import) {create(:attendance_import, headers: headers_attedance, csv_file: csv_file_attendance)}
 
   describe "#process_CSV" do
+    before do
+      time_slot_import.process_CSV
+    end
+
     it "sets AttendanceContact for every valid row" do
       expect{attendance_import.process_CSV}.to change{AttendanceContact.count}.by 17
     end
@@ -34,7 +67,7 @@ describe AttendanceImport do
     end
     it "stores in imported_ids ids of created Attendances" do
       attendance_import.process_CSV
-      attendance_import.imported_ids.should include Attendance.last.id
+      attendance_import.imported_ids.should include AttendanceContact.last.id
     end
     it "stores failed rows numbers" do
       expect{attendance_import.process_CSV}.to change{attendance_import.failed_rows.count}.by 1
