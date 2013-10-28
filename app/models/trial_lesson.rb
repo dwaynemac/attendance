@@ -66,6 +66,7 @@ class TrialLesson < ActiveRecord::Base
       a.create(username: self.padma_uid, account_name: self.account.name)
     end
   end
+  
   def broadcast_create
     # Send notification using the messaging system
     Messaging::Client.post_message('trial_lesson',self.as_json_for_messaging)

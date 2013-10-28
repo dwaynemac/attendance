@@ -10,4 +10,7 @@ FactoryGirl.define do
   factory :attendance_import do
     account { Account.last || create(:account) }
   end
+  factory :trial_lesson_import do
+    account { Account.last || create(:account) }
+  end
 end

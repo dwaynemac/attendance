@@ -62,6 +62,12 @@ class Import < ActiveRecord::Base
     self.status = :finished
     self.save
   end
+  
+  # @return [Contact]
+  def map_contact(external_id)
+    c = PadmaContact.find_by_kshema_id(external_id)
+    Contact.get_by_padma_id(c.id,self.account.id, c) if c
+  end
 
   private
 

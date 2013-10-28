@@ -11,6 +11,7 @@ class Account < ActiveRecord::Base
   has_many :imports
   has_many :attendance_imports
   has_many :time_slot_imports
+  has_many :trial_lesson_imports
 
   # Hook to Padma Account API
   # @param [TrueClass] cache: Specify if Cache should be used. default: true

@@ -31,9 +31,10 @@ class Api::V0::ImportsController < Api::V0::ApiController
   private
 
   def initialize_import
-    scope = case params[:import][:object]
-    when 'TimeSlot', 'Attendance'
-      @account.send("#{params[:import][:object].underscore}_imports")
+    ot = params[:import].delete(:object)
+    scope = case ot
+    when 'TimeSlot', 'Attendance', 'TrialLesson'
+      @account.send("#{ot.underscore}_imports")
     else
       @account.imports
     end

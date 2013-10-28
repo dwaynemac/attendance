@@ -37,7 +37,8 @@ class AttendanceImport < Import
       # fail -- didn't find and couldnt create attendance
       nil
     else
-      contact = map_contact(row)
+      cid = value_for(row, 'contact_external_id')
+      contact = map_contact(cid)
       if contact.nil?
         # fail -- didn't find contact
         nil
@@ -48,10 +49,4 @@ class AttendanceImport < Import
     end
   end
 
-  # @return [Contact]
-  def map_contact(row)
-    external_id = value_for(row, 'contact_external_id')
-    c = PadmaContact.find_by_kshema_id(external_id)
-    Contact.get_by_padma_id(c.id,self.account.id, c) if c
-  end
 end

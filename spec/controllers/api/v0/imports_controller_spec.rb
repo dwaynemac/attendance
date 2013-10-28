@@ -40,12 +40,20 @@ describe Api::V0::ImportsController do
         expect{ post_req(import: {object: 'TimeSlot'}) }.to change{TimeSlotImport.count}.by 1
       end
       it "wont create an AttendanceImport instance" do
-        expect{ post_req(import: {object: 'TimeSlot'}) }.not_to change{AttendanceImport.count}.by 1
+        expect{ post_req(import: {object: 'TimeSlot'}) }.not_to change{AttendanceImport.count}
       end
     end
     describe "with import[object] Attendance" do
       it "creates an AttendanceImport instance" do
         expect{ post_req(import: {object: 'Attendance', headers: nil}) }.to change{AttendanceImport.count}.by 1
+      end
+    end
+    describe "with import[object] TrialLesson" do
+      it "creates an TrialLessonImport instance" do
+        expect{ post_req(import: {object: 'TrialLesson'}) }.to change{TrialLessonImport.count}.by 1
+      end
+      it "wont create an AttendanceImport instance" do
+        expect{ post_req(import: {object: 'TrialLesson'}) }.not_to change{AttendanceImport.count}
       end
     end
 
