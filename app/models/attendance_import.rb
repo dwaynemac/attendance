@@ -4,7 +4,7 @@ require 'open-uri'
 class AttendanceImport < Import
 
   def valid_headers
-    %W(attendance_on contact_external_id time_slot_external_id)
+    %W(attendance_on time_slot_external_id contact_external_id)
   end
 
   def process_CSV
@@ -15,7 +15,7 @@ class AttendanceImport < Import
       row_i = 1 # start at 1 because first row is skipped
       CSV.foreach(file_handle, encoding:"UTF-8:UTF-8", headers: :first_row) do |row|
         a = build_attendance_contact(row)
-
+        
         if a && a.save
           self.imported_ids << a.id
         else
@@ -37,6 +37,10 @@ class AttendanceImport < Import
     attendance_on = value_for(row,'attendance_on')
     
     external_id = value_for(row,'time_slot_external_id')
+    
+    # fail -- didn't find external_id in row
+    return nil unless !external_id.nil?
+
     time_slot_id = TimeSlot.where(external_id: external_id).pluck(:id).first
 
     attendance = Attendance.find_or_create_by(attendance_on: attendance_on,
