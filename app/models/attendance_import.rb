@@ -7,27 +7,14 @@ class AttendanceImport < Import
     %W(attendance_on time_slot_external_id contact_external_id)
   end
 
-  def process_CSV
-    return unless self.status == :ready
-
-    file_handle = open(self.csv_file.file.path)
-    unless file_handle.nil?
-      row_i = 1 # start at 1 because first row is skipped
-      CSV.foreach(file_handle, encoding:"UTF-8:UTF-8", headers: :first_row) do |row|
-        a = build_attendance_contact(row)
-        
-        if a && a.save
-          self.imported_ids << a.id
-        else
-          self.failed_rows << row_i
-        end
-
-        row_i +=1 
-      end
+  def handle_row(row)
+    a = build_attendance_contact(row)
+    
+    if a && a.save
+      a.id
+    else
+      nil
     end
-
-    self.status = :finished
-    self.save
   end
 
   private

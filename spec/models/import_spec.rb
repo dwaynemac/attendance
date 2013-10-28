@@ -12,7 +12,7 @@ describe Import do
   it "defaults status to ready" do
     i = build(:import, status: nil)
     i.save
-    i.status.should == 'ready'
+    i.status.should == :ready
   end
 
   it "saves CSV file" do

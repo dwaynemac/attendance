@@ -23,26 +23,13 @@ class TimeSlotImport < Import
     )
   end
 
-  def process_CSV
-    return unless self.status == :ready
-
-    file_handle = open(self.csv_file.file.path)
-    unless file_handle.nil?
-      row_i = 1 # start at 1 because first row is skipped
-      CSV.foreach(file_handle, encoding:"UTF-8:UTF-8", headers: :first_row) do |row|
-        t = build_time_slot(row)
-
-        if t.save || retry_fixing_errors(t)
-          self.imported_ids << t.id
-        else
-          self.failed_rows << row_i
-        end
-        row_i += 1
-      end
+  def handle_row(row)
+    t = build_time_slot(row)
+    if t.save || retry_fixing_errors(t)
+      t.id
+    else
+      nil
     end
-
-    self.status = :finished
-    self.save
   end
 
   private

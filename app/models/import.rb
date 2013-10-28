@@ -27,7 +27,6 @@ class Import < ActiveRecord::Base
     self.headers.index(attribute_name)
   end
 
-
   # @param [CSV::Row] row
   # @param [String] attribute_name
   def value_for(row,attribute_name)
@@ -36,6 +35,32 @@ class Import < ActiveRecord::Base
 
   # overrride this method on child class
   def valid_headers
+  end
+
+  # Override this on child class
+  # @param [CSV::Row]
+  # @return [Integer/Nil] will return id for imported_rows or nil if it failed
+  def handle_row(row)
+  end
+
+  def process_CSV
+    return unless self.status == :ready
+
+    file_handle = open(self.csv_file.file.path)
+    unless file_handle.nil?
+      row_i = 1 # start at 1 because first row is skipped
+      CSV.foreach(file_handle, encoding:"UTF-8:UTF-8", headers: :first_row) do |row|
+        if iid = handle_row(row)
+          self.imported_ids << iid
+        else
+          self.failed_rows << row_i
+        end
+        row_i += 1
+      end
+    end
+
+    self.status = :finished
+    self.save
   end
 
   private
