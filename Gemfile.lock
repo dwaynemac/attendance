@@ -88,6 +88,11 @@ GEM
       railties (>= 3.1)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
+    delayed_job (4.0.0)
+      activesupport (>= 3.0, < 4.1)
+    delayed_job_active_record (4.0.0)
+      activerecord (>= 3.0, < 4.1)
+      delayed_job (>= 3.0, < 4.1)
     devise_cas_authenticatable (1.2.1)
       devise (>= 1.0.6)
       rubycas-client (>= 2.2.1)
@@ -270,6 +275,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.0.0)
   contacts_client (~> 0.0.20)
+  delayed_job_active_record
   devise!
   devise_cas_authenticatable
   factory_girl_rails

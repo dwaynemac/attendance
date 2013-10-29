@@ -64,6 +64,7 @@ gem 'messaging_client','~> 0.0.2'
 
 gem 'carrierwave'
 gem 'fog'
+gem 'delayed_job_active_record' # must be declared after 'protected_attributes' gem
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

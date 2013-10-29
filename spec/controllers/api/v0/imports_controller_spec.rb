@@ -32,8 +32,8 @@ describe Api::V0::ImportsController do
   
   describe "#create" do
 
-    it "create an import instance" do
-      expect{ post_req }.to change{Import.count}.by 1
+    it "queues import in delayed_job" do
+      expect{ post_req }.to change{Delayed::Job.count}.by 1
     end
     describe "with import[object] TimeSlot" do
       it "creates an TimeSlotImport instance" do

@@ -1,3 +1,4 @@
+# @restful_api v0
 class Api::V0::ImportsController < Api::V0::ApiController
 
   before_filter :get_account
@@ -6,9 +7,34 @@ class Api::V0::ImportsController < Api::V0::ApiController
   # @url /api/v0/imports
   # @action POST
   #
-  # @required import[object] valid values: TimeSlot, Attendance
+  # @required import[object] valid values: TimeSlot, Attendance, TrialLesson
   # @required import[csv_file] CSV file
-  # @required import[headers] 
+  # @required import[headers]
+  #           valid values for TimeSlot
+  #                                external_id
+  #                                name
+  #                                padma_uid
+  #                                start_at
+  #                                end_at
+  #                                monday
+  #                                tuesday
+  #                                wednesday
+  #                                thursday
+  #                                friday
+  #                                saturday
+  #                                sunday
+  #                                cultural_activity
+  #                                observations
+  #           valid values for Attendance                     
+  #                                attendance_on
+  #                                time_slot_external_id
+  #                                contact_external_id
+  #           valid values for TrialLesson
+  #                                contact_external_id
+  #                                time_slot_external_id
+  #                                trial_on
+  #                                padma_uid
+  #                                assisted
   # @required import[account_name]
   #
   # @response_field id Import id
@@ -19,6 +45,7 @@ class Api::V0::ImportsController < Api::V0::ApiController
       @import = initialize_import
 
       if @import.save
+        @import.delay.process_CSV
         render json: { id: @import.id }, status: 201
       else
         render json: { error: 'couldnt create import'}, status: 400

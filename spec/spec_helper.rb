@@ -43,4 +43,9 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+  
+  config.before(:each) do
+    TrialLesson.any_instance.stub(:create_activity).and_return(true)
+    TrialLesson.any_instance.stub(:broadcast_create).and_return(true)
+  end
 end
