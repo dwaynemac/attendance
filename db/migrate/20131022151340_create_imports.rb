@@ -7,8 +7,8 @@ class CreateImports < ActiveRecord::Migration
 
       t.string :status
                                   
-      t.text :failed_rows, limit:  1073741824 # LONGTEXT (max 1Gb)
-      t.text :imported_ids, limit: 1073741824 # LONGTEXT (max 1Gb)
+      t.text :failed_rows
+      t.text :imported_ids
 
       t.timestamps
     end
