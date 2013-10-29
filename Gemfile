@@ -98,6 +98,10 @@ group :development do
   # for easier error debugging in development.
   gem 'better_errors'
   gem 'binding_of_caller'
+
+  # documentation
+  gem 'yard', '~> 0.8.3'
+  gem 'yard-restful'
 end
 
 group :production do

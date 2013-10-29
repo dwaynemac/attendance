@@ -29,3 +29,13 @@ it can be run by executing "rake synchronize"
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+
+= Documentation
+
+For ws API run
+    ./script/build_api_documentation.sh
+
+For code documentation run
+
+    bundle exec yard
+
