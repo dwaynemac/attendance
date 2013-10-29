@@ -6,9 +6,9 @@ class CreateImports < ActiveRecord::Migration
       t.references :account
 
       t.string :status
-
-      t.text :failed_rows, limit: 4294967295 # LONGTEXT (max 4Gb)
-      t.text :imported_ids, limit: 4294967295 # LONGTEXT (max 4Gb)
+                                  
+      t.text :failed_rows, limit:  1073741824 # LONGTEXT (max 1Gb)
+      t.text :imported_ids, limit: 1073741824 # LONGTEXT (max 1Gb)
 
       t.timestamps
     end
