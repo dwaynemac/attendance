@@ -39,11 +39,11 @@ describe TimeSlotImport do
     end
     it "stores imported rows ids" do
       expect{time_slot_import.process_CSV}.to change{TimeSlot.count}.by 25
-      time_slot_import.imported_ids.should include(TimeSlot.last.id)
+      time_slot_import.imported_ids.map(&:value).should include(TimeSlot.last.id)
     end
     it "stores failed rows numbers" do
-      expect{time_slot_import.process_CSV}.to change{time_slot_import.failed_rows.size}.by 1
-      time_slot_import.failed_rows.should == [4]
+      expect{time_slot_import.process_CSV}.to change{time_slot_import.failed_rows.count}.by 1
+      time_slot_import.failed_rows.map(&:value).should == [4]
     end
     it "sets status to :finished" do
       time_slot_import.status.should == :ready

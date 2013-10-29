@@ -4,9 +4,10 @@ class Import < ActiveRecord::Base
 
   belongs_to :account
 
-  serialize :failed_rows, Array
+  has_many :imported_ids
+  has_many :failed_rows
+
   serialize :headers, Array
-  serialize :imported_ids, Array
 
   VALID_STATUS = [:ready, :working, :finished]
 
@@ -51,9 +52,9 @@ class Import < ActiveRecord::Base
       row_i = 1 # start at 1 because first row is skipped
       CSV.foreach(file_handle, encoding:"UTF-8:UTF-8", headers: :first_row) do |row|
         if iid = handle_row(row)
-          self.imported_ids << iid
+          self.imported_ids.create(value: iid)
         else
-          self.failed_rows << row_i
+          self.failed_rows.create(value: row_i)
         end
         row_i += 1
       end

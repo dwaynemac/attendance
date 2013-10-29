@@ -1,0 +1,2 @@
+class FailedRow < ImportDetail
+end

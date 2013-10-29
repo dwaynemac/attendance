@@ -48,10 +48,10 @@ describe TrialLessonImport do
       end
       it "saves imported trial_lesson's ids in imported_ids" do
         expect{trial_lesson_import.process_CSV}.to change{TrialLesson.count}.by 28
-        trial_lesson_import.imported_ids.should include TrialLesson.last.id
+        trial_lesson_import.imported_ids.map(&:value).should include TrialLesson.last.id
       end
       it "saves failed rows in failed_rows" do
-        expect{trial_lesson_import.process_CSV}.to change{trial_lesson_import.failed_rows.size}.by 0
+        expect{trial_lesson_import.process_CSV}.to change{trial_lesson_import.failed_rows.count}.by 0
       end
       it "sets status to :finished" do
         trial_lesson_import.status.should == :ready

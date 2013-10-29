@@ -8,6 +8,8 @@ describe Import do
   end
 
   it { should belong_to :account }
+  it { should have_many :imported_ids }
+  it { should have_many :failed_rows } 
 
   it "defaults status to ready" do
     i = build(:import, status: nil)
@@ -36,6 +38,4 @@ describe Import do
       i.account.name.should == 'belgrano'
     end
   end
-
-
 end

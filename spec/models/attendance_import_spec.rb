@@ -67,7 +67,7 @@ describe AttendanceImport do
     end
     it "stores in imported_ids ids of created Attendances" do
       attendance_import.process_CSV
-      attendance_import.imported_ids.should include AttendanceContact.last.id
+      attendance_import.imported_ids.map(&:value).should include AttendanceContact.last.id
     end
     it "stores failed rows numbers" do
       expect{attendance_import.process_CSV}.to change{attendance_import.failed_rows.count}.by 1

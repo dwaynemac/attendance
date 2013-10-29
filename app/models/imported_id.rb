@@ -1,0 +1,3 @@
+class ImportedId < ImportDetail
+
+end
