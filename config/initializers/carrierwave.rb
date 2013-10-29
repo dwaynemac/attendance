@@ -18,7 +18,7 @@ else
           :region                 => 'sa-east-1'
       }
       config.fog_directory = 'attendance-prod',
-      config.fog_host = 'http://contacts-prod.s3-sa-east-1.amazonaws.com'
+      config.asset_host = 'http://contacts-prod.s3-sa-east-1.amazonaws.com'
     else
       config.fog_credentials = {
           :provider               => 'AWS',
@@ -26,7 +26,7 @@ else
           :aws_secret_access_key  => ENV['S3_SECRET_KEY'],
       }
       config.fog_directory  = 'attendance-staging'
-      config.fog_host       = "http://contacts-dev.s3.amazonaws.com"
+      config.asset_host       = "http://contacts-dev.s3.amazonaws.com"
     end
 
     config.fog_public     = false
