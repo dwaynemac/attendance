@@ -47,7 +47,7 @@ class Import < ActiveRecord::Base
   end
 
   def process_CSV
-    return unless self.status == :ready
+    return unless self.status.to_sym == :ready
 
     file_handle = open(self.csv_file.file.path)
     unless file_handle.nil?
@@ -67,6 +67,18 @@ class Import < ActiveRecord::Base
   def map_contact(external_id)
     c = PadmaContact.find_by_kshema_id(external_id)
     Contact.get_by_padma_id(c.id,self.account.id, c) if c
+  end
+
+  def failed_rows_to_csv
+    import_csv = CSV.read(self.csv_file.file.path)
+    unless file_handle.nil?
+      CSV.generate do |failed_rows_csv|
+        failed_rows_csv << ['row'] + self.headers + ['error message'] 
+        self.failed_rows.each do |failed_row|
+          failed_row_csv << [failed_row.value] + import_csv[failed_row.value] + [failed_row.message]
+        end
+      end 
+    end
   end
 
   private
