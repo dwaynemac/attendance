@@ -25,3 +25,4 @@ Procfile.dev
 # Ignore vim files
 *.swp
 public/uploads
+.env
