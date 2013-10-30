@@ -33,6 +33,7 @@ class Api::V0::ImportsController < Api::V0::ApiController
     else
       render json: {status: import.status,
                     failed_rows: import.failed_rows.count,
+                    failed_rows_csv: failed_rows_api_v0_import_url(import, format: :csv),
                     imported_ids: import.imported_ids.count}.to_json,
              status: 200
     end
@@ -107,13 +108,16 @@ class Api::V0::ImportsController < Api::V0::ApiController
   def failed_rows
     @import = Import.find(params[:id])
 
-    if import.nil? || import.stats.to_sym != :finished
+    if @import.nil?
       render json: { message: "Import not found"}.to_json,
              status: 404
+    elsif @import.status.to_sym != :finished
+      render json: { message: "Import not finished"}.to_json,
+             status: 400
     else
       respond_to do |format|
         format.csv do
-          send_data import.failed_rows_to_csv,
+          send_data @import.failed_rows_to_csv,
                     type: 'text/csv',
                     disposition: "attachment; filename=import_errors.csv"
         end

@@ -71,11 +71,11 @@ class Import < ActiveRecord::Base
 
   def failed_rows_to_csv
     import_csv = CSV.read(self.csv_file.file.path)
-    unless file_handle.nil?
+    unless import_csv.nil?
       CSV.generate do |failed_rows_csv|
         failed_rows_csv << ['row'] + self.headers + ['error message'] 
         self.failed_rows.each do |failed_row|
-          failed_row_csv << [failed_row.value] + import_csv[failed_row.value] + [failed_row.message]
+          failed_rows_csv << [failed_row.value] + import_csv[failed_row.value] + [failed_row.message]
         end
       end 
     end

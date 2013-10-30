@@ -25,7 +25,7 @@ class TimeSlotImport < Import
 
   def handle_row(row,row_i)
     t = build_time_slot(row)
-    if t.save || retry_fixing_errors(t)
+    if t.save or retry_fixing_errors(t)
       ImportedId.new(value: t.id)
     else
       FailedRow.new(value: row_i, message: t.errors.messages.map{|attr,err_array| "#{attr}: #{err_array.join(' and ')}" }.join(' AND '))
@@ -40,7 +40,12 @@ class TimeSlotImport < Import
     t = TimeSlot.new
     t.account = self.account
     
-    valid_headers.each do |header|
+    st = value_for(row,'start_at')
+    t.start_at = Time.parse(st) if st
+    et = value_for(row,'end_at')
+    t.end_at = Time.parse(et) if et
+
+    (valid_headers-%W(start_at end_at)).each do |header|
       if index_for(header)
         t.send("#{header}=",value_for(row,header))
       end
