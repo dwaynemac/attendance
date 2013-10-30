@@ -12,6 +12,31 @@ describe Api::V0::ImportsController do
     end
   end
 
+  describe "#show" do
+    before do
+      i = build(:import)
+      i.save
+      @import_id = i.id
+    end
+    describe "with a valid id" do
+      before do
+        get :show, id: @import_id, 
+                   app_key: ENV['app_key']
+      end
+      let(:json){ActiveSupport::JSON.decode(response.body)}
+      it { should respond_with 200 }
+      it "returns json with import status" do
+        json['status'].should == 'ready' 
+      end
+      it "returns json with failed_rows count" do
+        json['failed_rows'].should == 0
+      end
+      it "returns json with imported_ids count" do
+        json['imported_ids'].should == 0
+      end
+    end
+  end
+
   def post_req(options = {})
     parameters = {
       import: { csv_file: csv_file,
@@ -49,8 +74,10 @@ describe Api::V0::ImportsController do
       end
     end
     describe "with import[object] TrialLesson" do
-      it "creates an TrialLessonImport instance" do
-        expect{ post_req(import: {object: 'TrialLesson'}) }.to change{TrialLessonImport.count}.by 1
+      pending do
+        it "creates an TrialLessonImport instance" do
+          expect{ post_req(import: {object: 'TrialLesson'}) }.to change{TrialLessonImport.count}.by 1
+        end
       end
       it "wont create an AttendanceImport instance" do
         expect{ post_req(import: {object: 'TrialLesson'}) }.not_to change{AttendanceImport.count}

@@ -2,11 +2,47 @@
 class Api::V0::ImportsController < Api::V0::ApiController
 
   before_filter :get_account
+  
+  ##
+  # Returns status of an import
+  # Available statuses are:
+  #   * :ready
+  #   * :working
+  #   * :finished
+  # @url /v0/imports/:id
+  # @action GET
+  #
+  # @required [String] app_key
+  # @required [String] id import id
+  #
+  # @example_request
+  # -- show me the status of the import 1234
+  # GET /v0/imports/1234, {id: "1234"}
+  # @example response {status: 'working', failed_rows: 2, imported_rows: 10}
+  #
+  # @response_field [String] status status of the current import [:ready, :working, :finished]
+  # @response_field [Integer] failed_rows number of rows that have already failed
+  # @response_field [Integer] imported_rows number of rows that have already been imported
+  #
+  # @author Alex Falke
+  def show
+    import = Import.find(params[:id])
+
+    if import.nil?
+      render json: {message: "Import not found"}.to_json, status: 404
+    else
+      render json: {status: import.status,
+                    failed_rows: import.failed_rows.count,
+                    imported_ids: import.imported_ids.count}.to_json,
+             status: 200
+    end
+  end
 
   ##
   # @url /api/v0/imports
   # @action POST
   #
+  # @required [String] app_key
   # @required import[object] valid values: TimeSlot, Attendance, TrialLesson
   # @required import[csv_file] CSV file
   # @required import[headers]
@@ -70,8 +106,10 @@ class Api::V0::ImportsController < Api::V0::ApiController
 
 
   def get_account
-    account_name = params[:import].delete(:account_name)
-    @account = Account.find_by_name(account_name)
+    if params[:import]
+      account_name = params[:import].delete(:account_name)
+      @account = Account.find_by_name(account_name)
+    end
   end
 
   def import_params

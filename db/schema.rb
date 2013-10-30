@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131029152046) do
+ActiveRecord::Schema.define(version: 20131029155452) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -77,11 +77,9 @@ ActiveRecord::Schema.define(version: 20131029152046) do
     t.string   "type"
     t.integer  "account_id"
     t.string   "status"
-    t.text     "failed_rows",  limit: 4294967295
-    t.text     "imported_ids", limit: 4294967295
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "headers",      limit: 4294967295
+    t.text     "headers",    limit: 4294967295
     t.string   "csv_file"
   end
 
