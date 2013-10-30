@@ -19,7 +19,7 @@ class TrialLessonImport < Import
   end
   
   # return created id or nil
-  def handle_row(row)
+  def handle_row(row,row_i)
     new_time_slot = self.account.trial_lessons.new
 
     ts_external_id = value_for(row,'time_slot_external_id')
@@ -35,16 +35,19 @@ class TrialLessonImport < Import
         (valid_headers-%W(contact_external_id time_slot_external_id)).each do |header|
           new_time_slot.send("#{header}=",value_for(row,header))
         end
+      
         if new_time_slot.save!
-          new_time_slot.id
+          ImportedId.new value: new_time_slot.id
         else
-          nil
+          FailedRow.new(value: row_i,
+                        message: new_time_slot.errors.messages.map{|attr,err_array| "#{attr}: #{err_array.join(' and ')}" }.join(' AND '))
         end
+
       else
-        nil # fail - contact not found
+        FailedRow.new value: row_i, message: "contact not found"
       end
     else
-      nil # fail - no timeslot specified
+      FailedRow.new value: row_i, message: "no timeslot specified"
     end
   end
 

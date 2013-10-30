@@ -7,13 +7,20 @@ class AttendanceImport < Import
     %W(attendance_on time_slot_external_id contact_external_id)
   end
 
-  def handle_row(row)
-    a = build_attendance_contact(row)
+  def handle_row(row,row_i)
+    a, mess = build_attendance_contact(row)
     
     if a && a.save
-      a.id
+      ImportedId.new(value: a.id)
     else
-      nil
+      if a
+        message = a.errors.messages.map{|attr,err_array| "#{attr}: #{err_array.join(' and ')}" }.join(' AND ')
+      else
+        message = mess
+      end
+      FailedRow.new(value: row_i,
+                    message: message
+                   )
     end
   end
 
@@ -25,8 +32,8 @@ class AttendanceImport < Import
     
     external_id = value_for(row,'time_slot_external_id')
     
-    # fail -- didn't find external_id in row
-    return nil unless !external_id.nil?
+    # fail
+    return nil,"didn't find external_id in row" unless !external_id.nil?
 
     time_slot_id = TimeSlot.where(external_id: external_id).pluck(:id).first
 
@@ -34,14 +41,14 @@ class AttendanceImport < Import
                                               time_slot_id: time_slot_id,
                                               account_id: self.account.id)
     if attendance.nil?
-      # fail -- didn't find and couldnt create attendance
-      nil
+      # fail
+      return nil, "didn't find and couldnt create attendance"
     else
       cid = value_for(row, 'contact_external_id')
       contact = map_contact(cid)
       if contact.nil?
-        # fail -- didn't find contact
-        nil
+        # fail
+        return nil, "didn't find contact"
       else
         attendance.attendance_contacts.new(contact_id: contact.id,
                                            attendance_id: attendance.id)

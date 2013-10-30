@@ -4,6 +4,7 @@ class Import < ActiveRecord::Base
 
   belongs_to :account
 
+  has_many :import_details
   has_many :imported_ids
   has_many :failed_rows
 
@@ -40,7 +41,8 @@ class Import < ActiveRecord::Base
 
   # Override this on child class
   # @param [CSV::Row]
-  # @return [Integer/Nil] will return id for imported_rows or nil if it failed
+  # @param [Integer] row index
+  # @return [ImportDetail] 
   def handle_row(row)
   end
 
@@ -51,11 +53,8 @@ class Import < ActiveRecord::Base
     unless file_handle.nil?
       row_i = 1 # start at 1 because first row is skipped
       CSV.foreach(file_handle, encoding:"UTF-8:UTF-8", headers: :first_row) do |row|
-        if iid = handle_row(row)
-          self.imported_ids.create(value: iid)
-        else
-          self.failed_rows.create(value: row_i)
-        end
+        self.import_details << handle_row(row, row_i)
+        self.import_details.last.save
         row_i += 1
       end
     end

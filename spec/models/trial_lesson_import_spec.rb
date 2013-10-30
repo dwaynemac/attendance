@@ -44,7 +44,7 @@ describe TrialLessonImport do
     end
     describe "#process_CSV" do
       it "creates a trial_lesson for every valid row" do
-        expect{trial_lesson_import.process_CSV}.to change{trial_lesson_import.imported_ids.size}.by 28
+        expect{trial_lesson_import.process_CSV}.to change{trial_lesson_import.imported_ids.count}.by 28
       end
       it "saves imported trial_lesson's ids in imported_ids" do
         expect{trial_lesson_import.process_CSV}.to change{TrialLesson.count}.by 28

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131029155452) do
+ActiveRecord::Schema.define(version: 20131030145027) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20131029155452) do
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "message"
   end
 
   create_table "imports", force: true do |t|

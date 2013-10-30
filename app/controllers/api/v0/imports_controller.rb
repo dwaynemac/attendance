@@ -90,6 +90,36 @@ class Api::V0::ImportsController < Api::V0::ApiController
       render json: { error: 'no account with this account_name'}, status: 400
     end
   end
+  
+  ##
+  # Returns a CSV file with the import errors
+  # @url /v0/imports/:id/failed_rows.csv
+  # @action GET
+  #
+  # @required [String] id import id
+  #
+  # @example_request
+  # GET /v0/imports/1234/failed_errors.csv, {id: "1234"}
+  # @example response { CSV }
+  #
+  # @response_field [CSV] csv file with the errors that occurred during import
+  #
+  def failed_rows
+    @import = Import.find(params[:id])
+
+    if import.nil? || import.stats.to_sym != :finished
+      render json: { message: "Import not found"}.to_json,
+             status: 404
+    else
+      respond_to do |format|
+        format.csv do
+          send_data import.failed_rows_to_csv,
+                    type: 'text/csv',
+                    disposition: "attachment; filename=import_errors.csv"
+        end
+      end
+    end
+  end
 
   private
 

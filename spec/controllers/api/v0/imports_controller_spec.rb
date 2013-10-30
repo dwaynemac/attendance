@@ -115,4 +115,37 @@ describe Api::V0::ImportsController do
     end
   end
 
+  let(:headers){ ['external_id',
+                  'name',
+                  'padma_uid',
+                  'start_at',
+                  'end_at',
+                  'sunday',
+                  'monday',
+                  'tuesday',
+                  'wednesday',
+                  'thursday',
+                  'friday',
+                  'saturday',
+                  'observations',
+                  nil,
+                  nil] }
+
+
+  describe "#failed_rows" do
+    before do
+      @i = build(:time_slot_import, csv_file: csv_file, headers: headers, account_name: 'belgrano')
+      @i.save!
+      @i.process_CSV
+    end
+    context 'when CSV file has finished' do
+      it "should send data" do
+        @controller.should_receive(:send_data).and_return{ @controller.render :nothing => true }
+        get :failed_rows, id: @i.id,
+                   app_key: ENV['app_key'],
+                   format: :csv
+      end
+    end
+  end
+
 end

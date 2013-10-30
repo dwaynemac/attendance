@@ -23,12 +23,12 @@ class TimeSlotImport < Import
     )
   end
 
-  def handle_row(row)
+  def handle_row(row,row_i)
     t = build_time_slot(row)
     if t.save || retry_fixing_errors(t)
-      t.id
+      ImportedId.new(value: t.id)
     else
-      nil
+      FailedRow.new(value: row_i, message: t.errors.messages.map{|attr,err_array| "#{attr}: #{err_array.join(' and ')}" }.join(' AND '))
     end
   end
 

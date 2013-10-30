@@ -27,7 +27,7 @@ describe TimeSlotImport do
 
   describe "#process_CSV" do
     it "creates a TimeSlot for every valid row" do
-      expect{time_slot_import.process_CSV}.to change{time_slot_import.imported_ids.size}.by 25
+      expect{time_slot_import.process_CSV}.to change{time_slot_import.imported_ids.count}.by 25
     end
     it "sets TimeSlots attributes from rows" do
       time_slot_import.process_CSV
@@ -39,7 +39,7 @@ describe TimeSlotImport do
     end
     it "stores imported rows ids" do
       expect{time_slot_import.process_CSV}.to change{TimeSlot.count}.by 25
-      time_slot_import.imported_ids.map(&:value).should include(TimeSlot.last.id)
+      time_slot_import.reload.imported_ids.map(&:value).should include(TimeSlot.last.id)
     end
     it "stores failed rows numbers" do
       expect{time_slot_import.process_CSV}.to change{time_slot_import.failed_rows.count}.by 1
