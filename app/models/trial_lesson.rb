@@ -11,7 +11,7 @@ class TrialLesson < ActiveRecord::Base
 
   attr_accessor :padma_contact_id
 
-  attr_accessible :trial_on, :time_slot_id, :padma_uid, :padma_contact_id, :assisted
+  attr_accessible :trial_on, :time_slot_id, :padma_uid, :padma_contact_id, :assisted, :confirmed, :archived, :absence_reason
 
   after_create :create_activity, :broadcast_create
   after_destroy :destroy_activity

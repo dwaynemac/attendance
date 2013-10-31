@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131030145027) do
+ActiveRecord::Schema.define(version: 20131031115303) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -27,23 +27,23 @@ ActiveRecord::Schema.define(version: 20131030145027) do
   add_index "attendance_contacts", ["contact_id"], name: "index_attendance_contacts_on_contact_id"
 
   create_table "attendances", force: true do |t|
-    t.integer   "account_id"
-    t.integer   "time_slot_id"
-    t.date      "attendance_on"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.integer  "account_id"
+    t.integer  "time_slot_id"
+    t.date     "attendance_on"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "attendances", ["account_id"], name: "index_attendances_on_account_id"
   add_index "attendances", ["time_slot_id"], name: "index_attendances_on_time_slot_id"
 
   create_table "contacts", force: true do |t|
-    t.integer   "account_id"
-    t.string    "padma_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "time_slot_id"
-    t.string    "name"
+    t.integer  "account_id"
+    t.string   "padma_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "time_slot_id"
+    t.string   "name"
   end
 
   add_index "contacts", ["account_id"], name: "index_contacts_on_account_id"
@@ -80,39 +80,42 @@ ActiveRecord::Schema.define(version: 20131030145027) do
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "headers"
+    t.text     "headers",    limit: 4294967295
     t.string   "csv_file"
   end
 
   create_table "time_slots", force: true do |t|
-    t.string    "padma_uid"
-    t.integer   "account_id"
-    t.string    "name"
-    t.time      "start_at"
-    t.time      "end_at"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.boolean   "monday"
-    t.boolean   "tuesday"
-    t.boolean   "wednesday"
-    t.boolean   "thursday"
-    t.boolean   "friday"
-    t.boolean   "saturday"
-    t.boolean   "sunday"
-    t.boolean   "cultural_activity"
-    t.text      "observations"
-    t.string    "external_id"
+    t.string   "padma_uid"
+    t.integer  "account_id"
+    t.string   "name"
+    t.time     "start_at"
+    t.time     "end_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "monday"
+    t.boolean  "tuesday"
+    t.boolean  "wednesday"
+    t.boolean  "thursday"
+    t.boolean  "friday"
+    t.boolean  "saturday"
+    t.boolean  "sunday"
+    t.boolean  "cultural_activity"
+    t.text     "observations"
+    t.string   "external_id"
   end
 
   create_table "trial_lessons", force: true do |t|
-    t.integer   "account_id"
-    t.integer   "contact_id"
-    t.integer   "time_slot_id"
-    t.date      "trial_on"
-    t.string    "padma_uid"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.boolean   "assisted"
+    t.integer  "account_id"
+    t.integer  "contact_id"
+    t.integer  "time_slot_id"
+    t.date     "trial_on"
+    t.string   "padma_uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "assisted"
+    t.boolean  "confirmed"
+    t.boolean  "archived"
+    t.string   "absence_reason"
   end
 
   add_index "trial_lessons", ["account_id"], name: "index_trial_lessons_on_account_id"
@@ -120,10 +123,10 @@ ActiveRecord::Schema.define(version: 20131030145027) do
   add_index "trial_lessons", ["time_slot_id"], name: "index_trial_lessons_on_time_slot_id"
 
   create_table "users", force: true do |t|
-    t.string    "username"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "current_account_id"
+    t.string   "username"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "current_account_id"
   end
 
 end
