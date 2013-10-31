@@ -15,6 +15,9 @@ class TrialLessonImport < Import
       trial_on
       padma_uid
       assisted
+      confirmed
+      archived
+      absence_reason
     )
   end
   

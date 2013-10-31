@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131030145027) do
+ActiveRecord::Schema.define(version: 20131031115303) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -113,6 +113,9 @@ ActiveRecord::Schema.define(version: 20131030145027) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "assisted"
+    t.boolean  "confirmed"
+    t.boolean  "archived"
+    t.string   "absence_reason"
   end
 
   add_index "trial_lessons", ["account_id"], name: "index_trial_lessons_on_account_id"
