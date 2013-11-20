@@ -1,4 +1,4 @@
-== README
+== Attendance {<img src="https://travis-ci.org/dwaynemac/attendance.png" />}[https://travis-ci.org/dwaynemac/attendance] {<img src="https://codeclimate.com/github/dwaynemac/attendance.png" />}[https://codeclimate.com/github/dwaynemac/attendance] {<img src="https://gemnasium.com/dwaynemac/attendance.png" alt="Dependecies" />}[https://gemnasium.com/dwaynemac/attendance] {<img src="https://coveralls.io/repos/dwaynemac/attendance/badge.png" alt="Coverage Status" />}[https://coveralls.io/r/dwaynemac/attendance]
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
