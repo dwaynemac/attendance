@@ -81,6 +81,10 @@ gem 'delayed_job_active_record' # must be declared after 'protected_attributes' 
 # gem 'debugger', group: [:development, :test]
 
 group :test, :development do
+
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
+
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
@@ -93,10 +97,7 @@ group :development do
   gem 'subcontractor', '0.6.1'
 
   gem 'byebug'
-
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
-
+  #
   # for easier error debugging in development.
   gem 'better_errors'
   gem 'binding_of_caller'
