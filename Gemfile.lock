@@ -111,6 +111,9 @@ GEM
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
     ffi (1.0.11)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     fog (1.16.0)
       builder
       excon (~> 0.27.0)
@@ -282,6 +285,7 @@ DEPENDENCIES
   devise!
   devise_cas_authenticatable
   factory_girl_rails
+  figaro
   fog
   foreman
   jbuilder (~> 1.0.1)

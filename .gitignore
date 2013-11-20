@@ -19,10 +19,14 @@
 .rvmrc
 .ruby-version
 .ruby-gemset
+
 Procfile.dev
 /config/padma_api.yml
 
 # Ignore vim files
 *.swp
+
 public/uploads
-.env
+
+# Ignore application configuration
+/config/application.yml

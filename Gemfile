@@ -46,6 +46,8 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'figaro'
+
 # Rails 4 support for Mass Assignment Security
 gem 'protected_attributes'
 
