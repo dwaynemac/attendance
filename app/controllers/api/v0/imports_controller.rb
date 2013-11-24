@@ -9,7 +9,7 @@ class Api::V0::ImportsController < Api::V0::ApiController
   #   * :ready
   #   * :working
   #   * :finished
-  # @url /v0/imports/:id
+  # @url /api/v0/imports/:id
   # @action GET
   #
   # @required [String] app_key
