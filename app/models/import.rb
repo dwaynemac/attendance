@@ -49,6 +49,8 @@ class Import < ActiveRecord::Base
   def process_CSV
     return unless self.status.to_sym == :ready
 
+    self.update_attribute(:status, :working)
+
     file_handle = open(self.csv_file.file.path)
     unless file_handle.nil?
       row_i = 1 # start at 1 because first row is skipped
