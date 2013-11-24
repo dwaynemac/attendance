@@ -102,7 +102,7 @@ class Import < ActiveRecord::Base
       errors.add(:headers, 'invalid headers - check import type, there are no valid headers')
     else
       # compat headers, this way we consider nil valid
-      unless (self.headers.compact - self.valid_headers).empty?
+      unless (self.headers.reject {|x| x.blank?} - self.valid_headers).empty?
         errors.add(:headers, 'invalid headers')
       end
     end
