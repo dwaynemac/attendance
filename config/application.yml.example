@@ -5,6 +5,6 @@
 # PUSHER_SECRET: abdc3b896a0ffb85d373
 # STRIPE_API_KEY: EdAvEPVEC3LuaTg5Q3z6WbDVqZlcBQ8Z
 # STRIPE_PUBLIC_KEY: pk_BRgD57O8fHja9HxduJUszhef6jCyS
-accounts_key=xxx
-contacts_key=yyy
-app_key=zzz
+accounts_key: xxx
+contacts_key: yyy
+app_key: zzz
