@@ -67,8 +67,15 @@ class Import < ActiveRecord::Base
   
   # @return [Contact]
   def map_contact(external_id)
-    c = PadmaContact.find_by_kshema_id(external_id)
-    Contact.get_by_padma_id(c.id,self.account.id, c) if c
+    local_contact = Contact.where(external_sysname: 'Kshema', external_id: external_id).first
+    if local_contact
+      local_contact
+    else
+      c = PadmaContact.find_by_kshema_id(external_id)
+      if c
+        Contact.get_by_padma_id(c.id,self.account.id, c, {external_sysname: 'Kshema', external_id: external_id})
+      end
+    end
   end
 
   def failed_rows_to_csv

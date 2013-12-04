@@ -3,12 +3,13 @@ require 'spec_helper'
 describe AttendanceImport do
 
   before do
-    PadmaContact.stub!(:find_by_kshema_id).and_return(
-      PadmaContact.new(first_name: 'fn', last_name: 'ln')
-    )
+    PadmaContact.stub!(:find_by_kshema_id) do |arg1|
+      PadmaContact.new(id: arg1, first_name: 'fn', last_name: 'ln')
+    end
 
     # ensure there are no Attendances
     Attendance.destroy_all
+    Contact.delete_all
   end
 
   let(:headers_time_slot) {
@@ -57,6 +58,17 @@ describe AttendanceImport do
   describe "#process_CSV" do
     before do
       time_slot_import.process_CSV
+    end
+
+    it "calls contacts-ws only once for each kshema_id" do
+      PadmaContact.should_receive(:find_by_kshema_id).exactly(13).times do |arg1|
+        PadmaContact.new(id: arg1, first_name: 'fn', last_name: 'ln')
+      end
+      attendance_import.process_CSV
+    end
+
+    it "creates local contacts when they dont exist" do
+      expect{attendance_import.process_CSV}.to change{Contact.count}.by 13
     end
 
     it "sets AttendanceContact for every valid row" do
