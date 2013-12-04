@@ -44,8 +44,19 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
   
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with :truncation
+  end
+
   config.before(:each) do
+    DatabaseCleaner.start
+
     TrialLesson.any_instance.stub(:create_activity).and_return(true)
     TrialLesson.any_instance.stub(:broadcast_create).and_return(true)
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
   end
 end

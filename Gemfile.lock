@@ -86,6 +86,7 @@ GEM
     contacts_client (0.0.21)
       logical_model (~> 0.5.8)
       railties (>= 3.1)
+    database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     delayed_job (4.0.0)
@@ -281,6 +282,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.0.0)
   contacts_client (~> 0.0.21)
+  database_cleaner
   delayed_job_active_record
   devise!
   devise_cas_authenticatable
