@@ -53,6 +53,7 @@ RSpec.configure do |config|
     DatabaseCleaner.start
 
     TrialLesson.any_instance.stub(:create_activity).and_return(true)
+    TrialLesson.any_instance.stub(:destroy_activity).and_return(true)
     TrialLesson.any_instance.stub(:broadcast_create).and_return(true)
   end
 
