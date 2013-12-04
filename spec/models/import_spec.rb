@@ -32,7 +32,7 @@ describe Import do
   end
 
   describe "#account_name=" do
-    it "linkt to local account with given name" do
+    it "link to local account with given name" do
       i = build(:import,account: nil,  account_name: 'belgrano') # account: nil to avoid FactoryGirl to set account
       i.save!
       i.account.name.should == 'belgrano'
