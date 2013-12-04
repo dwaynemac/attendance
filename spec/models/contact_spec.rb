@@ -47,6 +47,14 @@ describe Contact do
           expect{Contact.get_by_padma_id(padma_id,account.id)}.to change{Contact.count}.by 1
         end
       end
+      describe "with new_contact_attributes" do
+        it "sets given attributes in created contact" do
+          pc = PadmaContact.new(id: padma_id, first_name: 'fn', last_name: 'ln')
+          PadmaContact.should_receive(:find).and_return(pc)
+          Contact.get_by_padma_id(padma_id,account.id,nil,{external_id: 1})
+          Contact.last.external_id.should == "1"
+        end
+      end
     end
   end
 end

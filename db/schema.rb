@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131031115303) do
+ActiveRecord::Schema.define(version: 20131204193614) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20131031115303) do
     t.datetime "updated_at"
     t.integer  "time_slot_id"
     t.string   "name"
+    t.string   "external_sysname"
+    t.string   "external_id"
   end
 
   add_index "contacts", ["account_id"], name: "index_contacts_on_account_id"
