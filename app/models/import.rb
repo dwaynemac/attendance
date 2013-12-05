@@ -1,3 +1,5 @@
+require 'csv'
+
 class Import < ActiveRecord::Base
 
   attr_accessible :headers, :csv_file
@@ -20,7 +22,7 @@ class Import < ActiveRecord::Base
   # Sets account by name
   # @param [String] name
   def account_name=(name)
-    self.account = Account.find_by_name(name)
+    self.account = Account.find_or_create_by_name(name)
   end
   
   # It returns column number for given attribute according to headers

@@ -7,6 +7,9 @@ describe Import do
     fixture_file_upload("/files/belgrano_horarios.csv","text/csv")
   end
 
+
+  let(:import){create(:import, csv_file: csv_file)}
+
   it { should belong_to :account }
   it { should have_many :imported_ids }
   it { should have_many :failed_rows } 
@@ -21,6 +24,18 @@ describe Import do
     i = build(:import, csv_file: csv_file)
     i.save!
     i.csv_file.identifier.should == 'belgrano_horarios.csv'
+  end
+
+  describe "#process_CSV" do
+    describe "if handle_row raises and exception" do
+      before { Import.any_instance.stub(:handle_row).and_raise 'error raised by handle_row' }
+      it "adds row as failed_row and continues" do
+        expect{import.process_CSV}.to change{import.failed_rows}.by 25
+      end
+      it "wont raise exception" do
+        expect{import.process_CSV}.not_to raise_exception
+      end
+    end
   end
 
   describe "#index_for" do
