@@ -30,7 +30,7 @@ describe Import do
     describe "if handle_row raises and exception" do
       before { Import.any_instance.stub(:handle_row).and_raise 'error raised by handle_row' }
       it "adds row as failed_row and continues" do
-        expect{import.process_CSV}.to change{import.failed_rows}.by 25
+        expect{import.process_CSV}.to change{import.failed_rows.count}.by 26
       end
       it "wont raise exception" do
         expect{import.process_CSV}.not_to raise_exception

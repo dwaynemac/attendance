@@ -57,8 +57,13 @@ class Import < ActiveRecord::Base
     unless file_handle.nil?
       row_i = 1 # start at 1 because first row is skipped
       CSV.foreach(file_handle, encoding:"UTF-8:UTF-8", headers: :first_row) do |row|
-        self.import_details << handle_row(row, row_i)
-        self.import_details.last.save
+        begin
+          self.import_details << handle_row(row, row_i)
+          self.import_details.last.save
+        rescue => e
+          self.import_details << FailedRow.new(value: row_i, message: "Exception: #{e.message}")
+          self.import_details.last.save
+        end
         row_i += 1
       end
     end
