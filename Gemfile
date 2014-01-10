@@ -30,9 +30,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.0.1'
 
 # Use twitter bootstrap as ui framework
-gem 'twitter-bootstrap-rails'
-
-gem "less-rails"
+gem 'less-rails-bootstrap'
 
 # Javascript runtime for bootstrap's LESS files to compile to CSS.
 gem 'therubyracer', :platforms => :ruby

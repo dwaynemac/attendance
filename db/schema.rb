@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 20131204193614) do
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "headers",    limit: 4294967295
+    t.text     "headers"
     t.string   "csv_file"
   end
 
