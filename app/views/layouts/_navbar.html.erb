@@ -33,7 +33,7 @@
 
 <nav id="navbar-2" class="navbar navbar-default" role="navigation">
   <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex2-collapse">
       <span class="sr-only">Padma menu 2</span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -41,7 +41,7 @@
     <a class="navbar-brand" href="http://padma-crm-staging.herokuapp.com/me"><img src="images/logo_30px.png"></a>
     </button>
   </div>
-  <div class="collapse navbar-collapse navbar-ex1-collapse">
+  <div class="collapse navbar-collapse navbar-ex2-collapse">
     <ul class="nav navbar-nav">
       <%= content_tag :li, link_to(t('layouts.navbar.time_slots'), time_slots_url), class: ('active' if controller_name == 'time_slots') %>
       <%= content_tag :li, link_to(t('layouts.navbar.trial_lessons'), trial_lessons_url), class: ('active' if controller_name == 'trial_lessons') %>
