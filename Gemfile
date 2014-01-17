@@ -6,6 +6,7 @@ ruby "2.0.0"
 gem 'rails', '4.0.0.rc1'
 
 #Translations
+gem 'i18n', '~> 0.6.6'
 gem 'rails-i18n'
 
 # Use SCSS for stylesheets
