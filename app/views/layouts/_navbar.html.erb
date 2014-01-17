@@ -43,9 +43,9 @@
   </div>
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
-      <li><%= link_to t('layouts.navbar.time_slots'), time_slots_url %></li>
-      <li><%= link_to t('layouts.navbar.trial_lessons'), trial_lessons_url %></li>
-      <li><%= link_to t('layouts.navbar.stats'), stats_url %></li>
+      <%= content_tag :li, link_to(t('layouts.navbar.time_slots'), time_slots_url), class: ('active' if controller_name == 'time_slots') %>
+      <%= content_tag :li, link_to(t('layouts.navbar.trial_lessons'), trial_lessons_url), class: ('active' if controller_name == 'trial_lessons') %>
+      <%= content_tag :li, link_to(t('layouts.navbar.stats'), stats_url), class: ('active' if controller_name == 'stats') %>
     </ul>
   </div>
 </nav> 
