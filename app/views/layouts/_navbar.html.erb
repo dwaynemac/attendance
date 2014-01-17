@@ -43,6 +43,7 @@
   </div>
   <div class="collapse navbar-collapse navbar-ex2-collapse">
     <ul class="nav navbar-nav">
+      <%= link_to image_tag('logo_30px.png'), root_url, class: "navbar-brand" %>
       <%= content_tag :li, link_to(t('layouts.navbar.time_slots'), time_slots_url), class: ('active' if controller_name == 'time_slots') %>
       <%= content_tag :li, link_to(t('layouts.navbar.trial_lessons'), trial_lessons_url), class: ('active' if controller_name == 'trial_lessons') %>
       <%= content_tag :li, link_to(t('layouts.navbar.stats'), stats_url), class: ('active' if controller_name == 'stats') %>
