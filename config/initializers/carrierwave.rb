@@ -19,6 +19,8 @@ else
       config.fog_directory = 'attendance-prod',
       config.asset_host = 'http://attendance-prod.s3-sa-east-1.amazonaws.com'
     else
+    config.cache_dir = "#{Rails.root}/tmp/uploads"
+    config.storage = :fog
       config.fog_credentials = {
           :provider               => 'AWS',
           :aws_access_key_id      => ENV['S3_KEY_ID'],
