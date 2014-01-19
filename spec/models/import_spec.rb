@@ -11,6 +11,7 @@ describe Import do
   let(:import){create(:import, csv_file: csv_file)}
 
   it { should belong_to :account }
+  it { should validate_presence_of :account }
   it { should have_many :imported_ids }
   it { should have_many :failed_rows } 
 
