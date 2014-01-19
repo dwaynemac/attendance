@@ -15,7 +15,6 @@ else
           :provider               => 'AWS',
           :aws_access_key_id      => ENV['S3_KEY_ID'],
           :aws_secret_access_key  => ENV['S3_SECRET_KEY'],
-          :region                 => 'sa-east-1'
       }
       config.fog_directory = 'attendance-prod',
       config.asset_host = 'http://attendance-prod.s3-sa-east-1.amazonaws.com'
