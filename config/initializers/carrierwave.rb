@@ -27,7 +27,6 @@ else
       config.fog_directory  = 'attendance-staging'
       config.asset_host       = "http://attendance-staging.s3.amazonaws.com"
     end
-
     config.fog_public     = false
   end
 
