@@ -5,6 +5,7 @@ class Import < ActiveRecord::Base
   attr_accessible :headers, :csv_file
 
   belongs_to :account
+  validates_presence_of :account
 
   has_many :import_details
   has_many :imported_ids
