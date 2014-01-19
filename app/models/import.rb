@@ -51,16 +51,21 @@ class Import < ActiveRecord::Base
   def process_CSV
     return unless self.status.to_sym == :ready
 
+    log "processing csv"
+
     self.update_attribute(:status, :working)
 
     file_handle = open(self.csv_file.file.path)
     unless file_handle.nil?
       row_i = 1 # start at 1 because first row is skipped
       CSV.foreach(file_handle, encoding:"UTF-8:UTF-8", headers: :first_row) do |row|
+        log "row #{row_i}"
         begin
+          log "     ok"
           self.import_details << handle_row(row, row_i)
           self.import_details.last.save
         rescue => e
+          log "     failed"
           self.import_details << FailedRow.new(value: row_i, message: "Exception: #{e.message}")
           self.import_details.last.save
         end
@@ -122,6 +127,10 @@ class Import < ActiveRecord::Base
         errors.add(:headers, 'invalid headers')
       end
     end
+  end
+
+  def log(txt)
+    Rails.logger.debug "[#{self.type} #{self.id}] #{txt}"
   end
 
 end
