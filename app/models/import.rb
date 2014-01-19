@@ -1,3 +1,4 @@
+require 'open-uri'
 require 'csv'
 
 class Import < ActiveRecord::Base
@@ -56,7 +57,7 @@ class Import < ActiveRecord::Base
 
     self.update_attribute(:status, :working)
 
-    file_handle = open(self.csv_file.file.path)
+    file_handle = open(self.csv_file.url)
     unless file_handle.nil?
       row_i = 1 # start at 1 because first row is skipped
       CSV.foreach(file_handle, encoding:"UTF-8:UTF-8", headers: :first_row) do |row|
