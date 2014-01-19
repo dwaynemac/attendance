@@ -8,3 +8,5 @@
 accounts_key: xxx
 contacts_key: yyy
 app_key: zzz
+S3_KEY_ID: xxx
+S3_SECRET_KEY: eee
