@@ -44,6 +44,7 @@ class TrialLesson < ActiveRecord::Base
     if !self.contact_id.nil?
 
       created_at = (self.activity_on_trial_time)? self.trial_at.to_s : Time.zone.now.to_s
+      updated_at = (self.activity_on_trial_time)? self.trial_at.to_s : Time.zone.now.to_s
 
       a = ActivityStream::Activity.new(target_id: self.contact.padma_id, target_type: 'Contact',
                                  object_id: self.id, object_type: 'TrialLesson',
@@ -53,7 +54,7 @@ class TrialLesson < ActiveRecord::Base
                                  username: self.padma_uid,
                                  account_name: self.account.name,
                                  created_at: created_at,
-                                 updated_at: Time.zone.now.to_s )
+                                 updated_at: updated_at )
       a.create(username: self.padma_uid, account_name: self.account.name)
     end
   end
