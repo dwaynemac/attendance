@@ -85,6 +85,7 @@ class Api::V0::ImportsController < Api::V0::ApiController
         @import.delay.process_CSV
         render json: { id: @import.id }, status: 201
       else
+        Rails.logger.debug "Couldnt create import. Errors: #{@import.errors}"
         render json: { error: 'couldnt create import'}, status: 400
       end
     else
