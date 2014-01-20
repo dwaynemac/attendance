@@ -13,7 +13,11 @@ class TrialLesson < ActiveRecord::Base
 
   attr_accessible :trial_on, :time_slot_id, :padma_uid, :padma_contact_id, :assisted, :confirmed, :archived, :absence_reason
 
-  after_create :create_activity, :broadcast_create
+  after_create :create_activity
+
+  attr_accessor :skip_broadcast
+  after_create :broadcast_create, unless: :skip_broadcast
+
   after_destroy :destroy_activity
 
   # Day of trial and Time of trial according to TimeSlot's time
@@ -68,8 +72,10 @@ class TrialLesson < ActiveRecord::Base
   end
   
   def broadcast_create
-    # Send notification using the messaging system
-    Messaging::Client.post_message('trial_lesson',self.as_json_for_messaging)
+    unless self.skip_broadcast
+      # Send notification using the messaging system
+      Messaging::Client.post_message('trial_lesson',self.as_json_for_messaging)
+    end
   end
 
   def as_json_for_messaging
