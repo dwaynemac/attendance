@@ -39,9 +39,9 @@ describe Api::V0::ImportsController do
 
   def post_req(options = {})
     parameters = {
+      account_name: 'belgrano',
       import: { csv_file: csv_file,
                 headers: ['name'],
-                account_name: 'belgrano',
                 object: 'TimeSlot'
       },
       app_key: ENV['app_key']
