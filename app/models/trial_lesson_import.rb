@@ -23,7 +23,7 @@ class TrialLessonImport < Import
   
   # return created id or nil
   def handle_row(row,row_i)
-    new_time_slot = self.account.trial_lessons.new
+    new_trial_lesson = self.account.trial_lessons.new
 
     ts_external_id = value_for(row,'time_slot_external_id')
     if ts_external_id 
@@ -32,18 +32,19 @@ class TrialLessonImport < Import
       contact_exid = value_for(row,'contact_external_id')
       contact = map_contact(contact_exid) if contact_exid
       if contact
-        new_time_slot.contact_id = contact.id 
-        new_time_slot.time_slot_id = time_slot_id
+        new_trial_lesson.contact_id = contact.id 
+        new_trial_lesson.time_slot_id = time_slot_id
 
         (valid_headers-%W(contact_external_id time_slot_external_id)).each do |header|
-          new_time_slot.send("#{header}=",value_for(row,header))
+          new_trial_lesson.send("#{header}=",value_for(row,header))
         end
       
-        if new_time_slot.save!
-          ImportedId.new value: new_time_slot.id
+        new_trial_lesson.skip_broadcast = true
+        if new_trial_lesson.save!
+          ImportedId.new value: new_trial_lesson.id
         else
           FailedRow.new(value: row_i,
-                        message: new_time_slot.errors.messages.map{|attr,err_array| "#{attr}: #{err_array.join(' and ')}" }.join(' AND '))
+                        message: new_trial_lesson.errors.messages.map{|attr,err_array| "#{attr}: #{err_array.join(' and ')}" }.join(' AND '))
         end
 
       else
