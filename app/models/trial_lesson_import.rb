@@ -40,6 +40,7 @@ class TrialLessonImport < Import
         end
       
         new_trial_lesson.skip_broadcast = true
+        new_trial_lesson.activity_on_trial_time = true
         if new_trial_lesson.save!
           ImportedId.new value: new_trial_lesson.id
         else
