@@ -113,6 +113,5 @@ end
 
 group :production do
   gem 'pg'
-  gem 'rails_log_stdout',           git: 'git://github.com/heroku/rails_log_stdout.git'
-  gem 'rails3_serve_static_assets', git: 'git://github.com/heroku/rails3_serve_static_assets.git'
+  gem 'rails_12factor'
 end
