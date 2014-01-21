@@ -57,10 +57,9 @@ class Import < ActiveRecord::Base
 
     self.update_attribute(:status, :working)
 
-    file_handle = open(self.csv_file.url)
-    unless file_handle.nil?
+    unless csv_file_handle.nil?
       row_i = 1 # start at 1 because first row is skipped
-      CSV.foreach(file_handle, encoding:"UTF-8:UTF-8", headers: :first_row) do |row|
+      CSV.foreach(csv_file_handle, encoding:"UTF-8:UTF-8", headers: :first_row) do |row|
         log "row #{row_i}"
         begin
           log "     ok"
@@ -105,6 +104,14 @@ class Import < ActiveRecord::Base
   end
 
   private
+
+  def csv_file_handle
+    @csv_file_handle ||= if Rails.env.test? || Rails.env.development?
+      open(self.csv_file.path)
+    else
+      open(self.csv_file.url)
+    end
+  end
 
   def set_defaults
     if self.status.nil?
