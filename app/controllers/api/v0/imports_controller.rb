@@ -85,7 +85,8 @@ class Api::V0::ImportsController < Api::V0::ApiController
         @import.delay.process_CSV
         render json: { id: @import.id }, status: 201
       else
-        render json: { error: 'couldnt create import'}, status: 400
+        Rails.logger.debug "Couldnt create import. Errors: #{@import.errors.messages}"
+        render json: { error: "couldnt create import. #{@import.errors.messages}"}, status: 400
       end
     else
       render json: { error: 'no account with this account_name'}, status: 400
@@ -141,7 +142,7 @@ class Api::V0::ImportsController < Api::V0::ApiController
 
   def get_account
     if params[:import]
-      account_name = params[:import].delete(:account_name)
+      account_name = params[:account_name]
       @account = Account.find_or_create_by_name(account_name)
     end
   end

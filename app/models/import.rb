@@ -52,31 +52,35 @@ class Import < ActiveRecord::Base
 
   def process_CSV
     return unless self.status.to_sym == :ready
+    
+    begin
+      log "processing csv"
 
-    log "processing csv"
+      self.update_attribute(:status, :working)
 
-    self.update_attribute(:status, :working)
-
-    file_handle = open(self.csv_file.url)
-    unless file_handle.nil?
-      row_i = 1 # start at 1 because first row is skipped
-      CSV.foreach(file_handle, encoding:"UTF-8:UTF-8", headers: :first_row) do |row|
-        log "row #{row_i}"
-        begin
-          log "     ok"
-          self.import_details << handle_row(row, row_i)
-          self.import_details.last.save
-        rescue => e
-          log "     failed"
-          self.import_details << FailedRow.new(value: row_i, message: "Exception: #{e.message}")
-          self.import_details.last.save
+      unless csv_file_handle.nil?
+        row_i = 1 # start at 1 because first row is skipped
+        CSV.foreach(csv_file_handle, encoding:"UTF-8:UTF-8", headers: :first_row) do |row|
+          log "row #{row_i}"
+          begin
+            log "     ok"
+            self.import_details << handle_row(row, row_i)
+            self.import_details.last.save
+          rescue => e
+            log "     failed"
+            self.import_details << FailedRow.new(value: row_i, message: "Exception: #{e.message}")
+            self.import_details.last.save
+          end
+          row_i += 1
         end
-        row_i += 1
       end
-    end
 
-    self.status = :finished
-    self.save
+      self.status = :finished
+      self.save
+    rescue Exception => e
+      Rails.logger.warn e.message
+      self.update_attribute(:status, :failed)
+    end
   end
   
   # @return [Contact]
@@ -105,6 +109,14 @@ class Import < ActiveRecord::Base
   end
 
   private
+
+  def csv_file_handle
+    @csv_file_handle ||= if Rails.env.test? || Rails.env.development?
+      open(self.csv_file.path)
+    else
+      open(self.csv_file.url)
+    end
+  end
 
   def set_defaults
     if self.status.nil?

@@ -66,7 +66,7 @@ gem 'accounts_client', '>= 0.0.19'
 gem 'messaging_client','~> 0.0.2'
 
 gem 'carrierwave'
-gem 'fog'
+gem 'fog', github: 'fog/fog', ref: '272bc6b2a2769f8d1a8b50b1f6cd9741db4969b4' # TODO waiting release of version 1.20
 gem 'delayed_job_active_record' # must be declared after 'protected_attributes' gem
 
 # Use ActiveModel has_secure_password
@@ -113,6 +113,5 @@ end
 
 group :production do
   gem 'pg'
-  gem 'rails_log_stdout',           git: 'git://github.com/heroku/rails_log_stdout.git'
-  gem 'rails3_serve_static_assets', git: 'git://github.com/heroku/rails3_serve_static_assets.git'
+  gem 'rails_12factor'
 end
