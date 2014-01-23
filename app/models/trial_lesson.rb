@@ -13,7 +13,12 @@ class TrialLesson < ActiveRecord::Base
 
   attr_accessible :trial_on, :time_slot_id, :padma_uid, :padma_contact_id, :assisted, :confirmed, :archived, :absence_reason
 
-  after_create :create_activity, :broadcast_create
+  attr_accessor :activity_on_trial_time
+  after_create :create_activity
+
+  attr_accessor :skip_broadcast
+  after_create :broadcast_create, unless: :skip_broadcast
+
   after_destroy :destroy_activity
 
   # Day of trial and Time of trial according to TimeSlot's time
@@ -37,6 +42,10 @@ class TrialLesson < ActiveRecord::Base
   def create_activity
     # Send notification to activities
     if !self.contact_id.nil?
+
+      created_at = (self.activity_on_trial_time)? self.trial_at.to_s : Time.zone.now.to_s
+      updated_at = (self.activity_on_trial_time)? self.trial_at.to_s : Time.zone.now.to_s
+
       a = ActivityStream::Activity.new(target_id: self.contact.padma_id, target_type: 'Contact',
                                  object_id: self.id, object_type: 'TrialLesson',
                                  generator: ActivityStream::LOCAL_APP_NAME,
@@ -44,8 +53,8 @@ class TrialLesson < ActiveRecord::Base
                                  public: false,
                                  username: self.padma_uid,
                                  account_name: self.account.name,
-                                 created_at: Time.zone.now.to_s,
-                                 updated_at: Time.zone.now.to_s )
+                                 created_at: created_at,
+                                 updated_at: updated_at )
       a.create(username: self.padma_uid, account_name: self.account.name)
     end
   end
@@ -68,8 +77,10 @@ class TrialLesson < ActiveRecord::Base
   end
   
   def broadcast_create
-    # Send notification using the messaging system
-    Messaging::Client.post_message('trial_lesson',self.as_json_for_messaging)
+    unless self.skip_broadcast
+      # Send notification using the messaging system
+      Messaging::Client.post_message('trial_lesson',self.as_json_for_messaging)
+    end
   end
 
   def as_json_for_messaging
