@@ -72,6 +72,7 @@ class Api::V0::ImportsController < Api::V0::ApiController
   #                                trial_on
   #                                padma_uid
   #                                assisted
+  #                                archived
   # @required import[account_name]
   #
   # @response_field id Import id

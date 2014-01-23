@@ -38,7 +38,8 @@ class TrialLessonImport < Import
         (valid_headers-%W(contact_external_id time_slot_external_id)).each do |header|
           new_time_slot.send("#{header}=",value_for(row,header))
         end
-      
+        archived = value_for(row, 'archived')
+        new_time_slot.archived = (archived == "true" ? true : false)
         if new_time_slot.save!
           ImportedId.new value: new_time_slot.id
         else
