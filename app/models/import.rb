@@ -57,7 +57,7 @@ class Import < ActiveRecord::Base
 
     self.update_attribute(:status, :working)
 
-    file_handle = open(self.csv_file.url)
+    file_handle = open_file(self.csv_file)
     unless file_handle.nil?
       row_i = 1 # start at 1 because first row is skipped
       CSV.foreach(file_handle, encoding:"UTF-8:UTF-8", headers: :first_row) do |row|
@@ -128,6 +128,14 @@ class Import < ActiveRecord::Base
       unless (self.headers.reject {|x| x.blank?} - self.valid_headers).empty?
         errors.add(:headers, 'invalid headers')
       end
+    end
+  end
+
+  def open_file(file)
+    if Rails.env.test? or Rails.env.cucumber? or Rails.env.development?
+      open(file.path)
+    else
+      open(file.url)
     end
   end
 
