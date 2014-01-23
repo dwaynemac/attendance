@@ -144,7 +144,7 @@ class Api::V0::ImportsController < Api::V0::ApiController
   def get_account
     if params[:import]
       account_name = params[:account_name]
-      @account = Account.find_or_create_by_name(account_name)
+      @account = Account.find_or_create_by(name: account_name)
     end
   end
 
