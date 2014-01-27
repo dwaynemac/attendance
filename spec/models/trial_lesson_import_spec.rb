@@ -19,7 +19,7 @@ describe TrialLessonImport do
     'trial_on',
     nil, # created_at
     nil, # updated_at
-    nil, # olvidar
+    'archived', # olvidar
     nil, # motivo_ausencia
     nil, # confirmed
     'assisted'
@@ -57,6 +57,12 @@ describe TrialLessonImport do
         trial_lesson_import.status.should == :ready
         trial_lesson_import.process_CSV
         trial_lesson_import.status.should == :finished
+      end
+      it "archives the correct lessons" do
+        trial_lesson_import.status.should == :ready
+        trial_lesson_import.process_CSV
+        trial_lesson_import.status.should == :finished
+        TrialLesson.where(archived: true).count.should == 7
       end
     end
   end

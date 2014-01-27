@@ -39,6 +39,8 @@ class TrialLessonImport < Import
           new_trial_lesson.send("#{header}=",value_for(row,header))
         end
       
+        archived = value_for(row, 'archived')
+        new_trial_lesson.archived = (archived == "true" ? true : false)
         new_trial_lesson.skip_broadcast = true
         new_trial_lesson.activity_on_trial_time = true
         if new_trial_lesson.save!
