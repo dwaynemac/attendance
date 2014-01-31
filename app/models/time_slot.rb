@@ -7,6 +7,8 @@ class TimeSlot < ActiveRecord::Base
 
   attr_accessible :padma_uid, :name, :start_at, :end_at, :padma_contacts, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :cultural_activity, :external_id
 
+  before_create :set_defaults
+
   def recurrent_contacts
     #TODO: Aprovechar el cache de name y no ir a buscar la lista a contacts.
   	padma_contact_ids = AttendanceContact.joins(:attendance).joins(:contact).where('attendances.time_slot_id' => self.id).group('contacts.padma_id').count().keys
@@ -21,5 +23,16 @@ class TimeSlot < ActiveRecord::Base
     	contact_ids << contact.id
     end
     self.contact_ids = contact_ids
+  end
+
+  private
+
+  def set_defaults
+    if self.cultural_activity.nil?
+      self.cultural_activity = false
+    end
+
+    # return true to avoid this filter breaking the callback queue.
+    return true
   end
 end
