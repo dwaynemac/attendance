@@ -1,6 +1,5 @@
 class Contact < ActiveRecord::Base
 	belongs_to :account
-	belongs_to :time_slot # todo remove this and remove db column after migration 20140201021038 is runned
 
   has_many :contact_time_slots
   has_many :time_slots, through: :contact_time_slots
