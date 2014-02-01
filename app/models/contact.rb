@@ -11,6 +11,8 @@ class Contact < ActiveRecord::Base
 
 	attr_accessible :account_id, :padma_id, :name, :external_id, :external_sysname
 
+  validates_uniqueness_of :padma_id
+
 	attr_accessor :padma_contact
 
 	def padma_contact(options={})
