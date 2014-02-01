@@ -1,6 +1,9 @@
 class TimeSlot < ActiveRecord::Base
   belongs_to :account
-  has_many :contacts
+  
+  has_many :contact_time_slots
+  has_many :contacts, through: :contact_time_slots
+
   validates :account,  :presence => true
   validates :name,  :presence => true
   validates_time :end_at, :after => :start_at
@@ -16,13 +19,15 @@ class TimeSlot < ActiveRecord::Base
   	PadmaContact.paginate(ids: padma_contact_ids, select: [:first_name, :last_name], per_page: padma_contact_ids.size)
   end
 
+  # WARNING this method persists it's changes automatically.
   def padma_contacts= padma_contacts
-  	contact_ids = []
-  	padma_contacts.each do |padma_contact_id|
-      contact = Contact.get_by_padma_id(padma_contact_id,self.account_id)
-    	contact_ids << contact.id
+    if self.persisted?
+      self.contact_time_slots.delete_all
+      padma_contacts.each do |padma_contact_id|
+        contact = Contact.get_by_padma_id(padma_contact_id,self.account_id)
+        self.contact_time_slots.create(contact_id: contact.id)
+      end
     end
-    self.contact_ids = contact_ids
   end
 
   private

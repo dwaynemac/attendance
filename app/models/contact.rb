@@ -1,11 +1,14 @@
 class Contact < ActiveRecord::Base
 	belongs_to :account
-	belongs_to :time_slot
+	belongs_to :time_slot # todo remove this and remove db column after migration 20140201021038 is runned
+
+  has_many :contact_time_slots
+  has_many :time_slots, through: :contact_time_slots
 
 	has_many :attendance_contacts
-	has_many :attendances, :through => :attendance_contacts
+	has_many :attendances, through: :attendance_contacts
 
-	validates :account, :presence => true
+	validates :account, presence: true
 
 	attr_accessible :account_id, :padma_id, :name, :external_id, :external_sysname
 
@@ -13,7 +16,7 @@ class Contact < ActiveRecord::Base
 
 	def padma_contact(options={})
     if @padma_contact.nil?
-      @padma_contact = PadmaContact.find(self.padma_id, {:select => [:first_name, :last_name, :email], :account_name => self.account.name})
+      @padma_contact = PadmaContact.find(self.padma_id, {select: [:first_name, :last_name, :email], account_name: self.account.name})
     end
     @padma_contact
 	end
