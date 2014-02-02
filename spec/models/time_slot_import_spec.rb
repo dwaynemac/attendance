@@ -16,7 +16,8 @@ describe TimeSlotImport do
                   'saturday',
                   'observations',
                   nil,
-                  nil] }
+                  nil,
+                  'student_ids'] }
 
   let(:csv_file) do
     extend ActionDispatch::TestProcess
@@ -24,6 +25,12 @@ describe TimeSlotImport do
   end
 
   let(:time_slot_import){ create(:time_slot_import, csv_file: csv_file, headers: headers, account: (Account.first || create(:account))) }
+
+  before do
+    PadmaContact.stub!(:find_by_kshema_id) do |arg1|
+      PadmaContact.new(id: arg1, first_name: 'fn', last_name: 'ln')
+    end
+  end
 
   describe "#process_CSV" do
     it "creates a TimeSlot for every valid row" do
@@ -36,6 +43,11 @@ describe TimeSlotImport do
       t.padma_uid.should == 'leda.bianucci'
       t.monday.should be_true
       t.sunday.should be_false
+    end
+    it "links contacts and time_slots" do
+      expect{time_slot_import.process_CSV}.to change{ContactTimeSlot.count}.by 5
+      t = TimeSlot.last
+      t.contacts.count.should == 5
     end
     it "stores imported rows ids" do
       expect{time_slot_import.process_CSV}.to change{TimeSlot.count}.by 25
