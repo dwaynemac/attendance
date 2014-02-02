@@ -73,7 +73,7 @@ class TimeSlotImport < Import
     student_ids = value_for(row,'student_ids')
     unless student_ids.blank?
       # cast student_ids to an Array of Integer , these are the remote_ids of contacts
-      student_ids = student_ids.split(', ').map(&:to_i)
+      student_ids = student_ids.split(', ')
 
       student_ids.each do |stid|
         contact = map_contact(stid)
