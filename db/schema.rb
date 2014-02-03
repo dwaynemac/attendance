@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131204193614) do
+ActiveRecord::Schema.define(version: 20140201044457) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -37,19 +37,24 @@ ActiveRecord::Schema.define(version: 20131204193614) do
   add_index "attendances", ["account_id"], name: "index_attendances_on_account_id"
   add_index "attendances", ["time_slot_id"], name: "index_attendances_on_time_slot_id"
 
+  create_table "contact_time_slots", force: true do |t|
+    t.integer  "contact_id"
+    t.integer  "time_slot_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "contacts", force: true do |t|
     t.integer  "account_id"
     t.string   "padma_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "time_slot_id"
     t.string   "name"
     t.string   "external_sysname"
     t.string   "external_id"
   end
 
   add_index "contacts", ["account_id"], name: "index_contacts_on_account_id"
-  add_index "contacts", ["time_slot_id"], name: "index_contacts_on_time_slot_id"
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false

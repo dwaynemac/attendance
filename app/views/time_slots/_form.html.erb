@@ -71,15 +71,17 @@
     </div> 
   </fieldset>
 
-  <div class="control-group">
-    <%= f.label :add_a_contact, :class => 'control-label' %>
-    <div class="controls">
-      <%= select_tag :padma_contacts_select, options_for_select({"" => :empty, "All students" => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| ["#{username}'s students", username].flatten}])) %> 
-      <fieldset id="time_slot_padma_contacts">
-        <%= render :partial => 'shared/padma_contacts' %>
-      </fieldset>
+  <% if @time_slot.persisted? -%>
+    <div class="control-group">
+      <%= f.label :add_a_contact, :class => 'control-label' %>
+      <div class="controls">
+        <%= select_tag :padma_contacts_select, options_for_select({"" => :empty, "All students" => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| ["#{username}'s students", username].flatten}])) %> 
+        <fieldset id="time_slot_padma_contacts">
+          <%= render :partial => 'shared/padma_contacts' %>
+        </fieldset>
+      </div>
     </div>
-  </div>
+  <% end -%>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

@@ -1,19 +1,23 @@
 class Contact < ActiveRecord::Base
 	belongs_to :account
-	belongs_to :time_slot
+
+  has_many :contact_time_slots
+  has_many :time_slots, through: :contact_time_slots
 
 	has_many :attendance_contacts
-	has_many :attendances, :through => :attendance_contacts
+	has_many :attendances, through: :attendance_contacts
 
-	validates :account, :presence => true
+	validates :account, presence: true
 
 	attr_accessible :account_id, :padma_id, :name, :external_id, :external_sysname
+
+  validates_uniqueness_of :padma_id
 
 	attr_accessor :padma_contact
 
 	def padma_contact(options={})
     if @padma_contact.nil?
-      @padma_contact = PadmaContact.find(self.padma_id, {:select => [:first_name, :last_name, :email], :account_name => self.account.name})
+      @padma_contact = PadmaContact.find(self.padma_id, {select: [:first_name, :last_name, :email], account_name: self.account.name})
     end
     @padma_contact
 	end

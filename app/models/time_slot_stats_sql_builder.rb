@@ -87,13 +87,13 @@ class TimeSlotStatsSQLBuilder
 	def time_slots_count_select time_slot
 		select = ""
 		distribution.each do |ts|
-			if time_slot && ts == "ts_#{time_slot.name.tr(" ","").underscore}"
+			if time_slot && ts == "ts_#{normalize_text(time_slot.name)}"
 				ts_select = "count(*) as #{ts}"
 			else
 				ts_select = "0 as #{ts}"
 			end
 
-			ts_select << ", " unless ts == "ts_#{time_slots.last.name.tr(" ","").underscore}"
+			ts_select << ", " unless ts == "ts_#{normalize_text(time_slots.last.name)}"
 
 			select << ts_select
 		end
@@ -107,7 +107,7 @@ class TimeSlotStatsSQLBuilder
 		distribution.each do |ts|
 			select << "SUM(#{ts}) as sum_#{ts}, "
 			total << ts
-			total << " + " unless ts == "ts_#{time_slots.last.name.tr(" ","").underscore}"
+			total << " + " unless ts == "ts_#{normalize_text(time_slots.last.name)}"
 		end
 		select << "SUM(#{total}) as attendance_total"
 		select
@@ -126,10 +126,16 @@ class TimeSlotStatsSQLBuilder
 	end
 
 	def distribution
-		time_slots.collect {|ts| "ts_#{ts.name.tr(" ","").underscore}"}
+		time_slots.collect {|ts| "ts_#{normalize_text(ts.name)}"}
 	end
 
 	def distribution_names
 		time_slots.collect {|ts| ts.name}
 	end
+
+  private
+
+  def normalize_text(str)
+    str.tr(" |.","").underscore
+  end
 end
