@@ -304,7 +304,7 @@ DEPENDENCIES
   i18n (~> 0.6.6)
   jbuilder (~> 1.0.1)
   jquery-rails
-  less-rails-bootstrap
+  less-rails-bootstrap (~> 3.0.6)
   messaging_client (~> 0.0.2)
   pg
   protected_attributes
