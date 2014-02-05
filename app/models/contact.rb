@@ -9,7 +9,7 @@ class Contact < ActiveRecord::Base
 
 	validates :account, presence: true
 
-	attr_accessible :account_id, :padma_id, :name, :external_id, :external_sysname
+	attr_accessible :account_id, :padma_id, :name, :external_id, :external_sysname, :padma_status
 
   validates_uniqueness_of :padma_id
 
