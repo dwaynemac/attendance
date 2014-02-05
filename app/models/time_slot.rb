@@ -13,7 +13,7 @@ class TimeSlot < ActiveRecord::Base
   before_create :set_defaults
 
   def recurrent_contacts
-    AttendanceContact.joins(:attendance).joins(:contact).where('contacts.padma_status' => 'student').where('attendances.time_slot_id' => self.id).group('contacts.padma_id').select("contacts.name as first_name, '' as last_name, contacts.padma_id as _id, count(*) as count").order('count desc').limit(15)
+    AttendanceContact.joins(:attendance).joins(:contact).where('contacts.padma_status' => 'student').where('attendances.time_slot_id' => self.id).group('contacts.padma_id, contacts.name').select("contacts.name as first_name, '' as last_name, contacts.padma_id as _id, count(*) as count").order('count desc').limit(15)
   end
 
   # WARNING this method persists it's changes automatically.
