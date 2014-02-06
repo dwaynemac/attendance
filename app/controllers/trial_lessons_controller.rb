@@ -3,7 +3,7 @@ class TrialLessonsController < ApplicationController
 
   # GET /trial_lessons
   def index
-    @trial_lessons = @trial_lessons.order(trial_on: :desc)
+    @trial_lessons = @trial_lessons.where('archived is not (?)', true).order(trial_on: :desc)
   end
 
   # GET /trial_lessons/1
