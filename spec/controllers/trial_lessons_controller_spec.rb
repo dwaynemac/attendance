@@ -12,6 +12,13 @@ describe TrialLessonsController do
       get :index, {}
       assigns(:trial_lessons).should eq([trial_lesson])
     end
+    it "doesn't retrieve archived trial lessons" do
+      tl_1 = create(:trial_lesson, :account => @user.current_account)
+      tl_2 = create(:trial_lesson, :account => @user.current_account)
+      tl_3_archived = create(:trial_lesson, account: @user.current_account, archived: true)
+      get :index, {}
+      assigns(:trial_lessons).count.should == 2
+    end
   end
 
   describe "GET show" do
