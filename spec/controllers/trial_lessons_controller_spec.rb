@@ -12,7 +12,7 @@ describe TrialLessonsController do
       get :index, {}
       assigns(:trial_lessons).should eq([trial_lesson])
     end
-    it "retrieves trial lessons in asc order" do
+    it "retrieves trial lessons in desc order" do
       tl_now = create :trial_lesson,
                       account: @user.current_account,
                       trial_on: Date.today
