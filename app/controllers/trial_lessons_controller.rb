@@ -34,7 +34,11 @@ class TrialLessonsController < ApplicationController
   # PATCH/PUT /trial_lessons/1
   def update
     if @trial_lesson.update(params[:trial_lesson])
-      redirect_to @trial_lesson, notice: 'Trial lesson was successfully updated.'
+      if params[:redirect_to].blank?
+        redirect_to @trial_lesson, notice: 'Trial lesson was successfully updated.'
+      elsif params[:redirect_to] == 'index'
+        redirect_to trial_lessons_url, notice: 'Trial lesson was successfully archived.'
+      end
     else
       render action: 'edit'
     end
