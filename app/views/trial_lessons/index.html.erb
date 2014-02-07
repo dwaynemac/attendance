@@ -13,7 +13,7 @@
       <%- end -%>
       <%= link_to t('edit'), edit_trial_lesson_path(trial_lesson), :class => 'btn btn-mini' %>
       <%= link_to t('destroy'), trial_lesson, method: :delete, data: { confirm: t('confirm')}, :class => 'btn btn-mini btn-danger' %>
-      <%= link_to t('archive'),
+      <%= link_to t('trial_lessons.index.archive'),
                   trial_lesson_path(
                     id: trial_lesson.id,
                     trial_lesson: {archived: true},
