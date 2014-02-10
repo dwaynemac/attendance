@@ -16,8 +16,8 @@ else
           :aws_access_key_id      => ENV['S3_KEY_ID'],
           :aws_secret_access_key  => ENV['S3_SECRET_KEY'],
       }
-      config.fog_directory = 'attendance-prod',
-      config.asset_host = 'http://attendance-prod.s3-sa-east-1.amazonaws.com'
+      config.fog_directory = 'padma-attendance-production',
+      config.asset_host = 'http://padma-attendance-production.s3.amazonaws.com'
     else
     config.cache_dir = "#{Rails.root}/tmp/uploads"
     config.storage = :fog

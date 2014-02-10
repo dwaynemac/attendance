@@ -40,6 +40,7 @@ en:
   trial_lessons:
     index:
       new: "New Trial lesson"
+      archive: "Archive"
     search_contact: "Search for a contact"
   stats:
     index:

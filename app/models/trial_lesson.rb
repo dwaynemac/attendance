@@ -3,6 +3,8 @@ class TrialLesson < ActiveRecord::Base
   belongs_to :contact
   belongs_to :time_slot
 
+  before_validation :set_defaults
+
   validates :account, presence: true
   validates :contact, presence: true
   validates :time_slot, presence: true
@@ -92,4 +94,12 @@ class TrialLesson < ActiveRecord::Base
     json["account_name"] = account.name
     json
   end  
+
+  private
+
+  def set_defaults
+    self.archived = false if self.archived.nil?
+    return true # return true, dont break callback queue
+  end
+
 end

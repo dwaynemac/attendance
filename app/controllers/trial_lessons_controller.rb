@@ -3,7 +3,7 @@ class TrialLessonsController < ApplicationController
 
   # GET /trial_lessons
   def index
-    @trial_lessons = @trial_lessons.order(:trial_on)
+    @trial_lessons = @trial_lessons.where(archived: false).order(trial_on: :desc)
   end
 
   # GET /trial_lessons/1
@@ -34,7 +34,11 @@ class TrialLessonsController < ApplicationController
   # PATCH/PUT /trial_lessons/1
   def update
     if @trial_lesson.update(params[:trial_lesson])
-      redirect_to @trial_lesson, notice: 'Trial lesson was successfully updated.'
+      if params[:redirect_to].blank?
+        redirect_to @trial_lesson, notice: 'Trial lesson was successfully updated.'
+      elsif params[:redirect_to] == 'index'
+        redirect_to trial_lessons_url, notice: 'Trial lesson was successfully archived.'
+      end
     else
       render action: 'edit'
     end
