@@ -34,6 +34,7 @@ class InstructorStatsSQLBuilder
 			SELECT contacts.*, #{instructors_count_select nil}
 			FROM contacts
 			WHERE #{account_condition}
+			AND contacts.padma_status = 'student'
 			GROUP BY contacts.id
 
 			-- unions for each instructor

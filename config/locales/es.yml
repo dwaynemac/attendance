@@ -56,6 +56,7 @@ es:
   trial_lessons:
     index:
       new: "Marcar clase de prueba"
+      archive: "Archivar"
     search_contact: "Buscar contacto"
   new: "Nuevo"
   edit: "Editar"

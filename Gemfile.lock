@@ -27,7 +27,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    accounts_client (0.0.20)
+    accounts_client (0.0.21)
       gravtastic
       logical_model (~> 0.5.8)
       railties (>= 3.1)
@@ -59,6 +59,10 @@ GEM
       logical_model (~> 0.5.0)
       railties (>= 3.1)
     angularjs-rails (1.0.6.1)
+    appsignal (0.8.5)
+      activesupport (>= 3.0)
+      rack
+      thread_safe
     arel (4.0.0)
     atomic (1.1.14)
     bcrypt-ruby (3.0.1)
@@ -284,9 +288,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  accounts_client (>= 0.0.19)
+  accounts_client (= 0.0.21)
   activity_stream_client
   angularjs-rails
+  appsignal
   better_errors
   binding_of_caller
   byebug

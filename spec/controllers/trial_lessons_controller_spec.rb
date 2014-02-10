@@ -12,6 +12,22 @@ describe TrialLessonsController do
       get :index, {}
       assigns(:trial_lessons).should eq([trial_lesson])
     end
+    it "retrieves trial lessons in desc order" do
+      tl_now = create :trial_lesson,
+                      account: @user.current_account,
+                      trial_on: Date.today
+      tl_tomorrow = create  :trial_lesson,
+                            account: @user.current_account
+      get :index, {}
+      assigns(:trial_lessons).should eq([tl_tomorrow, tl_now])
+    end
+    it "doesn't retrieve archived trial lessons" do
+      tl_1 = create(:trial_lesson, :account => @user.current_account)
+      tl_2 = create(:trial_lesson, :account => @user.current_account)
+      tl_3_archived = create(:trial_lesson, account: @user.current_account, archived: true)
+      get :index, {}
+      assigns(:trial_lessons).count.should == 2
+    end
   end
 
   describe "GET show" do
@@ -94,10 +110,15 @@ describe TrialLessonsController do
         assigns(:trial_lesson).should eq(trial_lesson)
       end
 
-      it "redirects to the trial_lesson" do
+      it "redirects to the trial_lesson if :redirect_to is blank" do
         trial_lesson = create(:trial_lesson, :account => @user.current_account)
         put :update, {:id => trial_lesson.to_param, :trial_lesson => attributes_for(:trial_lesson)}
         response.should redirect_to(trial_lesson)
+      end
+      it "redirects to the index if :redirect_to equals index" do
+        trial_lesson = create(:trial_lesson, :account => @user.current_account)
+        put :update, {:id => trial_lesson.to_param, :trial_lesson => attributes_for(:trial_lesson), redirect_to: 'index'}
+        response.should redirect_to(trial_lessons_url)
       end
     end
 

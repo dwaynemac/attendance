@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140201044457) do
+ActiveRecord::Schema.define(version: 20140205042055) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20140201044457) do
     t.string   "name"
     t.string   "external_sysname"
     t.string   "external_id"
+    t.string   "padma_status"
   end
 
   add_index "contacts", ["account_id"], name: "index_contacts_on_account_id"
@@ -87,7 +88,7 @@ ActiveRecord::Schema.define(version: 20140201044457) do
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "headers",    limit: 4294967295
+    t.text     "headers"
     t.string   "csv_file"
   end
 
