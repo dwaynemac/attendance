@@ -20,7 +20,7 @@
     </div>
     <div class="form-group">
       <%= f.label :time_slot_id, :class => 'col-sm-2 control-label' %>
-      <div class="input-group">
+      <div class="input-group col-lg-2">
         <%= f.collection_select :time_slot_id, current_user.current_account.time_slots, :id, :name, {},{:class => 'form-control'} %>
       </div>
     </div>
@@ -30,7 +30,9 @@
         <ul id="trial_lessons">
           <% @trial_lessons.each do |tl| %>
             <li>
-              <%= check_box_tag "trial_lessons[]", tl.id, tl.assisted? %><%= label_tag "trial_lessons[]", "#{tl.contact.name}" %>
+              <div class="checkbox col-sm-10">
+                <%= check_box_tag "trial_lessons[]", tl.id, tl.assisted? %><%= label_tag "trial_lessons[]", "#{tl.contact.name}" %>
+              </div>
             </li>
           <% end %>
         </ul>
@@ -38,7 +40,7 @@
     </div> 
     <div class="form-group">
       <%= f.label :padma_contacts, :class => 'col-sm-2 control-label' %>
-      <div class="input-group">
+      <div class="input-group col-lg-2">
         <ul id="attendance_contacts">
           <% @attendance.contacts.each do |c| %>
             <li>
@@ -50,7 +52,7 @@
     </div> 
   </fieldset>
   <div class="form-group">
-    <div class="input-group">
+    <div class="input-group col-lg-3">
     <%= select_tag :padma_contacts_select, options_for_select({"This time slot's recurrent contacts" => :recurrent_contacts, "All students" => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| ["#{username}'s students", username].flatten}])), {:class => 'form-control'} %>   
     </div>
   </div>

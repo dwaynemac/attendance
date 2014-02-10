@@ -2,35 +2,37 @@
 
 <%= form_for :stats, method: :get, html: { class: 'form-horizontal' } do |f| %>
   <fieldset>
-    <div class="control-group">
-      <%= f.label :distribution,t('activerecord.attributes.stat.distribution'), :class => 'control-label' %>
-      <div class="controls">
+    <div class="form-group">
+      <%= f.label :distribution,t('activerecord.attributes.stat.distribution'), :class => 'col-sm-2 control-label' %>
+      <div class="input-group">
         <%= select_tag :distribution, options_for_select({
               t('stats.index.by_instructor') => :instructor, 
-              t('stats.index.by_time_slot') => :time_slot}, params[:distribution]) %>
+              t('stats.index.by_time_slot') => :time_slot}, params[:distribution]),
+              {:class => 'form-control'} %>
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :start_on,t('activerecord.attributes.stat.start_on'), :class => 'control-label' %>
-      <div class="controls">
-        <%= f.date_select :start_on %>
+    <div class="form-group">
+      <%= f.label :start_on,t('activerecord.attributes.stat.start_on'), :class => 'col-sm-2 control-label' %>
+      <div class="input-group date">
+        <%= f.date_select :start_on, {},{:class => 'form-control'} %>
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :end_on,t('activerecord.attributes.stat.end_on'), :class => 'control-label' %>
-      <div class="controls">
-        <%= f.date_select :end_on %>
+    <div class="form-group">
+      <%= f.label :end_on,t('activerecord.attributes.stat.end_on'), :class => 'col-sm-2 control-label' %>
+      <div class="input-group date">
+        <%= f.date_select :end_on, {},{:class => 'form-control'} %>
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :include_cultural_activities,t('activerecord.attributes.stat.include_cultural_activities'), :class => 'control-label' %>
-      <div class="controls">
+    <div class="form-group">
+      <%= f.label :include_cultural_activities,t('activerecord.attributes.stat.include_cultural_activities'), :class => 'col-sm-2 control-label' %>
+      <div class="input-group">
         <%= f.check_box :include_cultural_activities %>
       </div>
     </div>
   </fieldset>
 
-  <div class="form-actions">
+  <div class="form-group">
+    <div class="col-sm-2"></div>
     <%= f.submit t('stats.index.calculate_stats'), :class => 'btn btn-primary' %>
   </div>
 <% end %>
