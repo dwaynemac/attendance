@@ -26,6 +26,7 @@ class TrialLesson < ActiveRecord::Base
   # Day of trial and Time of trial according to TimeSlot's time
   # @return [DateTime]
   def trial_at
+    return self.trial_on if time_slot.nil?
     DateTime.civil(trial_on.year,trial_on.month,trial_on.day,time_slot.start_at.hour,time_slot.start_at.min)
   end
 
