@@ -57,6 +57,7 @@ es:
     index:
       new: "Marcar clase de prueba"
       archive: "Archivar"
+      time_slot_deleted: "El horario de clase fue eliminado"
     search_contact: "Buscar contacto"
   new: "Nuevo"
   edit: "Editar"

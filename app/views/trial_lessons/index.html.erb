@@ -5,7 +5,7 @@
     <h3><%= date %></h3>
     <% trial_lessons.each do |trial_lesson| %>
     <li>
-      <%= trial_lesson.contact.name %> @ <%= trial_lesson.time_slot.name %>
+      <%= trial_lesson.contact.name %> @ <%= trial_lesson.time_slot.try(:name) || t('trial_lessons.index.time_slot_deleted') %>
       <%- if trial_lesson.assisted? -%>
         <span class="label label-success"><%= t('trial_lesson.status.assisted') %></span>
       <%- else -%>

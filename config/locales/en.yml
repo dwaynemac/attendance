@@ -41,6 +41,7 @@ en:
     index:
       new: "New Trial lesson"
       archive: "Archive"
+      time_slot_deleted: "Time slot was deleted"
     search_contact: "Search for a contact"
   stats:
     index:
