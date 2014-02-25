@@ -7,7 +7,7 @@
 			<% @time_slots.each do |time_slot| %>
 				<% if time_slot.send(Date::DAYNAMES[date.wday].downcase.to_sym) %>
 				<li>
-					<%= time_slot.name %>
+					<%= timeslot_description(time_slot) %>
 					<% if att = @attendances.select {|a| a.attendance_on == date && a.time_slot == time_slot}.first %>
 						<%= link_to t('attendances.index.view'), att, :class => 'btn btn-xs btn-default' %>
 					<% else %>
