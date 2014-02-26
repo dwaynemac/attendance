@@ -1,7 +1,11 @@
 module AttendancesHelper
 
   def timeslot_description(timeslot)
-    "'#{timeslot.name}' #{timeslot.start_at.hour}:#{minutes(timeslot.start_at)}-#{timeslot.end_at.hour}:#{minutes(timeslot.end_at)} (#{timeslot.padma_uid})"
+    "#{timeslot_period(timeslot)} (#{timeslot.padma_uid})"
+  end
+
+  def timeslot_period(timeslot)
+    "#{timeslot.start_at.hour}:#{minutes(timeslot.start_at)}-#{timeslot.end_at.hour}:#{minutes(timeslot.end_at)}"
   end
 
   private

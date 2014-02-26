@@ -1,23 +1,29 @@
 <h3><%= t('attendances.index.title') %></h3>
-<ul>
 <% (0..7).each do |n| %>
-	<li>
-		<%= date = n.days.ago.to_date %>
-		<ul>
-			<% @time_slots.each do |time_slot| %>
-				<% if time_slot.send(Date::DAYNAMES[date.wday].downcase.to_sym) %>
-				<li>
-					<%= timeslot_description(time_slot) %>
-					<% if att = @attendances.select {|a| a.attendance_on == date && a.time_slot == time_slot}.first %>
-						<%= link_to t('attendances.index.view'), att, :class => 'btn btn-xs btn-default' %>
-					<% else %>
-						<%= link_to t('attendances.index.new'), new_attendance_path(:attendance => {:attendance_on => date, :time_slot_id => time_slot.id}), :class => 'btn btn-xs btn-default' %>
-						<%= link_to t('attendances.index.new_empty'), attendances_path(:attendance => {:attendance_on => date, :time_slot_id => time_slot.id}), :method => :post, :class => 'btn btn-xs btn-default' %>
-					<% end %>
-				</li>
-				<% end %>
-			<% end %>
-		</ul>
-	</li>	
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <% date = n.days.ago.to_date %>
+      <%= l(date, format: :in_context).capitalize %>
+    </div>
+    <div class="panel-body">
+      <ul class="list-group">
+        <% @time_slots.each do |time_slot| %>
+          <% if time_slot.send(Date::DAYNAMES[date.wday].downcase.to_sym) %>
+          <li class="list-group-item">
+            <h4><%= time_slot.name %></h4>
+            <h5><%= timeslot_description(time_slot) %></h5>
+            <% if att = @attendances.select {|a| a.attendance_on == date && a.time_slot == time_slot}.first %>
+              <%= link_to t('attendances.index.view'), att, :class => 'btn btn-default' %>
+            <% else %>
+              <div class="btn-group">
+                <%= link_to t('attendances.index.new'), new_attendance_path(:attendance => {:attendance_on => date, :time_slot_id => time_slot.id}), :class => 'btn btn-default' %>
+                <%= link_to t('attendances.index.new_empty'), attendances_path(:attendance => {:attendance_on => date, :time_slot_id => time_slot.id}), :method => :post, :class => 'btn btn-default' %>
+              </div>
+            <% end %>
+          </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 <% end %>
-</ul>

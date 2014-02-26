@@ -77,3 +77,6 @@ es:
       pending: "pendiente"
   destroy: "eliminar"
   confirm: "¿Está seguro?"
+  date:
+    formats:
+      in_context: "%A %-d" 
