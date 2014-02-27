@@ -52,3 +52,6 @@ pt-BR:
       pending: "pendente"
   destroy: "excluir"
   confirm: "Tem certeza?"
+  date:
+    formats:
+      in_context: "%A %-d" 
