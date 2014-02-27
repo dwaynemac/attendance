@@ -60,3 +60,6 @@ en:
       pending: "pending"
   destroy: "delete"
   confirm: "Are you sure?"
+  date:
+    formats:
+      in_context: "%A %-d" 
