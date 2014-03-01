@@ -4,6 +4,8 @@ class TimeSlot < ActiveRecord::Base
   has_many :contact_time_slots
   has_many :contacts, through: :contact_time_slots
 
+  has_many :trial_lessons, dependent: :nullify
+
   validates :account,  :presence => true
   validates :name,  :presence => true
   validates_time :end_at, :after => :start_at

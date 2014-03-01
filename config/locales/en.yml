@@ -41,6 +41,7 @@ en:
     index:
       new: "New Trial lesson"
       archive: "Archive"
+      time_slot_deleted: "Time slot was deleted"
     search_contact: "Search for a contact"
   stats:
     index:
@@ -59,3 +60,6 @@ en:
       pending: "pending"
   destroy: "delete"
   confirm: "Are you sure?"
+  date:
+    formats:
+      in_context: "%A %-d" 

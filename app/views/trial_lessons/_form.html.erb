@@ -14,22 +14,22 @@
   <fieldset>
     <legend><%= t("trial_lessons.#{controller.action_name}.title") %></legend>
 
-    <div class="control-group">
-      <%= f.label :trial_on, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.date_select :trial_on %>
+    <div class="form-group">
+      <%= f.label :trial_on, :class => 'col-sm-2 control-label' %>
+      <div class="input-group date col-lg-3">
+        <%= f.date_select :trial_on, {},{:class => 'form-control'} %>
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :time_slot_id, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.collection_select :time_slot_id, current_user.current_account.time_slots, :id, :name %>
+    <div class="form-group">
+      <%= f.label :time_slot_id, :class => 'col-sm-2 control-label' %>
+      <div class="input-group col-lg-2">
+        <%= f.collection_select :time_slot_id, current_user.current_account.time_slots, :id, :name, {},{:class => 'form-control'} %>
       </div>
     </div>
 
-    <div class="control-group">
-      <%= f.label :padma_contact_id, :class => 'control-label' %>
-      <div class="controls">
+    <div class="form-group">
+      <%= f.label :padma_contact_id, :class => 'col-sm-2 control-label' %>
+      <div class="input-group">
         <% initialize_select = 
             if @trial_lesson.contact_id && !@trial_lesson.persisted?
               {:data => {:name => params[:padma_contact_name]}} 
@@ -102,16 +102,16 @@
 
     <% end %>
 
-    <div class="control-group">
-      <%= f.label :padma_uid, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.select :padma_uid, current_user.current_account.usernames %>
+    <div class="form-group">
+      <%= f.label :padma_uid, :class => 'col-sm-2 control-label' %>
+      <div class="input-group col-lg-2">
+        <%= f.select :padma_uid, current_user.current_account.usernames, {},{:class => 'form-control'} %>
       </div>
     </div>
 
-    <div class="control-group">
-      <%= f.label :assisted, :class => 'control-label' %>
-      <div class="controls">
+    <div class="form-group">
+      <%= f.label :assisted, :class => 'col-sm-2 control-label' %>
+      <div class="checkbox col-sm-10">
         <%= f.check_box :assisted %>
       </div>
     </div>

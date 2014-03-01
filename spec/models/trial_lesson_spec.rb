@@ -32,4 +32,19 @@ describe TrialLesson do
     tl.should_not_receive(:broadcast_create)
     tl.save!
   end
+
+  describe "trial_at" do
+    let(:trial_lesson){create(:trial_lesson)}
+    describe "if time_slot was deleted" do
+      before { trial_lesson.update_attribute(:time_slot_id, nil)}
+      it "return a Date" do
+        trial_lesson.trial_at.should be_a Date
+      end
+    end
+    describe "when time_slot it available" do 
+      it "returns DateTime" do
+        trial_lesson.trial_at.should be_a DateTime
+      end
+    end
+  end
 end

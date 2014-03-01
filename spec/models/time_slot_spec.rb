@@ -1,6 +1,9 @@
 require "spec_helper"
 
 describe TimeSlot do
+  
+  it { should have_many :trial_lessons }
+
 	it "should be valid with default attributes" do
 	  build(:time_slot).should be_valid
 	end

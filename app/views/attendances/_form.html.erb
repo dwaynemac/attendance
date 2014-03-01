@@ -12,33 +12,35 @@
   <% end %>
   <fieldset>
     <legend><%= t("attendance.#{controller.action_name}.title") %></legend>
-    <div class="control-group">
-      <%= f.label :attendance_on, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.date_select :attendance_on %>
+    <div class="form-group">
+      <%= f.label :attendance_on, :class => 'col-sm-2 control-label' %>
+      <div class="input-group date">
+        <%= f.date_select :attendance_on, {},{:class => 'form-control'} %>
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :time_slot_id, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.collection_select :time_slot_id, current_user.current_account.time_slots, :id, :name %>
+    <div class="form-group">
+      <%= f.label :time_slot_id, :class => 'col-sm-2 control-label' %>
+      <div class="input-group col-lg-2">
+        <%= f.collection_select :time_slot_id, current_user.current_account.time_slots, :id, :name, {},{:class => 'form-control'} %>
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :trial_lessons, :class => 'control-label' %>
-      <div class="controls">
+    <div class="form-group">
+      <%= f.label :trial_lessons, :class => 'col-sm-2 control-label' %>
+      <div class="input-group">
         <ul id="trial_lessons">
           <% @trial_lessons.each do |tl| %>
             <li>
-              <%= check_box_tag "trial_lessons[]", tl.id, tl.assisted? %><%= label_tag "trial_lessons[]", "#{tl.contact.name}" %>
+              <div class="checkbox col-sm-10">
+                <%= check_box_tag "trial_lessons[]", tl.id, tl.assisted? %><%= label_tag "trial_lessons[]", "#{tl.contact.name}" %>
+              </div>
             </li>
           <% end %>
         </ul>
       </div>  
     </div> 
-    <div class="control-group">
-      <%= f.label :padma_contacts, :class => 'control-label' %>
-      <div class="controls">
+    <div class="form-group">
+      <%= f.label :padma_contacts, :class => 'col-sm-2 control-label' %>
+      <div class="input-group col-lg-2">
         <ul id="attendance_contacts">
           <% @attendance.contacts.each do |c| %>
             <li>
@@ -49,7 +51,11 @@
       </div>  
     </div> 
   </fieldset>
-  <%= select_tag :padma_contacts_select, options_for_select({"This time slot's recurrent contacts" => :recurrent_contacts, "All students" => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| ["#{username}'s students", username].flatten}])) %> 
+  <div class="form-group">
+    <div class="input-group col-lg-3">
+    <%= select_tag :padma_contacts_select, options_for_select({"This time slot's recurrent contacts" => :recurrent_contacts, "All students" => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| ["#{username}'s students", username].flatten}])), {:class => 'form-control'} %>   
+    </div>
+  </div>
   <fieldset id="attendance_padma_contacts">
     <%= render :partial => 'shared/padma_contacts' %>
   </fieldset>
