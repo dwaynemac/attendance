@@ -3,6 +3,9 @@ class AttendancesController < ApplicationController
   respond_to :html
 
   def index
+    days_back = params[:days_back] || 7
+    @view_range = (0..days_back.to_i)
+
     @time_slots = current_user.current_account.time_slots
     respond_with @attendances
   end

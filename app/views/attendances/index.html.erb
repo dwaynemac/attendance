@@ -1,5 +1,5 @@
 <h3><%= t('attendances.index.title') %></h3>
-<% (0..7).each do |n| %>
+<% @view_range.each do |n| %>
   <div class="panel panel-default">
     <div class="panel-heading">
       <% date = n.days.ago.to_date %>
