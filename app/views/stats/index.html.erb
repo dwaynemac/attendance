@@ -1,5 +1,7 @@
 <h3><%= t('stats.index.title') %></h3>
 
+<%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, stats_url(params.merge(format: 'csv')), class: 'btn btn-default', id: 'download-link' %>
+
 <%= form_for :stats, method: :get, html: { class: 'form-horizontal' } do |f| %>
   <fieldset>
     <div class="form-group">

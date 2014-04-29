@@ -15,5 +15,9 @@ class StatsController < ApplicationController
     @contacts = Contact.find_by_sql(@stats.sql)
     @distribution = @stats.distribution
     @distribution_names = @stats.distribution_names
+    respond_to do |format|
+      format.html
+      format.csv
+    end
   end
 end

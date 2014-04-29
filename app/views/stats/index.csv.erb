@@ -1,0 +1,20 @@
+<%- require 'csv' -%>
+<%= CSV.generate(CSV_DEFAULTS) do |csv|
+  header= [
+      t('stats.table.name'),
+      t('stats.table.total')
+  ]
+  @distribution_names.each do |name|
+    header << name
+  end
+  csv << header
+  @contacts.each do |c|
+    csv << [
+      c.name,
+      c.attendance_total || 0
+    ]
+    @distribution.each do |d|
+  	  	number_to_percentage contact.attendance_total > 0 ? contact.send("sum_#{name}")/contact.attendance_total.to_f*100 : 0, :precision => 2, :strip_insignificant_zeros => true
+    end
+  end
+end.html_safe %>
