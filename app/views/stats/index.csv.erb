@@ -14,7 +14,7 @@
       c.attendance_total || 0
     ]
     @distribution.each do |d|
-  	  	number_to_percentage contact.attendance_total > 0 ? contact.send("sum_#{name}")/contact.attendance_total.to_f*100 : 0, :precision => 2, :strip_insignificant_zeros => true
+  	  	number_to_percentage c.attendance_total > 0 ? c.send("sum_#{d}")/c.attendance_total.to_f*100 : 0, :precision => 2, :strip_insignificant_zeros => true
     end
   end
 end.html_safe %>
