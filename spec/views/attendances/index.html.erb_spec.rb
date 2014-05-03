@@ -13,6 +13,8 @@ describe "attendances/index" do
       create(:time_slot, :account => account),
       create(:time_slot, :account => account)
     ])
+
+    assign(:view_range,(1..7))
   end
 
   it "renders a list of attendances" do

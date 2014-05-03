@@ -30,5 +30,3 @@ Assistance::Application.configure do
   # Devise config
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end
-
-BetterErrors.editor='rubymine://open?url=file://%{file}&line=%{line}'
