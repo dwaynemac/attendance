@@ -1,7 +1,0 @@
-bundler_args: --without development:production:doc
-language: ruby
-rvm:
-  2.0.0
-env:
- - accounts_key=xxx contacts_key=yyy app_key=zzz
-
