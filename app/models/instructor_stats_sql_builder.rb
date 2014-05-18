@@ -96,7 +96,7 @@ class InstructorStatsSQLBuilder
 				u_select = "0 as #{u}"
 			end
 
-			u_select << ", " unless u.tr("_", ".") == account.usernames.last
+			u_select << ", " unless u.tr("_", ".") == distribution_names.last
 
 			select << u_select
 		end
@@ -110,7 +110,7 @@ class InstructorStatsSQLBuilder
 		distribution.each do |username|
 			select << "SUM(#{username}) as sum_#{username}, "
 			total << "#{username}"
-			total << " + " unless username.tr("_",".") == account.usernames.last			
+			total << " + " unless username.tr("_",".") == distribution_names.last			
 		end
 		select << "SUM(#{total}) as attendance_total"
 		select
