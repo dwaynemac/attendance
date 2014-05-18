@@ -137,6 +137,6 @@ class TimeSlotStatsSQLBuilder
   private
 
   def normalize_text(str)
-    str.tr(" |.","").underscore
+    str.gsub(/[^0-9A-Za-z]/,"")
   end
 end
