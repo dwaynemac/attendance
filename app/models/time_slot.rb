@@ -7,7 +7,7 @@ class TimeSlot < ActiveRecord::Base
   has_many :trial_lessons, dependent: :nullify
 
   validates :account,  :presence => true
-  validates :name,  :presence => true
+  validates :name,  :presence => true, :uniqueness => {:scope => :account_id}
   validates_time :end_at, :after => :start_at
 
   attr_accessible :padma_uid, :name, :start_at, :end_at, :padma_contacts, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :cultural_activity, :external_id
