@@ -88,13 +88,13 @@ class TimeSlotStatsSQLBuilder
 	def time_slots_count_select time_slot
 		select = ""
 		distribution.each do |ts|
-			if time_slot && ts == "ts_#{normalize_text(time_slot.name)}"
+			if time_slot && ts == "ts_#{time_slot.id}"
 				ts_select = "count(*) as #{ts}"
 			else
 				ts_select = "0 as #{ts}"
 			end
 
-			ts_select << ", " unless ts == "ts_#{normalize_text(time_slots.last.name)}"
+			ts_select << ", " unless ts == "ts_#{time_slots.last.id}"
 
 			select << ts_select
 		end
@@ -108,7 +108,7 @@ class TimeSlotStatsSQLBuilder
 		distribution.each do |ts|
 			select << "SUM(#{ts}) as sum_#{ts}, "
 			total << ts
-			total << " + " unless ts == "ts_#{normalize_text(time_slots.last.name)}"
+			total << " + " unless ts == "ts_#{time_slots.last.id}"
 		end
 		select << "SUM(#{total}) as attendance_total"
 		select
@@ -127,7 +127,7 @@ class TimeSlotStatsSQLBuilder
 	end
 
 	def distribution
-		time_slots.collect {|ts| "ts_#{normalize_text(ts.name)}"}
+		time_slots.collect {|ts| "ts_#{ts.id}"}
 	end
 
 	def distribution_names
@@ -137,6 +137,6 @@ class TimeSlotStatsSQLBuilder
   private
 
   def normalize_text(str)
-    str.tr(" |.","").underscore
+    str.gsub(/[^0-9A-Za-z]/,"")
   end
 end
