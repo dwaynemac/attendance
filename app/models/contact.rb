@@ -17,7 +17,7 @@ class Contact < ActiveRecord::Base
 
 	def padma_contact(options={})
     if @padma_contact.nil?
-      @padma_contact = PadmaContact.find(self.padma_id, {select: [:first_name, :last_name, :email], account_name: self.account.name})
+      @padma_contact = PadmaContact.find(self.padma_id, {select: [:first_name, :last_name, :email, :last_seen_at], account_name: self.account.name})
     end
     @padma_contact
 	end
