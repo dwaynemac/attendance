@@ -90,7 +90,7 @@ GEM
     coffee-script-source (1.6.2)
     columnize (0.3.6)
     commonjs (0.2.7)
-    contacts_client (0.0.21)
+    contacts_client (0.0.25)
       logical_model (~> 0.5.8)
       railties (>= 3.1)
     coveralls (0.7.0)
@@ -316,7 +316,7 @@ DEPENDENCIES
   cancan
   carrierwave
   coffee-rails (~> 4.0.0)
-  contacts_client (~> 0.0.21)
+  contacts_client (~> 0.0.23)
   coveralls
   database_cleaner
   delayed_job_active_record
