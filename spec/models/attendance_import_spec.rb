@@ -4,8 +4,10 @@ describe AttendanceImport do
 
   before do
     PadmaContact.stub!(:find_by_kshema_id) do |arg1|
-      PadmaContact.new(id: arg1, first_name: 'fn', last_name: 'ln')
+      PadmaContact.new(id: arg1, first_name: 'fn', last_name: 'ln', last_seen_at: 1.day.ago.to_s)
     end
+
+    Contact.any_instance.stub(:padma_contact).and_return(PadmaContact.new(first_name: 'fn', last_name: 'ln', last_seen_at: 1.day.ago.to_s))
 
     # ensure there are no Attendances
     Attendance.destroy_all
