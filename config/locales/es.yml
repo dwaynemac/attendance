@@ -1,82 +1,259 @@
 es:
-  layouts:
-    navbar:
-      time_slots: Horarios
-      trial_lessons: "Clases de prueba"
-  time_slots:
-    index:
-      title: Horarios
-      new: "Nuevo horario"
-    edit:
-      title: Editando horario
-    new:
-      title: 
-    show:
-      title: Horario
-  attendances:
-    index:
-      title: Asistencias
-      new: Marcar asistencia
-      new_empty: No vino nadie
-      view: Ver asistencia
-  stats:
-    index:
-      title: "Estadisticas de asistencia"
-      calculate_stats: "Calcular estadisticas"
-      by_instructor: "Por instructor"
-      by_time_slot: "Por horario"
-    table:
-      name: "Nombre"
-      total: "Total"    
   activerecord:
     attributes:
-      time_slot:
-        name: Nombre
-        start_at: Inicio
-        end_at: Fin
-        padma_uid: Instructor
-        cultural_activity: Actividad Cultural
-        schedule: Cronograma
-        padma_contacts: Alumnos
-        add_a_contact: Agregar un alumno
+      attendance:
+        attendance_on: fecha de asistencia
+        contacts: contacto
+        padma_contacts: contactos
+        time_slot: clase
+        time_slot_id: clase
+        trial_lessons: clase de prueba
       stat:
-        distribution: "Distribución"
-        start_on: "Desde"
-        end_on: "Hasta"
-        include_cultural_activities: "Incluir actividades culturales"
+        distribution: Distribución
+        end_on: Hasta
+        include_cultural_activities: Incluir actividades culturales
+        start_on: Desde
+      time_slot:
+        add_a_contact: Agregar un alumno
+        cultural_activity: Actividad Cultural
+        end_at: Fin
+        name: Nombre
+        padma_contacts: Alumnos
+        padma_uid: Instructor
+        schedule: Cronograma
+        start_at: Inicio
+      user:
+        username: usuario
+    models:
+      attendance: asistencia
+      time_slot: clase
+      user: usuario
+  attendance:
+    edit:
+      title: Editar asistencia
+    new:
+      title: Nueva asistencia
+  attendances:
+    index:
+      new: Marcar asistencia
+      new_empty: No vino nadie
+      title: Asistencias
+      view: Ver asistencia
+    show:
+      title: Asistencia
+  back: volver
+  confirm: ¿Está seguro?
+  date:
+    abbr_day_names:
+    - dom
+    - lun
+    - mar
+    - mié
+    - jue
+    - vie
+    - sáb
+    abbr_month_names:
+    - 
+    - ene
+    - feb
+    - mar
+    - abr
+    - may
+    - jun
+    - jul
+    - ago
+    - sep
+    - oct
+    - nov
+    - dic
+    day_names:
+    - domingo
+    - lunes
+    - martes
+    - miércoles
+    - jueves
+    - viernes
+    - sábado
+    formats:
+      default: '%d/%m/%Y'
+      in_context: '%A %-d'
+      long: '%d de %B de %Y'
+      short: '%d de %b'
+    month_names:
+    - 
+    - enero
+    - febrero
+    - marzo
+    - abril
+    - mayo
+    - junio
+    - julio
+    - agosto
+    - septiembre
+    - octubre
+    - noviembre
+    - diciembre
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: alrededor de 1 hora
+        other: alrededor de %{count} horas
+      about_x_months:
+        one: alrededor de 1 mes
+        other: alrededor de %{count} meses
+      about_x_years:
+        one: alrededor de 1 año
+        other: alrededor de %{count} años
+      almost_x_years:
+        one: casi 1 año
+        other: casi %{count} años
+      half_a_minute: medio minuto
+      less_than_x_minutes:
+        one: menos de 1 minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: más de 1 año
+        other: más de %{count} años
+      x_days:
+        one: 1 día
+        other: '%{count} días'
+      x_minutes:
+        one: 1 minuto
+        other: '%{count} minutos'
+      x_months:
+        one: 1 mes
+        other: '%{count} meses'
+      x_seconds:
+        one: 1 segundo
+        other: '%{count} segundos'
+    prompts:
+      day: Día
+      hour: Hora
+      minute: Minutos
+      month: Mes
+      second: Segundos
+      year: Año
+  destroy: eliminar
+  download: descargar
+  edit: Editar
   flash:
     actions:
       create:
         notice: '{resource_name} se creó exitosamente'
+      destroy:
+        alert: '{resource_name} no pudo ser destruido'
+        notice: '{resource_name} se destruyó exitosamente'
       update:
         notice: '{resource_name} se actualizó exitosamente'
-      destroy:
-        notice: '{resource_name} se destruyó exitosamente'
-        alert: '{resource_name} no pudo ser destruido'
-  trial_lessons:
+  layouts:
+    navbar:
+      stats: Estadísticas
+      time_slots: Horarios
+      trial_lessons: Clases de prueba
+  new: Nuevo
+  number:
+    currency:
+      format:
+        delimiter: .
+        format: '%n %u'
+        precision: 2
+        separator: ','
+        significant: false
+        strip_insignificant_zeros: false
+        unit: €
+    format:
+      delimiter: .
+      precision: 3
+      separator: ','
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: '%n %u'
+        units:
+          billion: mil millones
+          million: millón
+          quadrillion: mil billones
+          thousand: mil
+          trillion: billón
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  stats:
     index:
-      new: "Marcar clase de prueba"
-      archive: "Archivar"
-      time_slot_deleted: "El horario de clase fue eliminado"
-    search_contact: "Buscar contacto"
-  new: "Nuevo"
-  edit: "Editar"
-  back: "volver"
-  date:
-    order:
-      - :day
-      - :month
-      - :year
+      by_instructor: Por instructor
+      by_time_slot: Por horario
+      calculate_stats: Calcular estadisticas
+      title: Estadisticas de asistencia
+    table:
+      name: Nombre
+      total: Total
+  support:
+    array:
+      last_word_connector: ', y '
+      two_words_connector: ' y '
+      words_connector: ', '
+  time:
+    am: am
+    formats:
+      default: '%A, %d de %B de %Y %H:%M:%S %z'
+      long: '%d de %B de %Y %H:%M'
+      short: '%d de %b %H:%M'
+    pm: pm
+  time_slots:
+    edit:
+      title: Editando horario
+    index:
+      new: Nuevo horario
+      title: Horarios
+    new:
+      title: Nueva clase
+    show:
+      title: Horario
+    update:
+      title: Editando clase
   trial_lesson:
     activity_content:
-      create: "Clase de prueba creada"
-      deleted: "Clase de prueba cancelada."
+      create: Clase de prueba creada
+      deleted: Clase de prueba cancelada.
     status:
-      assisted: "asistió"
-      absent: "ausente"
-      pending: "pendiente"
-  destroy: "eliminar"
-  confirm: "¿Está seguro?"
-  date:
-    formats:
-      in_context: "%A %-d" 
+      absent: ausente
+      assisted: asistió
+      pending: pendiente
+  trial_lessons:
+    index:
+      archive: Archivar
+      new: Marcar clase de prueba
+      time_slot_deleted: El horario de clase fue eliminado
+    search_contact: Buscar contacto
+  validates_timeliness:
+    error_value_formats:
+      date: Fecha inválida
+      datetime: Fecha inválida
+      time: Fecha inválida
