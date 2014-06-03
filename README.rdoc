@@ -24,7 +24,7 @@ A rake task is required to run periodically in order to keep in sync contact nam
 
 it can be run by executing "rake synchronize"
 
-* ...
+* ..
 
 
 Please feel free to use a different markup language if you do not plan to run
