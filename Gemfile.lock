@@ -59,12 +59,11 @@ GEM
       logical_model (~> 0.5.0)
       railties (>= 3.1)
     angularjs-rails (1.0.6.1)
-    appsignal (0.8.5)
+    appsignal (0.8.14)
       activesupport (>= 3.0)
       rack
       thread_safe
     arel (4.0.0)
-    atomic (1.1.14)
     bcrypt-ruby (3.0.1)
     better_errors (0.8.0)
       coderay (>= 1.0.0)
@@ -181,7 +180,7 @@ GEM
     mime-types (1.25)
     mini_portile (0.5.2)
     minitest (4.7.5)
-    multi_json (1.8.2)
+    multi_json (1.10.1)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
@@ -272,8 +271,7 @@ GEM
       libv8 (~> 3.11.8.12)
       ref
     thor (0.18.1)
-    thread_safe (0.1.3)
-      atomic
+    thread_safe (0.3.4)
     tilt (1.4.0)
     timeliness (0.3.7)
     tins (0.13.1)
@@ -284,7 +282,7 @@ GEM
       coffee-rails
     typhoeus (0.5.0.alpha)
       ethon (~> 0.4.2)
-    tzinfo (0.3.38)
+    tzinfo (0.3.39)
     uglifier (2.0.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
