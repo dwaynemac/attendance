@@ -6,14 +6,14 @@ describe AttendanceContact do
 	end
 
 	it "should require an attendance" do
-	  build(:attendance_contact, :attendance => nil).should_not be_valid
+	  build(:attendance_contact, attendance: nil).should_not be_valid
 	end	
 
 	it "should require contact" do
-	  build(:attendance_contact, :contact => nil).should_not be_valid
+	  build(:attendance_contact, contact: nil).should_not be_valid
 	end
 
-  describe "if connection contact-ws fails" do
+  describe "if connection to contact-ws fails" do
     before do
       PadmaContact.stub(:find).and_return nil
     end
@@ -29,7 +29,7 @@ describe AttendanceContact do
     before do
       PadmaContact.stub(:find).and_return PadmaContact.new
     end
-    it "saves attendances anyway" do
+    it "saves attendances" do
       ac = build(:attendance_contact)
       ac.save.should be_true
     end
