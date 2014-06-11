@@ -110,6 +110,8 @@ group :development do
   # documentation
   gem 'yard', '~> 0.8.3'
   gem 'yard-restful'
+
+  gem 'git-pivotal-tracker-integration'
 end
 
 group :production do
