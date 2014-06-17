@@ -19,6 +19,7 @@ class AttendanceContact < ActiveRecord::Base
       padma_last_seen_at = contact.padma_contact.last_seen_at
       if padma_last_seen_at.blank? || last_seen_at > padma_last_seen_at
         contact.padma_contact.update({contact: {last_seen_at: last_seen_at},
+                                      ignore_validation: true,
                                       username: attendance.time_slot.padma_uid,
                                       account_name: attendance.account.name})
       end
