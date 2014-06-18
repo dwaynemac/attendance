@@ -1,0 +1,98 @@
+<div class = "row" id="time_slot">
+  <div class ="col-md-5">
+    <%= form_for @time_slot, :html => { :class => 'form-horizontal' } do |f| %>
+      <% if @time_slot.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@time_slot.errors.count, "error") %> prohibited this time_slot from being saved:</h2>
+
+          <ul>
+          <% @time_slot.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class = "row">
+        <div class = "col-md-12"><%= t("time_slots.#{controller.action_name}.title") %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"><%= f.label :name, :class => 'control-label' %></div>
+        <div class="col-md-8">
+          <%= f.text_field :name, class: "form-control", placeholder: "input name" %>
+        </div>
+      </div>
+      <div class="row row_margin">
+        <div class="col-md-4">
+          <%= label_tag 'Time', nil, class: 'control-label' %>
+          <%= f.label :start_at, :class => 'control-label' %>
+        </div>
+        <div class="col-md-8">
+          <p id="amount"></p>
+          <div id="slider"></div>
+        </div>
+      </div>
+      <div class="hidden">
+          <%= f.time_select :start_at %>
+          <%= f.time_select :end_at %>
+      </div>
+      <div class="row row_margin">
+        <div class="col-md-4"><%= f.label :padma_uid, :class => 'control-label' %></div>
+        <div class="col-md-8">
+          <%= f.select :padma_uid, current_user.current_account.usernames, {}, class: 'selectpicker' %>
+        </div>
+      </div>
+
+      <div class="row row_margin">
+        <div class="col-md-4"><%= f.label :cultural_activity, :class => 'control-label' %></div>
+        <div class="col-md-8">
+          <%= f.check_box :cultural_activity %>
+        </div>
+      </div>
+
+      <div class="row row_margin">
+        <div class="col-md-4"><%= f.label :schedule, :class => 'control-label' %></div>
+        <div class="col-md-8">
+          <% Date::DAYNAMES.each do |dayname| %>
+            <%= f.label dayname.downcase.to_sym, :class => 'checkbox inline' do %>
+              <%= dayname %>
+              <%= f.check_box dayname.downcase.to_sym %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row row_margin">
+        <div class="col-md-4"><%= f.label :padma_contacts, :class => 'control-label' %></div>
+        <div class="col-md-8">
+          <ul id="time_slot_students">
+            <% @time_slot.contacts.each do |c| %>
+              <li>
+                <%= hidden_field_tag "time_slot[padma_contacts][]", c.padma_id %><%= link_to "#{c.name}", "#", :class => "delete" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>  
+      </div> 
+      </fieldset>
+
+      <% if @time_slot.persisted? -%>
+        <div class="row row_margin">
+          <div class="col-md-4"><%= f.label :add_a_contact, :class => 'control-label' %></div>
+          <div class="col-md-8">
+            <%= select_tag :padma_contacts_select, options_for_select({"" => :empty, "All students" => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| ["#{username}'s students", username].flatten}])) %> 
+            <fieldset id="time_slot_padma_contacts">
+              <%= render :partial => 'shared/padma_contacts' %>
+            </fieldset>
+          </div>
+        </div>
+      <% end -%>
+
+      <div class="form-actions">
+        <%= f.submit nil, :class => 'btn btn-primary' %>
+        <%= link_to 'Show', @time_slot, :class => 'btn' if @time_slot.persisted? %>
+        <%= link_to t('destroy'), @time_slot, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+        <%= link_to 'Cancel', time_slots_path, :class => 'btn' %>
+      </div>
+    <% end %>
+  </div>
+</div> 

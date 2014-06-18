@@ -13,3 +13,8 @@
  *= require select2
  *= require_tree .
  */
+
+ .middle-section{
+  margin: 0 auto;
+  width: 960px;
+ }
