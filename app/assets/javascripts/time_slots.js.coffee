@@ -13,14 +13,25 @@ $ ->
     minutes = "0" + minutes  if minutes.toString().length is 1
     hours: hours
     minutes: minutes
+  
+  default_start_hour = $("#time_slot_start_at_4i").val()
+  default_start_minute = $("#time_slot_start_at_5i").val()
+  default_start_at = parseInt(default_start_hour) * 60 + parseInt(default_start_minute)
+
+  default_end_hour = $("#time_slot_end_at_4i").val()
+  default_end_minute = $("#time_slot_end_at_5i").val()
+  default_end_at = parseInt(default_end_hour) * 60 + parseInt(default_end_minute)
+
+  $("#amount").text default_start_hour + ":" + default_start_minute + " To " + default_end_hour + ":" + default_end_minute
+
   $("#slider").slider
     range: true
     min: 0
     max: 1439
     step: 1
     values: [
-      0
-      1439
+      default_start_at
+      default_end_at
     ]
     slide: (e, ui) ->
       startTime = timeFormat(ui.values[0])
@@ -43,10 +54,14 @@ $ ->
       $("#time_slot_start_at_5i").val startMinute
       $("#time_slot_end_at_4i").val endHour
       $("#time_slot_end_at_5i").val endMinute
-      return
-
-  $("#amount").text "00:00 To 23:59"
+  
+  
   $(".selectpicker").selectpicker()
-  return
+  
+  $("#time_slot_cultural_activity").bootstrapSwitch();
+
+  $('.multiselect').multiselect({
+    includeSelectAllOption: true
+  });
 
 		

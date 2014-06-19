@@ -40,6 +40,8 @@ gem 'angularjs-rails'
 
 gem "select2-rails"
 
+gem 'bootstrap-multiselect-rails'
+
 gem 'localeapp'
 
 group :doc do
@@ -80,7 +82,6 @@ gem "workless"
 # gem 'capistrano', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
 
 group :test, :development do
 
