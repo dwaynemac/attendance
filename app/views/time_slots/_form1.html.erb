@@ -1,5 +1,5 @@
 <div class = "row" id="time_slot">
-  <div class ="col-md-5">
+  <div class ="col-md-5 col-sm-5 col-xs-12">
     <%= form_for @time_slot, :html => { :class => 'form-horizontal' } do |f| %>
       <% if @time_slot.errors.any? %>
         <div id="error_explanation">
@@ -13,57 +13,60 @@
         </div>
       <% end %>
       <div class = "row">
-        <div class = "col-md-12"><%= t("time_slots.#{controller.action_name}.title") %></div>
+        <div class = "col-md-12 col-sm-12 col-xs-12 pad_none"><%= t("time_slots.#{controller.action_name}.title") %></div>
       </div>
       <div class="row">
-        <div class="col-md-4"><%= f.label :name, :class => 'control-label' %></div>
-        <div class="col-md-8">
+        <div class="col-md-4 col-sm-4 col-xs-4 pad_none"><%= f.label :name, :class => 'control-label' %></div>
+        <div class="col-md-8 col-sm-8 col-xs-8">
           <%= f.text_field :name, class: "form-control", placeholder: "input name" %>
         </div>
       </div>
       <div class="row row_margin">
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-4 col-xs-4 pad_none">
           <%= label_tag 'Time', nil, class: 'control-label' %>
           <%= f.label :start_at, :class => 'control-label' %>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 col-sm-8 col-xs-8">
           <p id="amount"></p>
           <div id="slider"></div>
         </div>
       </div>
       <div class="hidden">
-          <%= f.time_select :start_at %>
-          <%= f.time_select :end_at %>
+          <%= f.time_select :start_at, :default => Time.now.beginning_of_day %>
+          <%= f.time_select :end_at, :default => Time.now.end_of_day %>
       </div>
       <div class="row row_margin">
-        <div class="col-md-4"><%= f.label :padma_uid, :class => 'control-label' %></div>
-        <div class="col-md-8">
+        <div class="col-md-4 col-sm-4 col-xs-4 pad_none"><%= f.label :padma_uid, :class => 'control-label' %></div>
+        <div class="col-md-8 col-sm-8 col-xs-8 instrutor_select">
           <%= f.select :padma_uid, current_user.current_account.usernames, {}, class: 'selectpicker' %>
         </div>
       </div>
 
       <div class="row row_margin">
-        <div class="col-md-4"><%= f.label :cultural_activity, :class => 'control-label' %></div>
-        <div class="col-md-8">
-          <%= f.check_box :cultural_activity %>
+        <div class="col-md-4 col-sm-4 col-xs-4 pad_none"><%= f.label :cultural_activity, :class => 'control-label' %></div>
+        <div class="col-md-8 col-sm-8 col-xs-8">
+          <%= f.check_box :cultural_activity  %>
         </div>
       </div>
 
       <div class="row row_margin">
-        <div class="col-md-4"><%= f.label :schedule, :class => 'control-label' %></div>
-        <div class="col-md-8">
-          <% Date::DAYNAMES.each do |dayname| %>
-            <%= f.label dayname.downcase.to_sym, :class => 'checkbox inline' do %>
-              <%= dayname %>
-              <%= f.check_box dayname.downcase.to_sym %>
-            <% end %>
-          <% end %>
+        <div class="col-md-4 col-sm-4 col-xs-4 pad_none"><%= f.label :schedule, :class => 'control-label' %></div>
+        <div class="col-md-8 col-sm-8 col-xs-8">
+          <%= select_tag "dayname", options_for_select(Date::DAYNAMES, already_selected_day_name), multiple: true, class: 'multiselect'%>
+          <!--div class = "hidden">
+            <% #Date::DAYNAMES.each do |dayname| %>
+              <%#= f.label dayname.downcase.to_sym, :class => 'checkbox inline' do %>
+                <%#= dayname %>
+                <%#= f.check_box dayname.downcase.to_sym %>
+              <% #end %>
+            <% #end %>
+          </div-->
         </div>
       </div>
 
       <div class="row row_margin">
-        <div class="col-md-4"><%= f.label :padma_contacts, :class => 'control-label' %></div>
-        <div class="col-md-8">
+        <div class="col-md-4 col-sm-4 col-xs-4 pad_none"><%= f.label :padma_contacts, :class => 'control-label' %></div>
+        <div class="col-md-8 col-sm-8 col-xs-8">
           <ul id="time_slot_students">
             <% @time_slot.contacts.each do |c| %>
               <li>
@@ -77,9 +80,9 @@
 
       <% if @time_slot.persisted? -%>
         <div class="row row_margin">
-          <div class="col-md-4"><%= f.label :add_a_contact, :class => 'control-label' %></div>
-          <div class="col-md-8">
-            <%= select_tag :padma_contacts_select, options_for_select({"" => :empty, "All students" => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| ["#{username}'s students", username].flatten}])) %> 
+          <div class="col-md-4 col-sm-4 col-xs-4 pad_none"><%= f.label :add_a_contact, :class => 'control-label' %></div>
+          <div class="col-md-8 col-sm-8 col-xs-8 ">
+            <%= select_tag :padma_contacts_select, options_for_select({"" => :empty, "All students" => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| ["#{username}'s students", username].flatten}])), class: 'selectpicker' %> 
             <fieldset id="time_slot_padma_contacts">
               <%= render :partial => 'shared/padma_contacts' %>
             </fieldset>
@@ -96,3 +99,4 @@
     <% end %>
   </div>
 </div> 
+

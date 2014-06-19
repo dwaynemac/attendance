@@ -17,4 +17,5 @@
 //= require angular
 //= require angular-resource
 //= require select2
+//= require bootstrap-multiselect
 //= require_tree .
