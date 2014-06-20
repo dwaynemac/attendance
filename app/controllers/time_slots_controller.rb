@@ -42,7 +42,7 @@ class TimeSlotsController < ApplicationController
     selected_day_names = params[:dayname] ? params[:dayname].map{|day| day.downcase} : []
     params.delete :dayname
     Date::DAYNAMES.each do |day_name|
-      day_name.downcase!
+      day_name = day_name.downcase
       params[:time_slot][day_name.to_sym] = (selected_day_names.include? day_name) ? "1" : "0"
     end
   end 
