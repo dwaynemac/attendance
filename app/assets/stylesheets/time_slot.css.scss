@@ -12,21 +12,54 @@
   }
   
   .pad_none{
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
   }
 }
-
-@media screen and (min-width:320px) and (max-width:480px){
+.select_btn_width{
+  width:auto !important;
+}
+@media screen and (min-width:320px) and (max-width:700px){
   .middle-section {
     width: 100%;
+    .row{
+      margin-left:0px !important;
+      margin-right:0px !important;
+    }
   }
   .instrutor_select{
     padding:0px;
     .bootstrap-select {
     width:100% !important;
+    }
   }
+  .content{
+    width:auto !important;
+    padding:0 10px !important;
   }
-  
+  .left_pad_none{
+    padding:0px;
+  }
+  body {
+    padding-left: 0px;
+    padding-top: 0;
+  }
+  .main_col_pad_none{
+    padding-left:0px !important;
+    padding-right:0px !important;
+  }
 
+}
+
+@media screen and (min-width:360px) and (max-width:640px) and (orientation:landscape)
+{
+  .middle-section {
+    width: auto !important;
+  }
+}
+@media screen and(min-width:701px) and (max-width:1000px){
+  .cultural_pad{
+      display: inline !important;
+      text-align:left;
+    }
 }
