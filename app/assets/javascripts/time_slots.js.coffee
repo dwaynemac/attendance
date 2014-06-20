@@ -58,10 +58,20 @@ $ ->
   
   $(".selectpicker").selectpicker()
   
-  $("#time_slot_cultural_activity").bootstrapSwitch();
+  $("#time_slot_cultural_activity").bootstrapSwitch({
+    onText: "Yes",
+    offText: "No"
+  });
 
   $('.multiselect').multiselect({
     includeSelectAllOption: true
   });
+  
+  $("#loading").hide()
+  $(document).ajaxStart ->
+    $("#loading").show()
+  
+  $(document).ajaxComplete ->
+    $("#loading").hide()
 
 		
