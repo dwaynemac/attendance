@@ -3,6 +3,8 @@ es:
     attributes:
       attendance:
         attendance_on: fecha de asistencia
+        attendance_to: Asistencia para
+        text_on: en
         contacts: contacto
         padma_contacts: contactos
         time_slot: clase
