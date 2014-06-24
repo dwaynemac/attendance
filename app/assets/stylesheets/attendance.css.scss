@@ -1,0 +1,20 @@
+#attendance{
+  .pad_none{
+    padding:0px;
+  }
+  .row_margin{
+    margin-top: 25px;
+    margin-left:15px;
+  }
+  .select_width{
+    width:80%;
+  }
+  .not-allowed{
+    cursor:not-allowed;
+    font-weight:bold;
+  }
+  .hidden{
+    display: none;
+  }
+}
+
