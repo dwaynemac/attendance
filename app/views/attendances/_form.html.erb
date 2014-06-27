@@ -62,8 +62,6 @@
             <%= f.label :padma_contacts, :class => 'col-sm-2 control-label' %>
           </div>  
           <div class="col-md-7 col-sm-8 col-xs-12 pad_none">
-            <%= select_tag :padma_contacts_select, options_for_select({"This time slot's recurrent contacts" => :recurrent_contacts, "All students" => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| ["#{username}'s students", username].flatten}])), {:class => 'selectpicker select_width show-tick show-menu-arrow form-control'} %>
-            <span id="loader"><%= image_tag("ajax-loader.gif") %></span>
             <ul id="attendance_contacts">
               <% @attendance.contacts.each do |c| %>
                 <li>
@@ -71,6 +69,8 @@
                 </li>
               <% end %>
             </ul>
+            <%= select_tag :padma_contacts_select, options_for_select({"This time slot's recurrent contacts" => :recurrent_contacts, "All students" => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| ["#{username}'s students", username].flatten}])), {:class => 'selectpicker select_width show-tick show-menu-arrow form-control'} %>
+            <span id="loader"><%= image_tag("ajax-loader.gif") %></span>
           </div>  
         </div> 
       </fieldset>
