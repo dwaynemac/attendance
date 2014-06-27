@@ -82,7 +82,7 @@ describe TimeSlotsController do
         # specifies that the TimeSlot created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        TimeSlot.any_instance.should_receive(:update).with({ "these" => "params" })
+        TimeSlot.any_instance.should_receive(:update).with(hash_including({ "these" => "params" }))
         put :update, {:id => time_slot.to_param, :time_slot => { "these" => "params" }}
       end
 
