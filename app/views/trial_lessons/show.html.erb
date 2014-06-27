@@ -14,7 +14,7 @@
 
 <p>
   <b><%= TrialLesson.human_attribute_name :contact %></b><br>
-  <%= @trial_lesson.contact.name %> 
+  <%= @trial_lesson.contact.try :name %> 
 </p>
 
 <p>
