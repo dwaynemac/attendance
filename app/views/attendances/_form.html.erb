@@ -67,7 +67,7 @@
             <ul id="attendance_contacts">
               <% @attendance.contacts.each do |c| %>
                 <li>
-                  <%= hidden_field_tag "attendance[padma_contacts][]", c.padma_id %><%= link_to "#{c.name}", "#", :class => "delete" %>
+                  <%= hidden_field_tag "attendance[padma_contacts][]", c.padma_id %><%= link_to "#{c.name}", "#", :class => "delete btn btn-default btn-sm btn-block" %>
                 </li>
               <% end %>
             </ul>
