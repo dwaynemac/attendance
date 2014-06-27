@@ -16,8 +16,8 @@
         <div class="row row_margin">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <legend>
-              <%= t("attendance.#{controller.action_name}.title") %><br>
-              <%= t('activerecord.attributes.attendance.attendance_to') %> "<%= TimeSlot.find(@attendance.time_slot_id).name %>" <%= t('activerecord.attributes.attendance.text_on') %> <%= l @attendance.attendance_on, format: :long %>
+              <%= t('activerecord.attributes.attendance.attendance_to') %> "<%= TimeSlot.find(@attendance.time_slot_id).name %>"<br/>
+              <%= t('activerecord.attributes.attendance.text_on') %> <%= l @attendance.attendance_on, format: :long %>
             </legend>
           </div>
         </div>
@@ -50,7 +50,7 @@
             <div class="row" id="trial_lessons">
               <% @trial_lessons.each_with_index do |tl, index| %>
                 <div class="checkbox col-sm-10 ">
-                  <%= label_tag "trial_lessons[]", "#{tl.contact.name}"%> is assisted?
+                  <%= label_tag "trial_lessons[]", "#{t('attendances.form.contact_assisted', name: tl.contact.name)}"%>
                   <%= check_box_tag "trial_lessons[]", tl.id, tl.assisted?, class: "trial_lessons", id: "trial_lessons_#{index}" %>
                 </div>
               <% end %>

@@ -3,8 +3,8 @@ es:
     attributes:
       attendance:
         attendance_on: fecha de asistencia
-        attendance_to: Asistencia para
-        text_on: en
+        attendance_to: Asistencia a
+        text_on: el
         contacts: contacto
         padma_contacts: contactos
         time_slot: clase
@@ -36,6 +36,8 @@ es:
     new:
       title: Nueva asistencia
   attendances:
+    form:
+      contact_assisted: ¿%{name} asisitió?
     index:
       new: Marcar asistencia
       new_empty: No vino nadie
