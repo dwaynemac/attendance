@@ -6,12 +6,55 @@ pt-BR:
         name: Nome
         padma_uid: Instrutor
         start_at: Começo
+        contact_time_slots: 
+      attendance:
+        attendance_on: data da presença
+        attendance_to: Presença em
+        contacts: alunos
+        dsfadf_on: 
+        'on': 
+        padma_contacts: contatos
+        text_on: 'no'
+        time_slot: aula
+        time_slot_id: aula
+        trial_lessons: aula experimental
+      contact_time_slot:
+        contact_id: 
+      trial_lesson:
+        assisted: 
+        contact: 
+        padma_contact_id: 
+        padma_uid: 
+        time_slot: 
+        time_slot_id: 
+        trial_on: 
+      user:
+        username: 
+    attendance:
+      text:
+        'on': 
+    errors:
+      models:
+        time_slot:
+          attributes:
+            end_at:
+              after: 
+    models:
+      attendance: 
+      contact_time_slot: 
+      time_slot: 
+      trial_lesson: 
+      user: 
   attendances:
     index:
       new: Marcar presença
       new_empty: Ninguém veio
       title: Presenças
       view: Ver presenças
+    form:
+      contact_assisted: '%{name} fez a aula?'
+    show:
+      title: 
   flash:
     actions:
       create:
@@ -24,34 +67,99 @@ pt-BR:
   layouts:
     navbar:
       time_slots: Turmas
-      trial_lessons: "Aulas Experimentais"
+      trial_lessons: Aulas Experimentais
+      stats: 
   time_slots:
     edit:
       title: Atualizando turma
     index:
       title: Turma
-      new: "Nova turma"
+      new: Nova turma
     new:
       title: Nova turma
     show:
       title: Turma
+    create:
+      title: 
+    update:
+      title: 
   trial_lessons:
     index:
-      new: "Cadastrar aula experimental"
-    search_contact: "Buscar contato"
-  new: "Novo"
-  edit: "Alterar"
-  back: "voltar"
+      new: Cadastrar aula experimental
+    search_contact: Buscar contato
+    edit:
+      title: 
+    new:
+      title: 
+    show:
+      title: 
+  new: Novo
+  edit: Alterar
+  back: voltar
   trial_lesson:
     activity_content:
-      create: "Aula experimental criada."
-      deleted: "Aula experimental cancelada"
+      create: Aula experimental criada.
+      deleted: Aula experimental cancelada
     status:
-      assisted: "participou"
-      absent: "ausente"
-      pending: "pendente"
-  destroy: "excluir"
-  confirm: "Tem certeza?"
+      assisted: participou
+      absent: ausente
+      pending: pendente
+  destroy: excluir
+  confirm: Tem certeza?
   date:
     formats:
-      in_context: "%A %-d" 
+      in_context: '%A %-d'
+  attendance:
+    activerecord:
+      attributes:
+        attendance:
+          attendance_on: 
+    edit:
+      title: 
+    new:
+      title: 
+    'on': 
+    text:
+      'on': 
+  download: 
+  helpers:
+    label:
+      attendance:
+        attendance_on: 
+        padma_contacts: 
+        time_slot_id: 
+        trial_lessons: 
+      time_slot:
+        add_a_contact: 
+        cultural_activity: 
+        end_at: 
+        name: 
+        padma_contacts: 
+        padma_uid: 
+        schedule: 
+        start_at: 
+      trial_lesson:
+        assisted: 
+        padma_contact_id: 
+        padma_uid: 
+        time_slot_id: 
+        trial_on: 
+    submit:
+      attendance:
+        create: 
+        update: 
+      time_slot:
+        create: 
+        update: 
+      trial_lesson:
+        create: 
+        update: 
+  number:
+    human:
+      decimal_units:
+        units:
+          unit: ''
+  time:
+    am: ''
+    pm: ''
+  unauthorized: 
