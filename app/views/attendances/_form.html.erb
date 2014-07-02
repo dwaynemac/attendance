@@ -58,8 +58,8 @@
           </div>  
         </div> 
         <div class="row row_margin">
-          <div class="col-md-5 col-sm-4 col-xs-12 pad_none">
-            <%= f.label :padma_contacts, :class => 'col-sm-2 control-label' %>
+          <div class="col-md-5 col-sm-4 col-xs-12 pad_none padma-contact-label">
+            <%= f.label :padma_contacts, :class => 'col-sm-7 col-md-9 text-left' %>
           </div>  
           <div class="col-md-7 col-sm-8 col-xs-12 pad_none">
             <%= select_tag :padma_contacts_select, options_for_select({"This time slot's recurrent contacts" => :recurrent_contacts, "All students" => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| ["#{username}'s students", username].flatten}])), {:class => 'selectpicker select_width show-tick show-menu-arrow form-control'} %>
@@ -83,7 +83,7 @@
         <%= f.submit nil, :class => 'btn btn-primary' %>
         <%= link_to 'Show', @attendance, :class => 'btn' if @attendance.persisted? %>
         <%= link_to t('destroy'), @attendance, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
-        <%= link_to 'Cancel', attendances_path, :class => 'btn' %>
+        <%= link_to 'Cancel', attendances_path, :class => 'btn btn-default' %>
       </div>
     <% end %>
   </div>  

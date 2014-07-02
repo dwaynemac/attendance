@@ -16,5 +16,22 @@
   .hidden{
     display: none;
   }
+  form{
+    background-color: #F8F8F8;
+    border: 1px solid #CFCFCF;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    .padma-contact-label{
+      label{
+        line-height:2.2;
+        margin-bottom:0px;
+        padding:0px 9px;
+      }
+    }
+  }
+  legend{
+    border-bottom: 1px solid #666666;
+  }
 }
 
