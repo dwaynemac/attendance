@@ -16,6 +16,7 @@
   .hidden{
     display: none;
   }
+<<<<<<< HEAD
   form{
     background-color: #F8F8F8;
     border: 1px solid #CFCFCF;
@@ -35,3 +36,35 @@
   }
 }
 
+=======
+}
+
+ul#padma_contacts {
+  li {
+    list-style-type: none;
+  }
+  .btn:hover {
+    color: #fff;
+    background: #5cb85c;
+    border-color: #4cae4c;
+  }
+}
+
+ul#attendance_contacts {
+  li {
+    list-style-type: none;
+  }
+
+  .btn {
+    color: #fff;
+    background: #5cb85c;
+    border-color: #4cae4c;
+  }
+
+  .btn:hover {
+    color: #fff;
+    background: #c9302c;
+    border-color: #ac2925
+  }
+}
+>>>>>>> master

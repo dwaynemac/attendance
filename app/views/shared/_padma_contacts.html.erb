@@ -1,7 +1,7 @@
 <ul id="padma_contacts">
   <% unless @padma_contacts.blank? %>
     <% @padma_contacts.each do |c| %>
-      <li><%= link_to "#{c.first_name} #{c.last_name}", "#", :class => 'add', :data => {:padma_id => c._id} %></li>
+      <li><%= link_to "#{c.first_name} #{c.last_name}", "#", :class => 'add btn btn-default btn-sm btn-block', :data => {:padma_id => c._id} %></li>
     <% end%>
   <% end %>
 </ul>

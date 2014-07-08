@@ -1,12 +1,9 @@
 pt-BR:
   activerecord:
+    attendance:
+      text:
+        'on': 
     attributes:
-      time_slot:
-        end_at: Final
-        name: Nome
-        padma_uid: Instrutor
-        start_at: Começo
-        contact_time_slots: 
       attendance:
         attendance_on: data da presença
         attendance_to: Presença em
@@ -20,6 +17,21 @@ pt-BR:
         trial_lessons: aula experimental
       contact_time_slot:
         contact_id: 
+      stat:
+        distribution: 
+        end_on: 
+        include_cultural_activities: 
+        start_on: 
+      time_slot:
+        add_a_contact: 
+        contact_time_slots: 
+        cultural_activity: 
+        end_at: Final
+        name: Nome
+        padma_contacts: 
+        padma_uid: Instrutor
+        schedule: 
+        start_at: Começo
       trial_lesson:
         assisted: 
         contact: 
@@ -30,9 +42,6 @@ pt-BR:
         trial_on: 
       user:
         username: 
-    attendance:
-      text:
-        'on': 
     errors:
       models:
         time_slot:
@@ -45,70 +54,6 @@ pt-BR:
       time_slot: 
       trial_lesson: 
       user: 
-  attendances:
-    index:
-      new: Marcar presença
-      new_empty: Ninguém veio
-      title: Presenças
-      view: Ver presenças
-    form:
-      contact_assisted: '%{name} fez a aula?'
-    show:
-      title: 
-  flash:
-    actions:
-      create:
-        notice: '{resource_name} criado.'
-      destroy:
-        alert: 'Nāo conseguimos apagar {resource_name} '
-        notice: '{resource_name} apagado'
-      update:
-        notice: '{resource_name} atualiçado'
-  layouts:
-    navbar:
-      time_slots: Turmas
-      trial_lessons: Aulas Experimentais
-      stats: 
-  time_slots:
-    edit:
-      title: Atualizando turma
-    index:
-      title: Turma
-      new: Nova turma
-    new:
-      title: Nova turma
-    show:
-      title: Turma
-    create:
-      title: 
-    update:
-      title: 
-  trial_lessons:
-    index:
-      new: Cadastrar aula experimental
-    search_contact: Buscar contato
-    edit:
-      title: 
-    new:
-      title: 
-    show:
-      title: 
-  new: Novo
-  edit: Alterar
-  back: voltar
-  trial_lesson:
-    activity_content:
-      create: Aula experimental criada.
-      deleted: Aula experimental cancelada
-    status:
-      assisted: participou
-      absent: ausente
-      pending: pendente
-  destroy: excluir
-  confirm: Tem certeza?
-  date:
-    formats:
-      in_context: '%A %-d'
   attendance:
     activerecord:
       attributes:
@@ -121,7 +66,127 @@ pt-BR:
     'on': 
     text:
       'on': 
+  attendances:
+    form:
+      contact_assisted: '%{name} fez a aula?'
+    index:
+      new: Marcar presença
+      new_empty: Ninguém veio
+      title: Presenças
+      view: Ver presenças
+    show:
+      title: 
+  back: voltar
+  confirm: Tem certeza?
+  date:
+    abbr_day_names:
+    - Dom
+    - Seg
+    - Ter
+    - Qua
+    - Qui
+    - Sex
+    - Sáb
+    abbr_month_names:
+    - 
+    - Jan
+    - Fev
+    - Mar
+    - Abr
+    - Mai
+    - Jun
+    - Jul
+    - Ago
+    - Set
+    - Out
+    - Nov
+    - Dez
+    day_names:
+    - Domingo
+    - Segunda
+    - Terça
+    - Quarta
+    - Quinta
+    - Sexta
+    - Sábado
+    formats:
+      default: '%d/%m/%Y'
+      in_context: '%A %-d'
+      long: '%d de %B de %Y'
+      short: '%d de %B'
+    month_names:
+    - 
+    - Janeiro
+    - Fevereiro
+    - Março
+    - Abril
+    - Maio
+    - Junho
+    - Julho
+    - Agosto
+    - Setembro
+    - Outubro
+    - Novembro
+    - Dezembro
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: aproximadamente 1 hora
+        other: aproximadamente %{count} horas
+      about_x_months:
+        one: aproximadamente 1 mês
+        other: aproximadamente %{count} meses
+      about_x_years:
+        one: aproximadamente 1 ano
+        other: aproximadamente %{count} anos
+      almost_x_years:
+        one: quase 1 ano
+        other: quase %{count} anos
+      half_a_minute: meio minuto
+      less_than_x_minutes:
+        one: menos de um minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: mais de 1 ano
+        other: mais de %{count} anos
+      x_days:
+        one: 1 dia
+        other: '%{count} dias'
+      x_minutes:
+        one: 1 minuto
+        other: '%{count} minutos'
+      x_months:
+        one: 1 mês
+        other: '%{count} meses'
+      x_seconds:
+        one: 1 segundo
+        other: '%{count} segundos'
+    prompts:
+      day: Dia
+      hour: Hora
+      minute: Minuto
+      month: Mês
+      second: Segundo
+      year: Ano
+  destroy: excluir
   download: 
+  edit: Alterar
+  flash:
+    actions:
+      create:
+        notice: '{resource_name} criado.'
+      destroy:
+        alert: 'Nāo conseguimos apagar {resource_name} '
+        notice: '{resource_name} apagado'
+      update:
+        notice: '{resource_name} atualiçado'
   helpers:
     label:
       attendance:
@@ -154,12 +219,125 @@ pt-BR:
       trial_lesson:
         create: 
         update: 
+  layouts:
+    navbar:
+      stats: 
+      time_slots: Turmas
+      trial_lessons: Aulas Experimentais
+  new: Novo
   number:
+    currency:
+      format:
+        delimiter: .
+        format: '%u %n'
+        precision: 2
+        separator: ','
+        significant: false
+        strip_insignificant_zeros: false
+        unit: R$
+    format:
+      delimiter: .
+      precision: 3
+      separator: ','
+      significant: false
+      strip_insignificant_zeros: false
     human:
       decimal_units:
+        format: '%n %u'
         units:
+          billion:
+            one: bilhão
+            other: bilhões
+          million:
+            one: milhão
+            other: milhões
+          quadrillion:
+            one: quatrilhão
+            other: quatrilhões
+          thousand: mil
+          trillion:
+            one: trilhão
+            other: trilhões
           unit: ''
+      format:
+        delimiter: .
+        precision: 2
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: .
+    precision:
+      format:
+        delimiter: .
+  stats:
+    index:
+      by_instructor: 
+      by_time_slot: 
+      calculate_stats: 
+      title: 
+    table:
+      name: 
+      total: 
+  support:
+    array:
+      last_word_connector: ' e '
+      two_words_connector: ' e '
+      words_connector: ', '
   time:
     am: ''
+    formats:
+      default: '%A, %d de %B de %Y, %H:%M h'
+      long: '%A, %d de %B de %Y, %H:%M h'
+      short: '%d/%m, %H:%M h'
     pm: ''
+  time_slots:
+    create:
+      title: 
+    edit:
+      title: Atualizando turma
+    index:
+      new: Nova turma
+      title: Turma
+    new:
+      title: Nova turma
+    show:
+      title: Turma
+    update:
+      title: 
+  trial_lesson:
+    activity_content:
+      create: Aula experimental criada.
+      deleted: Aula experimental cancelada
+    status:
+      absent: ausente
+      assisted: participou
+      pending: pendente
+  trial_lessons:
+    edit:
+      title: 
+    index:
+      archive: 
+      new: Cadastrar aula experimental
+      time_slot_deleted: 
+    new:
+      title: 
+    search_contact: Buscar contato
+    show:
+      title: 
   unauthorized: 
+  validates_timeliness:
+    error_value_formats:
+      date: 
+      datetime: 
+      time: 

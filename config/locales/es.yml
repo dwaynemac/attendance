@@ -1,17 +1,22 @@
 es:
   activerecord:
+    attendance:
+      text:
+        'on': 
     attributes:
       attendance:
         attendance_on: fecha de asistencia
         attendance_to: Asistencia a
-        text_on: el
         contacts: alumnos
+        dsfadf_on: 
+        'on': 
         padma_contacts: contactos
+        text_on: el
         time_slot: clase
         time_slot_id: clase
         trial_lessons: clase de prueba
-        dsfadf_on: 
-        'on': 
+      contact_time_slot:
+        contact_id: 
       stat:
         distribution: Distribución
         end_on: Hasta
@@ -19,6 +24,7 @@ es:
         start_on: Desde
       time_slot:
         add_a_contact: Agregar un alumno
+        contact_time_slots: 
         cultural_activity: Actividad Cultural
         end_at: Fin
         name: Nombre
@@ -26,11 +32,6 @@ es:
         padma_uid: Instructor
         schedule: Cronograma
         start_at: Inicio
-        contact_time_slots: 
-      user:
-        username: usuario
-      contact_time_slot:
-        contact_id: 
       trial_lesson:
         assisted: 
         contact: 
@@ -39,34 +40,35 @@ es:
         time_slot: 
         time_slot_id: 
         trial_on: 
-    models:
-      attendance: asistencia
-      time_slot: clase
-      user: usuario
-      contact_time_slot: 
-      trial_lesson: 
-    attendance:
-      text:
-        'on': 
+      user:
+        username: usuario
     errors:
       models:
         time_slot:
           attributes:
             end_at:
               after: 
+    models:
+      attendance: asistencia
+      contact_time_slot: 
+      time_slot: clase
+      trial_lesson: 
+      user: usuario
   attendance:
-    edit:
-      title: Editar asistencia
-    new:
-      title: Nueva asistencia
     activerecord:
       attributes:
         attendance:
           attendance_on: 
+    edit:
+      title: Editar asistencia
+    new:
+      title: Nueva asistencia
     'on': 
     text:
       'on': 
   attendances:
+    form:
+      contact_assisted: ¿%{name} asisitió?
     index:
       new: Marcar asistencia
       new_empty: No vino nadie
@@ -74,8 +76,6 @@ es:
       view: Ver asistencia
     show:
       title: Asistencia
-    form:
-      contact_assisted: ¿%{name} asisitió?
   back: volver
   confirm: ¿Está seguro?
   date:
@@ -187,6 +187,38 @@ es:
         notice: '{resource_name} se destruyó exitosamente'
       update:
         notice: '{resource_name} se actualizó exitosamente'
+  helpers:
+    label:
+      attendance:
+        attendance_on: 
+        padma_contacts: 
+        time_slot_id: 
+        trial_lessons: 
+      time_slot:
+        add_a_contact: 
+        cultural_activity: 
+        end_at: 
+        name: 
+        padma_contacts: 
+        padma_uid: 
+        schedule: 
+        start_at: 
+      trial_lesson:
+        assisted: 
+        padma_contact_id: 
+        padma_uid: 
+        time_slot_id: 
+        trial_on: 
+    submit:
+      attendance:
+        create: 
+        update: 
+      time_slot:
+        create: 
+        update: 
+      trial_lesson:
+        create: 
+        update: 
   layouts:
     navbar:
       stats: Estadísticas
@@ -262,6 +294,8 @@ es:
       short: '%d de %b %H:%M'
     pm: pm
   time_slots:
+    create:
+      title: 
     edit:
       title: Editando horario
     index:
@@ -273,8 +307,6 @@ es:
       title: Horario
     update:
       title: Editando clase
-    create:
-      title: 
   trial_lesson:
     activity_content:
       create: Clase de prueba creada
@@ -284,52 +316,20 @@ es:
       assisted: asistió
       pending: pendiente
   trial_lessons:
+    edit:
+      title: 
     index:
       archive: Archivar
       new: Marcar clase de prueba
       time_slot_deleted: El horario de clase fue eliminado
-    search_contact: Buscar contacto
-    edit:
-      title: 
     new:
       title: 
+    search_contact: Buscar contacto
     show:
       title: 
+  unauthorized: 
   validates_timeliness:
     error_value_formats:
       date: Fecha inválida
       datetime: Fecha inválida
       time: Fecha inválida
-  helpers:
-    label:
-      attendance:
-        attendance_on: 
-        padma_contacts: 
-        time_slot_id: 
-        trial_lessons: 
-      time_slot:
-        add_a_contact: 
-        cultural_activity: 
-        end_at: 
-        name: 
-        padma_contacts: 
-        padma_uid: 
-        schedule: 
-        start_at: 
-      trial_lesson:
-        assisted: 
-        padma_contact_id: 
-        padma_uid: 
-        time_slot_id: 
-        trial_on: 
-    submit:
-      attendance:
-        create: 
-        update: 
-      time_slot:
-        create: 
-        update: 
-      trial_lesson:
-        create: 
-        update: 
-  unauthorized: 

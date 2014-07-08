@@ -1,40 +1,9 @@
 en:
-  time_slots:
-    index:
-      title: Time Slots
-      new: New time slot
-    new:
-      title: New Time Slot
-    edit:
-      title: Editing Time Slot
-    show:
-      title: Time Slot
-    create:
-      title: 
-    update:
-      title: 
-  attendances:
-    index:
-      title: Attendance
-      new: Create attendance
-      view: View attendance
-      new_empty: No one came
-    form:
-      contact_assisted: 
-    show:
-      title: 
   activerecord:
+    attendance:
+      text:
+        'on': 
     attributes:
-      time_slot:
-        padma_uid: Instructor
-        end_at: End
-        name: Name
-        start_at: Starts
-        padma_contacts: Students
-        add_a_contact: Add a student
-        contact_time_slots: 
-        cultural_activity: Cultural activity
-        schedule: Schedule
       attendance:
         attendance_on: Attendance on
         attendance_to: 
@@ -53,6 +22,16 @@ en:
         end_on: Up to
         include_cultural_activities: Include cultural activities
         start_on: Since
+      time_slot:
+        add_a_contact: Add a student
+        contact_time_slots: 
+        cultural_activity: Cultural activity
+        end_at: End
+        name: Name
+        padma_contacts: Students
+        padma_uid: Instructor
+        schedule: Schedule
+        start_at: Starts
       trial_lesson:
         assisted: Assisted
         contact: 
@@ -63,9 +42,6 @@ en:
         trial_on: Trial on
       user:
         username: Username
-    attendance:
-      text:
-        'on': 
     errors:
       models:
         time_slot:
@@ -78,57 +54,6 @@ en:
       time_slot: Time slot
       trial_lesson: Trial lesson
       user: User
-  flash:
-    actions:
-      create:
-        notice: '{resource_name} created successfully'
-      destroy:
-        alert: '{resourse_name} couldn''t be removed'
-        notice: '{resource_name} successfully removed'
-      update:
-        notice: '{resource_name} updated successfully'
-  layouts:
-    navbar:
-      time_slots: Time Slots
-      trial_lessons: Trial Lessons
-      stats: 
-  trial_lessons:
-    index:
-      new: New Trial lesson
-      archive: Archive
-      time_slot_deleted: Time slot was deleted
-    search_contact: Search for a contact
-    edit:
-      title: 
-    new:
-      title: 
-    show:
-      title: 
-  stats:
-    index:
-      title: Attendance Stats
-      calculate_stats: Calculate Stats
-      by_instructor: By Instrucutor
-      by_time_slot: By scheduled time
-    table:
-      name: Name
-      total: Total
-  new: New
-  edit: Edit
-  back: Back
-  trial_lesson:
-    activity_content:
-      create: Trial Lesson created
-      deleted: Trial lesson canceled
-    status:
-      assisted: Assisted
-      absent: absent
-      pending: pending
-  destroy: delete
-  confirm: Are you sure?
-  date:
-    formats:
-      in_context: '%A %-d'
   attendance:
     activerecord:
       attributes:
@@ -141,12 +66,127 @@ en:
     'on': 
     text:
       'on': 
+  attendances:
+    form:
+      contact_assisted: 
+    index:
+      new: Create attendance
+      new_empty: No one came
+      title: Attendance
+      view: View attendance
+    show:
+      title: 
+  back: Back
+  confirm: Are you sure?
+  date:
+    abbr_day_names:
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+    abbr_month_names:
+    - 
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - Dec
+    day_names:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+    formats:
+      default: '%Y-%m-%d'
+      in_context: '%A %-d'
+      long: '%B %d, %Y'
+      short: '%b %d'
+    month_names:
+    - 
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
+    order:
+    - :year
+    - :month
+    - :day
   datetime:
     distance_in_words:
+      about_x_hours:
+        one: about 1 hour
+        other: about %{count} hours
       about_x_months:
         one: around 1 month
         other: around %{count} months
+      about_x_years:
+        one: about 1 year
+        other: about %{count} years
+      almost_x_years:
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: less than a minute
+        other: less than %{count} minutes
+      less_than_x_seconds:
+        one: less than 1 second
+        other: less than %{count} seconds
+      over_x_years:
+        one: over 1 year
+        other: over %{count} years
+      x_days:
+        one: 1 day
+        other: '%{count} days'
+      x_minutes:
+        one: 1 minute
+        other: '%{count} minutes'
+      x_months:
+        one: 1 month
+        other: '%{count} months'
+      x_seconds:
+        one: 1 second
+        other: '%{count} seconds'
+    prompts:
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
+  destroy: delete
   download: 
+  edit: Edit
+  flash:
+    actions:
+      create:
+        notice: '{resource_name} created successfully'
+      destroy:
+        alert: '{resourse_name} couldn''t be removed'
+        notice: '{resource_name} successfully removed'
+      update:
+        notice: '{resource_name} updated successfully'
   helpers:
     label:
       attendance:
@@ -179,19 +219,114 @@ en:
       trial_lesson:
         create: Create Trial lesson
         update: 
+  layouts:
+    navbar:
+      stats: 
+      time_slots: Time Slots
+      trial_lessons: Trial Lessons
+  new: New
   number:
+    currency:
+      format:
+        delimiter: ','
+        format: '%u%n'
+        precision: 2
+        separator: .
+        significant: false
+        strip_insignificant_zeros: false
+        unit: $
+    format:
+      delimiter: ','
+      precision: 3
+      separator: .
+      significant: false
+      strip_insignificant_zeros: false
     human:
       decimal_units:
+        format: '%n %u'
         units:
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
           unit: ''
       format:
         delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
     percentage:
       format:
         delimiter: ''
     precision:
       format:
         delimiter: ''
+  stats:
+    index:
+      by_instructor: By Instrucutor
+      by_time_slot: By scheduled time
+      calculate_stats: Calculate Stats
+      title: Attendance Stats
+    table:
+      name: Name
+      total: Total
+  support:
+    array:
+      last_word_connector: ', and '
+      two_words_connector: ' and '
+      words_connector: ', '
+  time:
+    am: am
+    formats:
+      default: '%a, %d %b %Y %H:%M:%S %z'
+      long: '%B %d, %Y %H:%M'
+      short: '%d %b %H:%M'
+    pm: pm
+  time_slots:
+    create:
+      title: 
+    edit:
+      title: Editing Time Slot
+    index:
+      new: New time slot
+      title: Time Slots
+    new:
+      title: New Time Slot
+    show:
+      title: Time Slot
+    update:
+      title: 
+  trial_lesson:
+    activity_content:
+      create: Trial Lesson created
+      deleted: Trial lesson canceled
+    status:
+      absent: absent
+      assisted: Assisted
+      pending: pending
+  trial_lessons:
+    edit:
+      title: 
+    index:
+      archive: Archive
+      new: New Trial lesson
+      time_slot_deleted: Time slot was deleted
+    new:
+      title: 
+    search_contact: Search for a contact
+    show:
+      title: 
   unauthorized: 
   validates_timeliness:
     error_value_formats:
