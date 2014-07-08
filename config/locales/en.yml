@@ -333,3 +333,4 @@ en:
       date: '%Y-%m-%d'
       datetime: '%Y-%m-%d %H:%M:%S'
       time: '%H:%M:%S'
+  Cancel: Cancel
