@@ -3,13 +3,15 @@ es:
     attributes:
       attendance:
         attendance_on: fecha de asistencia
-        attendance_to: Asistencia para
-        text_on: en
-        contacts: contacto
+        attendance_to: Asistencia a
+        text_on: el
+        contacts: alumnos
         padma_contacts: contactos
         time_slot: clase
         time_slot_id: clase
         trial_lessons: clase de prueba
+        dsfadf_on: 
+        'on': 
       stat:
         distribution: Distribución
         end_on: Hasta
@@ -24,17 +26,46 @@ es:
         padma_uid: Instructor
         schedule: Cronograma
         start_at: Inicio
+        contact_time_slots: 
       user:
         username: usuario
+      contact_time_slot:
+        contact_id: 
+      trial_lesson:
+        assisted: 
+        contact: 
+        padma_contact_id: 
+        padma_uid: 
+        time_slot: 
+        time_slot_id: 
+        trial_on: 
     models:
       attendance: asistencia
       time_slot: clase
       user: usuario
+      contact_time_slot: 
+      trial_lesson: 
+    attendance:
+      text:
+        'on': 
+    errors:
+      models:
+        time_slot:
+          attributes:
+            end_at:
+              after: 
   attendance:
     edit:
       title: Editar asistencia
     new:
       title: Nueva asistencia
+    activerecord:
+      attributes:
+        attendance:
+          attendance_on: 
+    'on': 
+    text:
+      'on': 
   attendances:
     index:
       new: Marcar asistencia
@@ -43,6 +74,8 @@ es:
       view: Ver asistencia
     show:
       title: Asistencia
+    form:
+      contact_assisted: ¿%{name} asisitió?
   back: volver
   confirm: ¿Está seguro?
   date:
@@ -185,9 +218,9 @@ es:
           quadrillion: mil billones
           thousand: mil
           trillion: billón
-          unit: ''
+          unit: 
       format:
-        delimiter: ''
+        delimiter: 
         precision: 1
         significant: true
         strip_insignificant_zeros: true
@@ -203,10 +236,10 @@ es:
           tb: TB
     percentage:
       format:
-        delimiter: ''
+        delimiter: 
     precision:
       format:
-        delimiter: ''
+        delimiter: 
   stats:
     index:
       by_instructor: Por instructor
@@ -240,6 +273,8 @@ es:
       title: Horario
     update:
       title: Editando clase
+    create:
+      title: 
   trial_lesson:
     activity_content:
       create: Clase de prueba creada
@@ -254,8 +289,47 @@ es:
       new: Marcar clase de prueba
       time_slot_deleted: El horario de clase fue eliminado
     search_contact: Buscar contacto
+    edit:
+      title: 
+    new:
+      title: 
+    show:
+      title: 
   validates_timeliness:
     error_value_formats:
       date: Fecha inválida
       datetime: Fecha inválida
       time: Fecha inválida
+  helpers:
+    label:
+      attendance:
+        attendance_on: 
+        padma_contacts: 
+        time_slot_id: 
+        trial_lessons: 
+      time_slot:
+        add_a_contact: 
+        cultural_activity: 
+        end_at: 
+        name: 
+        padma_contacts: 
+        padma_uid: 
+        schedule: 
+        start_at: 
+      trial_lesson:
+        assisted: 
+        padma_contact_id: 
+        padma_uid: 
+        time_slot_id: 
+        trial_on: 
+    submit:
+      attendance:
+        create: 
+        update: 
+      time_slot:
+        create: 
+        update: 
+      trial_lesson:
+        create: 
+        update: 
+  unauthorized: 

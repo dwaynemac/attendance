@@ -2,19 +2,27 @@ en:
   time_slots:
     index:
       title: Time Slots
-      new: "New time slot"
+      new: New time slot
     new:
       title: New Time Slot
     edit:
       title: Editing Time Slot
     show:
       title: Time Slot
+    create:
+      title: 
+    update:
+      title: 
   attendances:
     index:
       title: Attendance
       new: Create attendance
       view: View attendance
       new_empty: No one came
+    form:
+      contact_assisted: 
+    show:
+      title: 
   activerecord:
     attributes:
       time_slot:
@@ -24,6 +32,52 @@ en:
         start_at: Starts
         padma_contacts: Students
         add_a_contact: Add a student
+        contact_time_slots: 
+        cultural_activity: Cultural activity
+        schedule: Schedule
+      attendance:
+        attendance_on: Attendance on
+        attendance_to: 
+        contacts: Contacts
+        dsfadf_on: 
+        'on': 
+        padma_contacts: Padma contacts
+        text_on: 
+        time_slot: Time slot
+        time_slot_id: Time slot
+        trial_lessons: Trial lessons
+      contact_time_slot:
+        contact_id: 
+      stat:
+        distribution: Distribution
+        end_on: Up to
+        include_cultural_activities: Include cultural activities
+        start_on: Since
+      trial_lesson:
+        assisted: Assisted
+        contact: 
+        padma_contact_id: Padma contact
+        padma_uid: Padma uid
+        time_slot: 
+        time_slot_id: Time slot
+        trial_on: Trial on
+      user:
+        username: Username
+    attendance:
+      text:
+        'on': 
+    errors:
+      models:
+        time_slot:
+          attributes:
+            end_at:
+              after: 
+    models:
+      attendance: Attendance
+      contact_time_slot: 
+      time_slot: Time slot
+      trial_lesson: Trial lesson
+      user: User
   flash:
     actions:
       create:
@@ -36,30 +90,111 @@ en:
   layouts:
     navbar:
       time_slots: Time Slots
-      trial_lessons: "Trial Lessons"
+      trial_lessons: Trial Lessons
+      stats: 
   trial_lessons:
     index:
-      new: "New Trial lesson"
-      archive: "Archive"
-      time_slot_deleted: "Time slot was deleted"
-    search_contact: "Search for a contact"
+      new: New Trial lesson
+      archive: Archive
+      time_slot_deleted: Time slot was deleted
+    search_contact: Search for a contact
+    edit:
+      title: 
+    new:
+      title: 
+    show:
+      title: 
   stats:
     index:
-      title: "Attendance Stats"
-      calculate_stats: "Calculate Stats"  
-  new: "New"
-  edit: "Edit"
-  back: "Back"
+      title: Attendance Stats
+      calculate_stats: Calculate Stats
+      by_instructor: By Instrucutor
+      by_time_slot: By scheduled time
+    table:
+      name: Name
+      total: Total
+  new: New
+  edit: Edit
+  back: Back
   trial_lesson:
     activity_content:
-      create: "Trial Lesson created"
-      deleted: "Trial lesson canceled"
+      create: Trial Lesson created
+      deleted: Trial lesson canceled
     status:
-      assisted: "Assisted"
-      absent: "absent"
-      pending: "pending"
-  destroy: "delete"
-  confirm: "Are you sure?"
+      assisted: Assisted
+      absent: absent
+      pending: pending
+  destroy: delete
+  confirm: Are you sure?
   date:
     formats:
-      in_context: "%A %-d" 
+      in_context: '%A %-d'
+  attendance:
+    activerecord:
+      attributes:
+        attendance:
+          attendance_on: 
+    edit:
+      title: 
+    new:
+      title: 
+    'on': 
+    text:
+      'on': 
+  datetime:
+    distance_in_words:
+      about_x_months:
+        one: around 1 month
+        other: around %{count} months
+  download: 
+  helpers:
+    label:
+      attendance:
+        attendance_on: 
+        padma_contacts: 
+        time_slot_id: 
+        trial_lessons: 
+      time_slot:
+        add_a_contact: 
+        cultural_activity: 
+        end_at: 
+        name: 
+        padma_contacts: 
+        padma_uid: 
+        schedule: 
+        start_at: 
+      trial_lesson:
+        assisted: 
+        padma_contact_id: 
+        padma_uid: 
+        time_slot_id: 
+        trial_on: 
+    submit:
+      attendance:
+        create: Create Attendance
+        update: 
+      time_slot:
+        create: Create Time slot
+        update: 
+      trial_lesson:
+        create: Create Trial lesson
+        update: 
+  number:
+    human:
+      decimal_units:
+        units:
+          unit: ''
+      format:
+        delimiter: ''
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  unauthorized: 
+  validates_timeliness:
+    error_value_formats:
+      date: '%Y-%m-%d'
+      datetime: '%Y-%m-%d %H:%M:%S'
+      time: '%H:%M:%S'

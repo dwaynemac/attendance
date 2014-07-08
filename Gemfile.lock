@@ -286,7 +286,6 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     sqlite3 (1.3.7)
-    subcontractor (0.6.1)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
     therubyracer (0.11.4)
@@ -365,7 +364,6 @@ DEPENDENCIES
   select2-rails
   shoulda-matchers
   sqlite3
-  subcontractor (= 0.6.1)
   therubyracer
   turbolinks
   uglifier (>= 1.3.0)

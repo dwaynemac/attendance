@@ -100,7 +100,7 @@ gem 'validates_timeliness'
 
 group :development do
   gem 'foreman'
-  gem 'subcontractor', '0.6.1'
+  #gem 'subcontractor', '0.6.1'
 
   gem 'byebug'
   #
