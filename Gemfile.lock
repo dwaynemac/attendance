@@ -27,7 +27,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    accounts_client (0.0.21)
+    accounts_client (0.2.4)
       gravtastic
       logical_model (~> 0.5.8)
       railties (>= 3.1)
@@ -325,7 +325,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  accounts_client (= 0.0.21)
+  accounts_client (= 0.2.4)
   activity_stream_client
   angularjs-rails
   appsignal
