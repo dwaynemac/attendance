@@ -44,6 +44,7 @@ class TimeSlotStatsSQLBuilder
 			#{time_slot_queries}
 		) AS attendance_distribution
 		GROUP BY id, account_id, padma_id, name
+		ORDER BY name ASC
 	  )
 	end	
 

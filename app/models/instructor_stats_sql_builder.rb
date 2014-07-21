@@ -41,6 +41,7 @@ class InstructorStatsSQLBuilder
 			#{instructor_queries}
 		) AS attendance_distribution
 		GROUP BY id, account_id, padma_id, name
+		ORDER BY name ASC
 	  )
 	end	
 
