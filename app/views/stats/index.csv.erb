@@ -9,12 +9,15 @@
   end
   csv << header
   @contacts.each do |c|
-    csv << [
-      c.name,
-      c.attendance_total || 0
-    ]
+    dist_array = []
+
+    dist_array << c.name
+    dist_array << c.attendance_total || 0
+    
     @distribution.each do |d|
-  	  	number_to_percentage c.attendance_total > 0 ? c.send("sum_#{d}")/c.attendance_total.to_f*100 : 0, :precision => 2, :strip_insignificant_zeros => true
+  	  	dist_array << number_to_percentage(c.attendance_total > 0 ? c.send("sum_#{d}")/c.attendance_total.to_f*100 : 0, :precision => 2, :strip_insignificant_zeros => true).to_s
     end
+
+    csv << dist_array
   end
 end.html_safe %>
