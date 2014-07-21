@@ -1,0 +1,10 @@
+<h1><%= @contact.name %></h1>
+
+<% @attendances_by_month.each do |month, attendances| %>
+  <h2><%= I18n.l(month, :format => "%B") %></h2>
+  <% for attendance in attendances %>
+    <div class="attendances">
+      <%= I18n.l(attendance.attendance_on) %> - <strong><%= attendance.time_slot.name %></strong> (<%= link_to t('view'), attendance_path(attendance) %>)
+    </div>
+  <% end %>
+<% end %>

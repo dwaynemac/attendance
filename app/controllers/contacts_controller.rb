@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   load_and_authorize_resource
-  respond_to :js
+  respond_to :html, :js
 
   def index
     if params[:time_slot_id].present?
@@ -12,5 +12,10 @@ class ContactsController < ApplicationController
       @padma_contacts = current_user.current_account.students
     end
     respond_with @padma_contacts
+  end
+
+  def show
+    @contact = current_user.current_account.contacts.find(params[:id])
+    @attendances_by_month = @contact.attendances.order("attendance_on DESC").group_by { |att| att.attendance_on.beginning_of_month }
   end  
 end

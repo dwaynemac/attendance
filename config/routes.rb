@@ -21,7 +21,7 @@ Assistance::Application.routes.draw do
   resources :time_slots
   resources :attendances
   resources :trial_lessons
-  resources :contacts, :only => [:index]
+  resources :contacts, :only => [:index, :show]
   resources :stats, :only => [:index]
 
   namespace 'api' do
