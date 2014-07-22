@@ -1,4 +1,5 @@
 class ContactsController < ApplicationController
+  before_filter :find_contact_by_padma_id, :only => :show
   load_and_authorize_resource
   respond_to :html, :js
 
@@ -15,7 +16,13 @@ class ContactsController < ApplicationController
   end
 
   def show
-    @contact = current_user.current_account.contacts.find(params[:id])
     @attendances_by_month = @contact.attendances.order("attendance_on DESC").group_by { |att| att.attendance_on.beginning_of_month }
-  end  
+  end
+
+  private
+
+  def find_contact_by_padma_id
+    @contact = current_user.current_account.contacts.find_by_padma_id(params[:id])
+  end
+
 end

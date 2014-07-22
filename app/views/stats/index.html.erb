@@ -52,7 +52,7 @@
   <tbody>
   <% @contacts.each do |contact| %>
   	<tr>
-  	  <td><%= link_to contact.name, contact_path(contact) %></td>
+  	  <td><%= link_to contact.name, contact_path(:id => contact.padma_id) %></td>
   	  <td><%= contact.attendance_total || 0 %></td>	
   	  <% @distribution.each do |name| %>
   	  	<td><%= number_to_percentage contact.attendance_total > 0 ? contact.send("sum_#{name}")/contact.attendance_total.to_f*100 : 0, :precision => 2, :strip_insignificant_zeros => true %></td>
