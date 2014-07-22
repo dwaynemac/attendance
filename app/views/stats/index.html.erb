@@ -13,16 +13,31 @@
               {:class => 'form-control'} %>
       </div>
     </div>
-    <div class="form-group">
-      <%= f.label :start_on,t('activerecord.attributes.stat.start_on'), :class => 'col-sm-2 control-label' %>
-      <div class="input-group date">
-        <%= f.date_select :start_on, {},{:class => 'form-control'} %>
+    <div id="stats-easy-period">
+      <div class="form-group">
+        <%= f.label :easy_period, t('.period'), :class => 'col-sm-2 control-label' %>
+        <div class="input-group date">
+          <ul>
+            <li><%= link_to t('.current_month'), current_month_stats_path %></li>
+            <li><%= link_to t('.last_month'), last_month_stats_path %></li>
+            <li><%= link_to t('.custom_period'), 'javascript: showCustomMenu();', id: 'custom-period-button' %></li>
+          </ul>
+        </div>
       </div>
+
     </div>
-    <div class="form-group">
-      <%= f.label :end_on,t('activerecord.attributes.stat.end_on'), :class => 'col-sm-2 control-label' %>
-      <div class="input-group date">
-        <%= f.date_select :end_on, {},{:class => 'form-control'} %>
+    <div id="stats-custom-period">
+      <div class="form-group">
+        <%= f.label :start_on,t('activerecord.attributes.stat.start_on'), :class => 'col-sm-2 control-label' %>
+        <div class="input-group date">
+          <%= f.date_select :start_on, {},{:class => 'form-control'} %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :end_on,t('activerecord.attributes.stat.end_on'), :class => 'col-sm-2 control-label' %>
+        <div class="input-group date">
+          <%= f.date_select :end_on, {},{:class => 'form-control'} %>
+        </div>
       </div>
     </div>
     <div class="form-group">

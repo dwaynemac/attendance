@@ -22,7 +22,12 @@ Assistance::Application.routes.draw do
   resources :attendances
   resources :trial_lessons
   resources :contacts, :only => [:index, :show]
-  resources :stats, :only => [:index]
+  resources :stats, :only => [:index] do
+    collection do
+      get 'current_month', as: 'current_month', to: 'stats#index' # TODO set params
+      get 'last_month', as: 'last_month', to: 'stats#index' # TODO set params
+    end
+  end
 
   namespace 'api' do
     namespace 'v0' do
