@@ -4,23 +4,14 @@
 
 <%= form_for :stats, method: :get, url: stats_path, html: { class: 'form-horizontal', id: 'stats-form' } do |f| %>
   <fieldset>
-    <div class="form-group">
-      <%= f.label :distribution,t('activerecord.attributes.stat.distribution'), :class => 'col-sm-2 control-label' %>
-      <div class="input-group">
-        <%= select_tag :distribution, options_for_select({
-              t('stats.index.by_instructor') => :instructor, 
-              t('stats.index.by_time_slot') => :time_slot}, params[:distribution]),
-              {:class => 'form-control'} %>
-      </div>
-    </div>
     <div id="stats-easy-period">
       <div class="form-group">
         <%= f.label :easy_period, t('.period'), :class => 'col-sm-2 control-label' %>
         <div class="input-group date">
-          <ul>
-            <li><%= link_to t('.current_month'), 'javascript: openCurrentMonth(); ' %></li>
-            <li><%= link_to t('.last_month'), 'javascript: openLastMonth();' %></li>
-            <li><%= link_to t('.custom_period'), 'javascript: showCustomMenu();' %></li>
+          <ul class="nav nav-pills">
+            <li <%= active_pill :current_month %>><%= link_to t('.current_month'), 'javascript: openCurrentMonth(); ' %></li>
+            <li <%= active_pill :last_month %>><%= link_to t('.last_month'), 'javascript: openLastMonth();' %></li>
+            <li <%= active_pill nil %>><%= link_to t('.custom_period'), 'javascript: showCustomMenu();' %></li>
           </ul>
         </div>
       </div>
@@ -37,6 +28,15 @@
         <div class="input-group date">
           <%= f.date_select :end_on, {},{:class => 'form-control', disabled: true} %>
         </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :distribution,t('activerecord.attributes.stat.distribution'), :class => 'col-sm-2 control-label' %>
+      <div class="input-group">
+        <%= select_tag :distribution, options_for_select({
+              t('stats.index.by_instructor') => :instructor, 
+              t('stats.index.by_time_slot') => :time_slot}, params[:distribution]),
+              {:class => 'form-control'} %>
       </div>
     </div>
     <div class="form-group">
