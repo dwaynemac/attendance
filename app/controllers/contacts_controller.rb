@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   before_filter :find_contact_by_padma_id, :only => :show
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:show]
   respond_to :html, :js
 
   def index
