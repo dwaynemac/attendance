@@ -22,6 +22,7 @@ pt-PT:
         end_on: 
         include_cultural_activities: 
         start_on: 
+        month: 
       time_slot:
         add_a_contact: 
         contact_time_slots: 
@@ -286,6 +287,10 @@ pt-PT:
       by_time_slot: 
       calculate_stats: 
       title: 
+      current_month: 
+      custom_period: 
+      last_month: 
+      period: 
     table:
       name: 
       total: 
@@ -342,4 +347,5 @@ pt-PT:
       datetime: 
       time: 
   Cancel: Cancelar
-  view: Ver
+  view: 
+  Show: 

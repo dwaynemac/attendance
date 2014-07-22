@@ -18,10 +18,11 @@ es:
       contact_time_slot:
         contact_id: 
       stat:
-        distribution: Distribución
+        distribution: Agrupar por
         end_on: Hasta
         include_cultural_activities: Incluir actividades culturales
         start_on: Desde
+        month: 
       time_slot:
         add_a_contact: Agregar un alumno
         contact_time_slots: 
@@ -280,8 +281,10 @@ es:
       by_time_slot: Por horario
       calculate_stats: Calcular estadisticas
       title: Estadisticas de asistencia
-      current_month: Mes actual
+      current_month: mes actual
       last_month: Mes pasado
+      custom_period: elegir período
+      period: período
     table:
       name: Nombre
       total: Total
@@ -338,4 +341,5 @@ es:
       datetime: Fecha inválida
       time: Fecha inválida
   Cancel: Cancelar
-  view: Ver
+  view: 
+  Show: 

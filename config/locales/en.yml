@@ -22,6 +22,7 @@ en:
         end_on: Up to
         include_cultural_activities: Include cultural activities
         start_on: Since
+        month: 
       time_slot:
         add_a_contact: Add a student
         contact_time_slots: 
@@ -278,6 +279,10 @@ en:
       by_time_slot: By scheduled time
       calculate_stats: Calculate Stats
       title: Attendance Stats
+      current_month: 
+      custom_period: 
+      last_month: 
+      period: 
     table:
       name: Name
       total: Total
@@ -334,4 +339,5 @@ en:
       datetime: '%Y-%m-%d %H:%M:%S'
       time: '%H:%M:%S'
   Cancel: Cancel
-  view: View
+  view: 
+  Show: 

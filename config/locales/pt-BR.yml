@@ -18,10 +18,11 @@ pt-BR:
       contact_time_slot:
         contact_id: 
       stat:
-        distribution: 
-        end_on: 
-        include_cultural_activities: 
+        distribution: Agrupar por
+        end_on: Atê
+        include_cultural_activities: Contabilizar atividades culturais
         start_on: 
+        month: 
       time_slot:
         add_a_contact: 
         contact_time_slots: 
@@ -282,13 +283,17 @@ pt-BR:
         delimiter: .
   stats:
     index:
-      by_instructor: 
-      by_time_slot: 
-      calculate_stats: 
-      title: 
+      by_instructor: por instrutor
+      by_time_slot: por turma
+      calculate_stats: fazer estatística
+      title: Resumo das presenças
+      current_month: mês atual
+      custom_period: selecionar o período
+      last_month: mês passado
+      period: periodo
     table:
-      name: 
-      total: 
+      name: Nome
+      total: Total
   support:
     array:
       last_word_connector: ' e '
@@ -342,4 +347,5 @@ pt-BR:
       datetime: 
       time: 
   Cancel: Cancelar
-  view: Ver
+  view: 
+  Show: 
