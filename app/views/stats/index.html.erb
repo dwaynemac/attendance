@@ -1,8 +1,8 @@
-<h3><%= t('stats.index.title') %></h3>
+<h3><%= t('stats.index.title') %>: <%= show_period %></h3>
 
 <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, stats_url(params.merge(format: 'csv')), class: 'btn btn-default', id: 'download-link' %>
 
-<%= form_for :stats, method: :get, html: { class: 'form-horizontal' } do |f| %>
+<%= form_for :stats, method: :get, url: stats_path, html: { class: 'form-horizontal', id: 'stats-form' } do |f| %>
   <fieldset>
     <div class="form-group">
       <%= f.label :distribution,t('activerecord.attributes.stat.distribution'), :class => 'col-sm-2 control-label' %>
@@ -18,9 +18,9 @@
         <%= f.label :easy_period, t('.period'), :class => 'col-sm-2 control-label' %>
         <div class="input-group date">
           <ul>
-            <li><%= link_to t('.current_month'), current_month_stats_path %></li>
-            <li><%= link_to t('.last_month'), last_month_stats_path %></li>
-            <li><%= link_to t('.custom_period'), 'javascript: showCustomMenu();', id: 'custom-period-button' %></li>
+            <li><%= link_to t('.current_month'), 'javascript: openCurrentMonth(); ' %></li>
+            <li><%= link_to t('.last_month'), 'javascript: openLastMonth();' %></li>
+            <li><%= link_to t('.custom_period'), 'javascript: showCustomMenu();' %></li>
           </ul>
         </div>
       </div>

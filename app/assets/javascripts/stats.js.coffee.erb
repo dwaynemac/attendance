@@ -1,0 +1,17 @@
+<% url = Rails.application.routes.url_helpers %>
+@showCustomMenu = () ->
+  $("#stats-custom-period select").prop('disabled',false)
+  $("#stats-easy-period").hide()
+  $("#stats-custom-period").show()
+  return false
+
+@openCurrentMonth = () ->
+  form = $("#stats-form")
+  form.prop 'action', '<%= url.current_month_stats_path %>'
+  form.submit()
+
+@openLastMonth = () ->
+  form = $("#stats-form")
+  form.prop 'action', '<%= url.last_month_stats_path %>'
+  form.submit()
+

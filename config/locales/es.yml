@@ -114,6 +114,8 @@ es:
       in_context: '%A %-d'
       long: '%d de %B de %Y'
       short: '%d de %b'
+      month: '%B'
+      month_year: '%b%y'
     month_names:
     - 
     - enero

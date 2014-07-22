@@ -24,8 +24,8 @@ Assistance::Application.routes.draw do
   resources :contacts, :only => [:index, :show]
   resources :stats, :only => [:index] do
     collection do
-      get 'current_month', as: 'current_month', to: 'stats#index' # TODO set params
-      get 'last_month', as: 'last_month', to: 'stats#index' # TODO set params
+      get 'current_month', as: 'current_month', to: 'stats#index', easy_period: :current_month
+      get 'last_month', as: 'last_month', to: 'stats#index', easy_period: :last_month
     end
   end
 
