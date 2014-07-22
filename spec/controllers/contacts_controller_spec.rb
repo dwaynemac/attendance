@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe ContactsController do
 
+  render_views
+
   before do
     sign_in_as_a_valid_user
     create(:contact, padma_id: '123', account: @user.current_account)
