@@ -280,6 +280,8 @@ es:
       by_time_slot: Por horario
       calculate_stats: Calcular estadisticas
       title: Estadisticas de asistencia
+      current_month: Mes actual
+      last_month: Mes pasado
     table:
       name: Nombre
       total: Total
