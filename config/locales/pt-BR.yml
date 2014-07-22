@@ -224,7 +224,7 @@ pt-BR:
         update: 
   layouts:
     navbar:
-      stats: 
+      stats: Estatística
       time_slots: Turmas
       trial_lessons: Aulas Experimentais
   new: Novo
