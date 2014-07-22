@@ -115,6 +115,8 @@ pt-PT:
       in_context: 
       long: '%d de %B de %Y'
       short: '%d de %B'
+      month: '%B'
+      month_year: '%b%y'
     month_names:
     - 
     - Janeiro
