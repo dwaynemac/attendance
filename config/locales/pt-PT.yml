@@ -75,6 +75,7 @@ pt-PT:
       new_empty: 
       title: 
       view: 
+      timeslots_wout_schedule_warning: 
     show:
       title: 
   back: 

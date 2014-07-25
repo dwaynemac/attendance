@@ -13,19 +13,24 @@
         </div>
       <% end %>
       <fieldset>
-        <div class="row row_margin">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <legend>
-              <%= t('activerecord.attributes.attendance.attendance_to') %> "<%= TimeSlot.find(@attendance.time_slot_id).name %>"<br/>
-              <%= t('activerecord.attributes.attendance.text_on') %> <%= l @attendance.attendance_on, format: :long %>
-            </legend>
-          </div>
-        </div>
         <% if  @attendance.attendance_on and  @attendance.attendance_on %>
+          <div class="row row_margin">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <legend>
+                <%= t('activerecord.attributes.attendance.attendance_to') %> "<%= TimeSlot.find(@attendance.time_slot_id).name %>"<br/>
+                <%= t('activerecord.attributes.attendance.text_on') %> <%= l @attendance.attendance_on, format: :long %>
+              </legend>
+            </div>
+          </div>
           <div class="hidden"><%= f.date_select :attendance_on, :default => Date.today %></div>
           <%= f.hidden_field :time_slot_id %>
         <% else %>  
           <div class="row row_margin">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <legend>
+                <%= t('activerecord.attributes.attendance.attendance_to') %> "<%= TimeSlot.find(@attendance.time_slot_id).name %>"
+              </legend>
+            </div>
             <div class="col-md-5 col-sm-4 col-xs-7 pad_none">
               <%= f.label :attendance_on, :class => 'col-sm-9' %>
             </div>  
