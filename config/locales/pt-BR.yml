@@ -324,10 +324,10 @@ pt-BR:
     update:
       title: 
     vacancies:
-      check_vacancies: 
-      days: 
-      no_vacancies: 
-      vacancies: 
+      check_vacancies: Conferir vagas
+      days: Dias
+      no_vacancies: NĀO tem vagas disponíveis
+      vacancies: Vagas
   trial_lesson:
     activity_content:
       create: Aula experimental criada.
