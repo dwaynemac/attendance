@@ -7,9 +7,29 @@ describe TimeSlotsController do
   end
 
   describe "GET /time_slots/vacancies" do
+    let(:my_timeslot){create(:time_slot, :account => @user.current_account)}
+    let(:not_my_timeslot){create(:time_slot, :account => create(:account))}
+    
+    let(:cultural){create(:time_slot, cultural_activity: true, :account => @user.current_account)}
+    let(:not_cultural){create(:time_slot, cultural_activity: false, :account => @user.current_account)}
+
     it "responds 200" do
       get :vacancies
       should respond_with 200
+    end
+    it "includes only time_slots of current account" do
+      my_timeslot
+      not_my_timeslot
+      get :vacancies
+      my_timeslot.should be_in assigns(:time_slots)
+      not_my_timeslot.should_not be_in assigns(:time_slots)
+    end
+    it "includes only NON cultural activity timeslots" do
+      cultural
+      not_cultural
+      get :vacancies
+      cultural.should_not be_in assigns(:time_slots)
+      not_cultural.should be_in assigns(:time_slots)
     end
   end
 
