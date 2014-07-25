@@ -25,10 +25,11 @@ $ ->
   $(document).ajaxComplete ->
     $("#loading").hide()
 
+
+
 @checkVacancies = (e) ->
-  td = $(e).parent()
-  td.html '<img src="/assets/ajax-loader.gif"></img>'
-  setTimeout ->
-    td.html(td.data('text'))
-  , 5000
-  , td
+  $(e).parent().html ''
+  
+
+
+		

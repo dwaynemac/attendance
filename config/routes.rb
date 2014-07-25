@@ -18,7 +18,11 @@ Assistance::Application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  resources :time_slots
+  resources :time_slots do
+    collection do
+      get :vacancies
+    end
+  end
   resources :attendances
   resources :trial_lessons
   resources :contacts, :only => [:index, :show]

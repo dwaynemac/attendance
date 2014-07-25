@@ -6,6 +6,10 @@ class TimeSlotsController < ApplicationController
   def index
   end
 
+  def vacancies
+    @time_slots = @time_slots.not_cultural_activity
+  end
+
   def new
   end
 

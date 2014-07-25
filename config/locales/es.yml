@@ -308,12 +308,18 @@ es:
     index:
       new: Nuevo horario
       title: Horarios
+      vacancies: Verificar vacantes
     new:
       title: Nueva clase
     show:
       title: Horario
     update:
       title: Editando clase
+    vacancies:
+      check_vacancies: Verificar vacantes
+      days: Dias
+      no_vacancies: NO hay vacantes disponibles
+      vacancies: Vacantes
   trial_lesson:
     activity_content:
       create: Clase de prueba creada

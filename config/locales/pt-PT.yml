@@ -316,12 +316,18 @@ pt-PT:
     index:
       new: 
       title: 
+      vacancies: 
     new:
       title: 
     show:
       title: 
     update:
       title: 
+    vacancies:
+      check_vacancies: 
+      days: 
+      no_vacancies: 
+      vacancies: 
   trial_lesson:
     activity_content:
       create: 
