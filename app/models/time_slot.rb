@@ -14,6 +14,9 @@ class TimeSlot < ActiveRecord::Base
 
   before_create :set_defaults
 
+  scope :with_schedule, ->{ where("monday or tuesday or wednesday or thursday or friday or saturday or sunday") }
+  scope :without_schedule, ->{ where("NOT (monday or tuesday or wednesday or thursday or friday or saturday or sunday)") }
+
   def recurrent_contacts
     AttendanceContact.joins(:attendance).joins(:contact).where('contacts.padma_status' => 'student').where('attendances.time_slot_id' => self.id).group('contacts.padma_id, contacts.name').select("contacts.name as first_name, '' as last_name, contacts.padma_id as _id, count(*) as count").order('contacts.name asc')
   end

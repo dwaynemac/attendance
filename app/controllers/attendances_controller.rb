@@ -6,7 +6,9 @@ class AttendancesController < ApplicationController
     days_back = params[:days_back] || 7
     @view_range = (0..days_back.to_i)
 
-    @time_slots = current_user.current_account.time_slots
+    @time_slots = current_user.current_account.time_slots.with_schedule
+
+    @time_slots_wout_day = current_user.current_account.time_slots.without_schedule
     respond_with @attendances
   end
 

@@ -188,6 +188,7 @@ GEM
     messaging_client (0.0.3)
       logical_model (~> 0.5.0)
       railties (>= 3.1)
+    method_source (0.8.2)
     mime-types (1.25)
     mini_portile (0.5.2)
     minitest (4.7.5)
@@ -212,6 +213,10 @@ GEM
     polyglot (0.3.3)
     protected_attributes (1.0.1)
       activemodel (>= 4.0.0.beta, < 5.0)
+    pry (0.9.12.6)
+      coderay (~> 1.0)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -276,6 +281,7 @@ GEM
       multi_json
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
+    slop (3.6.0)
     sprockets (2.9.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -355,6 +361,7 @@ DEPENDENCIES
   messaging_client (~> 0.0.2)
   pg
   protected_attributes
+  pry
   rails (= 4.0.0.rc1)
   rails-i18n
   rails_12factor

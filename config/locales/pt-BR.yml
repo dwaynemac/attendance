@@ -75,8 +75,9 @@ pt-BR:
       new_empty: Ninguém veio
       title: Presenças
       view: Ver presenças
+      timeslots_wout_schedule_warning: Estas turmas nāo tem configurados seus días de aula e por tanto nāo sāo incluidas na agenda de cadastro de presenças. Para facilitar o cadastro día a día recomendamos colocar em cada turma os dias de aula.
     show:
-      title: 
+      title: Presenças
   back: voltar
   confirm: Tem certeza?
   date:
@@ -227,6 +228,7 @@ pt-BR:
       stats: Estatística
       time_slots: Turmas
       trial_lessons: Aulas Experimentais
+      attendances: Presenças
   new: Novo
   number:
     currency:

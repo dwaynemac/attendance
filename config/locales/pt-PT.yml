@@ -75,6 +75,7 @@ pt-PT:
       new_empty: 
       title: 
       view: 
+      timeslots_wout_schedule_warning: 
     show:
       title: 
   back: 
@@ -227,6 +228,7 @@ pt-PT:
       stats: 
       time_slots: 
       trial_lessons: 
+      attendances: 
   new: 
   number:
     currency:

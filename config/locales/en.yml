@@ -75,6 +75,7 @@ en:
       new_empty: No one came
       title: Attendance
       view: View attendance
+      timeslots_wout_schedule_warning: 
     show:
       title: 
   back: Back
@@ -227,6 +228,7 @@ en:
       stats: 
       time_slots: Time Slots
       trial_lessons: Trial Lessons
+      attendances: 
   new: New
   number:
     currency:
