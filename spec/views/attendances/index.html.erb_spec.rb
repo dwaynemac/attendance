@@ -10,9 +10,11 @@ describe "attendances/index" do
     ])
 
     assign(:time_slots, [
-      create(:time_slot, :account => account),
-      create(:time_slot, :account => account)
+      create(:time_slot, :account => account, monday: true),
+      create(:time_slot, :account => account, monday: true)
     ])
+
+    assign(:time_slots_wout_day, [])
 
     assign(:view_range,(1..7))
   end
