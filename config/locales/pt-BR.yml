@@ -316,6 +316,7 @@ pt-BR:
     index:
       new: Nova turma
       title: Turma
+      vacancies: 
     new:
       title: Nova turma
     show:

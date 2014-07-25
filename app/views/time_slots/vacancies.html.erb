@@ -16,7 +16,7 @@
       <td><%= ts.name %></td>
       <td><%= ts.start_at.strftime('%H:%M') %></td>
       <td><%= ts.end_at.strftime('%H:%M') %></td>
-      <td></td>
+      <td><%= showSchedule ts %></td>
       <td data-text="<%= t('.no_vacancies') %>"><%= link_to t('.check_vacancies'), 'javascript:void(0);', onclick: 'checkVacancies(this);', class: 'btn btn-default' %></td>
     </tr>
   <% end %>

@@ -308,6 +308,7 @@ en:
     index:
       new: New time slot
       title: Time Slots
+      vacancies: 
     new:
       title: New Time Slot
     show:

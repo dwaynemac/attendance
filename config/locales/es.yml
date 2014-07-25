@@ -308,6 +308,7 @@ es:
     index:
       new: Nuevo horario
       title: Horarios
+      vacancies: Verificar vacantes
     new:
       title: Nueva clase
     show:
