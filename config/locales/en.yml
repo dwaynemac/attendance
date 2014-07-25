@@ -314,6 +314,11 @@ en:
       title: Time Slot
     update:
       title: 
+    vacancies:
+      check_vacancies: 
+      days: 
+      no_vacancies: 
+      vacancies: 
   trial_lesson:
     activity_content:
       create: Trial Lesson created
