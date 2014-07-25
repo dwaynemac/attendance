@@ -7,7 +7,7 @@ class TimeSlotsController < ApplicationController
   end
 
   def vacancies
-    @time_slots = @time_slots.not_cultural_activity
+    @time_slots = @time_slots.where(account_id: current_user.current_account.id).not_cultural_activity
   end
 
   def new

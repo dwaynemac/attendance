@@ -6,6 +6,13 @@ describe TimeSlotsController do
     @user = sign_in_as_a_valid_user
   end
 
+  describe "GET /time_slots/vacancies" do
+    it "responds 200" do
+      get :vacancies
+      should respond_with 200
+    end
+  end
+
   describe "GET index" do
     it "assigns all time_slots as @time_slots" do
       time_slot = create(:time_slot, :account => @user.current_account)
