@@ -27,7 +27,8 @@ $ ->
 
 @checkVacancies = (e) ->
   td = $(e).parent()
-  td.html '<img src="/assets/ajax-loader.gif"></img>'
+  $(e).hide()
+  td.children('#vacancies-think').show()
   setTimeout ->
     td.html(td.data('text'))
   , 5000
