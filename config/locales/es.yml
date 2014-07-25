@@ -227,6 +227,7 @@ es:
       stats: Estadísticas
       time_slots: Horarios
       trial_lessons: Clases de prueba
+      attendances: Asistencias
   new: Nuevo
   number:
     currency:

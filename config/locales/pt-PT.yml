@@ -227,6 +227,7 @@ pt-PT:
       stats: 
       time_slots: 
       trial_lessons: 
+      attendances: 
   new: 
   number:
     currency:

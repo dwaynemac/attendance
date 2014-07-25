@@ -227,6 +227,7 @@ en:
       stats: 
       time_slots: Time Slots
       trial_lessons: Trial Lessons
+      attendances: 
   new: New
   number:
     currency:
