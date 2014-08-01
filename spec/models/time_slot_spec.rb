@@ -4,6 +4,24 @@ describe TimeSlot do
   
   it { should have_many :trial_lessons }
 
+  describe "has schedule scopes:" do
+    let!(:with_sched){ create(:time_slot, monday: true) }
+    let!(:without_sched_all_nil){ create(:time_slot) }
+    let!(:without_sched_with_false){ create(:time_slot, monday: false) }
+    describe ".with_schedule" do
+      subject{TimeSlot.with_schedule}
+      it { should include(with_sched) }
+      it { should_not include(without_sched_all_nil) }
+      it { should_not include(without_sched_with_false) }
+    end
+    describe ".without_schedule" do
+      subject{TimeSlot.without_schedule}
+      it { should_not include(with_sched) }
+      it { should include(without_sched_all_nil) }
+      it { should include(without_sched_with_false) }
+    end
+  end
+
 	it "should be valid with default attributes" do
 	  build(:time_slot).should be_valid
 	end
