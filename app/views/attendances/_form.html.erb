@@ -86,8 +86,10 @@
 
       <div class="row row_margin form-actions">
         <%= f.submit nil, :class => 'btn btn-primary' %>
-        <%= link_to t('Show'), @attendance, :class => 'btn' if @attendance.persisted? %>
-        <%= link_to t('destroy'), @attendance, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+        <%  if @attendance.persisted?  -%>
+          <%= link_to t('Show'), @attendance, :class => 'btn'%>
+          <%= link_to t('destroy'), @attendance, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+        <% end -%>
         <%= link_to t('Cancel'), attendances_path, :class => 'btn' %>
       </div>
     <% end %>
