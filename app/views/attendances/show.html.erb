@@ -16,9 +16,15 @@
 <ul>
 	<% @trial_lessons.each do |tl| %>
 	  <li>
-	  	<%= tl.contact.name %>
-	  	<%= content_tag :span, "Assisted", :class => "label label-success" if tl.assisted? %>
-	  	<%= content_tag :span, "Absent", :class => "label label-important" unless tl.assisted? %>
+      <% if tl.contact.nil? %>
+        <div class="alert alert-warning" role="alert">
+          <%= t('attendances.show.trial_lesson_without_contact') %>
+        </div>
+      <% else %>
+        <%= tl.contact.name %>
+        <%= content_tag :span, t(".Assisted"), :class => "label label-success" if tl.assisted? %>
+        <%= content_tag :span, t(".Absent"), :class => "label label-important" unless tl.assisted? %>
+      <% end %>
 	  </li>	
 	<% end %>
 </ul>

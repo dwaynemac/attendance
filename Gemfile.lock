@@ -139,7 +139,6 @@ GEM
     git-pivotal-tracker-integration (1.4.0)
       highline (~> 1.6)
       pivotal-tracker (~> 0.5)
-    gli (2.10.0)
     gravtastic (3.2.6)
     happymapper (0.4.1)
       libxml-ruby (~> 2.0)
@@ -168,13 +167,6 @@ GEM
       less-rails (~> 2.4.2)
     libv8 (3.11.8.17)
     libxml-ruby (2.7.0)
-    localeapp (0.7.2)
-      gli
-      i18n
-      json
-      rack
-      rest-client
-      ya2yaml
     logical_model (0.5.8)
       activemodel
       activesupport
@@ -322,7 +314,6 @@ GEM
       heroku-api
       rails
       rush
-    ya2yaml (0.31)
     yard (0.8.7)
     yard-restful (1.2.2)
       yard (~> 0.8.3)
@@ -357,7 +348,6 @@ DEPENDENCIES
   jbuilder (~> 1.0.1)
   jquery-rails
   less-rails-bootstrap (~> 3.0.6)
-  localeapp
   messaging_client (~> 0.0.2)
   pg
   protected_attributes
