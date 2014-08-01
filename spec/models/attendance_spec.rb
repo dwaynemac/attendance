@@ -3,6 +3,18 @@ require 'spec_helper'
 describe Attendance do
 
   let(:account){ Account.first || create(:account)}
+  let(:attendance){ create(:attendance) }
+
+  describe "#trial_lessons" do
+    let!(:yes_trial){ create(:trial_lesson, time_slot: attendance.time_slot,
+                                           trial_on: attendance.attendance_on)}
+    let!(:other_date_trial){ create(:trial_lesson, time_slot: attendance.time_slot)}
+    let!(:other_timeslot_trial){ create(:trial_lesson, trial_on: attendance.attendance_on)}
+
+    it "returns trial lessons on the time_slot and date of attendance" do
+     expect(attendance.trial_lessons).to eq [yes_trial]
+    end
+  end
 
   it "should be valid with default attributes" do
 	  build(:attendance).should be_valid

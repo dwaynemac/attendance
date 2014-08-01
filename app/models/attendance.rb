@@ -16,6 +16,10 @@ class Attendance < ActiveRecord::Base
 
   accepts_nested_attributes_for :attendance_contacts
 
+  def trial_lessons
+    TrialLesson.where(time_slot_id: self.time_slot_id, trial_on: self.attendance_on)
+  end
+
   def padma_contacts= padma_contacts
   	contact_ids = []
   	padma_contacts.each do |padma_contact_id|
