@@ -42,8 +42,6 @@ gem "select2-rails"
 
 gem 'bootstrap-multiselect-rails'
 
-gem 'localeapp'
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
