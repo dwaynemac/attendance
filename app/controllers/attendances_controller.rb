@@ -25,7 +25,7 @@ class AttendancesController < ApplicationController
   end
   
   def show
-    @trial_lessons = TrialLesson.where(time_slot_id: @attendance.time_slot_id, trial_on: @attendance.attendance_on)
+    @trial_lessons = @attendance.trial_lessons
     respond_with @attendance
   end
 
