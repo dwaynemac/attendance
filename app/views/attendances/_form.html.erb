@@ -47,6 +47,14 @@
             </div>
           </div>
         <% end %>  
+      <div class="row row_margin form-actions">
+        <%= f.submit nil, :class => 'btn btn-primary' %>
+        <%  if @attendance.persisted?  -%>
+          <%= link_to t('Show'), @attendance, :class => 'btn'%>
+          <%= link_to t('destroy'), @attendance, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+        <% end -%>
+        <%= link_to t('Cancel'), attendances_path, :class => 'btn' %>
+      </div>
         <div class="row row_margin">
           <div class="col-md-5 col-sm-4 col-xs-7 pad_none">
             <%= f.label :trial_lessons, :class => 'col-sm-9' %>
