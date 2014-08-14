@@ -344,7 +344,8 @@ pt-BR:
     index:
       archive: 
       new: Cadastrar aula experimental
-      time_slot_deleted: 
+      time_slot_deleted: (A turma foi apagada)
+      contact_without_name: (O contato foi apagado)
     new:
       title: 
     search_contact: Buscar contato

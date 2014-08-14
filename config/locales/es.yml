@@ -336,7 +336,8 @@ es:
     index:
       archive: Archivar
       new: Marcar clase de prueba
-      time_slot_deleted: El horario de clase fue eliminado
+      time_slot_deleted: (El horario de clase fue eliminado)
+      contact_without_name: (El contacto fue eliminado o no tiene nombre)
     new:
       title: 
     search_contact: Buscar contacto
