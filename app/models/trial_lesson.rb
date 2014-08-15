@@ -6,7 +6,7 @@ class TrialLesson < ActiveRecord::Base
   before_validation :set_defaults
 
   validates :account, presence: true
-  validates :contact, presence: true
+  validates :contact_id, presence: true
   validates :time_slot, presence: true
   validates :padma_uid, presence: true
   validates :trial_on, presence: true
@@ -35,7 +35,7 @@ class TrialLesson < ActiveRecord::Base
         padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name])
         c = Contact.create(padma_id: padma_contact_id, account_id: self.account_id, name: "#{padma_contact.first_name} #{padma_contact.last_name}")
       end
-  	self.contact = c
+  	self.contact_id = c.id
   end
 
   def padma_contact_id
