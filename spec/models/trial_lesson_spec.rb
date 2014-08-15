@@ -9,9 +9,16 @@ describe TrialLesson do
 	  build(:trial_lesson, :account => nil).should_not be_valid
 	end
 
-	it "should require a contact" do
-	  build(:trial_lesson, :contact => nil).should_not be_valid
-	end	
+  describe "#contact" do
+    it "is required" do
+      build(:trial_lesson, :contact => nil).should_not be_valid
+      build(:trial_lesson, :contact_id => nil).should_not be_valid
+    end
+
+    it "is not valid if Contact not persisted" do
+      build(:trial_lesson, :contact => Contact.new).should_not be_valid
+    end
+  end
 
 	it "should require time slot" do
 	  build(:trial_lesson, :time_slot => nil).should_not be_valid
