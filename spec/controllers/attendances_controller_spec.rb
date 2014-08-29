@@ -16,6 +16,13 @@ describe AttendancesController do
     @user.current_account
   end
 
+  describe "GET /attendances/new" do
+    before do
+      get :new
+    end
+    it { should respod_with 200 }
+  end
+
   describe "GET index" do
     let(:attendance){create(:attendance, :account => current_account)}
     it "assigns all attendances as @attendances" do

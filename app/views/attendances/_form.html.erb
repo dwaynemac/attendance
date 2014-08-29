@@ -78,11 +78,21 @@
             <ul id="attendance_contacts">
               <% @attendance.contacts.each do |c| %>
                 <li>
-                  <%= hidden_field_tag "attendance[padma_contacts][]", c.padma_id %><%= link_to "#{c.name}", "#", :class => "delete btn btn-default btn-sm btn-block" %>
+                <%= hidden_field_tag "attendance[padma_contacts][]",
+                  c.padma_id %>
+                <%= link_to "#{c.name}",
+                            "#",
+                            class: "delete btn btn-default btn-sm btn-block" %>
                 </li>
               <% end %>
             </ul>
-            <%= select_tag :padma_contacts_select, options_for_select({"This time slot's recurrent contacts" => :recurrent_contacts, "All students" => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| ["#{username}'s students", username].flatten}])), {:class => 'selectpicker select_width show-tick show-menu-arrow form-control'} %>
+            <%= select_tag :padma_contacts_select,
+              options_for_select({
+                t('attendances.form.recurrents_contacts') => :recurrent_contacts,
+                t('attendances.form.all_contacts') => :all_students
+            }.merge(Hash[current_user.current_account.usernames.map {|username| [t('attendances.form.students_of', teacher: username), username].flatten}])
+              ),
+              {:class => 'selectpicker select_width show-tick show-menu-arrow form-control'} %>
             <span id="loader"><%= image_tag("ajax-loader.gif") %></span>
           </div>  
         </div> 

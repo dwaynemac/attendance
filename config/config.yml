@@ -20,7 +20,7 @@ production:
   overmind-url: http://statistics.padm.am
   mailing-url: http://padma-mailing.herokuapp.com
   fnz-url: http://fnz.herokuapp.com
-  attendance-url: http://padma-attendance.herokuapp.com
+  attendance-url: http://attendance.padm.am
 
 
 staging:
