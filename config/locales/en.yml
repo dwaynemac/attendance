@@ -69,7 +69,10 @@ en:
       'on': 
   attendances:
     form:
+      recurrents_contacts: This time slot's recurrent contacts
+      all_contacts: All students
       contact_assisted: 
+      students_of: "%{username}'s students"
     index:
       new: Create attendance
       new_empty: No one came
