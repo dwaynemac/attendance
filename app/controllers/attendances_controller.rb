@@ -13,9 +13,14 @@ class AttendancesController < ApplicationController
   end
 
   def new
-    @padma_contacts = @attendance.time_slot.try(:recurrent_contacts)
-    @trial_lessons = TrialLesson.where(time_slot_id: @attendance.time_slot_id, trial_on: @attendance.attendance_on)
-    respond_with @attendance
+    @time_slot = @attendance.time_slot
+    if @time_slot.nil?
+      redirect_to attendances_url
+    else
+      @padma_contacts = @time_slot.recurrent_contacts
+      @trial_lessons = TrialLesson.where(time_slot_id: @attendance.time_slot_id, trial_on: @attendance.attendance_on)
+      respond_with @attendance
+    end
   end
 
   def edit

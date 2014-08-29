@@ -28,7 +28,8 @@
           <div class="row row_margin">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <legend>
-                <%= t('activerecord.attributes.attendance.attendance_to') %> "<%= TimeSlot.find(@attendance.time_slot_id).name %>"
+                <%= t('activerecord.attributes.attendance.attendance_to') %>s
+                "<%= @time_slot.name %>"
               </legend>
             </div>
             <div class="col-md-5 col-sm-4 col-xs-7 pad_none">

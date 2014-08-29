@@ -17,10 +17,24 @@ describe AttendancesController do
   end
 
   describe "GET /attendances/new" do
-    before do
-      get :new
+    context "if accounts-ws is online" do
+      before do
+        PadmaUser.stub(:paginate).and_return([PadmaUser.new(name: 'as')])
+      end
+      let(:time_slot){create(:time_slot)}
+      context "if time_slot is not specified" do
+        before do
+          get :new
+        end
+        it { should redirect_to attendances_url }
+      end
+      context "if time_slot is specified" do
+        before do
+          get :new, attendance: {time_slot_id: time_slot.id}
+        end
+        it { should respond_with 200 }
+      end
     end
-    it { should respod_with 200 }
   end
 
   describe "GET index" do
