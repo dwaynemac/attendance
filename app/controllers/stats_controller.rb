@@ -37,9 +37,9 @@ class StatsController < ApplicationController
   def stats_attributes
     s = params[:stats].merge({:account => current_user.current_account})
     case params[:easy_period]
-      when :current_month
+      when 'current_month'
         s.delete_if{|k,_| k =~ /start_on|end_on/ }.merge(start_on: Date.today.beginning_of_month, end_on: Date.today.end_of_month)
-      when :last_month
+      when 'last_month'
         s.delete_if{|k,_| k =~ /start_on|end_on/ }.merge(start_on: 1.month.ago.beginning_of_month.to_date, end_on: 1.month.ago.end_of_month.to_date)
       else
         s
