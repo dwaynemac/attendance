@@ -17,7 +17,6 @@ class TimeSlot < ActiveRecord::Base
   scope :with_schedule, ->{ where("(monday = :true) or (tuesday = :true) or (wednesday = :true) or (thursday = :true) or (friday = :true) or (saturday = :true) or (sunday = :true)",true: true) }
   scope :without_schedule, ->{ where("(monday = :false OR monday IS NULL) and (tuesday = :false OR tuesday IS NULL) and (wednesday = :false OR wednesday IS NULL) and (thursday = :false OR thursday IS NULL) and (friday = :false OR friday IS NULL) and (saturday = :false OR saturday IS NULL) and (sunday = :false OR sunday IS NULL)",false: false) }
 
-  default_scope order(:start_at)
 
   def recurrent_contacts
     AttendanceContact.joins(:attendance)
