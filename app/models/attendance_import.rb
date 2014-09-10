@@ -9,6 +9,7 @@ class AttendanceImport < Import
 
   def handle_row(row,row_i)
     a, mess = build_attendance_contact(row)
+    a.skip_update_last_seen_at = true unless a.nil?
     
     if a && a.save
       ImportedId.new(value: a.id)

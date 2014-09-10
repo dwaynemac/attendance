@@ -76,6 +76,9 @@ describe AttendanceImport do
     it "sets AttendanceContact for every valid row" do
       expect{attendance_import.process_CSV}.to change{AttendanceContact.count}.by 17
     end
+    it "should only queue one job to Delayed Job" do
+      expect{ attendance_import.process_CSV }.to change{ Delayed::Job.count }.by 1
+    end
     it "sets Attendance for every [time_slot_external_id,attendance_on] in rows" do
       expect{attendance_import.process_CSV}.to change{Attendance.count}.by 7
     end
