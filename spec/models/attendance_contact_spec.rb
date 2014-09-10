@@ -47,6 +47,14 @@ describe AttendanceContact do
           ac.save.should be_true
         end.to change{ Delayed::Job.count }
       end
+      context "and skip_update_last_seen_at flag is set to true" do
+        it "should not queue delayed job to set last_seen_at" do
+          expect do
+            ac = build(:attendance_contact, skip_update_last_seen_at: true)
+            ac.save.should be_true
+          end.not_to change { Delayed::Job.count }
+        end
+      end
     end
   end
 
