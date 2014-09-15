@@ -43,6 +43,10 @@ class Import < ActiveRecord::Base
   def valid_headers
   end
 
+  # override this method on child class
+  def post_import_tasks
+  end
+
   # Override this on child class
   # @param [CSV::Row]
   # @param [Integer] row index
@@ -74,6 +78,8 @@ class Import < ActiveRecord::Base
           row_i += 1
         end
       end
+
+      post_import_tasks
 
       self.status = :finished
       self.save

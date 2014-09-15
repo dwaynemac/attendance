@@ -4,10 +4,10 @@ describe AttendanceImport do
 
   before do
     PadmaContact.stub!(:find_by_kshema_id) do |arg1|
-      PadmaContact.new(id: arg1, first_name: 'fn', last_name: 'ln', last_seen_at: 1.day.ago.to_s)
+      PadmaContact.new(id: arg1, first_name: 'fn', last_name: 'ln')
     end
 
-    Contact.any_instance.stub(:padma_contact).and_return(PadmaContact.new(first_name: 'fn', last_name: 'ln', last_seen_at: 1.day.ago.to_s))
+    Contact.any_instance.stub(:padma_contact).and_return(PadmaContact.new(first_name: 'fn', last_name: 'ln'))
 
     # ensure there are no Attendances
     Attendance.destroy_all
@@ -76,8 +76,12 @@ describe AttendanceImport do
     it "sets AttendanceContact for every valid row" do
       expect{attendance_import.process_CSV}.to change{AttendanceContact.count}.by 17
     end
-    it "should only queue one job to Delayed Job" do
-      expect{ attendance_import.process_CSV }.to change{ Delayed::Job.count }.by 1
+    it "should not queue last_seen updates to Delayed Job" do
+      expect{ attendance_import.process_CSV }.not_to change{ Delayed::Job.count }
+    end
+    it "should set last_seen_at to every student" do
+      LastSeenUpdater.should_receive(:update_account)
+      attendance_import.process_CSV
     end
     it "sets Attendance for every [time_slot_external_id,attendance_on] in rows" do
       expect{attendance_import.process_CSV}.to change{Attendance.count}.by 7

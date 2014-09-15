@@ -25,6 +25,10 @@ class AttendanceImport < Import
     end
   end
 
+  def post_import_tasks
+    LastSeenUpdater.update_account(self.account.name)
+  end
+
   private
 
   # @return [AttendanceContact/nil]
