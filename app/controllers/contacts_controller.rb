@@ -24,7 +24,7 @@ class ContactsController < ApplicationController
   end
 
   def show
-    @time_slots = @contact.time_slots.to_a
+    @time_slots = @contact.time_slots.where(account_id: current_user.current_account.id)
     @attendances_by_month = @contact.attendances.order("attendance_on DESC").group_by { |att| att.attendance_on.beginning_of_month }
   end
 

@@ -12,6 +12,19 @@ describe ContactsController do
                        account: @user.current_account)}
 
   describe "GET /contacts/:padma_id" do
+    let!(:my_time_slot){create(:time_slot,
+                               account: @user.current_account)}
+    let!(:not_my_time_slot){create(:time_slot)}
+    before do
+      ContactTimeSlot.create(time_slot: my_time_slot,
+                             contact: contact)
+      ContactTimeSlot.create(time_slot: not_my_time_slot,
+                             contact: contact)
+    end
+    it "wont show other accounts time_slots" do
+      get :show, id: '123'
+      expect(assigns(:time_slots)).to include not_my_time_slot
+    end
     it "responds 200" do
       get :show, id: '123'
       should respond_with 200
