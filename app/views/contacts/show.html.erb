@@ -6,9 +6,11 @@
       <div class="panel-heading">
         <h2 class="panel-title"><%= t('.timeslots') %></h2>
       </div>
-      <div class="panel-body">
-        asdfasfd
-      </div>
+      <ul class="list-group">
+        <% @time_slots.each do |t| -%>
+          <li class="list-group-item"><%= t.name %></li>
+        <% end -%>
+      </ul>
     </div>
   </div>
 
@@ -17,21 +19,19 @@
       <div class="panel-heading">
         <h2 class="panel-title"><%= t('.attendances') %></h2>
       </div>
-      <div class="panel-body">
-        <% @attendances_by_month.each do |month, attendances| %>
-          <table class="table">
-            <tr><th><%= I18n.l(month, :format => "%B") %></th></tr>
-              <% for attendance in attendances %>
-                <tr><td>
-                <div class="attendances">
-                  <%= I18n.l(attendance.attendance_on, format: :in_context) %> - <strong><%= attendance.time_slot.try :name %></strong> (<%= link_to t('view'), attendance_path(attendance) %>)
-                </div>
-                </td></tr>
-              <% end %>
-            </div>
-          </table>
-        <% end %>
-      </div>
+      <% @attendances_by_month.each do |month, attendances| %>
+        <table class="table">
+          <tr><th><%= I18n.l(month, :format => "%B") %></th></tr>
+            <% for attendance in attendances %>
+              <tr><td>
+              <div class="attendances">
+                <%= I18n.l(attendance.attendance_on, format: :in_context) %> - <strong><%= attendance.time_slot.try :name %></strong> (<%= link_to t('view'), attendance_path(attendance) %>)
+              </div>
+              </td></tr>
+            <% end %>
+          </div>
+        </table>
+      <% end %>
     </div>
   </div>
 
