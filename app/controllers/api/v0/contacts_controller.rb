@@ -6,7 +6,7 @@ class Api::V0::ContactsController < Api::V0::ApiController
 
   def show
     contact_json = {
-      time_slots: @contact.time_slots.map{|ts| {id: ts.id, name: ts.name }}
+      time_slots: @contact.time_slots.map{|ts| {id: ts.id, name: ts.name, description: ts.description }}
     }
     respond_with contact_json
   end
