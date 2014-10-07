@@ -9,7 +9,7 @@ describe ContactsController do
   end
 
   let!(:contact){create(:contact, padma_id: '123',
-                       account: @user.current_account)}
+                        account: @user.current_account)}
 
   describe "GET /contacts/:padma_id" do
     let!(:my_time_slot){create(:time_slot,
@@ -23,7 +23,7 @@ describe ContactsController do
     end
     it "wont show other accounts time_slots" do
       get :show, id: '123'
-      expect(assigns(:time_slots)).to include not_my_time_slot
+      expect(assigns(:time_slots)).not_to include not_my_time_slot
     end
     it "responds 200" do
       get :show, id: '123'
