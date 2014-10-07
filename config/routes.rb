@@ -25,7 +25,7 @@ Assistance::Application.routes.draw do
   end
   resources :attendances
   resources :trial_lessons
-  resources :contacts, :only => [:index, :show]
+  resources :contacts, :only => [:index, :show, :update]
   resources :stats, :only => [:index] do
     collection do
       get 'current_month', as: 'current_month', to: 'stats#index', easy_period: :current_month

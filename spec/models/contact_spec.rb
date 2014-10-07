@@ -7,6 +7,19 @@ describe Contact do
 
   let(:account){ Account.first || create(:account)}
 
+  describe "#time_slot_ids=" do
+    # provided by has_many :time_slots
+    let(:time_slot){create(:time_slot)}
+    let(:padma_id){'contact-id'}
+    let(:contact){create(:contact, padma_id: padma_id, account_id: account.id)}
+    it "sets contact times_slots" do
+      expect(contact.time_slots).to eq []
+      contact.time_slot_ids = [time_slot.id]
+      expect(contact.time_slots).to eq [time_slot]
+      expect(contact.reload.time_slots).to eq [time_slot]
+    end
+  end
+
   describe ".get_by_padma_id" do
     let(:padma_id){'contact-id'}
     describe "if already cached" do

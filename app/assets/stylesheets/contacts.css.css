@@ -1,0 +1,11 @@
+#contacts-timeslots div.panel-heading a {
+  float: right;
+}
+
+#contacts-timeslots div.panel-body {
+  display: none;
+}
+
+#contacts-timeslots form input[type=submit] {
+  float: right;
+}

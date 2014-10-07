@@ -1,4 +1,6 @@
 es:
+  cancel: Cancelar
+  save: Guardar
   module_name: Módulo de clases
   activerecord:
     attendance:

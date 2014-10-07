@@ -1,0 +1,33 @@
+$(document).ready(function(){
+  $('#edit-timeslots').click(function(){
+    toggleTimeSlotsForm();
+    return false;
+  })
+
+  $("#contacts-timeslots form").on("ajax:success", function(e, data, status, xhr){
+    var new_html = "";
+    $.each(data.time_slots,function(i,ts){
+      new_html = new_html + "<li class='list-group-item'>" + ts.description + "</li>"
+    });
+    $("#contacts-timeslots ul.list-group").html(new_html);
+
+    toggleTimeSlotsForm();
+  }).on("ajax:error",function(e,xhr,status,error){
+    alert('error');
+  });
+})
+
+var toggleTimeSlotsForm = function(){
+  $('#contacts-timeslots div.panel-body').toggle();
+  $('#contacts-timeslots ul.list-group').toggle();
+  
+  t = $('#edit-timeslots');
+
+  if ( t.text() == t.data('edit-text')) {
+    t.text( t.data('cancel-text') );
+  } else {
+    t.text( t.data('edit-text') );
+  }
+
+  t.toggleClass('btn-danger');
+}

@@ -23,8 +23,28 @@ class ContactsController < ApplicationController
     respond_with @padma_contacts
   end
 
+  def update
+    @contact.update_attributes(params.require( :contact ))
+
+    respond_to do |format|
+      format.json do
+        render json: {
+          id: @contact.id,
+          time_slots: @contact.time_slots
+                              .order(:start_at)
+                              .where(account_id: current_user.current_account.id)
+                              .map{|ts| {id: ts.id,
+                                         name: ts.name,
+                                         description: ts.description }}
+        }
+      end
+    end
+  end
+
   def show
-    @time_slots = @contact.time_slots.where(account_id: current_user.current_account.id)
+    @time_slots = @contact.time_slots
+                          .order(:start_at)
+                          .where(account_id: current_user.current_account.id)
     @attendances_by_month = @contact.attendances.order("attendance_on DESC").group_by { |att| att.attendance_on.beginning_of_month }
   end
 
