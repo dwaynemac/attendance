@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :contact_time_slot do
+    time_slot
+    contact
   end
 end
