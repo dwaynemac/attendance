@@ -1,4 +1,6 @@
 pt-BR:
+  cancel: Cancelar
+  save: Salvar
   module_name: Modulo de Aulas
   activerecord:
     attendance:

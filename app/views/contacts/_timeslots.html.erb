@@ -1,0 +1,30 @@
+<div id="contacts-timeslots" class="col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <%= link_to t('edit'), "#",
+                             id: 'edit-timeslots',
+                             'data-cancel-text' => t('cancel'),
+                             'data-edit-text' => t('edit'),
+                             class: 'btn btn-xs btn-default' %>
+      <h2 class="panel-title"><%= t('.timeslots') %></h2>
+    </div>
+    <div class="panel-body">
+      <%= form_for @contact, remote: true, method: 'PUT' do |f|  %>
+        <%= f.collection_check_boxes(:time_slot_ids,
+                                     current_user.current_account.time_slots,
+                                     :id,
+                                     :description
+            ) do |b|
+              b.label { b.check_box + b.text }  + "<br/>".html_safe
+            end
+        %>
+        <%= f.submit t('save'), class: "btn btn-xs btn-success" %>
+      <% end -%>
+    </div>
+    <ul class="list-group">
+      <% @time_slots.each do |t| -%>
+        <li class="list-group-item"><%= t.description %></li>
+      <% end -%>
+    </ul>
+  </div>
+</div>

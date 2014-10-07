@@ -1,4 +1,6 @@
 en:
+  cancel: Cancel
+  save: Save
   module_name: Classes module
   activerecord:
     attendance:

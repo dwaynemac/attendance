@@ -1,0 +1,20 @@
+<div class="col-md-8">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title"><%= t('.attendances') %></h2>
+    </div>
+    <% @attendances_by_month.each do |month, attendances| %>
+      <table class="table">
+        <tr><th><%= I18n.l(month, :format => "%B") %></th></tr>
+          <% for attendance in attendances %>
+            <tr><td>
+            <div class="attendances">
+              <%= I18n.l(attendance.attendance_on, format: :in_context) %> - <strong><%= attendance.time_slot.try :name %></strong> (<%= link_to t('view'), attendance_path(attendance) %>)
+            </div>
+            </td></tr>
+          <% end %>
+        </div>
+      </table>
+    <% end %>
+  </div>
+</div>
