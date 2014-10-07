@@ -1,4 +1,5 @@
 pt-BR:
+  module_name: Modulo de Aulas
   activerecord:
     attendance:
       text:

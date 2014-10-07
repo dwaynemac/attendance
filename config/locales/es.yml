@@ -1,4 +1,5 @@
 es:
+  module_name: Módulo de clases
   activerecord:
     attendance:
       text:
