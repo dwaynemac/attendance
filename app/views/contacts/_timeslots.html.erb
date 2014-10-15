@@ -5,11 +5,16 @@
                              id: 'edit-timeslots',
                              'data-cancel-text' => t('cancel'),
                              'data-edit-text' => t('edit'),
-                             class: 'btn btn-xs btn-default' %>
+                             class: 'btn btn-xs btn-default pull-right' %>
+      <%= link_to t('save'),
+                  "javascript:$('#contacts-timeslots form').submit();",
+                  id: 'save_timeslots',
+                  class: 'btn btn-xs btn-success pull-right'
+      %>
       <h2 class="panel-title"><%= t('.timeslots') %></h2>
     </div>
     <div class="panel-body">
-      <%= form_for @contact, remote: true, method: 'PUT' do |f|  %>
+      <%= form_for @contact, remote: true, method: 'PUT', id: 'timeslots_form' do |f|  %>
         <%= f.collection_check_boxes(:time_slot_ids,
                                      current_user.current_account.time_slots,
                                      :id,
@@ -18,7 +23,6 @@
               b.label { b.check_box + b.text }  + "<br/>".html_safe
             end
         %>
-        <%= f.submit t('save'), class: "btn btn-xs btn-success" %>
       <% end -%>
     </div>
     <ul class="list-group">
