@@ -4,6 +4,7 @@ Assistance::Application.routes.draw do
   devise_scope :user do
     get "/login", :to => "devise/cas_sessions#new"
     get '/logout', to: "devise/cas_sessions#destroy"
+    post '/logout', to: "devise/cas_sessions#destroy"
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
