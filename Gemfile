@@ -54,7 +54,7 @@ gem 'protected_attributes'
 
 # CAS authentication
 gem 'devise', github: 'plataformatec/devise', :branch => 'rails4'
-gem 'devise_cas_authenticatable'
+gem 'devise_cas_authenticatable', '~> 1.3'
 gem 'activerecord-session_store'
 
 # authorization
