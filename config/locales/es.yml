@@ -77,6 +77,7 @@ es:
       all_contacts: Todos los alumnos
       recurrents_contacts: Alumnos recurrentes de este horario
     index:
+      older: Marcar asistencias de hace más de 1 semana atrás.
       new: Marcar asistencia
       new_empty: No vino nadie
       title: Asistencias

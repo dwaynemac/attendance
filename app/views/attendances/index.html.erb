@@ -45,3 +45,9 @@
     </div>
   </div>
 <% end %>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= link_to t('attendances.index.older'), attendances_path(days_back: 60), class: 'btn btn-primary' %>
+  </div>
+</div>

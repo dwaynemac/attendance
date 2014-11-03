@@ -77,7 +77,8 @@ en:
       contact_assisted: 
       students_of: '%{teacher}''s students'
     index:
-      new: Create attendance
+      older: Regiser older attendances 
+      new: Register attendance
       new_empty: No one came
       title: Attendance
       view: View attendance

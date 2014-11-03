@@ -74,7 +74,8 @@ pt-BR:
     form:
       contact_assisted: '%{name} fez a aula?'
     index:
-      new: Marcar presença
+      older: Lançar presença de aulas anteriores.
+      new: Lançar presença
       new_empty: Ninguém veio
       title: Presenças
       view: Ver presenças
