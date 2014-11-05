@@ -51,7 +51,7 @@ class ContactsController < ApplicationController
   private
 
   def find_contact_by_padma_id
-    @contact = current_user.current_account.contacts.find_by_padma_id(params[:id])
+    @contact = Contact.get_by_padma_id(params[:id],current_user.current_account.id)
   end
 
 end
