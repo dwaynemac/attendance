@@ -59,7 +59,7 @@
   	  <th><%= t('stats.table.name')%></th>
   	  <th><%= t('stats.table.total')%></th>
   	  <% @distribution_names.each do |name| %>
-  	  	<th><%= name %></th>
+  	  	<th colspan="2"><%= name %></th>
   	  <% end %>	
   	</tr>
   </thead>
@@ -69,6 +69,7 @@
   	  <td><%= link_to contact.name, contact_path(:id => contact.padma_id) %></td>
   	  <td><%= contact.attendance_total || 0 %></td>	
   	  <% @distribution.each do |name| %>
+  	  	<td><%= contact.send("sum_#{name}") %></td>
   	  	<td><%= number_to_percentage contact.attendance_total > 0 ? contact.send("sum_#{name}")/contact.attendance_total.to_f*100 : 0, :precision => 2, :strip_insignificant_zeros => true %></td>
   	  <% end %>	
   	</tr>

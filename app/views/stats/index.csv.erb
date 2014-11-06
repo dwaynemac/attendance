@@ -6,6 +6,7 @@
   ]
   @distribution_names.each do |name|
     header << name
+    header << name
   end
   csv << header
   @contacts.each do |c|
@@ -15,6 +16,7 @@
     dist_array << c.attendance_total || 0
     
     @distribution.each do |d|
+  	  	dist_array << c.send("sum_#{d}")
   	  	dist_array << number_to_percentage(c.attendance_total > 0 ? c.send("sum_#{d}")/c.attendance_total.to_f*100 : 0, :precision => 2, :strip_insignificant_zeros => true).to_s
     end
 
