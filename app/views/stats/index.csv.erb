@@ -13,7 +13,7 @@
     dist_array = []
 
     dist_array << c.name
-    dist_array << c.attendance_total || 0
+    dist_array << number_with_precision(c.attendance_total || 0, precision: 0)
     
     @distribution.each do |d|
   	  	dist_array << number_with_precision(c.send("sum_#{d}"), precision: 0)
