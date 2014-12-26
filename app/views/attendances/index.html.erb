@@ -22,6 +22,9 @@
     <div class="panel-heading">
       <% date = n.days.ago.to_date %>
       <%= l(date, format: :in_context).capitalize %>
+      <% if date.month != Date.today.month -%>
+        (<%= l(date, format: :month) %>)
+      <% end -%>
     </div>
     <div class="panel-body">
       <ul class="list-group">
