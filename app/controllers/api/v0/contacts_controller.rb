@@ -23,7 +23,7 @@ class Api::V0::ContactsController < Api::V0::ApiController
 
       @trial_lesson = scope.order('trial_on DESC').first
       if @trial_lesson
-        respond_with({ trial_lesson: { id: @trial_lesson.id, trial_on: @trial_lesson.trial_on }})
+        respond_with({ trial_lesson: { id: @trial_lesson.id, trial_on: @trial_lesson.trial_on, assisted: @trial_lesson.assisted }})
       else
         respond_with({ trial_lesson: nil})
       end
