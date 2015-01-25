@@ -22,13 +22,20 @@ class TimeSlot < ActiveRecord::Base
   end
 
   def recurrent_contacts
-    AttendanceContact.joins(:attendance)
-                 .joins(:contact)
-                 .where('contacts.padma_status' => 'student')
-                 .where('attendances.time_slot_id' => self.id)
-                 .group('contacts.padma_id, contacts.name')
-                 .select("contacts.name as first_name, '' as last_name, contacts.padma_id as _id, count(*) as count")
-                 .order('contacts.name asc')
+    # Find recurrent_contacts
+    rec_contacts = Attendance
+                    .joins(:attendance_contacts)
+                    .joins(:attendance_contacts => :contact)
+                    .where('contacts.padma_status' => 'student') # Make sure they are still students
+                    .where('attendances.time_slot_id' => self.id) # Consider only this timeslot
+                    .where('attendances.attendance_on >= ?', 1.month.ago.beginning_of_month) # Filter those who attended this timeslot on the past month
+                    .select("contacts.name as first_name, '' as last_name, contacts.padma_id as _id") # Select Contact fields and prepare return as PadmaContacts
+    
+    # Find this timeslot's contacts and select fields for result
+    ts_contacts = self.contacts.select("contacts.name as first_name, '' as last_name, contacts.padma_id as _id").group('contacts.padma_id, contacts.name')
+    
+    # Join recurrent contacts and timeslot contacts and order by name
+    (ts_contacts+rec_contacts).uniq.sort{|a,b| a.first_name <=> b.first_name }
   end
 
   # WARNING this method persists it's changes automatically.
