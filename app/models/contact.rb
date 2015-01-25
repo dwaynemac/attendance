@@ -7,6 +7,8 @@ class Contact < ActiveRecord::Base
 	has_many :attendance_contacts
 	has_many :attendances, through: :attendance_contacts
 
+  has_many :trial_lessons
+
 	validates :account, presence: true
 
 	attr_accessible :account_id, :padma_id, :name, :external_id, :external_sysname, :padma_status, :time_slot_ids
