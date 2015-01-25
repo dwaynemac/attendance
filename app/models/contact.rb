@@ -36,7 +36,7 @@ class Contact < ActiveRecord::Base
     unless contact = Contact.find_by_padma_id(padma_contact_id)
       if padma_contact.nil?
         account = Account.find(account_id)
-        padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name, :local_status], :username => account.usernames.first,  :account_name => account.name)
+        padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name, :local_status], :username => account.usernames.try(:first),  :account_name => account.name)
       end
       args = {
               padma_id: padma_contact_id,
