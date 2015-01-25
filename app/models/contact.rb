@@ -35,11 +35,15 @@ class Contact < ActiveRecord::Base
   def self.get_by_padma_id(padma_contact_id,account_id,padma_contact=nil,new_contact_attributes=nil)
     unless contact = Contact.find_by_padma_id(padma_contact_id)
       if padma_contact.nil?
-        padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name])
+        account = Account.find(account_id)
+        padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name, :local_status], :username => account.usernames.first,  :account_name => account.name)
       end
-      args = {padma_id: padma_contact_id,
+      args = {
+              padma_id: padma_contact_id,
               account_id: account_id,
-              name: "#{padma_contact.first_name} #{padma_contact.last_name}"}
+              name: "#{padma_contact.first_name} #{padma_contact.last_name}",
+              padma_status: padma_contact.local_status
+            }
       if new_contact_attributes
         args = args.merge(new_contact_attributes)
       end
