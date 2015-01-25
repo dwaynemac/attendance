@@ -24,8 +24,8 @@ class Attendance < ActiveRecord::Base
   	contact_ids = []
   	padma_contacts.each do |padma_contact_id|
     	unless contact = Contact.find_by_padma_id(padma_contact_id)
-        padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name])
-        contact = Contact.create(padma_id: padma_contact_id, account_id: time_slot.account.id, name: "#{padma_contact.first_name} #{padma_contact.last_name}")
+        padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name, :local_status], :username => time_slot.padma_uid,  :account_name => time_slot.account.name)
+        contact = Contact.create(padma_id: padma_contact_id, account_id: time_slot.account.id, name: "#{padma_contact.first_name} #{padma_contact.last_name}", padma_status: padma_contact.local_status)
       end
     	contact_ids << contact.id
     end
