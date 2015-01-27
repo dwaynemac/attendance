@@ -35,7 +35,7 @@ class TimeSlot < ActiveRecord::Base
     ts_contacts = self.contacts.select("contacts.name as first_name, '' as last_name, contacts.padma_id as _id").group('contacts.padma_id, contacts.name')
     
     # Join recurrent contacts and timeslot contacts and order by name
-    (ts_contacts+rec_contacts).uniq.sort{|a,b| a.first_name <=> b.first_name }
+    (ts_contacts+rec_contacts).uniq {|c| c._id}.sort{|a,b| a.first_name <=> b.first_name }
   end
 
   # WARNING this method persists it's changes automatically.
