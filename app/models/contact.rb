@@ -15,6 +15,8 @@ class Contact < ActiveRecord::Base
 
   validates_uniqueness_of :padma_id
 
+  scope :students, ->{ where(:padma_status => 'student') }
+
 	attr_accessor :padma_contact
 
 	def padma_contact(options={})
