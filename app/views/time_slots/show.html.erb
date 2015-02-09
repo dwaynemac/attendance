@@ -1,39 +1,66 @@
-<p id="notice"><%= notice %></p>
-
-<legend><%= t('time_slots.show.title') %></legend>
-
-<p>
-  <b><%=TimeSlot.human_attribute_name :name %></b><br>
+<%= content_for :title do %>
   <%= @time_slot.name %>
-</p>
+<% end -%>
 
-<p>
-  <b><%=TimeSlot.human_attribute_name :padma_uid %></b><br>
-  <%= @time_slot.padma_uid %>
-</p>
+<legend>
+  <%= @time_slot.name %> (<%= @time_slot.start_at.strftime('%H:%M') %> - <%= @time_slot.end_at.strftime('%H:%M') %>)
+  <% if @time_slot.cultural_activity -%>
+    -
+    <%= t('.is_a_cultural_activity') %>
+  <% end -%>
+</legend>
+
+  <p>
+    <b><%=TimeSlot.human_attribute_name :padma_uid %></b>:
+    <%= @time_slot.padma_uid %>
+  </p>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+          <%= t('.days_of_the_week') %>
+          <%= link_to t('edit'),
+                      edit_time_slot_path(@time_slot),
+                      class: 'btn btn-xs btn-default pull-right' %>
+        </h2>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+        <% Date::DAYNAMES.each do |dayname| %>
+          <%- if @time_slot.send(dayname.downcase.to_sym) %>
+            <li class="list-group-item"><%= dayname %></li>
+          <% end -%>
+        <% end -%>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+          <%= t('.students') %>
+          <%= link_to t('edit'),
+                      edit_time_slot_path(@time_slot),
+                      class: 'btn btn-xs btn-default pull-right' %>
+        </h2>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <% @time_slot.contacts.each do |contact| -%>
+            <li class="list-group-item"><%= contact.name %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
 
 
-<p>
-  <b><%=TimeSlot.human_attribute_name :start_at %></b><br>
-  <%= @time_slot.start_at.strftime('%H:%M') %>
-</p>
-
-<p>
-  <b><%=TimeSlot.human_attribute_name :end_at %></b><br>
-  <%= @time_slot.end_at.strftime('%H:%M') %>
-</p>
-
-<p>
-  <b><%=TimeSlot.human_attribute_name :cultural_activity %></b><br>
-  <%= @time_slot.cultural_activity %>
-</p>
-
-<b><%= TimeSlot.human_attribute_name :schedule %></b><br>	
-<ul>
-	<% Date::DAYNAMES.each do |dayname| %>
-	  <%= content_tag :li, dayname if @time_slot.send(dayname.downcase.to_sym) %>
-	<% end %>
-</ul>
-<%= link_to t('edit'), edit_time_slot_path(@time_slot), :class => 'btn' %>
+</div>
+<div class="row">
 <%= link_to t('back'), time_slots_path, :class => 'btn' %>
 <%= link_to t('destroy'), @time_slot, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+</div>
