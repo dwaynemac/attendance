@@ -9,6 +9,8 @@ gem 'rails', '4.0.0.rc1'
 gem 'i18n', '~> 0.6.6'
 gem 'rails-i18n'
 
+gem "intercom-rails"
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0.rc1'
 
