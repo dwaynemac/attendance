@@ -326,6 +326,9 @@ es:
     new:
       title: Nueva clase
     show:
+      students: Alumnos inscriptos en esta clase
+      is_a_cultural_activity: Es actividad cultural
+      days_of_the_week: Días de la semana
       title: Horario
     update:
       title: Editando clase
