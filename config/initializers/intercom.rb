@@ -46,7 +46,7 @@ IntercomRails.config do |config|
     user_id: Proc.new { |user| user.username },
     language_override: Proc.new { |user| user.locale },
     name: Proc.new { |user| user.username.split('.').join(' ').titleize if user.username },
-    created_at: nil # created_at should only be sent by accounts-ws
+    created_at: Proc.new{|u| nil } # created_at should only be sent by accounts-ws
   }
 
   # == User -> Company association
