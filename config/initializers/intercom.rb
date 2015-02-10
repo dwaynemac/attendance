@@ -43,9 +43,10 @@ IntercomRails.config do |config|
   # user object, or a Proc which will be passed the current user.
   #
   config.user.custom_data = {
-    user_id: Proc.new { |current_user| current_user.username },
-    Locale: Proc.new { |current_user| current_user.locale },
-    name: Proc.new { |current_user| current_user.username.split('.').join(' ').capitalize if current_user.username }
+    user_id: Proc.new { |user| user.username },
+    Locale: Proc.new { |user| user.locale },
+    name: Proc.new { |user| user.username.split('.').join(' ').capitalize if user.username }
+    roles: Proc.new { |user| user.padma.try(:roles) }
   }
 
   # == User -> Company association
@@ -53,7 +54,7 @@ IntercomRails.config do |config|
   # that the user belongs to.
   #
   # config.user.company_association = Proc.new { |user| user.companies.to_a }
-  config.user.company_association = Proc.new { |user| [user.enabled_account] }
+  config.user.company_association = Proc.new { |user| [user.enabled_accounts] }
 
   # == Current company method/variable
   # The method/variable that contains the current company for the current user,
@@ -67,9 +68,11 @@ IntercomRails.config do |config|
   # This works the same as User custom data above.
   #
   config.company.custom_data = {
-    id: Proc.new { |company| company.name },
-    name: Proc.new { |company| company.name },
-    full_name: Proc.new{ |company| company.padma.full_name }
+    id: Proc.new { |account| account.name },
+    name: Proc.new { |account| account.name },
+    full_name: Proc.new{ |account| account.padma.full_name }
+    enabled: Proc.new { |account| account.padma.try(:enabled) }
+    migrated_on: Proc.new { |account| account.padma.try(:migrated_to_padma_on) }
   }
 
   # == Company Plan name
