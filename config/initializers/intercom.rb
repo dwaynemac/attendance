@@ -44,7 +44,7 @@ IntercomRails.config do |config|
   #
   config.user.custom_data = {
     user_id: Proc.new { |user| user.username },
-    Locale: Proc.new { |user| user.locale },
+    language_override: Proc.new { |user| user.locale },
     name: Proc.new { |user| user.username.split('.').join(' ').titleize if user.username }
   }
 
@@ -71,7 +71,7 @@ IntercomRails.config do |config|
     name: Proc.new { |account| account.name },
     full_name: Proc.new{ |account| account.padma.full_name },
     enabled: Proc.new { |account| account.padma.try(:enabled) },
-    migrated_on: Proc.new { |account| account.padma.try(:migrated_to_padma_on).try(:to_date) }
+    migrated_at: Proc.new { |account| account.padma.try(:migrated_to_padma_on).try(:to_time).try(:to_i) }
   }
 
   # == Company Plan name
