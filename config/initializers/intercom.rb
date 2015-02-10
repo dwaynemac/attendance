@@ -1,7 +1,7 @@
 IntercomRails.config do |config|
   # == Intercom app_id
   #
-  config.app_id = ENV["INTERCOM_APP_ID"] || "bwjydh9i"
+  config.app_id = Rails.env.production?? "bwjydh9i" : "z8hvyosu"
 
   # == Intercom secret key
   # This is required to enable secure mode, you can find it on your Intercom
@@ -18,7 +18,7 @@ IntercomRails.config do |config|
   # == Enabled Environments
   # Which environments is auto inclusion of the Javascript enabled for
   #
-  config.enabled_environments = ["development", "production"]
+  config.enabled_environments = ["development", "staging", "production"]
 
   # == Current user method/variable
   # The method/variable that contains the logged in user in your controllers.
@@ -45,8 +45,7 @@ IntercomRails.config do |config|
   config.user.custom_data = {
     user_id: Proc.new { |user| user.username },
     Locale: Proc.new { |user| user.locale },
-    name: Proc.new { |user| user.username.split('.').join(' ').capitalize if user.username }
-    roles: Proc.new { |user| user.padma.try(:roles) }
+    name: Proc.new { |user| user.username.split('.').join(' ').titleize if user.username }
   }
 
   # == User -> Company association
@@ -70,9 +69,9 @@ IntercomRails.config do |config|
   config.company.custom_data = {
     id: Proc.new { |account| account.name },
     name: Proc.new { |account| account.name },
-    full_name: Proc.new{ |account| account.padma.full_name }
-    enabled: Proc.new { |account| account.padma.try(:enabled) }
-    migrated_on: Proc.new { |account| account.padma.try(:migrated_to_padma_on) }
+    full_name: Proc.new{ |account| account.padma.full_name },
+    enabled: Proc.new { |account| account.padma.try(:enabled) },
+    migrated_on: Proc.new { |account| account.padma.try(:migrated_to_padma_on).try(:to_date) }
   }
 
   # == Company Plan name
