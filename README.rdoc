@@ -39,3 +39,4 @@ For code documentation run
 
     bundle exec yard
 
+.
