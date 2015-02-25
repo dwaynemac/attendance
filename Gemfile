@@ -121,5 +121,5 @@ end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
-  gem 'appsignal'
+  gem 'appsignal', '>= 0.9.4'
 end
