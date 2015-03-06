@@ -7,6 +7,10 @@ class TimeSlotsController < ApplicationController
     @time_slots = @time_slots.order(:start_at)
   end
 
+  def show
+    @students = @time_slot.contacts.students
+  end
+
   def vacancies
     @time_slots = @time_slots.where(cultural_activity: false)
   end

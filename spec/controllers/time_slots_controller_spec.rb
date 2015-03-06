@@ -2,8 +2,30 @@ require 'spec_helper'
 
 describe TimeSlotsController do
 
-  before (:each) do
+  before do
     @user = sign_in_as_a_valid_user
+  end
+
+  describe "GET /time_slots/:id" do
+    let!(:ts){create(:time_slot, account_id: @user.current_account_id)}
+    let(:st){create(:contact_time_slot,
+                     time_slot: ts,
+                     contact: create(:contact,
+                                     padma_status: 'student')).contact}
+    let(:fst){create(:contact_time_slot,
+                      time_slot: ts,
+                      contact: create(:contact,
+                                      padma_status: 'former_student')).contact}
+    before do
+      get :show, id: ts.id
+    end
+    it { should respond_with 200 }
+    it "lists students" do
+      expect(assigns(:students)).to eq [st]
+    end
+    it "wont include former_students" do
+      expect(assigns(:students)).not_to include fst
+    end
   end
 
   describe "GET /time_slots/vacancies" do
