@@ -12,7 +12,8 @@
  *= require twitter/bootstrap
  *= require select2
  *= require bootstrap-multiselect
-
+ *= require fonts
+ *= require header
  *= require_tree .
  */
 

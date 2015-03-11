@@ -24,6 +24,12 @@ GIT
       railties (>= 3.2.6, < 5)
       warden (~> 1.2.1)
 
+PATH
+  remote: ~/Workspace/padma-assets
+  specs:
+    padma-assets (0.0.14)
+      railties (>= 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -170,7 +176,7 @@ GEM
       less (~> 2.4.0)
     less-rails-bootstrap (3.0.6)
       less-rails (~> 2.4.2)
-    libv8 (3.11.8.17)
+    libv8 (3.16.14.7)
     libxml-ruby (2.7.0)
     logical_model (0.5.8)
       activemodel
@@ -240,7 +246,7 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
-    ref (1.0.4)
+    ref (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec-core (2.13.1)
@@ -291,8 +297,8 @@ GEM
     sqlite3 (1.3.7)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
-    therubyracer (0.11.4)
-      libv8 (~> 3.11.8.12)
+    therubyracer (0.12.1)
+      libv8 (~> 3.16.14.0)
       ref
     thor (0.18.1)
     thread_safe (0.3.4)
@@ -356,6 +362,7 @@ DEPENDENCIES
   jquery-rails
   less-rails-bootstrap (~> 3.0.6)
   messaging_client (~> 0.0.2)
+  padma-assets!
   pg
   protected_attributes
   pry
@@ -368,7 +375,7 @@ DEPENDENCIES
   select2-rails
   shoulda-matchers
   sqlite3
-  therubyracer
+  therubyracer (= 0.12.1)
   turbolinks
   uglifier (>= 1.3.0)
   validates_timeliness

@@ -12,10 +12,6 @@
 
 @charset "utf-8";
 /* CSS Document */
-body{
-padding-top:0;
-padding-left: 20px;
-}
 .row{
   margin-right: 5px;
 }
@@ -120,10 +116,7 @@ padding-top:5px;
   padding-right: 20px;
 }
 
-.navbar-nav > li > a {padding-top:12px !important; padding-bottom:11px !important;}
-.navbar {
-  min-height: 40px !important;
-}
+
 .navbar-inner {
   min-height: 40px;
 }
