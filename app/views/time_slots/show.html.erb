@@ -51,7 +51,7 @@
       <div class="panel-body">
         <ul class="list-group">
           <% @students.each do |contact| -%>
-            <li class="list-group-item"><%= contact.name %></li>
+            <li class="list-group-item"><%= link_to contact.name, "#{APP_CONFIG['crm-url']}/contacts/#{contact.padma_id}" %></li>
           <% end %>
         </ul>
       </div>
