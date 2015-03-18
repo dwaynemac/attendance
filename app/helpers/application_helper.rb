@@ -11,4 +11,8 @@ module ApplicationHelper
 
       return "timestamp: #{timestamp}, token: '#{token}', signature: '#{signature}', ".html_safe
   end
+
+  def breadcrum(text)
+    content_for :breadcrum, text
+  end
 end

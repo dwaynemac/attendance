@@ -1,4 +1,4 @@
-<h1>Listing trial_lessons</h1>
+<%- breadcrum t("trial_lessons.index.title") -%>
 
 <ul>
   <% @trial_lessons.group_by { |t| t.trial_on }.each do |date, trial_lessons| %>
