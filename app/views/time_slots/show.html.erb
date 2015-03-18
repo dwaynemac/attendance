@@ -1,7 +1,7 @@
 <%= content_for :title do %>
   <%= @time_slot.name %>
 <% end -%>
-
+<%- breadcrum t("time_slots.show.title") -%>
 <legend>
   <%= @time_slot.name %> (<%= @time_slot.start_at.strftime('%H:%M') %> - <%= @time_slot.end_at.strftime('%H:%M') %>)
   <% if @time_slot.cultural_activity -%>
