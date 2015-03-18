@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 1.0.1'
 
 # Use twitter bootstrap as ui framework
 gem 'less-rails-bootstrap', '~> 3.0.6'
-gem 'padma-assets', path: '~/Workspace/padma-assets'
+gem 'padma-assets', '0.1.3'
 
 # Javascript runtime for bootstrap's LESS files to compile to CSS.
 gem 'therubyracer', '0.12.1', :platforms => :ruby
@@ -38,8 +38,6 @@ gem 'therubyracer', '0.12.1', :platforms => :ruby
 gem 'angularjs-rails'
 gem "select2-rails"
 gem 'bootstrap-multiselect-rails'
-
-gem 'padma-assets', path: '~/Workspace/padma-assets'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
