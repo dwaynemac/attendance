@@ -347,17 +347,18 @@ es:
       pending: pendiente
   trial_lessons:
     edit:
-      title: 
+      title: Editar clase de prueba
     index:
       archive: Archivar
       new: Marcar clase de prueba
       time_slot_deleted: (El horario de clase fue eliminado)
       contact_without_name: (El contacto fue eliminado o no tiene nombre)
+      title: Clases de prueba
     new:
-      title: 
+      title: Marcar clase de prueba
     search_contact: Buscar contacto
     show:
-      title: 
+      title: Clase de prueba
   unauthorized: 
   validates_timeliness:
     error_value_formats:
