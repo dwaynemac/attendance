@@ -29,4 +29,12 @@ class Api::V0::ContactsController < Api::V0::ApiController
       end
     end
   end
+
+  def index
+    @contacts = Contact.where(:padma_id => params[:padma_contact_ids])
+    contacts_json = {
+      contacts: @contacts.each_with_object({}) {|c, h| h[c.padma_id] = c.time_slots.collect(&:name)}
+    }
+    respond_with contacts_json
+  end
 end

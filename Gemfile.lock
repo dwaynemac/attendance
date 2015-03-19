@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/dwaynemac/padma-assets.git
-  revision: 29235326c7f20dea5380f4c35493fff68aabfef5
-  specs:
-    padma-assets (0.1.4)
-      railties (>= 3.1)
-
-GIT
   remote: git://github.com/fog/fog.git
   revision: 272bc6b2a2769f8d1a8b50b1f6cd9741db4969b4
   ref: 272bc6b2a2769f8d1a8b50b1f6cd9741db4969b4
@@ -205,6 +198,8 @@ GEM
     nokogiri-happymapper (0.5.9)
       nokogiri (~> 1.5)
     orm_adapter (0.4.0)
+    padma-assets (0.1.5)
+      railties (>= 3.1)
     pg (0.15.1)
     pivotal-tracker (0.5.12)
       builder
@@ -363,7 +358,7 @@ DEPENDENCIES
   jquery-rails
   less-rails-bootstrap (~> 3.0.6)
   messaging_client (~> 0.0.2)
-  padma-assets!
+  padma-assets (= 0.1.5)
   pg
   protected_attributes
   pry

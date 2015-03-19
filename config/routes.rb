@@ -36,7 +36,7 @@ Assistance::Application.routes.draw do
 
   namespace 'api' do
     namespace 'v0' do
-      resources :contacts, only: [:show] do
+      resources :contacts, only: [:show, :index] do
         member do
           get :last_trial
         end
