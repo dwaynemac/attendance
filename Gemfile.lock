@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/dwaynemac/padma-assets.git
-  revision: 428d65a57717d911fb9ed0fb886cd1cc849c8b37
+  revision: 29235326c7f20dea5380f4c35493fff68aabfef5
   specs:
     padma-assets (0.1.4)
       railties (>= 3.1)
@@ -196,7 +196,7 @@ GEM
     mime-types (1.25)
     mini_portile (0.5.2)
     minitest (4.7.5)
-    multi_json (1.10.1)
+    multi_json (1.11.0)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
@@ -222,7 +222,7 @@ GEM
       method_source (~> 0.8)
       slop (~> 3.4)
     rack (1.5.2)
-    rack-test (0.6.2)
+    rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.0.0.rc1)
       actionmailer (= 4.0.0.rc1)
@@ -244,7 +244,7 @@ GEM
       activesupport (= 4.0.0.rc1)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.1.0)
+    rake (10.4.2)
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
@@ -301,8 +301,8 @@ GEM
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
-    thor (0.18.1)
-    thread_safe (0.3.4)
+    thor (0.19.1)
+    thread_safe (0.3.5)
     tilt (1.4.0)
     timeliness (0.3.7)
     tins (0.13.1)
