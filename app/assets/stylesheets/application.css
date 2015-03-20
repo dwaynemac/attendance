@@ -17,7 +17,12 @@
  *= require_tree .
  */
 
- .middle-section{
-  margin: 0 auto;
-  width: 960px;
- }
+.container.middle-section {
+	margin-top: 20px;
+}
+
+@media (min-width: 992px) {
+	.container.middle-section {
+		width: 980px;
+	}
+}

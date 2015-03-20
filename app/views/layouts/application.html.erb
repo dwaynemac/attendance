@@ -16,23 +16,16 @@
 
 </header> <!-- .header -->
 
-<div class="row">
-  <div class="container middle-section">
-    <div class="content">
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12" id="flash_messages">
-          <%= render 'layouts/flash_messages' %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12 main_col_pad_none">
-          <%= yield %>
-        </div>
+<div class="container middle-section">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12" id="flash_messages">
+      <%= render 'layouts/flash_messages' %>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12 main_col_pad_none">
+      <%= yield %>
+    </div>
 
-      </div><!--/row-->
-    </div><!--/content-->
-
-    <footer>
+    <footer class='col-md-12 text-center'>
       <p>&copy; PADMA 2012</p>
     </footer>
 

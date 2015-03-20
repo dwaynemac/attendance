@@ -12,118 +12,22 @@
 
 @charset "utf-8";
 /* CSS Document */
-.row{
+.row {
   margin-right: 5px;
 }
-#username img{
-  padding-right:10px;
-  }
-#logout{
-  }
-#logout img{
-  }
-#navbar-1{
-  background:none;
-  border:none;
-  box-shadow: none;
-  min-height:10px!important;
-  margin-bottom: 0px!important;
-  }
-#navbar-2{
-  border: 1px solid #CFCFCF;
-  }
-#navbar-2 ul li.active{
-  } 
-#navbar-2 input{
-  /*height: 30px;*/
-  } 
 
-#navbar-2 > div > ul > li:last-child {
-  border-right: 1px solid #CFCFCF;
-}
-
-#navbar-2 > div > ul > li {
-  border-left: 1px solid #CFCFCF;
-}
-  
-#navbar-1 li a{
-  font:normal 12px Arial, Helvetica, sans-serif;
-  text-decoration:none;
-  text-shadow:none !important;
-  }
-    
-#menu-top-left a{
-  padding:12px 20px 0 30px;
-  }
-#menu-top-right{
-  margin-right: 20px;
-  }
-  
-#navbar-2 li a, #navbar-2 li active{
-  font:bold 14px Arial, Helvetica, sans-serif;
-  text-shadow:none !important;
-  padding:15px 30px 15px 30px;
-  }
-
-.glyphicon-off{
-padding-top:5px;
-}
-.navbar-form{
-  vertical-align:middle!important;
+.navbar-form {
+  vertical-align: middle!important;
   margin-top: 2px;
   margin-bottom: 0px;
-} 
+}
 
 /* -------------- END OF ESTADISTICAS.CSS ----------- */
 
-/*--------------- BOOTSTRAP-THEME.CSS ----------------*/
-.navbar {
-  background-color: #E5E5E5;
-  background: #f1f2f2;
-  background: -moz-linear-gradient(top, #fff, #f1f2f2);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #f1f2f2));
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-
-.navbar .navbar-nav > .active > a {
-  background: #f8f8f8;
-  background: -moz-linear-gradient(top, #fff, #f8f8f8);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #f8f8f8));
-}
-
-#navbar-2 .navbar-nav > .active > a:hover {
-  background-color: #E5E5E5;
-  background: #dfdfdf;
-  background: -moz-linear-gradient(top, #fff, #dfdfdf);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #dfdfdf));
-}
-
-#navbar-2 .navbar-nav > li > a:hover {
-  background-color: #E5E5E5;
-  background: #dfdfdf;
-  background: -moz-linear-gradient(top, #fff, #dfdfdf);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #dfdfdf));
-}
-
 /*------------- APPLICATION.CSS --------------------*/
-
-.navbar-brand{
-  height: 20px;
-  padding-top: 4px;
-  padding-bottom: 8px;
-  padding-right: 20px;
-}
-
 
 .navbar-inner {
   min-height: 40px;
-}
-
-.navbar-collapse {
-  padding-left: 5px;
-  padding-right: 5px;
 }
 
 .date > .form-control {
