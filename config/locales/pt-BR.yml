@@ -37,13 +37,13 @@ pt-BR:
         schedule: 
         start_at: Começo
       trial_lesson:
-        assisted: 
-        contact: 
-        padma_contact_id: 
-        padma_uid: 
-        time_slot: 
-        time_slot_id: 
-        trial_on: 
+        assisted: Asistiu
+        contact: Contato
+        padma_contact_id: Contato 
+        padma_uid: Instrutor
+        time_slot: Turma
+        time_slot_id: Turma 
+        trial_on: Data
       user:
         username: 
     errors:
@@ -53,10 +53,10 @@ pt-BR:
             end_at:
               after: 
     models:
-      attendance: 
+      attendance: Presença
       contact_time_slot: 
-      time_slot: 
-      trial_lesson: 
+      time_slot: Aula
+      trial_lesson: Aula experimental 
       user: 
   attendance:
     activerecord:
@@ -73,6 +73,9 @@ pt-BR:
   attendances:
     form:
       contact_assisted: '%{name} fez a aula?'
+      recurrents_contacts: 'Alunos frequêntes'
+      all_contacts: 'Todos os alunos'
+      students_of: "Alunos de %{teacher}"
     index:
       older: Lançar presença de aulas anteriores.
       new: Lançar presença
