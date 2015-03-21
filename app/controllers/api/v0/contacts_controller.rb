@@ -4,10 +4,14 @@ class Api::V0::ContactsController < Api::V0::ApiController
 
   def show
     @contact = Contact.includes(:time_slots).find_by_padma_id(params[:id])
+    if @contact
     contact_json = {
       time_slots: @contact.time_slots.map{|ts| {id: ts.id, name: ts.name, description: ts.description }}
     }
     respond_with contact_json
+    else
+      render json: 'not found', status: 404
+    end
   end
 
   def last_trial
