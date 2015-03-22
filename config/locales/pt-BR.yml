@@ -34,7 +34,7 @@ pt-BR:
         name: Nome
         padma_contacts: 
         padma_uid: Instrutor
-        schedule: 
+        schedule: Días da turma
         start_at: Começo
       trial_lesson:
         assisted: Asistiu
