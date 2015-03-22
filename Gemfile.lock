@@ -198,7 +198,7 @@ GEM
     nokogiri-happymapper (0.5.9)
       nokogiri (~> 1.5)
     orm_adapter (0.4.0)
-    padma-assets (0.1.7)
+    padma-assets (0.1.8)
       railties (>= 3.1)
     pg (0.15.1)
     pivotal-tracker (0.5.12)
@@ -358,7 +358,7 @@ DEPENDENCIES
   jquery-rails
   less-rails-bootstrap (~> 3.0.6)
   messaging_client (~> 0.0.2)
-  padma-assets (= 0.1.7)
+  padma-assets (= 0.1.8)
   pg
   protected_attributes
   pry
