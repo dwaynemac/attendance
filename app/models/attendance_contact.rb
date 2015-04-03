@@ -25,6 +25,8 @@ class AttendanceContact < ActiveRecord::Base
                                       account_name: attendance.account.name})
       end
     else
+      Rails.logger.info "attendance #{attendance.id} couldnt update last_seen_at for contact #{contact.id}"
+      # raise exception for delayed_job to retry later
       raise "attendance #{attendance.id} couldnt update last_seen_at for contact #{contact.id}"
     end
   end
