@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Account do
+  it { should have_and_belong_to_many(:contacts) }
+	
   let(:account){create(:account)}
   describe "#usernames" do
     context "if contacts-ws is online" do
