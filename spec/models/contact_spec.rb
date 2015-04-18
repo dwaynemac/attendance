@@ -1,17 +1,13 @@
 require 'spec_helper'
 
 describe Contact do
-  it "should require an account" do
-    build(:contact, :account => nil).should_not be_valid
-  end	
-
   let(:account){ Account.first || create(:account)}
 
   describe "#time_slot_ids=" do
     # provided by has_many :time_slots
     let(:time_slot){create(:time_slot)}
     let(:padma_id){'contact-id'}
-    let(:contact){create(:contact, padma_id: padma_id, account_id: account.id)}
+    let(:contact){create(:contact, padma_id: padma_id)}
     it "sets contact times_slots" do
       expect(contact.time_slots).to eq []
       contact.time_slot_ids = [time_slot.id]
@@ -24,13 +20,16 @@ describe Contact do
     let(:padma_id){'contact-id'}
     describe "if already cached" do
       before do
-        @contact = Contact.find_by_padma_id(padma_id) || create(:contact, padma_id: padma_id, account_id: account.id)
+        @contact = Contact.find_by_padma_id(padma_id) || create(:contact, padma_id: padma_id)
       end
       it "finds local_contact with given padma_id" do
         Contact.get_by_padma_id(padma_id,account.id).should == @contact
       end
       it "wont create a new contact" do
         expect{Contact.get_by_padma_id(padma_id,account.id)}.not_to change{Contact.count}
+      end
+      it "associates the contact to the account" do
+	expect{Contact.get_by_padma_id(padma_id, account.id).accounts.includes? account}
       end
     end
     describe "if not cached" do
