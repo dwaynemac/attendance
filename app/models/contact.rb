@@ -17,11 +17,11 @@ class Contact < ActiveRecord::Base
 
   attr_accessor :padma_contact
 
-  def padma_contact(options={})
+  def padma_contact(account, options={})
     if @padma_contact.nil?
       @padma_contact = PadmaContact.find(self.padma_id, {select: [:first_name, :last_name, :email, :last_seen_at],
                                                          except: [:except_linked, :except_last_local_status],
-                                                         account_name: self.account.name})
+                                                         account_name: account.name})
     end
     @padma_contact
   end

@@ -31,11 +31,8 @@ class TrialLesson < ActiveRecord::Base
   end
 
   def padma_contact_id= padma_contact_id
-    unless c = Contact.find_by_padma_id_and_account_id(padma_contact_id, self.account_id)
-        padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name])
-        c = Contact.create(padma_id: padma_contact_id, account_id: self.account_id, name: "#{padma_contact.first_name} #{padma_contact.last_name}")
-      end
-  	self.contact_id = c.id
+    c = Contact.get_by_padma_id(padma_contact_id, self.account_id)
+    self.contact_id = c.id
   end
 
   def padma_contact_id
