@@ -9,7 +9,7 @@ describe ContactsController do
   end
 
   let!(:contact){create(:contact, padma_id: '123',
-                        account: @user.current_account)}
+                        accounts: [@user.current_account])}
 
   describe "GET /contacts/:padma_id" do
     let!(:my_time_slot){create(:time_slot,
