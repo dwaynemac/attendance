@@ -37,7 +37,7 @@ class TimeSlotStatsSQLBuilder
 			SELECT contacts.*, #{time_slots_count_select nil}
 			FROM contacts, accounts_contacts
 			WHERE #{account_condition}
-			AND contacts.padma_status = 'student'
+			AND accounts_contacts.padma_status = 'student'
 			GROUP BY contacts.id
 
 			-- unions for each time slot
