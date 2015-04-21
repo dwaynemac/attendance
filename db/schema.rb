@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416144118) do
+ActiveRecord::Schema.define(version: 20150421143735) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20150416144118) do
   create_table "accounts_contacts", force: true do |t|
     t.integer "account_id"
     t.integer "contact_id"
+    t.string  "padma_status"
   end
 
   create_table "attendance_contacts", force: true do |t|
