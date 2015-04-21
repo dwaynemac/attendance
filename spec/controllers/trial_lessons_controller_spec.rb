@@ -55,10 +55,11 @@ describe TrialLessonsController do
 
   describe "POST create" do
     describe "with valid params" do
-      let(:contact){create(:contact, accounts: [@user.current_account])}
+      let(:contact){create(:contact)}
       let(:time_slot){create(:time_slot, account: @user.current_account)}
       it "creates a new TrialLesson" do
         expect {
+          @user.current_account.contacts << contact
           post :create, {:trial_lesson => attributes_for(:trial_lesson, time_slot_id: time_slot.id, padma_contact_id: contact.padma_id)}
         }.to change(TrialLesson, :count).by(1)
       end

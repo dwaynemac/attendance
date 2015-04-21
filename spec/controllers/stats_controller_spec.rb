@@ -18,9 +18,9 @@ describe StatsController do
     end
     let(:time_slot){create(:time_slot, :account => @user.current_account, :padma_uid => "dwayne")}
     let(:attendance){create(:attendance, :account => @user.current_account, :attendance_on => 1.month.ago, :time_slot => time_slot)}
-    let(:contact){create(:contact, :accounts => [@user.current_account], :padma_status => "student")}
-
+    let(:contact){create(:contact, :padma_status => "student")}
     it "responds with the correct stats" do
+      @user.current_account.contacts << contact    
       attendance.contacts << contact
 
       get :index, 'easy_period' => 'last_month'    

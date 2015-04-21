@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Contact do
+  it { have_many(:accounts).through(:accounts_contact) }
+
   let(:account){ Account.first || create(:account)}
 
   describe "#time_slot_ids=" do
