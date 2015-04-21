@@ -79,6 +79,7 @@ class InstructorStatsSQLBuilder
 				WHERE time_slots.padma_uid = '#{username.tr("_",".")}' 
 				AND #{account_condition}
 				AND #{attendance_between_dates_condition}
+				AND accounts_contacts.padma_status = 'student'
 				#{cultural_activity_condition}
 				GROUP BY contacts.id
 			)

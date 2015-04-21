@@ -26,7 +26,9 @@ class TimeSlot < ActiveRecord::Base
     rec_contacts = Attendance
                     .joins(:attendance_contacts)
                     .joins(:attendance_contacts => :contact)
-                    .where('contacts.padma_status' => 'student') # Make sure they are still students
+    		    .joins(:attendance_contacts => {:contact => :accounts_contacts})
+                    .where('accounts_contacts.account_id = ?', account.id)
+                    .where('accounts_contacts.padma_status' => 'student') # Make sure they are still students
                     .where('attendances.time_slot_id' => self.id) # Consider only this timeslot
                     .where('attendances.attendance_on >= ?', 1.month.ago.beginning_of_month) # Filter those who attended this timeslot on the past month
                     .select("contacts.name as first_name, '' as last_name, contacts.padma_id as _id") # Select Contact fields and prepare return as PadmaContacts

@@ -78,6 +78,7 @@ class TimeSlotStatsSQLBuilder
 				WHERE attendances.time_slot_id = #{time_slot.id} 
 				AND #{account_condition}
 				AND #{attendance_between_dates_condition}
+				AND accounts_contacts.padma_status = 'student'
 				GROUP BY contacts.id
 			)
 		end
