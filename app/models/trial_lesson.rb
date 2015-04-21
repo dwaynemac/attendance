@@ -87,7 +87,7 @@ class TrialLesson < ActiveRecord::Base
     json = as_json
     json["trial_at"] = trial_at
     json["contact_id"] = contact.padma_id
-    json["recipient_email"] = contact.padma_contact.email
+    json["recipient_email"] = contact.padma_contact(account).email
     json["username"] = padma_uid
     json["account_name"] = account.name
     json
