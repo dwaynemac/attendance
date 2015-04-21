@@ -33,7 +33,8 @@ describe Attendance do
   end
 
   it "should create nested attendance_contacts" do
-    contact = create(:contact, :accounts => [account])
+    contact = create(:contact)
+    account.contacts << contact
     Contact.any_instance.stub(:padma_contact).and_return(PadmaContact.new(first_name: 'fn', last_name: 'ln', last_seen_at: 1.day.ago.to_s))
     ts = create(:time_slot, :account => account)
     attendance = create(:attendance, :account => account, :time_slot => ts, :contact_ids => [contact.id])

@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20150416144118) do
     t.datetime "synchronized_at"
   end
 
-  create_table "accounts_contacts", id: false, force: true do |t|
+  create_table "accounts_contacts", force: true do |t|
     t.integer "account_id"
     t.integer "contact_id"
   end

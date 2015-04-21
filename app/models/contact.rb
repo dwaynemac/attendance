@@ -1,5 +1,6 @@
 class Contact < ActiveRecord::Base
-  has_and_belongs_to_many :accounts
+  has_many :accounts_contacts
+  has_many :accounts, through: :accounts_contacts
 
   has_many :contact_time_slots
   has_many :time_slots, through: :contact_time_slots

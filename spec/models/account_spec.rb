@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Account do
-  it { should have_and_belong_to_many(:contacts) }
+  it { have_many(:contacts).through(:accounts_contact) }
 	
   let(:account){create(:account)}
   describe "#usernames" do
