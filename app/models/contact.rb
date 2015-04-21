@@ -37,26 +37,35 @@ class Contact < ActiveRecord::Base
     account = Account.find(account_id)
     if contact = Contact.find_by_padma_id(padma_contact_id)
       #Local Contact found, associate to account if necessary
-      contact.accounts << account unless contact.accounts.include?(account)
+      unless contact.accounts.include?(account)
+        # Get PadmaContact unless it is already present
+        padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name, :local_status], :username => account.usernames.try(:first),  :account_name => account.name) if padma_contact.blank?
+
+	contact.accounts_contacts.create(:account => account, :padma_status => padma_contact.local_status) if padma_contact.present?
+      end
+      contact
     else
       #Local Contact not found, create & associate to account
       
       # Get PadmaContact unless it is already present
-      padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name, :local_status], :username => account.usernames.try(:first),  :account_name => account.name) unless padma_contact.present?
+      padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name, :local_status], :username => account.usernames.try(:first),  :account_name => account.name) if padma_contact.blank?
 
       #New contact attributes from PadmaContacts
       args = {
               padma_id: padma_contact_id,
-              name: "#{padma_contact.first_name} #{padma_contact.last_name}",
-              padma_status: padma_contact.local_status
+              name: "#{padma_contact.first_name} #{padma_contact.last_name}"
             }
 
 
       # Merge with local attributes if they are present
       args = args.merge(new_contact_attributes) if new_contact_attributes.present?
       
-      # Create new local Contact associated to account
-      contact = account.contacts.create!(args)
+      # Create new local Contact
+      contact = Contact.create!(args)
+
+      # Associate to account
+      contact.accounts_contacts.create(:account => account, :padma_status => padma_contact.local_status) if padma_contact.present?
+
     end
     contact
   end
