@@ -35,7 +35,8 @@ class TimeSlotStatsSQLBuilder
 
 	  		-- select all contacts for that account
 			SELECT contacts.*, #{time_slots_count_select nil}
-			FROM contacts, accounts_contacts
+			FROM contacts
+			INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 			WHERE #{account_condition}
 			AND accounts_contacts.padma_status = 'student'
 			GROUP BY contacts.id
@@ -52,7 +53,7 @@ class TimeSlotStatsSQLBuilder
 	def account_condition
 		condition = ""
 		if account.present?
-			condition = "accounts_contacts.contact_id = contacts.id AND accounts_contacts.account_id = #{account.id}"
+			condition = "accounts_contacts.account_id = #{account.id}"
 		end
 		condition
 	end
@@ -72,7 +73,8 @@ class TimeSlotStatsSQLBuilder
 
 				-- select contact attributes and count attendances on a time slot
 				SELECT contacts.*, #{time_slots_count_select time_slot}
-				FROM contacts, accounts_contacts
+				FROM contacts
+				INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 				INNER JOIN attendance_contacts ON contacts.id = attendance_contacts.contact_id
 				INNER JOIN attendances ON attendance_contacts.attendance_id = attendances.id
 				WHERE attendances.time_slot_id = #{time_slot.id} 

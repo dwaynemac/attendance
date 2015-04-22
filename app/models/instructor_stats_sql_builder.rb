@@ -32,7 +32,8 @@ class InstructorStatsSQLBuilder
 	  	SELECT id, padma_id, name, #{instructors_sum_select} FROM (
 	  		-- select all contacts for that account
 			SELECT contacts.*, #{instructors_count_select nil}
-			FROM contacts, accounts_contacts
+			FROM contacts
+			INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 			WHERE #{account_condition}
 			AND accounts_contacts.padma_status = 'student'
 			GROUP BY contacts.id
@@ -49,7 +50,7 @@ class InstructorStatsSQLBuilder
 	def account_condition
 		condition = ""
 		if account.present?
-			condition = "accounts_contacts.contact_id = contacts.id AND accounts_contacts.account_id = #{account.id}"
+			condition = "accounts_contacts.account_id = #{account.id}"
 		end
 		condition
 	end
@@ -72,7 +73,8 @@ class InstructorStatsSQLBuilder
 				UNION
 				-- select contact attributes and count attendances on a time slot
 				SELECT contacts.*, #{instructors_count_select username}
-				FROM contacts, accounts_contacts
+				FROM contacts
+				INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 				INNER JOIN attendance_contacts ON contacts.id = attendance_contacts.contact_id
 				INNER JOIN attendances ON attendance_contacts.attendance_id = attendances.id
 				INNER JOIN time_slots ON attendances.time_slot_id = time_slots.id
