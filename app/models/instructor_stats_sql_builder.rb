@@ -29,18 +29,19 @@ class InstructorStatsSQLBuilder
 	def sql
 	  %(
 	  	-- select contact attributes and stats
-	  	SELECT id, account_id, padma_id, name, #{instructors_sum_select} FROM (
+	  	SELECT id, padma_id, name, #{instructors_sum_select} FROM (
 	  		-- select all contacts for that account
 			SELECT contacts.*, #{instructors_count_select nil}
 			FROM contacts
+			INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 			WHERE #{account_condition}
-			AND contacts.padma_status = 'student'
+			AND accounts_contacts.padma_status = 'student'
 			GROUP BY contacts.id
 
 			-- unions for each instructor
 			#{instructor_queries}
 		) AS attendance_distribution
-		GROUP BY id, account_id, padma_id, name
+		GROUP BY id, padma_id, name
 		ORDER BY name ASC
 	  )
 	end	
@@ -49,7 +50,7 @@ class InstructorStatsSQLBuilder
 	def account_condition
 		condition = ""
 		if account.present?
-			condition = "contacts.account_id = #{account.id}"
+			condition = "accounts_contacts.account_id = #{account.id}"
 		end
 		condition
 	end
@@ -73,12 +74,14 @@ class InstructorStatsSQLBuilder
 				-- select contact attributes and count attendances on a time slot
 				SELECT contacts.*, #{instructors_count_select username}
 				FROM contacts
+				INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 				INNER JOIN attendance_contacts ON contacts.id = attendance_contacts.contact_id
 				INNER JOIN attendances ON attendance_contacts.attendance_id = attendances.id
 				INNER JOIN time_slots ON attendances.time_slot_id = time_slots.id
 				WHERE time_slots.padma_uid = '#{username.tr("_",".")}' 
 				AND #{account_condition}
 				AND #{attendance_between_dates_condition}
+				AND accounts_contacts.padma_status = 'student'
 				#{cultural_activity_condition}
 				GROUP BY contacts.id
 			)

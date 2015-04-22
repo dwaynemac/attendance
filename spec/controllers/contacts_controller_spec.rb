@@ -8,14 +8,14 @@ describe ContactsController do
     sign_in_as_a_valid_user
   end
 
-  let!(:contact){create(:contact, padma_id: '123',
-                        account: @user.current_account)}
+  let!(:contact){create(:contact, padma_id: '123')}
 
   describe "GET /contacts/:padma_id" do
     let!(:my_time_slot){create(:time_slot,
                                account: @user.current_account)}
     let!(:not_my_time_slot){create(:time_slot)}
     before do
+      @user.current_account.contacts << contact    
       ContactTimeSlot.create(time_slot: my_time_slot,
                              contact: contact)
       ContactTimeSlot.create(time_slot: not_my_time_slot,

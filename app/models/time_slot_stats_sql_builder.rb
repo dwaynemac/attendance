@@ -31,19 +31,20 @@ class TimeSlotStatsSQLBuilder
 	def sql
 	  %(
 	  	-- select contact attributes and stats
-	  	SELECT id, account_id, padma_id, name, #{time_slots_sum_select} FROM (
+	  	SELECT id, padma_id, name, #{time_slots_sum_select} FROM (
 
 	  		-- select all contacts for that account
 			SELECT contacts.*, #{time_slots_count_select nil}
 			FROM contacts
+			INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 			WHERE #{account_condition}
-			AND contacts.padma_status = 'student'
+			AND accounts_contacts.padma_status = 'student'
 			GROUP BY contacts.id
 
 			-- unions for each time slot
 			#{time_slot_queries}
 		) AS attendance_distribution
-		GROUP BY id, account_id, padma_id, name
+		GROUP BY id, padma_id, name
 		ORDER BY name ASC
 	  )
 	end	
@@ -52,7 +53,7 @@ class TimeSlotStatsSQLBuilder
 	def account_condition
 		condition = ""
 		if account.present?
-			condition = "contacts.account_id = #{account.id}"
+			condition = "accounts_contacts.account_id = #{account.id}"
 		end
 		condition
 	end
@@ -73,11 +74,13 @@ class TimeSlotStatsSQLBuilder
 				-- select contact attributes and count attendances on a time slot
 				SELECT contacts.*, #{time_slots_count_select time_slot}
 				FROM contacts
+				INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 				INNER JOIN attendance_contacts ON contacts.id = attendance_contacts.contact_id
 				INNER JOIN attendances ON attendance_contacts.attendance_id = attendances.id
 				WHERE attendances.time_slot_id = #{time_slot.id} 
 				AND #{account_condition}
 				AND #{attendance_between_dates_condition}
+				AND accounts_contacts.padma_status = 'student'
 				GROUP BY contacts.id
 			)
 		end

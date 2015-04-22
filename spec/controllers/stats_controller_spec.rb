@@ -13,16 +13,17 @@ describe StatsController do
   end
 
   describe "GET /stats?easy_period=last_month" do
-    before do
-        PadmaContact.stub(:find).and_return PadmaContact.new
-    end
     let(:time_slot){create(:time_slot, :account => @user.current_account, :padma_uid => "dwayne")}
     let(:attendance){create(:attendance, :account => @user.current_account, :attendance_on => 1.month.ago, :time_slot => time_slot)}
-    let(:contact){create(:contact, :account => @user.current_account, :padma_status => "student")}
+    let(:contact){create(:contact)}
 
-    it "responds with the correct stats" do
+    before do
+      PadmaContact.stub(:find).and_return PadmaContact.new
+      contact.accounts_contacts.create!(:account_id => @user.current_account.id, :padma_status => :student)
       attendance.contacts << contact
-
+    end
+    
+    it "responds with the correct stats" do
       get :index, 'easy_period' => 'last_month'    
       assigns(:contacts).first.attendance_total.should == 1
     end

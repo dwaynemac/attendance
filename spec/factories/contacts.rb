@@ -2,7 +2,9 @@
 
 FactoryGirl.define do
   factory :contact do
-    account { Account.last || create(:account) }
     sequence(:padma_id) { |n| "padma_id_#{n}"}
+    after :create do |s|
+      s.accounts << FactoryGirl.create(:account)
+    end
   end
 end

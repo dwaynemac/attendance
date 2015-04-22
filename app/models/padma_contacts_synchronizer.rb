@@ -17,15 +17,12 @@ class PadmaContactsSynchronizer
 
         if contact
           # If contact already exists locally update it
-          contact.update_attributes(
-	        :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
-	        :padma_status => padma_contact.local_status)
+          @account.accounts_contacts.find_by_contact_id(contact.id).update_attributes(:padma_status => padma_contact.local_status)
         elsif padma_contact.status == 'student'
+	  contact = Contact.find_or_create_by_padma_id(contact.padma_id, :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip)
           # Otherwise, if its a student, create it locally
           # Prospects dont need to be in sync as TrialLesson can create a local contact if needed.
-          @account.contacts.create(
-            :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
-            :padma_status => padma_contact.local_status)
+          @account.account_contacts.create(:contact_id => contact.id, :padma_status => padma_contact.local_status)
       	end
     end
     @account.update_attribute(:synchronized_at, DateTime.now)

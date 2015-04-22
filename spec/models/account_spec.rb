@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Account do
+  it { have_many(:contacts).through(:accounts_contact) }
+	
   let(:account){create(:account)}
   describe "#usernames" do
     context "if contacts-ws is online" do
