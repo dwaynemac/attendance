@@ -13,11 +13,11 @@
         </div>
       <% end %>
       <fieldset>
-        <% if  @attendance.attendance_on and  @attendance.attendance_on %>
+        <% if  @attendance.attendance_on and  @attendance.time_slot %>
           <div class="row row_margin">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <legend>
-                <%= t('activerecord.attributes.attendance.attendance_to') %> "<%= TimeSlot.find(@attendance.time_slot_id).name %>"<br/>
+                <%= t('activerecord.attributes.attendance.attendance_to') %> "<%= @attendance.time_slot.name %>"<br/>
                 <%= t('activerecord.attributes.attendance.text_on') %> <%= l @attendance.attendance_on, format: :long %>
               </legend>
             </div>
@@ -28,15 +28,14 @@
           <div class="row row_margin">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <legend>
-                <%= t('activerecord.attributes.attendance.attendance_to') %>s
-                "<%= @time_slot.name %>"
+                <%= t('activerecord.attributes.attendance.attendance_to') %>
               </legend>
             </div>
             <div class="col-md-5 col-sm-4 col-xs-7 pad_none">
               <%= f.label :attendance_on, :class => 'col-sm-9' %>
             </div>  
             <div class="col-md-7 col-sm-7 col-xs-5 input-group date">
-              <%= f.text_field :attendance_on,:class => 'datepicker form-control' %>
+	      <%= f.date_select :attendance_on, {:default => Date.today}, {:class => "form-control"} %>
             </div>
           </div>  
           <div class="row row_margin">
@@ -48,15 +47,8 @@
             </div>
           </div>
         <% end %>  
-      <div class="row row_margin form-actions">
-        <%= f.submit nil, :class => 'btn btn-primary' %>
-        <%  if @attendance.persisted?  -%>
-          <%= link_to t('Show'), @attendance, :class => 'btn'%>
-          <%= link_to t('destroy'), @attendance, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
-        <% end -%>
-        <%= link_to t('Cancel'), attendances_path, :class => 'btn' %>
-      </div>
-        <div class="row row_margin">
+	<% unless @trial_lessons.blank? %>
+	<div class="row row_margin">
           <div class="col-md-5 col-sm-4 col-xs-7 pad_none">
             <%= f.label :trial_lessons, :class => 'col-sm-9' %>
           </div>  
@@ -71,35 +63,34 @@
             </div>
           </div>  
         </div> 
-        <div class="row row_margin">
+	<% end %>
+	<div class="row row_margin">
           <div class="col-md-5 col-sm-4 col-xs-12 pad_none">
             <%= f.label :padma_contacts, :class => 'col-sm-2 control-label' %>
           </div>  
           <div class="col-md-7 col-sm-8 col-xs-12 pad_none">
-            <ul id="attendance_contacts">
-              <% @attendance.contacts.each do |c| %>
-                <li>
-                <%= hidden_field_tag "attendance[padma_contacts][]",
-                  c.padma_id %>
-                <%= link_to "#{c.name}",
-                            "#",
-                            class: "delete btn btn-default btn-sm btn-block" %>
-                </li>
-              <% end %>
-            </ul>
-            <%= select_tag :padma_contacts_select,
+                      </div>  
+        </div> 
+      </fieldset>
+      <ul id="attendance_contacts">
+        <% @attendance.contacts.each do |c| %>
+          <li>
+            <%= hidden_field_tag "attendance[padma_contacts][]", c.padma_id %>
+            <%= link_to "#{c.name}", "#", class: "delete btn btn-default btn-sm btn-block" %>
+          </li>
+        <% end %>
+      </ul>
+      <div style="padding-left:40px">
+	<%= select_tag :padma_contacts_select,
               options_for_select({
                 t('attendances.form.recurrents_contacts') => :recurrent_contacts,
                 t('attendances.form.all_contacts') => :all_students
             }.merge(Hash[current_user.current_account.usernames.map {|username| [t('attendances.form.students_of', teacher: username), username].flatten}])
               ),
-              {:class => 'selectpicker select_width show-tick show-menu-arrow form-control'} %>
-            <span id="loader"><%= image_tag("ajax-loader.gif") %></span>
-          </div>  
-        </div> 
-      </fieldset>
-        
-      <fieldset id="attendance_padma_contacts">
+              {:class => 'selectpicker show-tick show-menu-arrow form-control'} %>
+        <span id="loader"><%= image_tag("ajax-loader.gif") %></span>
+      </div>
+      <fieldset id="attendance_padma_contacts" style="margin-top: 5px">
         <%= render :partial => 'shared/padma_contacts' %>
       </fieldset>
 
