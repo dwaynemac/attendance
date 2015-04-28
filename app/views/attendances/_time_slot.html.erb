@@ -5,7 +5,8 @@
     <div class="students-list">
       <%= att.contacts.map(&:name).join(', ') %>
     </div>
-    <%= link_to t('attendances.index.view'), att, :class => 'btn btn-default' %>
+    <%= link_to t('attendances.index.edit'), edit_attendance_path(att), :class => 'btn' %>
+    <%= link_to t('attendances.index.destroy'), att, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
   <% else %>
     <div class="btn-group">
       <%= link_to t('attendances.index.new'), new_attendance_path(:attendance => {:attendance_on => date, :time_slot_id => time_slot.id}), :class => 'btn btn-default' %>
