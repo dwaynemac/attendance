@@ -83,6 +83,8 @@ es:
       title: Asistencias
       view: Ver asistencia
       timeslots_wout_schedule_warning: Los siguientes horarios no tienen configurados sus días de la semana por lo que no aparecen en agenda de asistencias. Recomendamos configurar en cada horario de clases qué dias se dicta para facilitar el registro.
+      edit: Editar
+      destroy: Borrar
     show:
       title: Asistencia
   back: volver
