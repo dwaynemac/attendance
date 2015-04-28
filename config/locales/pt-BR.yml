@@ -77,6 +77,8 @@ pt-BR:
       all_contacts: 'Todos os alunos'
       students_of: "Alunos de %{teacher}"
     index:
+      edit: Alterar
+      destroy: Apagar
       older: Lançar presença de aulas anteriores.
       new: Lançar presença
       new_empty: Ninguém veio
