@@ -45,7 +45,7 @@ class AttendancesController < ApplicationController
   def update
     update_trial_lessons params[:trial_lessons] if params[:trial_lessons]
     @attendance.update(params[:attendance])
-    respond_with @attendance
+    redirect_to attendances_url
   end
 
   def destroy
