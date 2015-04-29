@@ -41,7 +41,7 @@ class Contact < ActiveRecord::Base
         # Get PadmaContact unless it is already present
         padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name, :local_status], :username => account.usernames.try(:first),  :account_name => account.name) if padma_contact.blank?
 
-	contact.accounts_contacts.create(:account => account, :padma_status => padma_contact.local_status) if padma_contact.present?
+	contact.accounts_contacts.create(:account_id => account.id, :padma_status => padma_contact.local_status) if padma_contact.present?
       end
       contact
     else
