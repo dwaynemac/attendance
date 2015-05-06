@@ -39,16 +39,29 @@ class Contact < ActiveRecord::Base
       #Local Contact found, associate to account if necessary
       unless contact.accounts.include?(account)
         # Get PadmaContact unless it is already present
-        padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name, :local_status], :username => account.usernames.try(:first),  :account_name => account.name) if padma_contact.blank?
+        if padma_contact.blank?
+          padma_contact = PadmaContact.find(padma_contact_id,
+                                            select: [:first_name, :last_name, :local_status],
+                                            username: account.usernames.try(:first),
+                                            account_name: account.name)
+        end
 
-	contact.accounts_contacts.create(:account_id => account.id, :padma_status => padma_contact.local_status) if padma_contact.present?
+        if padma_contact.present?
+          contact.accounts_contacts.create(account_id: account.id,
+                                           padma_status: padma_contact.local_status)
+        end
       end
       contact
     else
       #Local Contact not found, create & associate to account
       
       # Get PadmaContact unless it is already present
-      padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name, :local_status], :username => account.usernames.try(:first),  :account_name => account.name) if padma_contact.blank?
+      if padma_contact.blank?
+        padma_contact = PadmaContact.find(padma_contact_id,
+                                          select: [:first_name, :last_name, :local_status],
+                                          username: account.usernames.try(:first),
+                                          account_name: account.name)
+      end
 
       #New contact attributes from PadmaContacts
       args = {
