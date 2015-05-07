@@ -9,7 +9,12 @@ class PadmaContactsSynchronizer
     contacts = @account.contacts
 
     # Get all contacts updated since last sync.
-    padma_contacts = PadmaContact.search(select: [:first_name, :last_name, :local_status, :global_teacher_username], :where => {:local_status => [:student, :former_student], :updated_at =>  @account.synchronized_at}, per_page: 1000, username: @account.try(:padma).try(:admin).try(:username), account_name: @account.name)
+    padma_contacts = PadmaContact.search(select: [:first_name, :last_name, :local_status, :global_teacher_username],
+                                         where: {
+                                           local_status: [:student, :former_student],
+                                           updated_at:  @account.synchronized_at
+                                         },
+                                         account_name: @account.name)
 
     # Iterate over them
     padma_contacts.each do |padma_contact|
