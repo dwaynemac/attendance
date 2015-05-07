@@ -28,7 +28,9 @@ describe Contact do
     describe "if padma_contact given" do
       let(:padma_contact){PadmaContact.new(pc_attributes)}
       describe "if it has local_statuses" do
-        let(:pc_attributes){{first_name: 'a', local_statuses: [
+        let(:pc_attributes){{first_name: 'new-first-name',
+                             last_name: 'new-last-name',
+                             local_statuses: [
           {account_name: account.name, local_status: 'student'},
           {account_name: 'account-2', local_status: 'former_student'}
         ]}}
@@ -45,6 +47,11 @@ describe Contact do
         end
         it "created missing accounts_contacts" do
           expect{contact.sync_from_contacts_ws(padma_contact)}.to change{AccountsContact.count}.by 1
+        end
+        it "updates contact name" do
+          contact.sync_from_contacts_ws(padma_contact)
+          contact.reload
+          expect(contact.name).to eq 'new-first-name new-last-name'
         end
       end
       describe "if it doesnt have local_statuses" do
