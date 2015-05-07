@@ -27,6 +27,13 @@ class Contact < ActiveRecord::Base
     @padma_contact
   end
 
+  # Syncs local data with data from Contacts-ws
+  def sync_from_contacts_ws(pc = nil)
+    if pc.nil? || pc.local_statuses.blank?
+      pc = PadmaContact.find(padma_id, select: %W(full_name local_statuses))
+    end
+  end
+
   # Find or create a local contact by given padma_contact_id
   # @param [String] padma_contact_id ID of contact @ contacts-ws
   # @param [Integer] account_id 
