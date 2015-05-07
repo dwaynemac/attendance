@@ -18,6 +18,53 @@ describe Contact do
     end
   end
 
+  describe "sync_from_contacts_ws" do
+    let(:padma_id){'contact-id'}
+    let(:contact){create(:contact, padma_id: padma_id)}
+    before do
+      contact.accounts_contacts.create!(account_id: account.id,
+                                        padma_status: 'former_student')
+    end
+    describe "if padma_contact given" do
+      let(:padma_contact){PadmaContact.new(pc_attributes)}
+      describe "if it has local_statuses" do
+        let(:pc_attributes){{first_name: 'a', local_statuses: [
+          {account_name: account.name, local_status: 'student'},
+          {account_name: 'account-2', local_status: 'former_student'}
+        ]}}
+        it "wont call contacts-ws" do
+          PadmaContact.should_not_receive(:find)
+          contact.sync_from_contacts_ws(padma_contact)
+        end
+        it "updates accounts_contacts statuses" do
+          contact.sync_from_contacts_ws(padma_contact)
+          ac = contact.accounts_contacts
+                      .where(account_id: account.id)
+                      .first
+          expect(ac.padma_status).to eq 'student'
+        end
+        it "created missing accounts_contacts" do
+          expect{contact.sync_from_contacts_ws(padma_contact)}.to 
+            change{AccountcContact.count}.by 1
+        end
+      end
+      describe "if it doesnt have local_statuses" do
+        let(:pc_attributes){{first_name: 'a'}}
+        it "fetches padma_contact from contacts-ws" do
+          PadmaContact.should_receive(:find)
+          contact.sync_from_contacts_ws(padma_contact)
+        end
+      end
+    end
+    describe "if padma_contact not given" do
+      let(:padma_contact){nil}
+      it "fetches padma_contact from contacts-ws" do
+        PadmaContact.should_receive(:find)
+        contact.sync_from_contacts_ws(padma_contact)
+      end
+    end
+  end
+
   describe ".get_by_padma_id" do
     let(:padma_id){'contact-id'}
     describe "if already cached" do
