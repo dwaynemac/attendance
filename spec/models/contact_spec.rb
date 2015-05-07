@@ -44,8 +44,7 @@ describe Contact do
           expect(ac.padma_status).to eq 'student'
         end
         it "created missing accounts_contacts" do
-          expect{contact.sync_from_contacts_ws(padma_contact)}.to 
-            change{AccountcContact.count}.by 1
+          expect{contact.sync_from_contacts_ws(padma_contact)}.to change{AccountsContact.count}.by 1
         end
       end
       describe "if it doesnt have local_statuses" do

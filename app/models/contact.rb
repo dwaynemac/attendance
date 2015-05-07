@@ -32,6 +32,22 @@ class Contact < ActiveRecord::Base
     if pc.nil? || pc.local_statuses.blank?
       pc = PadmaContact.find(padma_id, select: %W(full_name local_statuses))
     end
+
+    if pc
+      pc.local_statuses.each do |ls|
+        ls.symbolize_keys!
+        a = Account.find_or_create_by_name ls[:account_name]
+        if a
+          ac = accounts_contacts.where(account_id: a.id).first
+          if ac
+            ac.update_attribute :padma_status, ls[:local_status]
+          else
+            accounts_contacts.create(account_id: a.id,
+                                     padma_stats: ls[:local_status])
+          end
+        end
+      end
+    end
   end
 
   # Find or create a local contact by given padma_contact_id
