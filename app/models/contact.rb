@@ -37,7 +37,7 @@ class Contact < ActiveRecord::Base
       update_attribute :name, "#{pc.first_name} #{pc.last_name}"
       pc.local_statuses.each do |ls|
         ls.symbolize_keys!
-        a = Account.find_or_create_by_name ls[:account_name]
+        a = Account.find_or_create_by name: ls[:account_name]
         if a
           ac = accounts_contacts.where(account_id: a.id).first
           if ac
