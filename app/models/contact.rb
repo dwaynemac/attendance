@@ -44,7 +44,7 @@ class Contact < ActiveRecord::Base
             ac.update_attribute :padma_status, ls[:local_status]
           else
             accounts_contacts.create(account_id: a.id,
-                                     padma_stats: ls[:local_status])
+                                     padma_status: ls[:local_status])
           end
         end
       end
