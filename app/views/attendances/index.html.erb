@@ -1,16 +1,18 @@
 <%- breadcrum t("attendances.index.title") -%>
 
+    <%= content_for :header_submenu do %>
+	<h2>
+          <%= link_to t('attendances.index.new'), new_attendance_path %>
+        </h2>
+    <% end -%>
+      
 <% unless @time_slots_wout_day.empty? -%>
   <div class="alert alert-warning">
     <p><%= t('.timeslots_wout_schedule_warning') %></p>
     <ul class="list-group">
       <% @time_slots_wout_day.each do |time_slot| -%>
         <li class="list-group-item">
-          <h4><%= time_slot.name %></h4>
-          <h5><%= timeslot_description(time_slot) %></h5>
-            <div class="btn-group">
-              <%= link_to t('attendances.index.new'), new_attendance_path(attendance: {time_slot_id: time_slot.id}), :class => 'btn btn-default' %>
-            </div>
+	  <b><%= time_slot.name %></b> <%= timeslot_description(time_slot) %> <%= link_to t('time_slots.index.edit'), edit_time_slot_path(time_slot), :class => 'btn btn-default btn-xs' %>
         </li>
       <% end -%>
     </ul>
