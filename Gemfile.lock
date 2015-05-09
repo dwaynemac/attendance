@@ -27,9 +27,9 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    accounts_client (0.2.5)
+    accounts_client (0.2.12)
       gravtastic
-      logical_model (~> 0.5.8)
+      logical_model (>= 0.5.8)
       railties (>= 3.1)
     actionmailer (4.0.0.rc1)
       actionpack (= 4.0.0.rc1)
@@ -329,7 +329,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  accounts_client (= 0.2.5)
+  accounts_client (= 0.2.12)
   activerecord-session_store
   activity_stream_client
   angularjs-rails
