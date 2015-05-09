@@ -1,25 +1,42 @@
 <%- require 'csv' -%>
-<%= CSV.generate(CSV_DEFAULTS) do |csv|
-  header= [
-      t('stats.table.name'),
-      t('stats.table.total')
+<%= CSV.generate(current_user.csv_options) do |csv|
+  header = [
+      to_current_encoding(t('stats.table.name')),
+      to_current_encoding(t('stats.table.total'))
   ]
+
   @distribution_names.each do |name|
-    header << name
-    header << name
+    header << to_current_encoding(name)
+    header << to_current_encoding(name)
   end
   csv << header
+  
   @contacts.each do |c|
     dist_array = []
 
-    dist_array << c.name
-    dist_array << number_with_precision(c.attendance_total || 0, precision: 0)
+    dist_array << to_current_encoding(c.name)
+    dist_array << to_current_encoding(number_with_precision(c.attendance_total || 0, 
+                                                            precision: 0))
     
     @distribution.each do |d|
-  	  	dist_array << number_with_precision(c.send("sum_#{d}"), precision: 0)
-  	  	dist_array << number_to_percentage(c.attendance_total > 0 ? c.send("sum_#{d}")/c.attendance_total.to_f*100 : 0, :precision => 2, :strip_insignificant_zeros => true).to_s
+  	  	dist_array << to_current_encoding(number_with_precision(c.send("sum_#{d}"), 
+                                                                precision: 0))
+
+        attendance_average = 0
+        if c.attendance_total > 0
+          attendance_average = c.send("sum_#{d}")/c.attendance_total.to_f*100
+        end
+
+  	  	dist_array << to_current_encoding(
+          number_to_percentage(
+            attendance_average,
+            :precision => 2,
+            :strip_insignificant_zeros => true
+          ).to_s
+        )
     end
 
     csv << dist_array
   end
+
 end.html_safe %>
