@@ -63,7 +63,7 @@
         <div class="col-md-4 col-sm-4 col-xs-5 pad_none"><%= f.label :padma_contacts, :class => 'control-label' %></div>
         <div class="col-md-8 col-sm-8 col-xs-7 left_pad_none">
           <ul id="time_slot_students">
-            <% @time_slot.contacts.students.each do |c| %>
+            <% @time_slot.contacts.students_on(current_user.current_account).each do |c| %>
               <li>
                 <%= hidden_field_tag "time_slot[padma_contacts][]", c.padma_id %><%= link_to "#{c.name}", "#", :class => "delete" %>
               </li>

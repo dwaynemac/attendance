@@ -34,7 +34,7 @@ class TimeSlot < ActiveRecord::Base
                     .select("contacts.name as first_name, '' as last_name, contacts.padma_id as _id") # Select Contact fields and prepare return as PadmaContacts
     
     # Find this timeslot's students and select fields for result
-    ts_contacts = self.contacts.students.select("contacts.name as first_name, '' as last_name, contacts.padma_id as _id").group('contacts.padma_id, contacts.name')
+    ts_contacts = self.contacts.students_on(account).select("contacts.name as first_name, '' as last_name, contacts.padma_id as _id").group('contacts.padma_id, contacts.name')
     
     # Join recurrent and timeslot students and order by name
     (ts_contacts+rec_contacts).uniq {|c| c._id}.sort{|a,b| a.first_name <=> b.first_name }

@@ -10,12 +10,10 @@ describe TimeSlotsController do
     let!(:ts){create(:time_slot, account_id: @user.current_account_id)}
     let(:st){create(:contact_time_slot,
                      time_slot: ts,
-                     contact: create(:contact,
-                                     padma_status: 'student')).contact}
+                     contact: create(:accounts_contact, account: @user.current_account, padma_status: 'student').contact).contact}
     let(:fst){create(:contact_time_slot,
                       time_slot: ts,
-                      contact: create(:contact,
-                                      padma_status: 'former_student')).contact}
+                      contact: create(:accounts_contact, account: @user.current_account, padma_status: 'former_student').contact).contact}
     before do
       get :show, id: ts.id
     end
