@@ -14,9 +14,11 @@ class Contact < ActiveRecord::Base
 
   validates_uniqueness_of :padma_id
 
-  scope :students, ->{ where(:padma_status => 'student') }
-
   attr_accessor :padma_contact
+
+  def self.students_on(account)
+    self.scoped.joins(:accounts_contacts).where(accounts_contacts: { padma_status: 'student', account_id: account.id })
+  end
 
   def padma_contact(account, options={})
     if @padma_contact.nil?

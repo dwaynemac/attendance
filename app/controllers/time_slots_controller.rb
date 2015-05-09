@@ -8,7 +8,7 @@ class TimeSlotsController < ApplicationController
   end
 
   def show
-    @students = @time_slot.contacts.students
+    @students = @time_slot.contacts.students_on(current_user.current_account)
   end
 
   def vacancies

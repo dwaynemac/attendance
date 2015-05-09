@@ -5,6 +5,20 @@ describe Contact do
 
   let(:account){ Account.first || create(:account)}
 
+  describe ".students_on(account)" do
+    before do
+      create(:contact).accounts_contacts.create(account_id: account.id,
+                                                padma_status: 'student')
+      create(:contact).accounts_contacts.create(account_id: account.id,
+                                                padma_status: 'prospect')
+      create(:contact).accounts_contacts.create(account_id: create(:account).id,
+                                                padma_status: 'student')
+    end
+    it "scopes to students on given account" do
+      expect(Contact.students_on(account).count).to eq 1
+    end
+  end
+
   describe "#time_slot_ids=" do
     # provided by has_many :time_slots
     let(:time_slot){create(:time_slot)}
