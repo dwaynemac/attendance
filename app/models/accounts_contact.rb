@@ -5,5 +5,5 @@ class AccountsContact < ActiveRecord::Base
   validates :account, presence: true
   validates :contact, presence: true
 
-  attr_accessible :account_id, :contact_id, :padma_status
+  attr_accessible :account_id, :account, :contact_id, :contact, :padma_status
 end
