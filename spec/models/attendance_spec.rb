@@ -33,6 +33,7 @@ describe Attendance do
   end
 
   it "should create nested attendance_contacts" do
+    account.contacts.delete_all
     contact = create(:contact)
     account.contacts << contact
     Contact.any_instance.stub(:padma_contact).and_return(PadmaContact.new(first_name: 'fn', last_name: 'ln', last_seen_at: 1.day.ago.to_s))

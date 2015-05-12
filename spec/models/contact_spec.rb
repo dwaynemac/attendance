@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Contact do
   it { have_many(:accounts).through(:accounts_contact) }
 
-  let(:account){ Account.first || create(:account)}
+  let(:account){ create(:account)}
 
   describe ".students_on(account)" do
     before do
@@ -36,8 +36,9 @@ describe Contact do
     let(:padma_id){'contact-id'}
     let(:contact){create(:contact, padma_id: padma_id)}
     before do
-      contact.accounts_contacts.create!(account_id: account.id,
-                                        padma_status: 'former_student')
+      create(:accounts_contact, contact: contact,
+                                account: account,
+                                padma_status: 'former_student')
     end
     describe "if padma_contact given" do
       let(:padma_contact){PadmaContact.new(pc_attributes)}
