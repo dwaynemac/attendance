@@ -5,12 +5,17 @@ class PadmaContactsSynchronizer
     @account = account
   end
 
-  def sync
+  def sync(wayback = nil)
+    wayback ||= 2.days
     # Get all contacts updated since last sync.
-    padma_contacts = PadmaContact.search(select: [:first_name, :last_name, :local_status, :local_statuses, :global_teacher_username],
+    padma_contacts = PadmaContact.search(select: [:first_name,
+                                                  :last_name,
+                                                  :local_status,
+                                                  :local_statuses,
+                                                  :global_teacher_username],
                                          where: {
                                            local_status: [:student, :former_student],
-                                           updated_at:  @account.synchronized_at
+                                           updated_at:  @account.synchronized_at - wayback
                                          },
                                          account_name: @account.name)
 
