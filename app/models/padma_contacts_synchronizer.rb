@@ -14,18 +14,19 @@ class PadmaContactsSynchronizer
                                                   :local_statuses,
                                                   :global_teacher_username],
                                          where: {
-                                           local_status: [:student, :former_student],
+                                           # local_status: [:student, :former_student], -- BUG - currently not working if used with together with updated_at filter
                                            updated_at:  @account.synchronized_at - wayback
                                          },
                                          account_name: @account.name)
 
     # Iterate over them
     padma_contacts.each do |padma_contact|
-        contact = Contact.find_or_create_by padma_id: padma_contact.id
+      next unless padma_contact.local_status.try(:to_sym).in?([:student,:former_student])
+      contact = Contact.find_or_create_by padma_id: padma_contact.id
 
-        if contact
-          contact.sync_from_contacts_ws(padma_contact)
-      	end
+      if contact
+        contact.sync_from_contacts_ws(padma_contact)
+      end
     end
     @account.update_attribute(:synchronized_at, DateTime.now)
   end
