@@ -21,7 +21,7 @@ class PadmaContactsSynchronizer
 
     # Iterate over them
     padma_contacts.each do |padma_contact|
-      next unless padma_contact.local_status.try(:to_sym).in?([:student,:former_student])
+      next unless padma_contact.local_status.try(:to_sym).in?([:student,:former_student]) # -- BUG -- filter here until local_status bug solved
       contact = Contact.find_or_create_by padma_id: padma_contact.id
 
       if contact
