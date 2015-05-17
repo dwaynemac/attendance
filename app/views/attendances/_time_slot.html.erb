@@ -1,9 +1,9 @@
 <% att = @attendances.select {|a| a.attendance_on == date && a.time_slot == time_slot}.first %>
-<% if att.present? || time_slot.send(Date::DAYNAMES[date.wday].downcase.to_sym) %>
+<% if att.present? || ( time_slot.send(Date::DAYNAMES[date.wday].downcase.to_sym) && Time.zone.local(date.year, date.month, date.day, time_slot.start_at.hour, time_slot.start_at.min) <= Time.zone.now )%>
 <li class="list-group-item">
   <h4><%= time_slot.name %></h4>
   <h5><%= timeslot_description(time_slot) %></h5>
-  <% if att = @attendances.select {|a| a.attendance_on == date && a.time_slot == time_slot}.first %>
+  <% if att %>
     <div class="students-list">
       <%= att.contacts.map(&:name).join(', ') %>
     </div>
