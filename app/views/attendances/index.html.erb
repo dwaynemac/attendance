@@ -27,6 +27,9 @@
       <% if date.month != Date.today.month -%>
         (<%= l(date, format: :month) %>)
       <% end -%>
+      <% if date.today? %>
+        <%= link_to "Show all timeslots", "#", :class => "btn btn-default btn-xs", :id => "toggle-hidden-timeslots" %>      
+      <% end %>
     </div>
     <div class="panel-body">
       <ul class="list-group">
