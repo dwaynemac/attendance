@@ -28,7 +28,7 @@
         (<%= l(date, format: :month) %>)
       <% end -%>
       <% if date.today? %>
-        <%= link_to "Show all timeslots", "#", :class => "btn btn-default btn-xs", :id => "toggle-hidden-timeslots" %>      
+        <%= link_to t('attendances.index.toggle_hidden_timeslots'), "#", :class => "btn btn-default btn-xs", :id => "toggle-hidden-timeslots" %>      
       <% end %>
     </div>
     <div class="panel-body">

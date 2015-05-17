@@ -85,6 +85,7 @@ es:
       timeslots_wout_schedule_warning: Los siguientes horarios no tienen configurados sus días de la semana por lo que no aparecen en agenda de asistencias. Recomendamos configurar en cada horario de clases qué dias se dicta para facilitar el registro.
       edit: Editar
       destroy: Borrar
+      toggle_hidden_timeslots: Mostrar todos los horarios
     show:
       title: Asistencia
   back: volver
