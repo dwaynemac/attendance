@@ -31,9 +31,7 @@
     <div class="panel-body">
       <ul class="list-group">
         <% @time_slots.each do |time_slot| %>
-          <% if time_slot.send(Date::DAYNAMES[date.wday].downcase.to_sym) %>
             <%= render 'attendances/time_slot', time_slot: time_slot, date: date %>
-          <% end %>
         <% end %>
       </ul>
     </div>

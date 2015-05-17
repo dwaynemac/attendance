@@ -1,3 +1,5 @@
+<% att = @attendances.select {|a| a.attendance_on == date && a.time_slot == time_slot}.first %>
+<% if att.present? || time_slot.send(Date::DAYNAMES[date.wday].downcase.to_sym) %>
 <li class="list-group-item">
   <h4><%= time_slot.name %></h4>
   <h5><%= timeslot_description(time_slot) %></h5>
@@ -14,3 +16,4 @@
     </div>
   <% end %>
 </li>
+<% end %>
