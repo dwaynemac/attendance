@@ -83,6 +83,7 @@ en:
       title: Attendance
       view: View attendance
       timeslots_wout_schedule_warning: 
+      toggle_hidden_timeslots: Show all timeslots
     show:
       title: 
   back: Back

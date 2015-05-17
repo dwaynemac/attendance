@@ -4,7 +4,12 @@ $(document).ready ->
 		$(this).parent().prepend("<input type='hidden' value='" + $(this).attr('data-padma-id') + "' name='attendance[padma_contacts][]'>")
 		$('ul#attendance_contacts').append($(this).parent())
 		false
-  
+        
+	$(document).on 'click', '#toggle-hidden-timeslots', (event) ->
+		event.preventDefault()
+		$('#toggle-hidden-timeslots').toggleClass('active')
+		$('.today.other-users-ts').toggle()
+
 $ ->
   $("#loader").hide()
   $(document).ajaxStart ->
@@ -24,3 +29,4 @@ $ ->
       onText: "Yes",
       offText: "No",
     })
+

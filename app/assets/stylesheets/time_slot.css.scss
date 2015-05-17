@@ -23,6 +23,11 @@
 .select_btn_width{
   width:auto !important;
 }
+
+.today.other-users-ts {
+  display: none;
+}
+
 @media screen and (min-width:320px) and (max-width:700px){
   .middle-section {
     width: 100%;
