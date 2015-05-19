@@ -83,7 +83,8 @@ en:
       title: Attendance
       view: View attendance
       timeslots_wout_schedule_warning: 
-      toggle_hidden_timeslots: Show all timeslots
+      timeslots_hidden_warning: Timeslots from other instructors and in the future are hidden to simplify the registration.
+      toggle_hidden_timeslots: Show timeslots from other instructors
     show:
       title: 
   back: Back

@@ -27,9 +27,6 @@
       <% if date.month != Date.today.month -%>
         (<%= l(date, format: :month) %>)
       <% end -%>
-      <% if date.today? %>
-        <%= link_to t('attendances.index.toggle_hidden_timeslots'), "#", :class => "btn btn-default btn-xs", :id => "toggle-hidden-timeslots" %>      
-      <% end %>
     </div>
     <div class="panel-body">
       <ul class="list-group">
@@ -37,6 +34,12 @@
             <%= render 'attendances/time_slot', time_slot: time_slot, date: date %>
         <% end %>
       </ul>
+
+      <% if date.today? %>
+        <div class="alert alert-warning">
+          <p><%= t('.timeslots_hidden_warning') %> <%= link_to t('attendances.index.toggle_hidden_timeslots'), "#", :class => "btn btn-default btn-xs", :id => "toggle-hidden-timeslots" %></p>
+        </div>         
+      <% end %>
     </div>
   </div>
 <% end %>

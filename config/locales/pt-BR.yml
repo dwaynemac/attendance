@@ -85,7 +85,8 @@ pt-BR:
       title: Presenças
       view: Ver presenças
       timeslots_wout_schedule_warning: Estas turmas nāo tem configurados seus días de aula e por tanto nāo sāo incluidas na agenda de cadastro de presenças. Para facilitar o cadastro día a día recomendamos colocar em cada turma os dias de aula.
-      toggle_hidden_timeslots: Ver todas as aulas
+      toggle_hidden_timeslots: Ver as aulas de todos os instrutores
+      timeslots_hidden_warning: As turmas futuras e de outros instrutores estāo ocultas para facilitar o cadastro.
     show:
       title: Presenças
   back: voltar
