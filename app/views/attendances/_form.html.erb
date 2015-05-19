@@ -22,7 +22,7 @@
               </legend>
             </div>
           </div>
-          <div class="hidden"><%= f.date_select :attendance_on, :default => Date.today %></div>
+          <div class="hidden"><%= f.date_select :attendance_on, :default => Time.zone.today %></div>
           <%= f.hidden_field :time_slot_id %>
         <% else %>  
           <div class="row row_margin">
@@ -35,7 +35,7 @@
               <%= f.label :attendance_on, :class => 'col-sm-9' %>
             </div>  
             <div class="col-md-7 col-sm-7 col-xs-5 input-group date">
-	      <%= f.date_select :attendance_on, {:default => Date.today}, {:class => "form-control"} %>
+	      <%= f.date_select :attendance_on, {:default => Time.zone.today}, {:class => "form-control"} %>
             </div>
           </div>  
           <div class="row row_margin">
@@ -43,7 +43,7 @@
               <%= f.label :time_slot_id, :class => 'col-sm-3' %>
             </div>  
             <div class="col-md-7 col-sm-8 col-xs-5 pad_none">
-              <%= f.collection_select :time_slot_id, current_user.current_account.time_slots, :id, :name, {},{:class => 'selectpicker select_width show-tick show-menu-arrow form-control'} %>
+		    <%= f.collection_select :time_slot_id, current_user.current_account.time_slots, :id, :name, {:prompt => t('attendances.form.select_timeslot')},{:class => 'selectpicker select_width show-tick show-menu-arrow form-control'} %>
             </div>
           </div>
         <% end %>  

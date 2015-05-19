@@ -76,6 +76,7 @@ pt-BR:
       recurrents_contacts: 'Alunos frequêntes'
       all_contacts: 'Todos os alunos'
       students_of: "Alunos de %{teacher}"
+      select_timeslot: Escolher uma turma
     index:
       edit: Alterar
       destroy: Apagar

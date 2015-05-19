@@ -76,6 +76,7 @@ en:
       all_contacts: All students
       contact_assisted: 
       students_of: '%{teacher}''s students'
+      select_timeslot: Select timeslot
     index:
       older: Regiser older attendances 
       new: Register attendance
