@@ -3,6 +3,9 @@ $(document).ready ->
 		$(this).parent().remove()
 		false
 
+	$(document).on 'change', '#attendance_time_slot_id', (event) ->
+		$("#padma_contacts_select").trigger("change")
+
 	$(document).on 'change', '#padma_contacts_select', (event) ->
 		if($(this).val() == 'recurrent_contacts')
 			$.ajax(url:'/contacts', data: {time_slot_id: $('#attendance_time_slot_id').val()}, dataType: "script")

@@ -76,6 +76,7 @@ es:
       students_of: Alumnos de %{teacher}
       all_contacts: Todos los alumnos
       recurrents_contacts: Alumnos recurrentes de este horario
+      select_timeslot: Seleccionar un horario
     index:
       older: Marcar asistencias de hace más de 1 semana atrás.
       new: Marcar asistencia
