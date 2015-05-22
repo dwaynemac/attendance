@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150517024821) do
+ActiveRecord::Schema.define(version: 20150522133423) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 20150517024821) do
     t.boolean  "cultural_activity"
     t.text     "observations"
     t.string   "external_id"
+    t.boolean  "unscheduled"
   end
 
   create_table "trial_lessons", force: true do |t|

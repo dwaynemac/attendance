@@ -35,6 +35,7 @@ en:
         padma_contacts: Students
         padma_uid: Instructor
         schedule: Schedule
+        unscheduled: Unscheduled
         start_at: Starts
       trial_lesson:
         assisted: Assisted

@@ -30,3 +30,14 @@ $ ->
       offText: "No",
     })
 
+  $(".ignore_unscheduled").click (e)->
+    e.preventDefault()
+    warning_entry = $(this).parent()
+    $.ajax
+      type: 'PUT'
+      data: { time_slot: {unscheduled: true}}
+      url: $(this).attr('href')
+      dataType: 'json'
+      success: (data, textStatus, jqXHR) ->
+        warning_entry.remove()
+
