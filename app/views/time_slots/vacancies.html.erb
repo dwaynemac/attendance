@@ -1,14 +1,13 @@
 <h3><%= t('time_slots.index.title') %></h3>
-
-<table class="table table-striped">
+<table id='attendancetable' class="table table-striped">
   <thead>
-  <tr>
-    <td><%= TimeSlot.human_attribute_name(:name) %></td>
-    <td><%= TimeSlot.human_attribute_name(:start_at) %></td>
-    <td><%= TimeSlot.human_attribute_name(:end_at) %></td>
-    <td><%= t('.days') %></td>
-    <td><%= t('.vacancies') %></td>
-  </tr>
+    <tr>
+      <th><%= TimeSlot.human_attribute_name(:name) %></th>
+      <th><%= TimeSlot.human_attribute_name(:start_at) %></th>
+      <th><%= TimeSlot.human_attribute_name(:end_at) %></th>
+      <th><%= t('.days') %></td>
+      <th><%= t('.vacancies') %></td>
+    </tr>
   </thead>
   <tbody>
   <% @time_slots.each do |ts| %>
@@ -17,7 +16,7 @@
       <td><%= ts.start_at.strftime('%H:%M') %></td>
       <td><%= ts.end_at.strftime('%H:%M') %></td>
       <td><%= showSchedule ts %></td>
-      <td data-text="<%= t('.no_vacancies') %>">
+      <td class='attendance_actions' data-text="<%= t('.no_vacancies') %>">
         <%= link_to t('.check_vacancies'), 'javascript:void(0);', onclick: 'checkVacancies(this);', class: 'btn btn-default' %>
         <%= image_tag 'ajax-loader.gif', id: 'vacancies-think' %>
       </td>

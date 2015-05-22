@@ -1,6 +1,5 @@
 <%- breadcrum t("trial_lessons.index.title") -%>
-
-<ul>
+<ul class='list-unstyled lessons-list'>
   <% @trial_lessons.group_by { |t| t.trial_on }.each do |date, trial_lessons| %>
     <h3><%= date %></h3>
     <% trial_lessons.each do |trial_lesson| %>
@@ -9,10 +8,10 @@
       <%- if trial_lesson.assisted? -%>
         <span class="label label-success"><%= t('trial_lesson.status.assisted') %></span>
       <%- else -%>
-        <%= content_tag( :span, t('trial_lesson.status.absent'), class: 'label label-important') if trial_lesson.trial_at < Time.zone.now %>
+        <%= content_tag( :span, t('trial_lesson.status.absent'), class: 'label label-danger') if trial_lesson.trial_at < Time.zone.now %>
       <%- end -%>
-      <%= link_to t('edit'), edit_trial_lesson_path(trial_lesson), :class => 'btn btn-mini' %>
-      <%= link_to t('destroy'), trial_lesson, method: :delete, data: { confirm: t('confirm')}, :class => 'btn btn-mini btn-danger' %>
+      <%= link_to t('edit'), edit_trial_lesson_path(trial_lesson), :class => 'btn btn-default btn-sm' %>
+      <%= link_to t('destroy'), trial_lesson, method: :delete, data: { confirm: t('confirm')}, :class => 'btn btn-danger btn-sm' %>
       <%= link_to t('trial_lessons.index.archive'),
                   trial_lesson_path(
                     id: trial_lesson.id,
@@ -20,13 +19,11 @@
                     redirect_to: 'index'
                   ),
                   method: :put,
-                  class: 'btn btn-mini btn-link'
+                  class: 'btn btn-link btn-sm'
       %>
       </li>
     <% end %>
   <% end %>
 </ul>
-
 <br>
-
 <%= link_to t('trial_lessons.index.new'), new_trial_lesson_path, :class => 'btn btn-default' %>

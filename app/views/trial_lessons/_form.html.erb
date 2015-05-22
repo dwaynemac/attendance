@@ -1,122 +1,123 @@
-<%= form_for @trial_lesson, :html => { :class => 'form-horizontal' } do |f| %>
-  <% if @trial_lesson.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@trial_lesson.errors.count, "error") %> prohibited this trial_lesson from being saved:</h2>
-
-      <ul>
-      <% @trial_lesson.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<div class='row'>
+  <%= form_for @trial_lesson, :html => { :class => 'form-horizontal' } do |f| %>
+    <div class='col-sm-9 col-md-6'>
+      <% if @trial_lesson.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@trial_lesson.errors.count, "error") %> prohibited this trial_lesson from being saved:</h2>
+          <ul>
+          <% @trial_lesson.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
+      <div class="form-group">
+        <%= f.label :trial_on, :class => 'col-xs-5 col-md-4 control-label' %>
+        <div class="col-xs-7 col-md-8 date">
+          <div class='form-inline input-group input-group-s'>
+            <%= f.date_select :trial_on, {},{:class => 'form-control'} %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :time_slot_id, :class => 'col-xs-5 col-md-4 control-label' %>
+        <div class='col-xs-7 col-md-8'>
+          <%= f.collection_select :time_slot_id, current_user.current_account.time_slots, :id, :name, {},{:class => 'form-control'} %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :padma_contact_id, :class => 'col-xs-5 col-md-4 control-label' %>
+        <div class='col-xs-7 col-md-8'>
+          <div class="input-group">
+            <% initialize_select =
+                if @trial_lesson.contact_id && !@trial_lesson.persisted?
+                  {:data => {:name => params[:padma_contact_name]}}
+                elsif @trial_lesson.contact
+                  {:data => {:name => "#{@trial_lesson.contact.name}"}}
+                else
+                  {}
+                end
+            %>
+            <%= f.hidden_field :padma_contact_id, initialize_select %>
+          </div>
+        </div>
+      </div>
+      <%= javascript_tag do %>
+
+        function contactFormatResult(contact) {
+            var markup = "<div>" + contact.name + "</div>";
+            return markup;
+        }
+
+        function contactFormatSelection(contact) {
+            return contact.name;
+        }
+
+        $("#trial_lesson_padma_contact_id").select2({
+          placeholder: "<%= t('trial_lessons.search_contact') %>",
+          minimumInputLength: 3,
+          ajax: {
+            url: "http://<%= Contacts::HOST %>/v0/contacts/search_for_select",
+            type: 'POST',
+            dataType: 'jsonp',
+            quietMillis: 100,
+            data: function (term, page) { // page is the one-based page number tracked by Select2
+              return {
+                page: page,
+                per_page: 10,
+                sort: {
+                  first_name: "asc",
+                  last_name: "asc"
+                },
+                username: "<%= current_user.username %>",
+                account_name: "<%= current_user.current_account.name %>",
+                only_name: true,
+                full_text: term,
+                app_key: "<%= ENV['contacts_key'] %>"
+              };
+            },
+            results: function (data, page) {
+              var more = (page * 10) < data.total; // whether or not there are more results available
+              // notice we return the value of more so Select2 knows if more results can be loaded
+              return {results: data.collection, more: more};
+            }
+          },
+          initSelection: function(element, callback) {
+            // the input tag has a value attribute preloaded that points to a preselected movie's id
+            // this function resolves that id attribute to an object that select2 can render
+            // using its formatResult renderer - that way the movie name is shown preselected
+            var id=$(element).val();
+            var name=$(element).attr("data-name");
+            if (id!=="") {
+              callback({"id": id, "name": name});
+            }
+          },
+          formatResult: contactFormatResult, // omitted for brevity, see the source of this page
+          formatSelection: contactFormatSelection, // omitted for brevity, see the source of this page
+          dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
+          escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
+        });
+
+      <% end %>
+      <div class="form-group">
+        <%= f.label :padma_uid, :class => 'col-xs-5 col-md-4 control-label' %>
+        <div class='col-xs-7 col-md-8'>
+          <%= f.select :padma_uid, current_user.current_account.usernames, {},{:class => 'form-control'} %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :assisted, :class => 'col-xs-5 col-md-4 control-label' %>
+        <div class='col-xs-7 col-md-8'>
+          <div class='checkbox'>
+            <%= f.check_box :assisted %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 form-actions">
+      <hr />
+      <%= link_to t('back'), trial_lessons_path, :class => 'btn btn-link' %>
+      <%= f.submit :class => 'btn btn-primary' %>
     </div>
   <% end %>
-
-  <fieldset>
-
-    <div class="form-group">
-      <%= f.label :trial_on, :class => 'col-sm-2 control-label' %>
-      <div class="input-group date col-lg-3">
-        <%= f.date_select :trial_on, {},{:class => 'form-control'} %>
-      </div>
-    </div>
-    <div class="form-group">
-      <%= f.label :time_slot_id, :class => 'col-sm-2 control-label' %>
-      <div class="input-group col-lg-2">
-        <%= f.collection_select :time_slot_id, current_user.current_account.time_slots, :id, :name, {},{:class => 'form-control'} %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :padma_contact_id, :class => 'col-sm-2 control-label' %>
-      <div class="input-group">
-        <% initialize_select = 
-            if @trial_lesson.contact_id && !@trial_lesson.persisted?
-              {:data => {:name => params[:padma_contact_name]}} 
-            elsif @trial_lesson.contact 
-              {:data => {:name => "#{@trial_lesson.contact.name}"}} 
-            else
-              {}
-            end 
-        %>
-        <%= f.hidden_field :padma_contact_id, initialize_select %>
-      </div>
-    </div>
-
-    <%= javascript_tag do %>
-
-      function contactFormatResult(contact) {
-          var markup = "<div>" + contact.name + "</div>";
-          return markup;
-      }
-
-      function contactFormatSelection(contact) {
-          return contact.name;
-      }
-
-      $("#trial_lesson_padma_contact_id").select2({
-        placeholder: "<%= t('trial_lessons.search_contact') %>",
-        minimumInputLength: 3,
-        ajax: {
-          url: "http://<%= Contacts::HOST %>/v0/contacts/search_for_select",
-          type: 'POST',
-          dataType: 'jsonp',
-          quietMillis: 100,
-          data: function (term, page) { // page is the one-based page number tracked by Select2
-            return {
-              page: page, 
-              per_page: 10,
-              sort: { 
-                first_name: "asc", 
-                last_name: "asc"
-              },
-              username: "<%= current_user.username %>", 
-              account_name: "<%= current_user.current_account.name %>",
-              only_name: true, 
-              full_text: term, 
-              app_key: "<%= ENV['contacts_key'] %>"
-            };
-          },
-          results: function (data, page) {
-            var more = (page * 10) < data.total; // whether or not there are more results available
-            
-            // notice we return the value of more so Select2 knows if more results can be loaded
-            return {results: data.collection, more: more};
-          }
-        },
-        initSelection: function(element, callback) {
-          // the input tag has a value attribute preloaded that points to a preselected movie's id
-          // this function resolves that id attribute to an object that select2 can render
-          // using its formatResult renderer - that way the movie name is shown preselected
-          var id=$(element).val();
-          var name=$(element).attr("data-name");
-          if (id!=="") {
-            callback({"id": id, "name": name});
-          }
-        },
-        formatResult: contactFormatResult, // omitted for brevity, see the source of this page
-        formatSelection: contactFormatSelection, // omitted for brevity, see the source of this page
-        dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
-        escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
-      });
-
-    <% end %>
-
-    <div class="form-group">
-      <%= f.label :padma_uid, :class => 'col-sm-2 control-label' %>
-      <div class="input-group col-lg-2">
-        <%= f.select :padma_uid, current_user.current_account.usernames, {},{:class => 'form-control'} %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :assisted, :class => 'col-sm-2 control-label' %>
-      <div class="checkbox col-sm-10">
-        <%= f.check_box :assisted %>
-      </div>
-    </div>
-  </fieldset>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

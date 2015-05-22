@@ -1,30 +1,24 @@
 <%- breadcrum t("trial_lessons.show.title") -%>
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b><%= TrialLesson.human_attribute_name :trial_on %></b><br>
-  <%= @trial_lesson.trial_on %>
-</p>
-
-<p>
-  <b><%= TrialLesson.human_attribute_name :time_slot %></b><br>
-  <%= @trial_lesson.time_slot.name %>
-</p>
-
-<p>
-  <b><%= TrialLesson.human_attribute_name :contact %></b><br>
-  <%= @trial_lesson.contact.try :name %> 
-</p>
-
-<p>
-  <b><%= TrialLesson.human_attribute_name :padma_uid %></b><br>
-  <%= @trial_lesson.padma_uid %>
-</p>
-
-<p>
-  <b><%= TrialLesson.human_attribute_name :assisted %></b><br>
-  <%= @trial_lesson.assisted %>
-</p>
-
-<%= link_to 'Edit', edit_trial_lesson_path(@trial_lesson) %> |
-<%= link_to t('back'), trial_lessons_path %>
+<dl>
+  <dt><%= TrialLesson.human_attribute_name :trial_on %></dt>
+  <dd><%= @trial_lesson.trial_on %></dd>
+</dl>
+<dl>
+  <dt><%= TrialLesson.human_attribute_name :time_slot %></dt>
+  <dd><%= @trial_lesson.time_slot.name %></dd>
+</dl>
+<dl>
+  <dt><%= TrialLesson.human_attribute_name :contact %></dt>
+  <dd><%= @trial_lesson.contact.try :name %></dd>
+</dl>
+<dl>
+  <dt><%= TrialLesson.human_attribute_name :padma_uid %></dt>
+  <dd><%= @trial_lesson.padma_uid %></dd>
+</dl>
+<dl>
+  <dt><%= TrialLesson.human_attribute_name :assisted %></dt>
+  <dd><%= @trial_lesson.assisted %></dd>
+</dl>
+<%= link_to 'Edit', edit_trial_lesson_path(@trial_lesson), :class => 'btn btn-default' %>
+<%= link_to t('back'), trial_lessons_path, :class => 'btn btn-link' %>

@@ -1,14 +1,14 @@
 <%- breadcrum t("time_slots.index.title") -%>
 
-<table class="table table-striped">
+<table id='attendancetable' class="table table-striped">
   <thead>
-  <tr>
-    <td><%= TimeSlot.human_attribute_name(:name) %></td>
-    <td><%= TimeSlot.human_attribute_name(:padma_uid) %></td>
-    <td><%= TimeSlot.human_attribute_name(:start_at) %></td>
-    <td><%= TimeSlot.human_attribute_name(:end_at) %></td>
-    <td></td>
-  </tr>
+    <tr>
+      <th><%= TimeSlot.human_attribute_name(:name) %></th>
+      <th><%= TimeSlot.human_attribute_name(:padma_uid) %></th>
+      <th><%= TimeSlot.human_attribute_name(:start_at) %></th>
+      <th><%= TimeSlot.human_attribute_name(:end_at) %></th>
+      <th></th>
+    </tr>
   </thead>
   <tbody>
   <% @time_slots.each do |ts| %>
@@ -17,10 +17,10 @@
       <td><%= ts.padma_uid %></td>
       <td><%= ts.start_at.strftime('%H:%M') %></td>
       <td><%= ts.end_at.strftime('%H:%M') %></td>
-      <td>
-        <%= link_to 'Show', ts, :class => 'btn btn-mini' %>
-        <%= link_to t('edit'), edit_time_slot_path(ts), :class => 'btn btn-mini' %>
-        <%= link_to t('destroy'), time_slot_path(ts), :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
+      <td class='attendance_actions'>
+        <%= link_to 'Show', ts, :class => 'btn btn-default btn-sm' %>
+        <%= link_to t('edit'), edit_time_slot_path(ts), :class => 'btn btn-default btn-sm' %>
+        <%= link_to t('destroy'), time_slot_path(ts), :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-sm' %>
       </td>
     </tr>
   <% end %>

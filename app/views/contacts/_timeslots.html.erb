@@ -1,17 +1,11 @@
 <div id="contacts-timeslots" class="col-md-4">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <%= link_to t('edit'), "#",
-                             id: 'edit-timeslots',
-                             'data-cancel-text' => t('cancel'),
-                             'data-edit-text' => t('edit'),
-                             class: 'btn btn-xs btn-default pull-right' %>
-      <%= link_to t('save'),
-                  "javascript:$('#contacts-timeslots form').submit();",
-                  id: 'save_timeslots',
-                  class: 'btn btn-xs btn-success pull-right'
-      %>
-      <h2 class="panel-title"><%= t('.timeslots') %></h2>
+      <div class='pull-right'>
+        <%= link_to t('edit'), "#", id: 'edit-timeslots', 'data-cancel-text' => t('cancel'), 'data-edit-text' => t('edit'), class: 'btn btn-xs btn-default' %>
+        <%= link_to t('save'), "javascript:$('#contacts-timeslots form').submit();", id: 'save_timeslots', class: 'btn btn-xs btn-success' %>
+      </div>
+      <div class="panel-title"><%= t('.timeslots') %></div>
     </div>
     <div class="panel-body">
       <%= form_for @contact, remote: true, method: 'PUT', id: 'timeslots_form' do |f|  %>

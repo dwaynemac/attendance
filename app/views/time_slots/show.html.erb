@@ -2,29 +2,25 @@
   <%= @time_slot.name %>
 <% end -%>
 <%- breadcrum t("time_slots.show.title") -%>
-<legend>
+<h4 class='page-header page-header-margin-middle'>
   <%= @time_slot.name %> (<%= @time_slot.start_at.strftime('%H:%M') %> - <%= @time_slot.end_at.strftime('%H:%M') %>)
   <% if @time_slot.cultural_activity -%>
     -
     <%= t('.is_a_cultural_activity') %>
   <% end -%>
-</legend>
-
-  <p>
-    <b><%=TimeSlot.human_attribute_name :padma_uid %></b>:
-    <%= @time_slot.padma_uid %>
-  </p>
+</h4>
+<p>
+  <strong><%=TimeSlot.human_attribute_name :padma_uid %></strong>: <%= @time_slot.padma_uid %>
+</p>
 
 <div class="row">
   <div class="col-md-4">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h2 class="panel-title">
+        <div class="panel-title">
+          <%= link_to t('edit'), edit_time_slot_path(@time_slot), class: 'btn btn-xs btn-default pull-right' %>
           <%= t('.days_of_the_week') %>
-          <%= link_to t('edit'),
-                      edit_time_slot_path(@time_slot),
-                      class: 'btn btn-xs btn-default pull-right' %>
-        </h2>
+        </div>
       </div>
       <div class="panel-body">
         <ul class="list-group">
@@ -37,16 +33,13 @@
       </div>
     </div>
   </div>
-
   <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h2 class="panel-title">
+        <div class="panel-title">
+          <%= link_to t('edit'), edit_time_slot_path(@time_slot), class: 'btn btn-xs btn-default pull-right' %>
           <%= t('.students') %>
-          <%= link_to t('edit'),
-                      edit_time_slot_path(@time_slot),
-                      class: 'btn btn-xs btn-default pull-right' %>
-        </h2>
+        </div>
       </div>
       <div class="panel-body">
         <ul class="list-group">
@@ -57,10 +50,9 @@
       </div>
     </div>
   </div>
-
-
 </div>
-<div class="row">
-<%= link_to t('back'), time_slots_path, :class => 'btn' %>
-<%= link_to t('destroy'), @time_slot, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+<hr />
+<div class='form-actions'>
+  <%= link_to t('back'), time_slots_path, :class => 'btn btn-link' %>
+  <%= link_to t('destroy'), @time_slot, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
 </div>
