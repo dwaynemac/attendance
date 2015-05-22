@@ -30,6 +30,7 @@ pt-BR:
         add_a_contact: 
         contact_time_slots: 
         cultural_activity: Atividade cultural
+        unscheduled: Sem cronograma
         end_at: Final
         name: Nome
         padma_contacts: 
@@ -79,6 +80,7 @@ pt-BR:
       select_timeslot: Escolher uma turma
     index:
       edit: Alterar
+      ignore: Ignorar
       destroy: Apagar
       older: Lançar presença de aulas anteriores.
       new: Lançar presença

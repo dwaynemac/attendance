@@ -14,6 +14,11 @@ $ ->
     offText: "No"
   })
 
+  $("#time_slot_unscheduled").bootstrapSwitch({
+    onText: "Yes",
+    offText: "No"
+  })
+
   $('.multiselect').multiselect({
     includeSelectAllOption: true
   })

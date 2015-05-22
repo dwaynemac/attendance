@@ -30,6 +30,7 @@ es:
         add_a_contact: Agregar un alumno
         contact_time_slots: 
         cultural_activity: Actividad Cultural
+        unscheduled: Sin cronograma
         end_at: Fin
         name: Nombre
         padma_contacts: Alumnos
@@ -80,6 +81,7 @@ es:
     index:
       older: Marcar asistencias de hace más de 1 semana atrás.
       new: Marcar asistencia
+      ignore: Ignorar
       new_empty: No vino nadie
       title: Asistencias
       view: Ver asistencia
