@@ -10,12 +10,12 @@ class TimeSlot < ActiveRecord::Base
   validates :name,  :presence => true #, :uniqueness => {:scope => :account_id}
   validates_time :end_at, :after => :start_at
 
-  attr_accessible :padma_uid, :name, :start_at, :end_at, :padma_contacts, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :cultural_activity, :external_id
+  attr_accessible :padma_uid, :name, :start_at, :end_at, :padma_contacts, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :cultural_activity, :external_id, :unscheduled
 
   before_create :set_defaults
 
   scope :with_schedule, ->{ where("(monday = :true) or (tuesday = :true) or (wednesday = :true) or (thursday = :true) or (friday = :true) or (saturday = :true) or (sunday = :true)",true: true) }
-  scope :without_schedule, ->{ where("(monday = :false OR monday IS NULL) and (tuesday = :false OR tuesday IS NULL) and (wednesday = :false OR wednesday IS NULL) and (thursday = :false OR thursday IS NULL) and (friday = :false OR friday IS NULL) and (saturday = :false OR saturday IS NULL) and (sunday = :false OR sunday IS NULL)",false: false) }
+  scope :without_schedule, ->{ where("(monday = :false OR monday IS NULL) and (tuesday = :false OR tuesday IS NULL) and (wednesday = :false OR wednesday IS NULL) and (thursday = :false OR thursday IS NULL) and (friday = :false OR friday IS NULL) and (saturday = :false OR saturday IS NULL) and (sunday = :false OR sunday IS NULL) and (unscheduled = :false OR unscheduled IS NULL)",false: false) }
 
   def description
     "#{self.name} (#{self.start_at.hour}hs-#{self.end_at.hour}hs)"

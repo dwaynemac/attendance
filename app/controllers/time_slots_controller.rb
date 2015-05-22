@@ -32,10 +32,21 @@ class TimeSlotsController < ApplicationController
 
   def update
     @time_slot.account = current_user.current_account
-    if @time_slot.update(params[:time_slot])
-      redirect_to @time_slot, notice: 'Time slot was successfully updated.'
-    else
-      render action: 'edit'
+    
+    respond_to do |format|
+      if @time_slot.update(params[:time_slot])
+        format.html {
+          redirect_to @time_slot, notice: 'Time slot was successfully updated.'
+	}
+	format.json { render json: { success: true }}
+      else
+	format.html {
+          render action: 'edit'
+	}
+	format.json {
+          render json: @time_slot.errors, status: :unprocessable_entity
+	}
+      end
     end
   end
 
