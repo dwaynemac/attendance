@@ -16,6 +16,16 @@ describe Attendance do
     end
   end
 
+  it "allows only one attendance per slot per day" do
+    a = build(:attendance)
+    a.save! # valid
+    inv = build(:attendance,
+                account: a.account,
+                time_slot: a.time_slot,
+                attendance_on: a.attendance_on)
+    expect(inv).not_to be_valid
+  end
+
   it "should be valid with default attributes" do
 	  build(:attendance).should be_valid
 	end

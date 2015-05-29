@@ -9,6 +9,7 @@ class Attendance < ActiveRecord::Base
   validates :time_slot, presence: true
   validates :attendance_on, presence: true
   validates_date :attendance_on, on_or_before: :today
+  validate :only_on_per_day_per_slot
 
   attr_accessor :padma_contacts
 
@@ -27,5 +28,15 @@ class Attendance < ActiveRecord::Base
       contact_ids << contact.id
     end
     self.contact_ids = contact_ids
+  end
+
+  private
+
+  def only_on_per_day_per_slot
+    if Attendance.where(account_id: self.account_id,
+                        time_slot_id: self.time_slot_id,
+                        attendance_on: self.attendance_on).count > 0
+      errors.add(:attendance_on, :already_registered)
+    end
   end
 end
