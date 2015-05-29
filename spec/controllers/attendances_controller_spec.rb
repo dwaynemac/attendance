@@ -32,8 +32,8 @@ describe AttendancesController do
   end
 
   describe "GET index" do
-    let(:attendance){create(:attendance, :account => current_account)}
-    it "assigns all attendances as @attendances" do
+    let!(:attendance){create(:attendance, :account => current_account)}
+    it "assigns last week's attendances as @attendances" do
       get :index, {}
       assigns(:attendances).should eq([attendance])
     end

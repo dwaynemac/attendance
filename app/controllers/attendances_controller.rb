@@ -4,11 +4,15 @@ class AttendancesController < ApplicationController
 
   def index
     days_back = params[:days_back] || 7
-    @view_range = (0..days_back.to_i)
+    further_limit = days_back.to_i
+    closer_limit = 0
+    @view_range = (closer_limit..further_limit)
+    @attendances = @attendances.where(attendance_on: (further_limit.days.ago.to_date..closer_limit.days.ago.to_date))
 
     @time_slots = current_user.current_account.time_slots.with_schedule.order("start_at ASC")
 
     @time_slots_wout_day = current_user.current_account.time_slots.without_schedule
+
     respond_with @attendances
   end
 

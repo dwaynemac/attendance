@@ -1,10 +1,8 @@
 <%- breadcrum t("attendances.index.title") -%>
 
-    <%= content_for :header_submenu do %>
-	<h2>
-          <%= link_to t('attendances.index.new'), new_attendance_path %>
-        </h2>
-    <% end -%>
+<%= content_for :header_submenu do %>
+	<h2> <%= link_to t('attendances.index.new'), new_attendance_path %> </h2>
+<% end -%>
       
 <%= render 'warn_unscheduled_timeslots' %>
 
@@ -20,7 +18,7 @@
     <div class="panel-body">
       <ul class="list-group">
         <% @time_slots.each do |time_slot| %>
-            <%= render 'attendances/time_slot', time_slot: time_slot, date: date %>
+          <%= render 'attendances/time_slot', time_slot: time_slot, date: date %>
         <% end %>
       </ul>
 
