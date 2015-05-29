@@ -9,8 +9,7 @@ class AttendancesController < ApplicationController
     @view_range = (closer_limit..further_limit)
     @attendances = @attendances.where(attendance_on: (further_limit.days.ago.to_date..closer_limit.days.ago.to_date))
 
-    @time_slots = current_user.current_account.time_slots.with_schedule.order("start_at ASC")
-
+    @time_slots = current_user.current_account.time_slots.order("start_at ASC")
     @time_slots_wout_day = current_user.current_account.time_slots.without_schedule
 
     respond_with @attendances
