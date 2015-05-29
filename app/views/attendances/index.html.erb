@@ -1,23 +1,10 @@
 <%- breadcrum t("attendances.index.title") -%>
 
-    <%= content_for :header_submenu do %>
-	<h2>
-          <%= link_to t('attendances.index.new'), new_attendance_path %>
-        </h2>
-    <% end -%>
-      
-<% unless @time_slots_wout_day.empty? -%>
-  <div class="alert alert-warning">
-    <p><%= t('.timeslots_wout_schedule_warning') %></p>
-    <ul class="list-group">
-      <% @time_slots_wout_day.each do |time_slot| -%>
-        <li class="list-group-item">
-	  <b><%= time_slot.name %></b> <%= timeslot_description(time_slot) %> <%= link_to t('attendances.index.edit'), edit_time_slot_path(time_slot), :class => 'btn btn-default btn-xs' %> <%= link_to t('attendances.index.ignore'), time_slot_path(time_slot), :class => 'btn btn-default btn-xs ignore_unscheduled' %>
-        </li>
-      <% end -%>
-    </ul>
-  </div>
+<%= content_for :header_submenu do %>
+	<h2> <%= link_to t('attendances.index.new'), new_attendance_path %> </h2>
 <% end -%>
+      
+<%= render 'warn_unscheduled_timeslots' %>
 
 <% @view_range.each do |n| %>
   <div class="panel panel-default">
@@ -31,7 +18,7 @@
     <div class="panel-body">
       <ul class="list-group">
         <% @time_slots.each do |time_slot| %>
-            <%= render 'attendances/time_slot', time_slot: time_slot, date: date %>
+          <%= render 'attendances/time_slot', time_slot: time_slot, date: date %>
         <% end %>
       </ul>
 

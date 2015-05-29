@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :attendance do
     account
     time_slot
-    attendance_on "2013-05-10"
+    attendance_on Date.yesterday
   end
 end

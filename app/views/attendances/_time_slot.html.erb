@@ -1,5 +1,5 @@
 <% att = @attendances.select {|a| a.attendance_on == date && a.time_slot == time_slot}.first %>
-<% if att.present? || ( time_slot.send(Date::DAYNAMES[date.wday].downcase.to_sym) && Time.zone.local(date.year, date.month, date.day, time_slot.start_at.hour, time_slot.start_at.min) <= Time.zone.now )%>
+<% if render_time_slot?(time_slot,date,att) -%>
 <li class="list-group-item <%= 'today' if date.today? %> <%= 'other-users-ts' if time_slot.padma_uid != current_user.username %>">
   <h4><%= time_slot.name %></h4>
   <h5><%= timeslot_description(time_slot) %></h5>
@@ -7,8 +7,8 @@
     <div class="students-list">
       <%= att.contacts.map(&:name).join(', ') %>
     </div>
-    <%= link_to t('attendances.index.edit'), edit_attendance_path(att), :class => 'btn' %>
-    <%= link_to t('attendances.index.destroy'), att, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+    <%= link_to t('attendances.index.edit'), edit_attendance_path(att), :class => 'btn btn-xs' %>
+    <%= link_to t('attendances.index.destroy'), att, :method => :delete, data: { confirm: t('confirm') }, :class => 'btn btn-xs btn-danger' %>
   <% else %>
     <div class="btn-group">
       <%= link_to t('attendances.index.new'), new_attendance_path(:attendance => {:attendance_on => date, :time_slot_id => time_slot.id}), :class => 'btn btn-default' %>
