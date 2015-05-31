@@ -79,7 +79,8 @@ es:
       recurrents_contacts: Alumnos recurrentes de este horario
       select_timeslot: Seleccionar un horario
     index:
-      older: Marcar asistencias de hace más de 1 semana atrás.
+      older: Marcar asistencias de la semana anterior.
+      newer: Marcar asistencia de la semana siguiente.
       new: Marcar asistencia
       ignore: Ignorar
       new_empty: No vino nadie
