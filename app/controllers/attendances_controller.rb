@@ -3,10 +3,12 @@ class AttendancesController < ApplicationController
   respond_to :html
 
   def index
-    days_from = params[:days_from] || 0
-    days_to = params[:days_to] || 7
-    further_limit = days_to.to_i
-    closer_limit = days_from.to_i
+    @day_span = 7
+
+    @days_from = params[:days_from] || 0
+    @days_to = params[:days_to] || @day_span
+    further_limit = @days_to.to_i
+    closer_limit = @days_from.to_i
     @view_range = (closer_limit..further_limit)
     @attendances = @attendances.where(attendance_on: (further_limit.days.ago.to_date..closer_limit.days.ago.to_date))
 
