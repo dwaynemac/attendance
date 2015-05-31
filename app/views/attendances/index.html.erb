@@ -33,6 +33,19 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <%= link_to t('attendances.index.older'), attendances_path(days_back: 60), class: 'btn btn-primary' %>
+    <span>
+      <%= link_to t('attendances.index.older'), 
+            attendances_path(
+              days_from: @days_to, 
+              days_to: @days_to.to_i + @day_span), 
+            class: 'btn btn-primary' %>
+    </span>
+    <span class="paginate-next">
+      <%= link_to t('attendances.index.newer'), 
+            attendances_path(
+              days_from: @days_from.to_i - @day_span, 
+              days_to: @days_to.to_i - @day_span), 
+            class: 'btn btn-primary' unless @days_from.to_i == 0 %>
+    </span>
   </div>
 </div>
