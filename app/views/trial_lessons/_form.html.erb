@@ -22,7 +22,12 @@
     <div class="form-group">
       <%= f.label :time_slot_id, :class => 'col-sm-2 control-label' %>
       <div class="input-group col-lg-2">
-        <%= f.collection_select :time_slot_id, current_user.current_account.time_slots, :id, :name, {},{:class => 'form-control'} %>
+        <%= f.collection_select :time_slot_id, 
+                                  current_user.current_account.time_slots, 
+                                  :id, 
+                                  :description_with_day, 
+                                  {},
+                                  {:class => 'form-control'} %>
       </div>
     </div>
 

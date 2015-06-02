@@ -51,6 +51,10 @@ class TimeSlot < ActiveRecord::Base
     end
   end
 
+  def description_with_day
+    description + " [#{time_slot_days}]"
+  end
+
   private
 
   def set_defaults
@@ -60,5 +64,17 @@ class TimeSlot < ActiveRecord::Base
 
     # return true to avoid this filter breaking the callback queue.
     return true
+  end
+
+  def time_slot_days
+    response = ""
+    days = [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday]
+    days.each do |day|
+      if send(day)
+        response += ", " unless response.empty?
+        response += I18n.t('date.abbr_day_names')[days.find_index(day)]
+      end
+    end
+    response
   end
 end
