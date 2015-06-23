@@ -58,10 +58,10 @@ gem 'activerecord-session_store'
 gem 'cancan'
 
 # Padma Clients
-gem 'activity_stream_client'
-gem 'contacts_client', '~> 0.0.23'
+gem 'activity_stream_client', '0.0.16'
+gem 'contacts_client', '~> 0.0.38'
 gem 'accounts_client', '0.2.12'
-gem 'messaging_client','~> 0.0.2'
+gem 'messaging_client','~> 0.0.4'
 
 gem 'carrierwave'
 gem 'fog', github: 'fog/fog', ref: '272bc6b2a2769f8d1a8b50b1f6cd9741db4969b4' # TODO waiting release of version 1.20
