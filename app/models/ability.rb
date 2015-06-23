@@ -12,6 +12,9 @@ class Ability
     #   end
 
     # user can do everything on templates of his account.
+
+    self.merge GeneralAbility.new(user)
+    
     can :manage, TimeSlot, account_id: user.current_account_id
     can :manage, Attendance, account_id: user.current_account_id
     can :manage, TrialLesson, account_id: user.current_account_id
