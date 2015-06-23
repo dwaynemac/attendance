@@ -1,14 +1,28 @@
 $(document).ready ->
-	$(document).on 'click', '#attendance_padma_contacts .add', (event) ->
-		$(this).removeClass('add').addClass('delete')
-		$(this).parent().prepend("<input type='hidden' value='" + $(this).attr('data-padma-id') + "' name='attendance[padma_contacts][]'>")
-		$('ul#attendance_contacts').append($(this).parent())
-		false
+
+  $('#uninitialized_new_attendance').click ->
+    registerEvent('registered-uninitialized-attendance')
+    return true # follow link
+
+  $('.initialized_attendance').click ->
+    registerEvent('registered-initialized-attendance')
+    return true # follow link
+
+  $('.empty_attendance').click ->
+    registerEvent('registered-empty-attendance')
+    return true # follow link
+  
+  $(document).on 'click', '#attendance_padma_contacts .add', (event) ->
+    $(this).removeClass('add').addClass('delete')
+    $(this).parent().prepend("<input type='hidden' value='" + $(this).attr('data-padma-id') + "' name='attendance[padma_contacts][]'>")
+    $('ul#attendance_contacts').append($(this).parent())
+    false
         
-	$(document).on 'click', '#toggle-hidden-timeslots', (event) ->
-		event.preventDefault()
-		$('#toggle-hidden-timeslots').toggleClass('active')
-		$('.today.other-users-ts').toggle()
+  $(document).on 'click', '#toggle-hidden-timeslots', (event) ->
+    event.preventDefault()
+    registerEvent('showed-hidden-timeslots')
+    $('#toggle-hidden-timeslots').toggleClass('active')
+    $('.today.other-users-ts').toggle()
 
 $ ->
   $("#loader").hide()

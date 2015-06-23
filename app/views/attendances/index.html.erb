@@ -1,7 +1,7 @@
 <%- breadcrum t("attendances.index.title") -%>
 
 <%= content_for :header_submenu do %>
-	<h2> <%= link_to t('attendances.index.new'), new_attendance_path %> </h2>
+	<h2> <%= link_to t('attendances.index.new'), new_attendance_path, id: 'uninitialized_new_attendance'%> </h2>
 <% end -%>
       
 <%= render 'warn_unscheduled_timeslots' %>
