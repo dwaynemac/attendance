@@ -60,7 +60,7 @@ gem 'cancan'
 # Padma Clients
 gem 'activity_stream_client', '0.0.16'
 gem 'contacts_client', '~> 0.0.38'
-gem 'accounts_client', '0.2.12'
+gem 'accounts_client', :github => 'dwaynemac/accounts_client'
 gem 'messaging_client','~> 0.0.4'
 
 gem 'carrierwave'
