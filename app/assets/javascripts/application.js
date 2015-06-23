@@ -18,5 +18,6 @@
 //= require angular-resource
 //= require select2
 //= require bootstrap-multiselect
+//= require mixpanel
 //= require ux-events
 //= require_tree .
