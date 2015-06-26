@@ -16,6 +16,31 @@ describe AttendancesController do
     @user.current_account
   end
 
+  describe "PATCH /attendances/:id" do
+    context "if accounts-ws is online" do
+      before do
+        create(:contact, padma_id: 'a')
+        create(:contact, padma_id: 'b')
+        PadmaUser.stub(:paginate).and_return([PadmaUser.new(name: 'as')])
+      end
+      let(:time_slot){create(:time_slot)}
+      let!(:attendance){create(:attendance,
+                               padma_contacts: ['a', 'b'],
+                               account: current_account)}
+      context "if time_slot is specified" do
+        before do
+          patch :update, id: attendance.id,
+                attendance: {
+            padma_contacts: ['a']
+          }
+        end
+        it "should change attendance contacts" do
+          expect(attendance.contacts.map(&:padma_id)).to eq ['a']
+        end
+      end
+    end
+  end
+
   describe "GET /attendances/new" do
     context "if accounts-ws is online" do
       before do
