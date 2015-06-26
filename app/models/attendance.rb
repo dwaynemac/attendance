@@ -35,7 +35,7 @@ class Attendance < ActiveRecord::Base
   def only_on_per_day_per_slot
     if Attendance.where(account_id: self.account_id,
                         time_slot_id: self.time_slot_id,
-                        attendance_on: self.attendance_on).count > 0
+                        attendance_on: self.attendance_on).count > ((self.persisted?)? 1 : 0)
       errors.add(:attendance_on, :already_registered)
     end
   end
