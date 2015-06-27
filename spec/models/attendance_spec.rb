@@ -24,6 +24,11 @@ describe Attendance do
                 time_slot: a.time_slot,
                 attendance_on: a.attendance_on)
     expect(inv).not_to be_valid
+ 
+    # shouldnt invalidate itself for updates
+    create(:contact, padma_id: 'a')
+    a.padma_contacts = ['a']
+    expect{ a.save! }.not_to raise_exception
   end
 
   it "should be valid with default attributes" do

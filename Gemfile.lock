@@ -1,13 +1,4 @@
 GIT
-  remote: git://github.com/dwaynemac/accounts_client.git
-  revision: 11c75981f4771da65f534cdd2988c36dcc799e99
-  specs:
-    accounts_client (0.2.13)
-      gravtastic
-      logical_model (>= 0.5.8)
-      railties (>= 3.1)
-
-GIT
   remote: git://github.com/fog/fog.git
   revision: 272bc6b2a2769f8d1a8b50b1f6cd9741db4969b4
   ref: 272bc6b2a2769f8d1a8b50b1f6cd9741db4969b4
@@ -36,6 +27,10 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    accounts_client (0.2.14)
+      gravtastic
+      logical_model (>= 0.5.8)
+      railties (>= 3.1)
     actionmailer (4.0.0.rc1)
       actionpack (= 4.0.0.rc1)
       mail (~> 2.5.3)
@@ -334,7 +329,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  accounts_client!
+  accounts_client (= 0.2.14)
   activerecord-session_store
   activity_stream_client (= 0.0.16)
   angularjs-rails
@@ -383,6 +378,3 @@ DEPENDENCIES
   workless
   yard (~> 0.8.3)
   yard-restful
-
-BUNDLED WITH
-   1.10.4
