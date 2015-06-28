@@ -24,7 +24,7 @@ class TrialLesson < ActiveRecord::Base
   after_destroy :destroy_activity
 
   def self.api_where(filters={})
-    ret = self.scoped
+    ret = self.all
     (filters||{}).each_pair do |k,v|
       if md = /^trial_on_days_ago_(.*)$/.match(k)
         ret = ret.where("trial_on #{map_operator(md[1], inverse: true)} ?", v.days.ago)
