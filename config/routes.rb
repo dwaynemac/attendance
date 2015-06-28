@@ -36,6 +36,7 @@ Assistance::Application.routes.draw do
 
   namespace 'api' do
     namespace 'v0' do
+      resources :trial_lessons, only: [:index]
       resources :contacts, only: [:show, :index] do
         member do
           get :last_trial

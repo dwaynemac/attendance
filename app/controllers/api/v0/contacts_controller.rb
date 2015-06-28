@@ -1,5 +1,7 @@
 class Api::V0::ContactsController < Api::V0::ApiController
 
+  authorize_resource
+
   respond_to :json
 
   def show
