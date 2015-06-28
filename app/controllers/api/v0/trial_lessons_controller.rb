@@ -17,14 +17,13 @@ class Api::V0::TrialLessonsController < Api::V0::ApiController
   # @optional [Hash] where This conditions are forwarded to ActiveRecord :where
   def index
     @trial_lessons.where(params[:where])
-    respond_with @trial_lessons.as_json(json_params)
+    respond_with( {
+      collection: @trial_lessons,
+      total: @trial_lessons.count
+    })
   end
 
   private
-
-  def json_params
-
-  end
 
   def load_account
     if params[:account_name]
