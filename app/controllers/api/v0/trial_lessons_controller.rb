@@ -39,7 +39,7 @@ class Api::V0::TrialLessonsController < Api::V0::ApiController
   end
 
   def load_trials
-    @trial_lessons = TrialLesson.scoped
+    @trial_lessons = TrialLesson.all
     if @account
       @trial_lessons = @account.trial_lessons 
     end
