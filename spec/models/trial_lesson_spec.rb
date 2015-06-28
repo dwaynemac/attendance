@@ -9,6 +9,27 @@ describe TrialLesson do
 	  build(:trial_lesson, :account => nil).should_not be_valid
 	end
 
+  describe ".filter" do
+    describe "trial_on_lt" do
+      let!(:ytrial){ create(:trial_lesson, trial_on: Date.civil(2010,1,1)) }
+      let!(:ntrial){ create(:trial_lesson, trial_on: Date.civil(2010,2,1)) }
+      let(:result){TrialLesson.filter(trial_on_lt: Date.civil(2010,1,10))}
+      it "returns trials that happend before given date" do
+        expect(result).to include ytrial
+        expect(result).not_to include ntrial
+      end
+    end
+    describe "trial_on_days_ago_lt" do
+      let!(:ytrial){ create(:trial_lesson, trial_on: 10.days.ago) }
+      let!(:ntrial){ create(:trial_lesson, trial_on: 20.days.ago) }
+      let(:result){TrialLesson.filter(trial_on_days_ago_lt: 15)}
+      it "returns trials that happend LESS THAN given days ago" do
+        expect(result).to include ytrial
+        expect(result).not_to include ntrial
+      end
+    end
+  end
+
   describe "#contact" do
     it "is required" do
       build(:trial_lesson, :contact => nil).should_not be_valid

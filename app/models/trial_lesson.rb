@@ -23,6 +23,24 @@ class TrialLesson < ActiveRecord::Base
 
   after_destroy :destroy_activity
 
+  def self.filter(filters={})
+    ret = self
+    filters.each_pair do |k,v|
+      case k.to_sym
+      when :trial_on_gt
+        ret = ret.where("trial_on > ?", v)
+      when :trial_on_lt
+        ret = ret.where("trial_on < ?", v)
+      when :trial_on_days_ago_lt
+        ret = ret.where("trial_on > ?", v.days.ago)
+      else
+        # direct map filter -> where
+        ret = ret.where(k => v)
+      end
+    end
+    ret
+  end
+
   # Day of trial and Time of trial according to TimeSlot's time
   # @return [DateTime]
   def trial_at

@@ -5,18 +5,17 @@ class Api::V0::TrialLessonsController < Api::V0::ApiController
 
   authorize_resource
 
-  before_filter :load_account
-  before_filter :load_contact
-  before_filter :load_trials
+  before_filter :set_scope
 
   # @url /api/v0/trial_lessons
   # @action GET
   #
-  # @required [String] account_name will scope this account
+  # Scope Options
+  # @optional [String] account_name will scope this account
   # @optional [String] contact_id will scope to contact with given padma_id
-  # @optional [Hash] where This conditions are forwarded to ActiveRecord :where
+  # @optional [Hash] filters 
   def index
-    @trial_lessons.where(params[:where])
+    @trial_lessons = @scope.filter(params[:filters])
     respond_with( {
       collection: @trial_lessons,
       total: @trial_lessons.count
@@ -25,26 +24,24 @@ class Api::V0::TrialLessonsController < Api::V0::ApiController
 
   private
 
-  def load_account
+  def set_scope
+    @scope = TrialLesson.all
     if params[:account_name]
       @account = Account.find_by_name params[:account_name]
+      if @account
+        @scope = @scope.where(account_id: @account.id)
+      else
+        @scope = @scope.none
+      end
+    end
+    if params[:contact_id]
+      @contact = Contact.find_by_padma_id(params[:contact_id])
+      if @contact
+        @scope = @scope.where(contact_id: @contact.id)
+      else
+        @scope = @scope.none
+      end
     end
   end
 
-  def load_contact
-    if @account && params[:contact_id]
-      @contact = Contact.get_by_padma_id(params[:contact_id])
-      @contact = Contact.get_by_padma_id(params[:id],@account.id)
-    end
-  end
-
-  def load_trials
-    @trial_lessons = TrialLesson.all
-    if @account
-      @trial_lessons = @account.trial_lessons 
-    end
-    if @contact
-      @trial_lessons = @contact.trial_lessons 
-    end
-  end
 end

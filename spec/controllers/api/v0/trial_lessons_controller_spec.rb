@@ -11,9 +11,10 @@ describe Api::V0::TrialLessonsController do
       do_req
     end
     it { should respond_with 200 }
+
     describe "with account_name" do
       let!(:belgrano){ create(:account, name: 'belgrano')}
-      let!(:ytrial){create(:trial_lesson, account: belgrano)}
+      let!(:ytrial){create(:trial_lesson, account: belgrano, contact_id: create(:contact).id)}
       let!(:ntrial){create(:trial_lesson)}
       before do
         do_req account_name: 'belgrano'
@@ -21,6 +22,22 @@ describe Api::V0::TrialLessonsController do
       it "returns trials of given account" do
         expect(response_trials_ids).to include ytrial.id
         expect(response_trials_ids).not_to include ntrial.id
+      end
+
+      describe "and contact_id" do
+        before do
+          PadmaContact.stub(:find).and_return PadmaContact.new id: 'the-id'
+        end
+        let!(:contact){ create(:contact, padma_id: 'the-id')}
+        let!(:ctrial){create(:trial_lesson, account: belgrano, contact_id: contact.id)}
+        before do
+          do_req account_name: 'belgrano', contact_id: 'the-id'
+        end
+        it "returns trials with given contact padma_id" do
+          expect(response_trials_ids).to include ctrial.id
+          expect(response_trials_ids).not_to include ytrial.id
+          expect(response_trials_ids).not_to include ntrial.id
+        end
       end
     end
   end
