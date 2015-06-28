@@ -15,12 +15,12 @@ class Api::V0::TrialLessonsController < Api::V0::ApiController
   # Scope Options
   # @optional [String] account_name will scope this account
   # @optional [String] contact_id will scope to contact with given padma_id
-  # @optional [Hash] filters 
+  # @optional [Hash] where
   #                  eg: * trial_on_lt: '2015-1-1'
   #                      * trial_on_days_ago_lt: 10
   #                      * updated_at_gte: '2014-1-1'
   def index
-    @trial_lessons = @scope.filter(params[:filters]).includes(:account, :contact)
+    @trial_lessons = @scope.api_where(params[:filters]).includes(:account, :contact)
     respond_with( {
       collection: api_json_for_collection(@trial_lessons),
       total: @trial_lessons.count

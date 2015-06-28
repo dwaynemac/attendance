@@ -23,7 +23,7 @@ class TrialLesson < ActiveRecord::Base
 
   after_destroy :destroy_activity
 
-  def self.filter(filters={})
+  def self.api_where(filters={})
     ret = self.scoped
     (filters||{}).each_pair do |k,v|
       if md = /^trial_on_days_ago_(.*)$/.match(k)
