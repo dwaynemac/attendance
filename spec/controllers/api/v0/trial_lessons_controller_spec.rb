@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Api::V0::TrialLessonsController do
+  include TrialLessonsHelper
   describe "GET index" do
     let(:response_trials){ ActiveSupport::JSON.decode(response.body)['collection'] }
     let(:response_trials_ids){response_trials.map{|t| t['id'] }}
@@ -15,7 +16,7 @@ describe Api::V0::TrialLessonsController do
     describe "with account_name" do
       let!(:belgrano){ create(:account, name: 'belgrano')}
       let!(:ytrial){create(:trial_lesson, account: belgrano, contact_id: create(:contact).id)}
-      let!(:ntrial){create(:trial_lesson)}
+      let!(:ntrial){create(:trial_lesson, account: create(:account))}
       before do
         do_req account_name: 'belgrano'
       end
@@ -37,6 +38,8 @@ describe Api::V0::TrialLessonsController do
           expect(response_trials_ids).to include ctrial.id
           expect(response_trials_ids).not_to include ytrial.id
           expect(response_trials_ids).not_to include ntrial.id
+
+          expect(response_trials.first).to include('contact_id', 'account_name')
         end
       end
     end

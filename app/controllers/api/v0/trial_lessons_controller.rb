@@ -1,6 +1,8 @@
 # @restful_api v0
 class Api::V0::TrialLessonsController < Api::V0::ApiController
 
+  include TrialLessonsHelper
+
   respond_to :json
 
   authorize_resource
@@ -14,10 +16,12 @@ class Api::V0::TrialLessonsController < Api::V0::ApiController
   # @optional [String] account_name will scope this account
   # @optional [String] contact_id will scope to contact with given padma_id
   # @optional [Hash] filters 
+  #                  eg: * trial_on_lt: '2015-1-1'
+  #                      * trial_on_days_ago_lt: 10
   def index
-    @trial_lessons = @scope.filter(params[:filters])
+    @trial_lessons = @scope.filter(params[:filters]).includes(:account, :contact)
     respond_with( {
-      collection: @trial_lessons,
+      collection: api_json_for_collection(@trial_lessons),
       total: @trial_lessons.count
     })
   end

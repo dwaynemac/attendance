@@ -24,11 +24,11 @@ class TrialLesson < ActiveRecord::Base
   after_destroy :destroy_activity
 
   def self.filter(filters={})
-    ret = self
-    filters.each_pair do |k,v|
-      if md = /trial_on_days_ago_(.*)/.match(k)
+    ret = self.scoped
+    (filters||{}).each_pair do |k,v|
+      if md = /^trial_on_days_ago_(.*)$/.match(k)
         ret = ret.where("trial_on #{map_operator(md[1], inverse: true)} ?", v.days.ago)
-      elsif md = /(trial_on|created_at|updated_at)_(.*)/.match(k)
+      elsif md = /^(trial_on|created_at|updated_at)_(.*)$/.match(k)
         attribute = md[1]
         ret = ret.where("#{attribute} #{map_operator(md[2])} ?", v)
       else
