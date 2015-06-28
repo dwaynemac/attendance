@@ -10,6 +10,15 @@ describe TrialLesson do
 	end
 
   describe ".filter" do
+    describe "assisted" do
+      let!(:ytrial){ create(:trial_lesson, assisted: true) }
+      let!(:ntrial){ create(:trial_lesson, assisted: false) }
+      let(:result){TrialLesson.filter(assisted: true)}
+      it "returns trials that happend before given date" do
+        expect(result).to include ytrial
+        expect(result).not_to include ntrial
+      end
+    end
     describe "trial_on_lt" do
       let!(:ytrial){ create(:trial_lesson, trial_on: Date.civil(2010,1,1)) }
       let!(:ntrial){ create(:trial_lesson, trial_on: Date.civil(2010,2,1)) }

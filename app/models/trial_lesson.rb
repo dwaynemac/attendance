@@ -26,13 +26,11 @@ class TrialLesson < ActiveRecord::Base
   def self.filter(filters={})
     ret = self
     filters.each_pair do |k,v|
-      case k.to_sym
-      when :trial_on_gt
-        ret = ret.where("trial_on > ?", v)
-      when :trial_on_lt
-        ret = ret.where("trial_on < ?", v)
-      when :trial_on_days_ago_lt
-        ret = ret.where("trial_on > ?", v.days.ago)
+      if md = /trial_on_days_ago_(.*)/.match(k)
+        ret = ret.where("trial_on #{map_operator(md[1], inverse: true)} ?", v.days.ago)
+      elsif md = /(trial_on|created_at|updated_at)_(.*)/.match(k)
+        attribute = md[1]
+        ret = ret.where("#{attribute} #{map_operator(md[2])} ?", v)
       else
         # direct map filter -> where
         ret = ret.where(k => v)
@@ -116,6 +114,26 @@ class TrialLesson < ActiveRecord::Base
   def set_defaults
     self.archived = false if self.archived.nil?
     return true # return true, dont break callback queue
+  end
+
+  # maps:
+  #   :lt (less than) -> <
+  #   :gt (geater than) -> >
+  #   :lte -> <=
+  #   :gte -> >=
+  #
+  # if inverse option is given it will iverse mapping
+  def self.map_operator(string_operator, options = {})
+    case string_operator
+    when 'lt'
+      (options[:inverse])? '>' : '<'
+    when 'gt'
+      (options[:inverse])? '<' : '>'
+    when 'lte'
+      (options[:inverse])? '>=' : '<='
+    when 'gte'
+      (options[:inverse])? '<=' : '>='
+    end
   end
 
 end
