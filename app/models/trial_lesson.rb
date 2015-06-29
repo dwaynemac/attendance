@@ -28,7 +28,7 @@ class TrialLesson < ActiveRecord::Base
     (filters||{}).each_pair do |k,v|
       if md = /^(trial_on|created_at|updated_at)_(.*)$/.match(k)
         attribute = md[1]
-        ret = ret.where("#{attribute} #{map_operator(md[2])} ?", v)
+        ret = ret.where("#{attribute} #{map_operator(md[2])} ?", v.to_date)
       else
         # direct map filter -> where
         ret = ret.where(k => v)

@@ -19,7 +19,7 @@ class Api::V0::TrialLessonsController < Api::V0::ApiController
   #                  eg: * trial_on_lt: '2015-1-1'
   #                      * updated_at_gte: '2014-1-1'
   def index
-    @trial_lessons = @scope.api_where(params[:filters]).includes(:account, :contact)
+    @trial_lessons = @scope.api_where(params[:where]).includes(:account, :contact)
     respond_with( {
       collection: api_json_for_collection(@trial_lessons),
       total: @trial_lessons.count
