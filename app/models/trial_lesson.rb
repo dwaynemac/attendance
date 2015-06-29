@@ -26,9 +26,7 @@ class TrialLesson < ActiveRecord::Base
   def self.api_where(filters={})
     ret = self.all
     (filters||{}).each_pair do |k,v|
-      if md = /^trial_on_days_ago_(.*)$/.match(k)
-        ret = ret.where("trial_on #{map_operator(md[1], inverse: true)} ?", v.days.ago)
-      elsif md = /^(trial_on|created_at|updated_at)_(.*)$/.match(k)
+      if md = /^(trial_on|created_at|updated_at)_(.*)$/.match(k)
         attribute = md[1]
         ret = ret.where("#{attribute} #{map_operator(md[2])} ?", v)
       else
@@ -121,18 +119,16 @@ class TrialLesson < ActiveRecord::Base
   #   :gt (geater than) -> >
   #   :lte -> <=
   #   :gte -> >=
-  #
-  # if inverse option is given it will iverse mapping
-  def self.map_operator(string_operator, options = {})
+  def self.map_operator(string_operator)
     case string_operator
     when 'lt'
-      (options[:inverse])? '>' : '<'
+      '<'
     when 'gt'
-      (options[:inverse])? '<' : '>'
+      '>'
     when 'lte'
-      (options[:inverse])? '>=' : '<='
+      '<='
     when 'gte'
-      (options[:inverse])? '<=' : '>='
+      '>='
     end
   end
 

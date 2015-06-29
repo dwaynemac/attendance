@@ -28,15 +28,6 @@ describe TrialLesson do
         expect(result).not_to include ntrial
       end
     end
-    describe "trial_on_days_ago_lt" do
-      let!(:ytrial){ create(:trial_lesson, trial_on: 10.days.ago) }
-      let!(:ntrial){ create(:trial_lesson, trial_on: 20.days.ago) }
-      let(:result){TrialLesson.api_where(trial_on_days_ago_lt: 15)}
-      it "returns trials that happend LESS THAN given days ago" do
-        expect(result).to include ytrial
-        expect(result).not_to include ntrial
-      end
-    end
   end
 
   describe "#contact" do
