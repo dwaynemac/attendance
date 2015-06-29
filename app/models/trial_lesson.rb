@@ -23,12 +23,18 @@ class TrialLesson < ActiveRecord::Base
 
   after_destroy :destroy_activity
 
+  ##
+  #
+  # For booleans: '1', 1, 't', 'true' and true are considered true
+  #               any other is false
   def self.api_where(filters={})
     ret = self.all
     (filters||{}).each_pair do |k,v|
       if md = /^(trial_on|created_at|updated_at)_(.*)$/.match(k)
         attribute = md[1]
         ret = ret.where("#{attribute} #{map_operator(md[2])} ?", v.to_date)
+      elsif k == 'assisted'
+        ret = ret.where(assisted: booleanize(v)) 
       else
         # direct map filter -> where
         ret = ret.where(k => v)
@@ -130,6 +136,10 @@ class TrialLesson < ActiveRecord::Base
     when 'gte'
       '>='
     end
+  end
+
+  def self.booleanize(value)
+    value == true || value == 1 || value == '1' || value == 'true' || value == 't' 
   end
 
 end
