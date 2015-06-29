@@ -3,9 +3,9 @@ module TrialLessonsHelper
     trials.map do |t|
       {
         id: t.id,
-        account_name: t.account.try :name,
+        account_name: t.account.try(:name),
         username: t.padma_uid,
-        contact_id: t.contact.try :padma_id,
+        contact_id: t.contact.try(:padma_id),
         trial_on: t.trial_on,
         assisted: t.assisted,
         confirmed: t.confirmed,
