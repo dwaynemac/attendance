@@ -11,6 +11,14 @@ class Api::V0::ApiController < ActionController::Base
 
   before_filter :require_app_key
 
+  def current_ability
+    @current_ability ||= Api::Ability.new(params[:app_key])
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    render :text => "access denied", :status => 401
+  end
+
   private
 
   def require_app_key

@@ -23,6 +23,20 @@ class TrialLesson < ActiveRecord::Base
 
   after_destroy :destroy_activity
 
+  def self.api_where(filters={})
+    ret = self.all
+    (filters||{}).each_pair do |k,v|
+      if md = /^(trial_on|created_at|updated_at)_(.*)$/.match(k)
+        attribute = md[1]
+        ret = ret.where("#{attribute} #{map_operator(md[2])} ?", v.to_date)
+      else
+        # direct map filter -> where
+        ret = ret.where(k => v)
+      end
+    end
+    ret
+  end
+
   # Day of trial and Time of trial according to TimeSlot's time
   # @return [DateTime]
   def trial_at
@@ -98,6 +112,24 @@ class TrialLesson < ActiveRecord::Base
   def set_defaults
     self.archived = false if self.archived.nil?
     return true # return true, dont break callback queue
+  end
+
+  # maps:
+  #   :lt (less than) -> <
+  #   :gt (geater than) -> >
+  #   :lte -> <=
+  #   :gte -> >=
+  def self.map_operator(string_operator)
+    case string_operator
+    when 'lt'
+      '<'
+    when 'gt'
+      '>'
+    when 'lte'
+      '<='
+    when 'gte'
+      '>='
+    end
   end
 
 end

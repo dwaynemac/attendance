@@ -17,7 +17,7 @@ class Contact < ActiveRecord::Base
   attr_accessor :padma_contact
 
   def self.students_on(account)
-    self.scoped.joins(:accounts_contacts).where(accounts_contacts: { padma_status: 'student', account_id: account.id })
+    self.all.joins(:accounts_contacts).where(accounts_contacts: { padma_status: 'student', account_id: account.id })
   end
 
   def padma_contact(account, options={})

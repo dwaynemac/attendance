@@ -9,6 +9,27 @@ describe TrialLesson do
 	  build(:trial_lesson, :account => nil).should_not be_valid
 	end
 
+  describe ".api_where" do
+    describe "assisted" do
+      let!(:ytrial){ create(:trial_lesson, assisted: true) }
+      let!(:ntrial){ create(:trial_lesson, assisted: false) }
+      let(:result){TrialLesson.api_where(assisted: true)}
+      it "returns trials that happend before given date" do
+        expect(result).to include ytrial
+        expect(result).not_to include ntrial
+      end
+    end
+    describe "trial_on_lt" do
+      let!(:ytrial){ create(:trial_lesson, trial_on: Date.civil(2010,1,1)) }
+      let!(:ntrial){ create(:trial_lesson, trial_on: Date.civil(2010,2,1)) }
+      let(:result){TrialLesson.api_where(trial_on_lt: Date.civil(2010,1,10))}
+      it "returns trials that happend before given date" do
+        expect(result).to include ytrial
+        expect(result).not_to include ntrial
+      end
+    end
+  end
+
   describe "#contact" do
     it "is required" do
       build(:trial_lesson, :contact => nil).should_not be_valid
