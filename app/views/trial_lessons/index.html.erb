@@ -6,7 +6,7 @@
     <% trial_lessons.each do |trial_lesson| %>
     <li>
       <% if trial_lesson.contact -%>
-        <%= link_to_contact_profile contact %>
+        <%= link_to_contact_profile trial_lesson.contact %>
       <% else -%>
         <%= t('trial_lessons.index.contact_without_name') %>
       <% end -%>
