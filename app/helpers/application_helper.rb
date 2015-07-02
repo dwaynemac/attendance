@@ -1,4 +1,9 @@
 module ApplicationHelper
+
+  def link_to_contact_profile(contact)
+    link_to contact.name, "#{APP_CONFIG['crm-url']}/contacts/#{contact.padma_id}"
+  end
+
   def generate_secure_doorbell_signature()
       jsonp_secret = 'hosV7LyVnX8r2IOHXUGmSFqvBWuyYXilLgg94aN17pfqeQ50ob5kCcuUHguUaN4H'
       timestamp = Time.now.to_i
