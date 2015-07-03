@@ -217,6 +217,7 @@ GEM
       method_source (~> 0.8)
       slop (~> 3.4)
     rack (1.5.5)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.0.0.rc1)
@@ -362,6 +363,7 @@ DEPENDENCIES
   pg
   protected_attributes
   pry
+  rack-cors
   rails (= 4.0.0.rc1)
   rails-i18n
   rails_12factor
