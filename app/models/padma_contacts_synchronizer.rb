@@ -6,7 +6,7 @@ class PadmaContactsSynchronizer
   end
 
   def sync(wayback = nil)
-    wayback ||= 7.days
+    wayback ||= 2.days
 
     since = (@account.synchronized_at || Date.today) - wayback
 
