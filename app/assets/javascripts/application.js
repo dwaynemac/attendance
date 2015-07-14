@@ -20,4 +20,8 @@
 //= require bootstrap-multiselect
 //= require mixpanel
 //= require ux-events
+//= require cache
+//= require jquery.quickfilter
+//= require async_render
+//= require initialize-lists-menu
 //= require_tree .
