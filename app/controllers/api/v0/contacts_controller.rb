@@ -41,6 +41,8 @@ class Api::V0::ContactsController < Api::V0::ApiController
     contacts_json = {
       contacts: @contacts.each_with_object({}) {|c, h| h[c.padma_id] = c.time_slots.collect(&:name)}
     }
-    respond_with contacts_json
+    respond_to do |format|
+      format.json { render :json => contacts_json }  # note, no :location or :status options
+    end
   end
 end
