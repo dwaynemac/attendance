@@ -353,6 +353,8 @@ es:
       assisted: asistió
       pending: pendiente
   trial_lessons:
+    form:
+      avoid_mailing_triggers: Ignorar mails automáticos
     edit:
       title: Editar clase de prueba
     index:
