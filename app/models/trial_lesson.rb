@@ -21,6 +21,8 @@ class TrialLesson < ActiveRecord::Base
   attr_accessor :skip_broadcast
   after_create :broadcast_create, unless: :skip_broadcast
 
+  attr_accessor :avoid_mailing_triggers
+
   after_destroy :destroy_activity
 
   ##
@@ -106,10 +108,11 @@ class TrialLesson < ActiveRecord::Base
   def as_json_for_messaging
     json = as_json
     json["trial_at"] = trial_at
-    json["contact_id"] = contact.padma_id
+    json["contact_id"] = padma_contact_id
     json["recipient_email"] = contact.padma_contact(account).email
     json["username"] = padma_uid
     json["account_name"] = account.name
+    json["avoid_mailing_triggers"] = avoid_mailing_triggers
     json
   end  
 
