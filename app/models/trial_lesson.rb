@@ -113,7 +113,7 @@ class TrialLesson < ActiveRecord::Base
     json["recipient_email"] = contact.padma_contact(account).email
     json["username"] = padma_uid
     json["account_name"] = account.name
-    json["avoid_mailing_triggers"] = avoid_mailing_triggers
+    json["avoid_mailing_triggers"] = true if avoid_mailing_triggers == "1" || avoid_mailing_triggers == "true" || avoid_mailing_triggers == true
     json
   end  
 
