@@ -22,6 +22,7 @@ class TrialLesson < ActiveRecord::Base
   after_create :broadcast_create, unless: :skip_broadcast
 
   attr_accessor :avoid_mailing_triggers
+  attr_accessible :avoid_mailing_triggers
 
   after_destroy :destroy_activity
 
