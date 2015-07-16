@@ -122,7 +122,7 @@
 
     <% unless @trial_lesson.persisted? -%>
       <div class="form-group">
-        <%= f.label :avoid_mailing_triggers, :class => 'col-sm-2 control-label' %>
+        <%= f.label :avoid_mailing_triggers, t('.avoid_mailing_triggers'),  :class => 'col-sm-2 control-label' %>
         <div class="checkbox col-sm-10">
           <%= f.check_box :avoid_mailing_triggers %>
         </div>

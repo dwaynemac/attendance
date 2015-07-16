@@ -356,6 +356,8 @@ pt-BR:
       assisted: participou
       pending: pendente
   trial_lessons:
+    form:
+      avoid_mailing_triggers: Ignorar mails automáticos
     edit:
       title: 
     index:
