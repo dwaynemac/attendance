@@ -332,6 +332,7 @@ pt-BR:
     index:
       new: Nova turma
       title: Turma
+      filter_timeslots: Buscar turma
       vacancies: Verificar vagas
     new:
       title: Nova turma

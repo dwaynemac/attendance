@@ -327,6 +327,7 @@ es:
     edit:
       title: Editando horario
     index:
+      filter_timeslots: Buscar horario
       new: Nuevo horario
       title: Horarios
       vacancies: Verificar vacantes
