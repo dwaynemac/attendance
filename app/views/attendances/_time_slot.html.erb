@@ -5,7 +5,7 @@
   <h5><%= timeslot_description(time_slot) %></h5>
   <% if att %>
     <div class="students-list">
-      <%= att.contacts.map(&:name).join(', ') %>
+      <%= att.contacts.map{|c| link_to_contact_profile(c)}.join(', ').html_safe %>
     </div>
     <%= link_to t('attendances.index.edit'), edit_attendance_path(att), :class => 'btn btn-xs' %>
     <%= link_to t('attendances.index.destroy'), att, :method => :delete, data: { confirm: t('confirm') }, :class => 'btn btn-xs btn-danger' %>
