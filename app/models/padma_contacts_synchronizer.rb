@@ -11,6 +11,7 @@ class PadmaContactsSynchronizer
     since = (@account.synchronized_at || Date.today) - wayback
 
     attempts = 0
+    padma_contacts = nil
     while padma_contacts.nil? && attempts <= 3 do
       # Get all contacts updated since last sync.
       padma_contacts = PadmaContact.search(select: [:first_name,
