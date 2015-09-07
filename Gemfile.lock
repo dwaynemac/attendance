@@ -94,7 +94,7 @@ GEM
     coffee-script-source (1.6.2)
     columnize (0.3.6)
     commonjs (0.2.7)
-    contacts_client (0.0.38)
+    contacts_client (0.0.40)
       logical_model (>= 0.6.1)
       railties (>= 3.1)
     coveralls (0.7.0)
@@ -172,7 +172,7 @@ GEM
       less-rails (~> 2.4.2)
     libv8 (3.16.14.7)
     libxml-ruby (2.7.0)
-    logical_model (0.6.1)
+    logical_model (0.6.3)
       activemodel
       activesupport
       ethon (= 0.4.2)
@@ -189,7 +189,7 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
-    multi_json (1.11.1)
+    multi_json (1.11.2)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
@@ -342,7 +342,7 @@ DEPENDENCIES
   cancan
   carrierwave
   coffee-rails (~> 4.0.0)
-  contacts_client (~> 0.0.38)
+  contacts_client (~> 0.0.40)
   coveralls
   database_cleaner
   delayed_job_active_record
@@ -358,6 +358,7 @@ DEPENDENCIES
   jbuilder (~> 1.0.1)
   jquery-rails
   less-rails-bootstrap (~> 3.0.6)
+  logical_model (= 0.6.3)
   messaging_client (~> 0.0.4)
   padma-assets (= 0.1.29)
   pg

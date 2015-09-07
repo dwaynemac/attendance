@@ -60,8 +60,9 @@ gem 'activerecord-session_store'
 gem 'cancan'
 
 # Padma Clients
+gem 'logical_model', '0.6.3'
 gem 'activity_stream_client', '0.0.16'
-gem 'contacts_client', '~> 0.0.38'
+gem 'contacts_client', '~> 0.0.40'
 gem 'accounts_client', '0.2.14'
 gem 'messaging_client','~> 0.0.4'
 
