@@ -5,6 +5,7 @@ class PadmaContactsSynchronizer
     @account = account
   end
 
+  MAX_ATTEMPTS = 3
   def sync(wayback = nil)
     wayback ||= 2.days
 
@@ -12,7 +13,7 @@ class PadmaContactsSynchronizer
 
     attempts = 0
     padma_contacts = nil
-    while padma_contacts.nil? && attempts <= 3 do
+    while padma_contacts.nil? && attempts < MAX_ATTEMPTS do
       # Get all contacts updated since last sync.
       padma_contacts = PadmaContact.search(select: [:first_name,
                                                     :last_name,
