@@ -20,6 +20,30 @@ class Contact < ActiveRecord::Base
     self.all.joins(:accounts_contacts).where(accounts_contacts: { padma_status: 'student', account_id: account.id })
   end
 
+  def update_last_seen_at(account)
+    last_attendance = AttendanceContact.where(contact_id: self.id,
+                                              attendances: { account_id: account.id })
+                                       .joins(:attendance)
+                                       .order("attendances.attendance_on ASC")
+                                       .last
+                                       .try(:attendance)
+    last_seen_at = last_attendance.try(:attendance_on)
+    return if last_seen_at.nil?
+
+    if padma_contact(account)
+      padma_last_seen_at = padma_contact(account).last_seen_at
+      if padma_last_seen_at.blank? || last_seen_at > padma_last_seen_at
+        padma_contact(account).update({contact: {last_seen_at: last_seen_at},
+                                      ignore_validation: true,
+                                      username: last_attendance.time_slot.padma_uid,
+                                      account_name: account.name})
+      end
+    else
+      Rails.logger.info "couldnt update last_seen_at for contact #{contact.id}"
+      raise "couldnt update last_seen_at for contact #{contact.id}"
+    end
+  end
+
   def padma_contact(account, options={})
     if @padma_contact.nil?
       @padma_contact = PadmaContact.find(self.padma_id, {select: [:first_name, :last_name, :email, :last_seen_at],

@@ -19,6 +19,21 @@ describe Contact do
     end
   end
 
+  describe "update_last_seen_at" do
+    let(:padma_id){'contact-id'}
+    let(:contact){create(:contact, padma_id: padma_id)}
+    before do
+      PadmaContact.stub(:find).and_return(PadmaContact.new)
+    end
+
+    it "sets last_seen_at to last attendance time" do
+      last = create(:attendance_contact, contact_id: contact.id, attendance: create(:attendance, attendance_on: Date.today, account: account))
+      prev = create(:attendance_contact, contact_id: contact.id, attendance: create(:attendance, attendance_on: 1.day.ago, account: account))
+      PadmaContact.any_instance.should_receive(:update).with(hash_including(contact: { last_seen_at: Date.today }))
+      contact.update_last_seen_at(account)
+    end
+  end
+
   describe "#time_slot_ids=" do
     # provided by has_many :time_slots
     let(:time_slot){create(:time_slot)}

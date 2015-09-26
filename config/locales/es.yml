@@ -96,6 +96,7 @@ es:
   confirm: ¿Está seguro?
   date:
     abbr_day_names:
+    - 
     - dom
     - lun
     - mar
@@ -118,6 +119,7 @@ es:
     - nov
     - dic
     day_names:
+    - 
     - domingo
     - lunes
     - martes
