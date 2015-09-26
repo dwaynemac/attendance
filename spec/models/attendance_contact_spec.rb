@@ -65,8 +65,8 @@ describe AttendanceContact do
       end
 
       it "raises exception with a readable message" do
-        ac = build(:attendance_contact)
-        expect{ac.set_last_seen_at_on_contacts}.to raise_exception "attendance #{ac.attendance.id} couldnt update last_seen_at for contact #{ac.contact.id}"
+        ac = create(:attendance_contact)
+        expect{ac.set_last_seen_at_on_contacts}.to raise_exception "couldnt update last_seen_at for contact #{ac.contact.id}"
       end
 
     end

@@ -39,8 +39,8 @@ class Contact < ActiveRecord::Base
                                       account_name: account.name})
       end
     else
-      Rails.logger.info "couldnt update last_seen_at for contact #{contact.id}"
-      raise "couldnt update last_seen_at for contact #{contact.id}"
+      Rails.logger.info "couldnt update last_seen_at for contact #{self.id}"
+      raise "couldnt update last_seen_at for contact #{self.id}"
     end
   end
 
