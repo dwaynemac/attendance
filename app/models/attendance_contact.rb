@@ -11,24 +11,7 @@ class AttendanceContact < ActiveRecord::Base
   after_create :queue_set_last_seen_at_on_contacts
 
   def set_last_seen_at_on_contacts
-    last_seen_at = DateTime.new(attendance.attendance_on.year,
-                                attendance.attendance_on.month,
-                                attendance.attendance_on.day,
-                                attendance.time_slot.start_at.hour,
-                                attendance.time_slot.start_at.min)
-    if contact.padma_contact(attendance.account)
-      padma_last_seen_at = contact.padma_contact(attendance.account).last_seen_at
-      if padma_last_seen_at.blank? || last_seen_at > padma_last_seen_at
-        contact.padma_contact(attendance.account).update({contact: {last_seen_at: last_seen_at},
-                                      ignore_validation: true,
-                                      username: attendance.time_slot.padma_uid,
-                                      account_name: attendance.account.name})
-      end
-    else
-      Rails.logger.info "attendance #{attendance.id} couldnt update last_seen_at for contact #{contact.id}"
-      # raise exception for delayed_job to retry later
-      raise "attendance #{attendance.id} couldnt update last_seen_at for contact #{contact.id}"
-    end
+    contact.update_last_seen_at(attendance.account)
   end
 
   private
