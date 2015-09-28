@@ -8,7 +8,7 @@ class AttendanceContact < ActiveRecord::Base
   validates :contact, presence: true
   validates :attendance, presence: true
 
-  after_create :queue_set_last_seen_at_on_contacts
+  after_save :queue_set_last_seen_at_on_contacts
 
   def set_last_seen_at_on_contacts
     contact.update_last_seen_at(attendance.account)
