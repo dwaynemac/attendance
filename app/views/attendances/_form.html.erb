@@ -1,107 +1,89 @@
 <div class="row" id="attendance">
-  <div class="col-md-6 col-sm-12 col-xs-12 pad_none">
+  <div class="col-md-6 col-sm-12 col-xs-12">
     <%= form_for @attendance, :html => { :class => 'form-horizontal' } do |f| %>
-      <% if @attendance.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
+      <div class='well'>
+        <% if @attendance.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
 
-          <ul>
-          <% @attendance.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
-      <fieldset>
-        <% if  @attendance.attendance_on and  @attendance.time_slot %>
-          <div class="row row_margin">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <legend>
-                <%= t('activerecord.attributes.attendance.attendance_to') %> "<%= @attendance.time_slot.name %>"<br/>
-                <%= t('activerecord.attributes.attendance.text_on') %> <%= l @attendance.attendance_on, format: :long %>
-              </legend>
-            </div>
+            <ul>
+            <% @attendance.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
           </div>
-          <div class="hidden"><%= f.date_select :attendance_on, :default => Time.zone.today %></div>
-          <%= f.hidden_field :time_slot_id %>
-        <% else %>  
-          <div class="row row_margin">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <legend>
-                <%= t('activerecord.attributes.attendance.attendance_to') %>
-              </legend>
-            </div>
-            <div class="col-md-5 col-sm-4 col-xs-7 pad_none">
-              <%= f.label :attendance_on, :class => 'col-sm-9' %>
-            </div>  
-            <div class="col-md-7 col-sm-7 col-xs-5 input-group date">
-	      <%= f.date_select :attendance_on, {:default => Time.zone.today}, {:class => "form-control"} %>
-            </div>
-          </div>  
-          <div class="row row_margin">
-            <div class="col-md-5 col-sm-4 col-xs-7 pad_none">
-              <%= f.label :time_slot_id, :class => 'col-sm-3' %>
-            </div>  
-            <div class="col-md-7 col-sm-8 col-xs-5 pad_none">
-		    <%= f.collection_select :time_slot_id, current_user.current_account.time_slots, :id, :name, {:prompt => t('attendances.form.select_timeslot')},{:class => 'selectpicker select_width show-tick show-menu-arrow form-control'} %>
-            </div>
-          </div>
-        <% end %>  
-	<% unless @trial_lessons.blank? %>
-	<div class="row row_margin">
-          <div class="col-md-5 col-sm-4 col-xs-7 pad_none">
-            <%= f.label :trial_lessons, :class => 'col-sm-9' %>
-          </div>  
-          <div class="col-md-7 col-sm-8 col-xs-5 pad_none">
-            <div class="row" id="trial_lessons">
-              <% @trial_lessons.each_with_index do |tl, index| %>
-                <div class="checkbox col-sm-10 ">
-                  <%= label_tag "trial_lessons[]", "#{t('attendances.form.contact_assisted', name: tl.contact.name)}"%>
-                  <%= check_box_tag "trial_lessons[]", tl.id, tl.assisted?, class: "trial_lessons", id: "trial_lessons_#{index}" %>
-                </div>
-              <% end %>
-            </div>
-          </div>  
-        </div> 
-	<% end %>
-	<div class="row row_margin">
-          <div class="col-md-5 col-sm-4 col-xs-12 pad_none">
-            <%= f.label :padma_contacts, :class => 'col-sm-2 control-label' %>
-          </div>  
-          <div class="col-md-7 col-sm-8 col-xs-12 pad_none">
-                      </div>  
-        </div> 
-      </fieldset>
-      <ul id="attendance_contacts">
-        <% @attendance.contacts.each do |c| %>
-          <li>
-            <%= hidden_field_tag "attendance[padma_contacts][]", c.padma_id %>
-            <%= link_to "#{c.name}", "#", class: "delete btn btn-default btn-sm btn-block" %>
-          </li>
         <% end %>
-      </ul>
-      <div style="padding-left:40px">
-	<%= select_tag :padma_contacts_select,
-              options_for_select({
-                t('attendances.form.recurrents_contacts') => :recurrent_contacts,
-                t('attendances.form.all_contacts') => :all_students
-            }.merge(Hash[current_user.current_account.usernames.map {|username| [t('attendances.form.students_of', teacher: username), username].flatten}])
-              ),
-              {:class => 'selectpicker show-tick show-menu-arrow form-control'} %>
-        <span id="loader"><%= image_tag("ajax-loader.gif") %></span>
-      </div>
-      <fieldset id="attendance_padma_contacts" style="margin-top: 5px">
-        <%= render :partial => 'shared/padma_contacts' %>
-      </fieldset>
-
-      <div class="row row_margin form-actions">
-        <%= f.submit nil, :class => 'btn btn-primary' %>
-        <%  if @attendance.persisted?  -%>
-          <%= link_to t('Show'), @attendance, :class => 'btn'%>
-          <%= link_to t('destroy'), @attendance, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
-        <% end -%>
-        <%= link_to t('Cancel'), attendances_path, :class => 'btn' %>
-      </div>
-    <% end %>
-  </div>  
-</div>  
+        <fieldset>
+          <% if  @attendance.attendance_on and  @attendance.time_slot %>
+            <legend>
+              <%= t('activerecord.attributes.attendance.attendance_to') %> "<%= @attendance.time_slot.name %>"<br/>
+              <%= t('activerecord.attributes.attendance.text_on') %> <%= l @attendance.attendance_on, format: :long %>
+            </legend>
+            <div class="hidden"><%= f.date_select :attendance_on, :default => Time.zone.today %></div>
+            <%= f.hidden_field :time_slot_id %>
+          <% else %>
+            <legend><%= t('activerecord.attributes.attendance.attendance_to') %></legend>
+            <div class='form-group'>
+              <%= f.label :attendance_on, :class => 'control-label col-xs-5 col-md-4' %>
+              <div class="col-xs-7 col-md-8">
+                <div class='input-group date'>
+                  <%= f.date_select :attendance_on, {:default => Time.zone.today}, {:class => "form-control"} %>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label :time_slot_id, :class => 'control-label col-xs-5 col-md-4' %>
+              <div class="col-xs-7 col-md-8">
+                <div class='select'>
+  		            <%= f.collection_select :time_slot_id, current_user.current_account.time_slots, :id, :name, {:prompt => t('attendances.form.select_timeslot')},{:class => 'selectpicker select_width show-tick show-menu-arrow form-control'} %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <% unless @trial_lessons.blank? %>
+            <div class="form-group">
+              <%= f.label :trial_lessons, :class => 'control-label col-xs-5 col-md-4' %>
+              <div class="col-xs-7 col-md-8">
+                <div class="row" id="trial_lessons">
+                  <% @trial_lessons.each_with_index do |tl, index| %>
+                    <div class="checkbox col-sm-10">
+                      <%= check_box_tag "trial_lessons[]", tl.id, tl.assisted?, class: "trial_lessons", id: "trial_lessons_#{index}" %> <%= label_tag "trial_lessons[]", "#{t('attendances.form.contact_assisted', name: tl.contact.name)}"%>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        	<div class="">
+            <%= f.label :padma_contacts, :class => 'col-xs-12 col-md-12' %>
+          </div>
+        </fieldset>
+        <ul id="attendance_contacts" class='list-unstyled'>
+          <% @attendance.contacts.each do |c| %>
+            <li>
+              <%= hidden_field_tag "attendance[padma_contacts][]", c.padma_id %>
+              <%= link_to "#{c.name}", "#", class: "delete btn btn-default btn-sm btn-block" %>
+            </li>
+          <% end %>
+        </ul>
+        <div class='text-center'>
+          <div class='select'>
+            <%= select_tag :padma_contacts_select, options_for_select({t('attendances.form.recurrents_contacts') => :recurrent_contacts, t('attendances.form.all_contacts') => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| [t('attendances.form.students_of', teacher: username), username].flatten}]) ), {:class => 'selectpicker show-tick show-menu-arrow form-control'} %>
+          </div>
+          <span id="loader"><%= image_tag("ajax-loader.gif") %></span>
+        </div>
+        <fieldset id="attendance_padma_contacts">
+          <%= render :partial => 'shared/padma_contacts' %>
+        </fieldset>
+        <footer class="form-footer margin-top-10">
+          <%= f.submit nil, :class => 'btn btn-primary' %>
+          <%  if @attendance.persisted?  -%>
+            <%= link_to t('Show'), @attendance, :class => 'btn btn-secondary'%>
+            <%= link_to t('destroy'), @attendance, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+          <% end -%>
+            <%= link_to t('Cancel'), attendances_path, :class => 'btn btn-link' %>
+        </footer>
+      <% end %>
+    </div>
+  </div>
+</div>

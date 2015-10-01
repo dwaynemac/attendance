@@ -13,11 +13,6 @@
  *= require select2
  *= require bootstrap-multiselect
  *= require fonts
- *= require header
  *= require_tree .
+ *= require padma-assets
  */
-
- .middle-section{
-  margin: 0 auto;
-  width: 960px;
- }

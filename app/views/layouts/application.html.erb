@@ -9,34 +9,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<header class="header">
-  <div id="H_moduleArea">
-     <%= render 'layouts/header' %>
-  </div><!-- #H_moduleArea -->
+  <%= render 'layouts/header' %>
 
-</header> <!-- .header -->
-
-<div class="row">
-  <div class="container middle-section">
-    <div class="content">
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12" id="flash_messages">
-          <%= render 'layouts/flash_messages' %>
-        </div>
+  <div id='content' class='container'>
+    <div class='row'>
+      <div class='col-xs-12 col-md-12' id='flash_messages'>
+        <%= render 'layouts/flash_messages' %>
       </div>
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12 main_col_pad_none">
-          <%= yield %>
-        </div>
-
-      </div><!--/row-->
-    </div><!--/content-->
-
-    <footer>
-      <p>&copy; PADMA 2012</p>
-    </footer>
-
+      <div class='col-xs-12 col-md-12'>
+        <%= yield %>
+      </div>
+    </div>
   </div>
-</div>
+
+  <footer class='text-center margin-top-30'>
+    <p>&copy; PADMA 2012</p>
+  </footer>
 </body>
 </html>

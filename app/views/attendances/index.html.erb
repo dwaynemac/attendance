@@ -1,51 +1,166 @@
 <%- breadcrum t("attendances.index.title") -%>
-
 <%= content_for :header_submenu do %>
-	<h2> <%= link_to t('attendances.index.new'), new_attendance_path, id: 'uninitialized_new_attendance'%> </h2>
+	<%= link_to t('attendances.index.new'), new_attendance_path, id: 'uninitialized_new_attendance'%>
 <% end -%>
-      
+
 <%= render 'warn_unscheduled_timeslots' %>
 
-<% @view_range.each do |n| %>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <% date = n.days.ago.to_date %>
-      <%= l(date, format: :in_context).capitalize %>
-      <% if date.month != Date.today.month -%>
-        (<%= l(date, format: :month) %>)
-      <% end -%>
+<div class='attendance-container'>
+  <nav class='attendance-navbar margin-bottom-10' role='navigation'>
+    <div class='filter-controls'>
+      <div class='btn-group'>
+        <%= link_to '<span class="glyphicon glyphicon-chevron-left"></span>'.html_safe, attendances_path(days_from: @days_to, days_to: @days_to.to_i + @day_span), class: 'btn btn-secondary btn-sm' %>
+        <%= link_to '<span class="glyphicon glyphicon-chevron-right"></span>'.html_safe, attendances_path(days_from: @days_from.to_i - @day_span, days_to: @days_to.to_i - @day_span), class: 'btn btn-secondary btn-sm' unless @days_from.to_i == 0 %>
+      </div>
+      <span class='label-filter label-filter-inline'>7 - 13 de sept de 2015</span> <a class='btn btn-link btn-sm'><span class='glyphicon glyphicon-calendar'></span></a>
+      <div class='filter-buttons' data-activates='nav-mobile'>
+        <button type='button' class='btn btn-secondary btn-sm' data-toggle='collapse' data-target='#attendance-filter' title='Filters' aria-expanded='false'>
+          <span class='glyphicon glyphicon-filter'></span> Filter
+        </button>
+        <a href='' class='btn btn-secondary btn-sm'>Ver la semana pasada</a>
+      </div>
     </div>
-    <div class="panel-body">
-      <ul class="list-group">
-        <% @time_slots.each do |time_slot| %>
-          <%= render 'attendances/time_slot', time_slot: time_slot, date: date %>
-        <% end %>
-      </ul>
+    <div class='filter-controls filter-controls-right'>
+      <span class='label-filter'>Clase reciente:</span>
+      <a href="#dialog-check-attendance" class='btn btn-primary' data-toggle='modal'>Marcar asistencia</a>
+      <a href="" class='btn btn-danger'>No vino nadie</a>
+    </div>
+  </nav>
 
-      <% if date.today? %>
-        <div class="alert alert-warning">
-          <p><%= t('.timeslots_hidden_warning') %> <%= link_to t('attendances.index.toggle_hidden_timeslots'), "#", :class => "btn btn-default btn-xs", :id => "toggle-hidden-timeslots" %></p>
-        </div>         
-      <% end %>
+  <div id='attendance-filter' class='collapse'>
+    <form class='form-inline'>
+      <div class='form-group clearfix'>
+        <label class='control-label'>Instructor</label>
+        <div class='select'>
+          <select class='form-control'>
+            <option>Alex Falke</option>
+            <option>Instructor 1</option>
+            <option>Instructor 2</option>
+            <option>Instructor 3</option>
+          </select>
+        </div>
+        <button id='filter-attendance-button' type='submit' class='btn btn-secondary btn-sm'>Filtrar</button>
+        <a href='' class='btn btn-secondary btn-sm attendance-pending' data-activates='nav-mobile'>Ver clases con asistencia pendiente</a>
+      </div>
+    </form>
+  </div>
+
+  <div class='attendance-filter-list margin-bottom-20 hide'> <!-- show when active filters -->
+    <label class='label-filter'>Filter On:</label>
+    <div class='label label-success'>Pendientes <a href='' class='close'>&times;</a></div>
+    <div class='label label-success'>Alex Falke <a href='' class='close'>&times;</a></div>
+  </div>
+
+  <section class='attendance-body'>
+    <% @view_range.each do |n| %>
+      <div class="panel panel-default">
+        <div class="panel-heading"> <!-- add class "current-day" when day is today -->
+          <% date = n.days.ago.to_date %>
+          <%= l(date, format: :in_context).capitalize %>
+          <% if date.month != Date.today.month -%>
+            (<%= l(date, format: :month) %>)
+          <% end -%>
+        </div>
+        <div class="panel-body">
+          <ul class="list-group">
+            <% @time_slots.each do |time_slot| %>
+              <%= render 'attendances/time_slot', time_slot: time_slot, date: date %>
+            <% end %>
+          </ul>
+
+          <% if date.today? %>
+            <div class="alert alert-warning">
+              <p><%= t('.timeslots_hidden_warning') %> <%= link_to t('attendances.index.toggle_hidden_timeslots'), "#", :class => "btn btn-default btn-xs", :id => "toggle-hidden-timeslots" %></p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </section>
+
+  <div class="panel panel-default" hidden>
+    <div class="panel-body">
+      <span>
+        <%= link_to t('attendances.index.older'), 
+              attendances_path(
+                days_from: @days_to, 
+                days_to: @days_to.to_i + @day_span), 
+              class: 'btn btn-primary' %>
+      </span>
+      <span class="paginate-next">
+        <%= link_to t('attendances.index.newer'), 
+              attendances_path(
+                days_from: @days_from.to_i - @day_span, 
+                days_to: @days_to.to_i - @day_span), 
+              class: 'btn btn-primary' unless @days_from.to_i == 0 %>
+      </span>
     </div>
   </div>
-<% end %>
+</div>
 
-<div class="panel panel-default">
-  <div class="panel-body">
-    <span>
-      <%= link_to t('attendances.index.older'), 
-            attendances_path(
-              days_from: @days_to, 
-              days_to: @days_to.to_i + @day_span), 
-            class: 'btn btn-primary' %>
-    </span>
-    <span class="paginate-next">
-      <%= link_to t('attendances.index.newer'), 
-            attendances_path(
-              days_from: @days_from.to_i - @day_span, 
-              days_to: @days_to.to_i - @day_span), 
-            class: 'btn btn-primary' unless @days_from.to_i == 0 %>
-    </span>
+<div class="modal fade" id='dialog-check-attendance'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Marcar Asistencia Mié <span class='date'>9/9</span></h4>
+      </div>
+      <div class="modal-body">
+        <form role='form'>
+          <div class='form-group'>
+            <label class='control-label'>Clase: Curso básico teórico</label>
+            <div class='select'>
+              <select class='form-control'>
+                <option value="id-1">Clasde de 10:00 a 11:00 hs</option>
+                <option value="id14431262211051">Clase de 11:00 a 12:00 hs</option>
+                <option value="id-2">Clase de 14:00 a 15:00 hs</option>
+                <option value="id14436207189901">Clase de 15:00 a 16:00 hs</option>
+              </select>
+            </div>
+          </div>
+          <div class='form-group'>
+            <label class='control-label'>Instructor que da la clase</label>
+            <div class='select'>
+              <select class='form-control'>
+                <option value="id14431262211051">Mariela Adrover</option>
+                <option value="id-1">Alex Falke</option>
+                <option value="id-2">Tu nombre</option>
+                <option value="id144200393390848">Instructor 1</option>
+                <option value="id144200397912350">Instructor 2</option>
+                <option value="id144200398367551">Instructor 3</option>
+              </select>
+            </div>
+          </div>
+          <div class='form-group'>
+            <label class='control-label'>Elige la lista de contactos:</label>
+            <div class='select'>
+              <select class='form-control'>
+                <option value="id-1">Alumnos recurrentes de este horario</option>
+                <option value="id14431262211051">ALumnos 2</option>
+                <option value="id-2">ALumnos 3</option>
+              </select>
+            </div>
+          </div>
+          <div class='form-group'>
+            <label class='label-checkbox'>Select:</label>
+            <div class='btn-group'>
+              <a href='' class='btn btn-link btn-sm'>All</a>
+              <a href='' class='btn btn-link btn-sm'>None</a>
+            </div>
+            <div class='checkbox'><label><input type='checkbox' /> Alumno 1</label></div>
+            <div class='checkbox'><label><input type='checkbox' /> Alumno 2</label></div>
+            <div class='checkbox'><label><input type='checkbox' /> Alumno 3</label></div>
+            <div class='checkbox'><label><input type='checkbox' /> Alumno 4</label></div>
+            <div class='checkbox'><label><input type='checkbox' /> Alumno 5</label></div>
+            <div class='checkbox'><label><input type='checkbox' /> Alumno 6</label></div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer text-center">
+        <button type='button' class='btn btn-danger'>No vino nadie</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Guardar asistencia</button>
+      </div>
+    </div>
   </div>
 </div>

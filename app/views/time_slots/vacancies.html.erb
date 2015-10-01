@@ -1,27 +1,30 @@
-<h3><%= t('time_slots.index.title') %></h3>
-
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <td><%= TimeSlot.human_attribute_name(:name) %></td>
-    <td><%= TimeSlot.human_attribute_name(:start_at) %></td>
-    <td><%= TimeSlot.human_attribute_name(:end_at) %></td>
-    <td><%= t('.days') %></td>
-    <td><%= t('.vacancies') %></td>
-  </tr>
-  </thead>
-  <tbody>
-  <% @time_slots.each do |ts| %>
-    <tr>
-      <td><%= ts.name %></td>
-      <td><%= ts.start_at.strftime('%H:%M') %></td>
-      <td><%= ts.end_at.strftime('%H:%M') %></td>
-      <td><%= showSchedule ts %></td>
-      <td data-text="<%= t('.no_vacancies') %>">
-        <%= link_to t('.check_vacancies'), 'javascript:void(0);', onclick: 'checkVacancies(this);', class: 'btn btn-default' %>
-        <%= image_tag 'ajax-loader.gif', id: 'vacancies-think' %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<div class='timeslot-container'>
+  <header class='timeslot-head'>
+    <legend><%= t('time_slots.index.title') %></legend>
+  </header>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= TimeSlot.human_attribute_name(:name) %></th>
+        <th><%= TimeSlot.human_attribute_name(:start_at) %></th>
+        <th><%= TimeSlot.human_attribute_name(:end_at) %></th>
+        <th><%= t('.days') %></th>
+        <th><%= t('.vacancies') %></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @time_slots.each do |ts| %>
+      <tr>
+        <td><%= ts.name %></td>
+        <td><%= ts.start_at.strftime('%H:%M') %></td>
+        <td><%= ts.end_at.strftime('%H:%M') %></td>
+        <td><%= showSchedule ts %></td>
+        <td data-text="<%= t('.no_vacancies') %>">
+          <%= link_to t('.check_vacancies'), 'javascript:void(0);', onclick: 'checkVacancies(this);', class: 'btn btn-secondary btn-xs' %>
+          <%= image_tag 'ajax-loader.gif', id: 'vacancies-think' %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
