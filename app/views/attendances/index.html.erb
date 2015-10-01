@@ -12,7 +12,7 @@
         <%= link_to '<span class="glyphicon glyphicon-chevron-left"></span>'.html_safe, attendances_path(days_from: @days_to, days_to: @days_to.to_i + @day_span), class: 'btn btn-secondary btn-sm' %>
         <%= link_to '<span class="glyphicon glyphicon-chevron-right"></span>'.html_safe, attendances_path(days_from: @days_from.to_i - @day_span, days_to: @days_to.to_i - @day_span), class: 'btn btn-secondary btn-sm' unless @days_from.to_i == 0 %>
       </div>
-      <span class='label-filter label-filter-inline'>7 - 13 de sept de 2015</span> <a class='btn btn-link btn-sm'><span class='glyphicon glyphicon-calendar'></span></a>
+      <span class='label-filter label-filter-inline'>7 - 13 de sept de 2015</span> <button type='button' class='btn btn-link btn-sm'><span class='glyphicon glyphicon-calendar'></span></button>
       <div class='filter-buttons' data-activates='nav-mobile'>
         <button type='button' class='btn btn-secondary btn-sm' data-toggle='collapse' data-target='#attendance-filter' title='Filters' aria-expanded='false'>
           <span class='glyphicon glyphicon-filter'></span> Filter
@@ -67,12 +67,13 @@
               <%= render 'attendances/time_slot', time_slot: time_slot, date: date %>
             <% end %>
           </ul>
-
+          <!--
           <% if date.today? %>
             <div class="alert alert-warning">
               <p><%= t('.timeslots_hidden_warning') %> <%= link_to t('attendances.index.toggle_hidden_timeslots'), "#", :class => "btn btn-default btn-xs", :id => "toggle-hidden-timeslots" %></p>
             </div>
           <% end %>
+          -->
         </div>
       </div>
     <% end %>
@@ -106,7 +107,7 @@
         <h4 class="modal-title">Marcar Asistencia Mié <span class='date'>9/9</span></h4>
       </div>
       <div class="modal-body">
-        <form role='form'>
+        <form class='checkattendance-form' role='form'>
           <div class='form-group'>
             <label class='control-label'>Clase: Curso básico teórico</label>
             <div class='select'>
@@ -156,7 +157,7 @@
           </div>
         </form>
       </div>
-      <div class="modal-footer text-center">
+      <div class="modal-footer">
         <button type='button' class='btn btn-danger'>No vino nadie</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-primary">Guardar asistencia</button>
@@ -164,3 +165,4 @@
     </div>
   </div>
 </div>
+<script>$('[data-toggle="popover"]').popover();</script>

@@ -7,11 +7,6 @@
   }
 }
 
-.students-list {
-  font-weight: bold;
-  padding-bottom: 10px;
-}
-
 .list-group-item.today.other-users-ts {
   list-style: none;
 }
@@ -34,6 +29,7 @@
     }
   }
 }
+
 @media (max-width: 767px) {
   .attendance-navbar {
     .filter-controls {
@@ -47,6 +43,9 @@
         text-align: center;
         &.label-filter-inline {
           display: inline-block;
+          @media (max-width: 767px) {
+            display: none;
+          }
         }
       }
     }
@@ -114,6 +113,7 @@
     .panel {
       border-right: none;
       display: table-cell;
+      vertical-align: top;
       &:last-child {
         border-right: solid 1px #ddd;
       }
@@ -137,13 +137,21 @@
   }
   .panel-body {
     padding: 0;
+    @media (max-width: 767px) {
+      min-height: 15px;
+    }
   }
   .list-group-item {
     background-color: #fff;
     border-width: 0 0 1px 0;
     padding: 5px 10px;
-    + .list-group-item {
-      border-top: 1px solid #ddd;
+    -webkit-transition: background-color .2s linear, opacity .2s;
+    transition: background-color .2s linear, opacity .2s;
+    &:before {
+      -webkit-transition: all .15s;
+      transition: all .15s;
+      -webkit-transform: scale(.8);
+      transform: scale(.8);
     }
     &:first-child,
     &:last-child {
@@ -159,17 +167,29 @@
         position: absolute;
         right: -2px;
         top: -2px;
+        -webkit-transform: scale(1);
+        transform: scale(1);
         z-index: -1;
       }
+    }
+    &.pending {
+      background-color: #fff;
     }
     &.complete {
       background-color: #ebebeb;
       opacity: .6;
+      .timeslot-content {
+        margin-top: 0;
+      }
     }
     &:hover {
       .timeslot-controls {
+        opacity: 1;
         visibility: visible;
       }
+    }
+    + .list-group-item {
+      border-top: 1px solid #ddd;
     }
     .glyphicon-check {
       display: none;
@@ -210,10 +230,10 @@
 }
 
 .timeslot-description {
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: end;
+  align-items: flex-end;
   color: #666;
   display: -webkit-box;
   display: -webkit-flex;
@@ -227,21 +247,53 @@
     -ms-flex: 1;
     flex: 1;
     margin: 0;
+    word-break: break-word;
   }
 }
 
 .timeslot-controls {
+  opacity: 0;
+  -webkit-transition: opacity .25s ease-in;
+  transition: opacity .25s ease-in;
   visibility: hidden;
 }
 
 .results-count-attendances {
   cursor: pointer;
   font-weight: bold;
+  margin-left: 5px;
+  outline: none;
   &.attendences0 {
     color: #d11111;
   }
-  @media (max-width: 767px) {
-    display: none;
+}
+
+.students-list {
+  a {
+    display: block;
+    margin-left: -15px;
+    margin-right: -15px;
+    overflow: hidden;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+// Students list popover
+.students-list-footer {
+  a {
+    color: #999;
+    display: block;
+    padding: 2.5px 5px;
+    text-align: center;
+    &:focus,
+    &:hover {
+      background-color: #f5f5f5;
+      color: #666;
+      text-decoration: none;
+    }
   }
 }
 
@@ -288,6 +340,9 @@
     display: inline-block;
     font-size: 14px;
     vertical-align: middle;
+    @media (max-width: 767px) {
+      margin-bottom: 5px;
+    }
     .close {
       color: #fff;
       font: {
@@ -298,6 +353,37 @@
       padding-left: 5px;
       text-shadow: none;
     }
+  }
+}
+
+// Modal check attendance
+.checkattendance-form {
+  .label-checkbox {
+    color: #999;
+    font: {
+      size: 14px;
+      weight: normal;
+    }
+    margin-bottom: 0;
+  }
+  .btn-group {
+    .btn-link {
+      position: relative;
+      + .btn-link {
+        &:before {
+          background-color: #ddd;
+          bottom: 5px;
+          content: '';
+          left: 0;
+          position: absolute;
+          top: 5px;
+          width: 1px;
+        }
+      }
+    }
+  }
+  .checkbox {
+    margin-left: -20px;
   }
 }
 
