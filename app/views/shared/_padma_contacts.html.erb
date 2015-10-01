@@ -1,4 +1,4 @@
-<ul id="padma_contacts">
+<ul id="padma_contacts" class='list-unstyled'>
   <% unless @padma_contacts.blank? %>
     <% @padma_contacts.each do |c| %>
       <li><%= link_to "#{c.first_name} #{c.last_name}", "#", :class => 'add btn btn-default btn-sm btn-block', :data => {:padma_id => c._id} %></li>

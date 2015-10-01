@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require twitter/bootstrap
 //= require angular
 //= require angular-resource
 //= require select2
@@ -22,6 +21,7 @@
 //= require ux-events
 //= require cache
 //= require jquery.quickfilter
+//= require padma-assets
 //= require async_render
 //= require initialize-lists-menu
 //= require_tree .

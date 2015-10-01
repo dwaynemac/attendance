@@ -1,6 +1,3 @@
 <%- breadcrum t("trial_lessons.edit.title") -%>
-
 <%= render 'form' %>
-
-<%= link_to 'Show', @trial_lesson %> |
-<%= link_to t('back'), trial_lessons_path %>
+<%= link_to 'Show', @trial_lesson, :class => 'btn btn-link' %>

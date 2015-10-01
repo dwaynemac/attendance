@@ -24,6 +24,12 @@ GIT
       railties (>= 3.2.6, < 5)
       warden (~> 1.2.1)
 
+PATH
+  remote: ~/Workspace/padma-assets
+  specs:
+    padma-assets (0.1.26)
+      railties (>= 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -198,8 +204,6 @@ GEM
     nokogiri-happymapper (0.5.9)
       nokogiri (~> 1.5)
     orm_adapter (0.4.0)
-    padma-assets (0.1.29)
-      railties (>= 3.1)
     pg (0.15.1)
     pivotal-tracker (0.5.12)
       builder
@@ -360,7 +364,7 @@ DEPENDENCIES
   less-rails-bootstrap (~> 3.0.6)
   logical_model (= 0.6.3)
   messaging_client (~> 0.0.4)
-  padma-assets (= 0.1.29)
+  padma-assets!
   pg
   protected_attributes
   pry
@@ -381,3 +385,6 @@ DEPENDENCIES
   workless
   yard (~> 0.8.3)
   yard-restful
+
+BUNDLED WITH
+   1.10.6

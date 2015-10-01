@@ -1,0 +1,17 @@
+.trial-lesson-list {
+	list-style-type: none;
+	margin-bottom: 15px;
+	li {
+		+ li {
+			margin-top: 5px;
+		}
+	}
+}
+
+.trial-lesson-list-head {
+	color: #666;
+	font: {
+		size: 14px;
+		weight: bold;
+	}
+}

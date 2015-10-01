@@ -1,30 +1,33 @@
 <%- breadcrum t("trial_lessons.show.title") -%>
-<p id="notice"><%= notice %></p>
+<div class='trial-lesson-container'>
+  <section class='trial-lesson-content'>
+    <p>
+      <strong><%= TrialLesson.human_attribute_name :trial_on %></strong><br>
+      <%= @trial_lesson.trial_on %>
+    </p>
 
-<p>
-  <b><%= TrialLesson.human_attribute_name :trial_on %></b><br>
-  <%= @trial_lesson.trial_on %>
-</p>
+    <p>
+      <strong><%= TrialLesson.human_attribute_name :time_slot %></strong><br>
+      <%= @trial_lesson.time_slot.name %>
+    </p>
 
-<p>
-  <b><%= TrialLesson.human_attribute_name :time_slot %></b><br>
-  <%= @trial_lesson.time_slot.name %>
-</p>
+    <p>
+      <strong><%= TrialLesson.human_attribute_name :contact %></strong><br>
+      <%= @trial_lesson.contact.try :name %>
+    </p>
 
-<p>
-  <b><%= TrialLesson.human_attribute_name :contact %></b><br>
-  <%= @trial_lesson.contact.try :name %> 
-</p>
+    <p>
+      <strong><%= TrialLesson.human_attribute_name :padma_uid %></strong><br>
+      <%= @trial_lesson.padma_uid %>
+    </p>
 
-<p>
-  <b><%= TrialLesson.human_attribute_name :padma_uid %></b><br>
-  <%= @trial_lesson.padma_uid %>
-</p>
-
-<p>
-  <b><%= TrialLesson.human_attribute_name :assisted %></b><br>
-  <%= @trial_lesson.assisted %>
-</p>
-
-<%= link_to 'Edit', edit_trial_lesson_path(@trial_lesson) %> |
-<%= link_to t('back'), trial_lessons_path %>
+    <p>
+      <strong><%= TrialLesson.human_attribute_name :assisted %></strong><br>
+      <%= @trial_lesson.assisted %>
+    </p>
+  </section>
+  <footer class='footer-actions margin-top-20'>
+    <%= link_to 'Edit', edit_trial_lesson_path(@trial_lesson), :class => 'btn btn-secondary' %>
+    <%= link_to t('back'), trial_lessons_path, :class => 'btn btn-link' %>
+  </footer>
+</div>

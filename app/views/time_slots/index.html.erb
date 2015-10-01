@@ -1,16 +1,16 @@
 <%- breadcrum t("time_slots.index.title") -%>
 
-<div id="search-field-container">
+<div id="search-field-container" class='margin-bottom-20'>
   <input id="timeslots-filter" class='form-control' type='text' placeholder='<%= t('.filter_timeslots') %>' />
 </div>
 <table id="timeslots" class="table table-striped">
   <thead>
     <tr>
-      <td><%= TimeSlot.human_attribute_name(:name) %></td>
-      <td><%= TimeSlot.human_attribute_name(:padma_uid) %></td>
-      <td><%= TimeSlot.human_attribute_name(:start_at) %></td>
-      <td><%= TimeSlot.human_attribute_name(:end_at) %></td>
-      <td></td>
+      <th><%= TimeSlot.human_attribute_name(:name) %></th>
+      <th><%= TimeSlot.human_attribute_name(:padma_uid) %></th>
+      <th><%= TimeSlot.human_attribute_name(:start_at) %></th>
+      <th><%= TimeSlot.human_attribute_name(:end_at) %></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -20,10 +20,10 @@
         <td><%= ts.padma_uid %></td>
         <td><%= ts.start_at.strftime('%H:%M') %></td>
         <td><%= ts.end_at.strftime('%H:%M') %></td>
-        <td>
-          <%= link_to 'Show', ts, :class => 'btn btn-mini' %>
-          <%= link_to t('edit'), edit_time_slot_path(ts), :class => 'btn btn-mini' %>
-          <%= link_to t('destroy'), time_slot_path(ts), :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
+        <td class='td-actions'>
+          <%= link_to 'Show', ts, :class => 'btn btn-primary btn-xs' %>
+          <%= link_to t('edit'), edit_time_slot_path(ts), :class => 'btn secondary btn-xs' %>
+          <%= link_to t('destroy'), time_slot_path(ts), :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs' %>
         </td>
       </tr>
     <% end %>

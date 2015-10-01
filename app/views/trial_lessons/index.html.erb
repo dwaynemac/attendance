@@ -1,37 +1,31 @@
 <%- breadcrum t("trial_lessons.index.title") -%>
-
-<ul>
-  <% @trial_lessons.group_by { |t| t.trial_on }.each do |date, trial_lessons| %>
-    <h3><%= date %></h3>
-    <% trial_lessons.each do |trial_lesson| %>
-    <li>
-      <% if trial_lesson.contact -%>
-        <%= link_to_contact_profile trial_lesson.contact %>
-      <% else -%>
-        <%= t('trial_lessons.index.contact_without_name') %>
-      <% end -%>
-      @ <%= trial_lesson.time_slot.try(:name) || t('trial_lessons.index.time_slot_deleted') %>
-      <%- if trial_lesson.assisted? -%>
-        <span class="label label-success"><%= t('trial_lesson.status.assisted') %></span>
-      <%- else -%>
-        <%= content_tag( :span, t('trial_lesson.status.absent'), class: 'label label-important') if trial_lesson.trial_at < Time.zone.now %>
-      <%- end -%>
-      <%= link_to t('edit'), edit_trial_lesson_path(trial_lesson), :class => 'btn btn-mini' %>
-      <%= link_to t('destroy'), trial_lesson, method: :delete, data: { confirm: t('confirm')}, :class => 'btn btn-mini btn-danger' %>
-      <%= link_to t('trial_lessons.index.archive'),
-                  trial_lesson_path(
-                    id: trial_lesson.id,
-                    trial_lesson: {archived: true},
-                    redirect_to: 'index'
-                  ),
-                  method: :put,
-                  class: 'btn btn-mini btn-link'
-      %>
-      </li>
-    <% end %>
-  <% end %>
-</ul>
-
-<br>
-
-<%= link_to t('trial_lessons.index.new'), new_trial_lesson_path, :class => 'btn btn-default' %>
+<div class='trial-lesson-container'>
+  <section class='trial-lesson-content'>
+    <ul class='trial-lesson-list'>
+      <% @trial_lessons.group_by { |t| t.trial_on }.each do |date, trial_lessons| %>
+        <li class='trial-lesson-list-head'><%= date %></li>
+        <% trial_lessons.each do |trial_lesson| %>
+        <li>
+          <% if trial_lesson.contact -%>
+            <%= link_to_contact_profile trial_lesson.contact %>
+          <% else -%>
+            <%= t('trial_lessons.index.contact_without_name') %>
+          <% end -%>
+          @ <%= trial_lesson.time_slot.try(:name) || t('trial_lessons.index.time_slot_deleted') %>
+          <%- if trial_lesson.assisted? -%>
+            <span class="label label-success"><%= t('trial_lesson.status.assisted') %></span>
+          <%- else -%>
+            <%= content_tag( :span, t('trial_lesson.status.absent'), class: 'label label-important') if trial_lesson.trial_at < Time.zone.now %>
+          <%- end -%>
+          <%= link_to t('edit'), edit_trial_lesson_path(trial_lesson), :class => 'btn btn-link btn-xs' %>
+          <%= link_to t('destroy'), trial_lesson, method: :delete, data: { confirm: t('confirm')}, :class => 'btn btn-danger btn-xs' %>
+          <%= link_to t('trial_lessons.index.archive'), trial_lesson_path(id: trial_lesson.id,trial_lesson: {archived: true},redirect_to: 'index'), method: :put, class: 'btn btn-secondary btn-xs' %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </section>
+  <footer class='footer-actions'>
+    <%= link_to t('trial_lessons.index.new'), new_trial_lesson_path, :class => 'btn btn-default' %>
+  </footer>
+</div>
