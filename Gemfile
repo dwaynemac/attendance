@@ -39,6 +39,7 @@ gem 'therubyracer', '0.12.1', :platforms => :ruby
 
 gem 'angularjs-rails'
 gem "select2-rails"
+
 gem 'bootstrap-multiselect-rails'
 
 group :doc do
