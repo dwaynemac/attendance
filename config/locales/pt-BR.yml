@@ -18,6 +18,7 @@ pt-BR:
         time_slot: aula
         time_slot_id: aula
         trial_lessons: aula experimental
+        username: instrutor
       contact_time_slot:
         contact_id: 
       stat:
@@ -78,6 +79,7 @@ pt-BR:
       all_contacts: 'Todos os alunos'
       students_of: "Alunos de %{teacher}"
       select_timeslot: Escolher uma turma
+      select_username: Escolher um instrutor
     index:
       edit: Alterar
       ignore: Ignorar

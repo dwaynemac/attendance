@@ -8,12 +8,13 @@ class Attendance < ActiveRecord::Base
   validates :account, presence: true
   validates :time_slot, presence: true
   validates :attendance_on, presence: true
+  validates :username, presence: true
   validates_date :attendance_on, on_or_before: :today
   validate :only_on_per_day_per_slot
 
   attr_accessor :padma_contacts
 
-  attr_accessible :account_id, :time_slot_id, :attendance_on, :padma_contacts
+  attr_accessible :account_id, :time_slot_id, :attendance_on, :padma_contacts, :username
 
   accepts_nested_attributes_for :attendance_contacts
 

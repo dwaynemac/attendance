@@ -18,6 +18,7 @@ es:
         time_slot: clase
         time_slot_id: clase
         trial_lessons: clase de prueba
+        username: instructor
       contact_time_slot:
         contact_id: 
       stat:
@@ -78,6 +79,7 @@ es:
       all_contacts: Todos los alumnos
       recurrents_contacts: Alumnos recurrentes de este horario
       select_timeslot: Seleccionar un horario
+      select_username: Seleccionar un instructor
     index:
       older: Marcar asistencias de la semana anterior.
       newer: Marcar asistencia de la semana siguiente.

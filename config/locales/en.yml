@@ -18,6 +18,7 @@ en:
         time_slot: Time slot
         time_slot_id: Time slot
         trial_lessons: Trial lessons
+        username: Instructor
       contact_time_slot:
         contact_id: 
       stat:
@@ -78,6 +79,7 @@ en:
       contact_assisted: 
       students_of: '%{teacher}''s students'
       select_timeslot: Select timeslot
+      select_username: Select instructor
     index:
       older: Regiser older attendances 
       new: Register attendance
