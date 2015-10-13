@@ -72,13 +72,13 @@ class InstructorStatsSQLBuilder
 			query << %(
 				UNION
 				-- select contact attributes and count attendances on a time slot
-				SELECT contacts.*, #{instructors_count_select username}
+				SELECT DISTINCT contacts.*, #{instructors_count_select username}
 				FROM contacts
 				INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 				INNER JOIN attendance_contacts ON contacts.id = attendance_contacts.contact_id
 				INNER JOIN attendances ON attendance_contacts.attendance_id = attendances.id
 				INNER JOIN time_slots ON attendances.time_slot_id = time_slots.id
-				WHERE time_slots.padma_uid = '#{username.tr("_",".")}' 
+				WHERE attendances.username = '#{username.tr("_",".")}' 
 				AND #{account_condition}
 				AND #{attendance_between_dates_condition}
 				AND accounts_contacts.padma_status = 'student'
@@ -95,7 +95,7 @@ class InstructorStatsSQLBuilder
 		select = ""
 		distribution.each do |u|
 			if u == username
-				u_select = "count(*) as #{username}"
+				u_select = "COUNT(DISTINCT contacts.id) as #{username}"
 			else
 				u_select = "0 as #{u}"
 			end
