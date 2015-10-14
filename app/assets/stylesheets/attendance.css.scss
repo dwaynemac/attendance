@@ -68,6 +68,25 @@
     }
   }
   .attendance-body {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    width: 100%;
+    .panel {
+      -webkit-box-flex: 1 100%;
+      -webkit-flex: 1 100%;
+      -ms-flex: 1 100%;
+      flex: 1 100%;
+      @for $i from 0 through 6 {
+        &[data-order='#{$i}'] {
+          order: $i;
+        }
+      }
+    }
     .list-group {
       margin-bottom: 0;
     }
