@@ -18,6 +18,8 @@ class Attendance < ActiveRecord::Base
 
   accepts_nested_attributes_for :attendance_contacts
 
+  before_validation :set_default_username
+
   def trial_lessons
     TrialLesson.where(time_slot_id: self.time_slot_id, trial_on: self.attendance_on)
   end
@@ -31,6 +33,9 @@ class Attendance < ActiveRecord::Base
     self.contact_ids = contact_ids
   end
 
+  def set_default_username
+    update_attribute(:username, time_slot.padma_uid) unless username.present? or time_slot.blank?
+  end
   private
 
   def only_on_per_day_per_slot

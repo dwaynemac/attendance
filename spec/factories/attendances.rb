@@ -5,5 +5,6 @@ FactoryGirl.define do
     account
     time_slot
     attendance_on Date.yesterday
+    username {'username'}
   end
 end
