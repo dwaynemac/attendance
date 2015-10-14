@@ -13,7 +13,7 @@
           <div class="popover-footer students-list-footer">
             <%= link_to t('attendances.index.edit'), edit_attendance_path(att) %>
           </div>'>
-            (1) <!-- include count contacts
+	    (<%= att.contacts.count %>) <!-- include count contacts
             <%= link_to t('attendances.index.destroy'), att, :method => :delete, data: { confirm: t('confirm') }, :class => 'btn btn-xs btn-danger' %> -->
           </span>
         <% end %>
