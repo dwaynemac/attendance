@@ -9,7 +9,7 @@ class AttendancesController < ApplicationController
     @days_to = params[:days_to] || @day_span
     further_limit = @days_to.to_i
     closer_limit = @days_from.to_i
-    @view_range = (closer_limit..further_limit)
+    @view_range = (further_limit - 1).downto(closer_limit)
     @attendances = @attendances.where(attendance_on: (further_limit.days.ago.to_date..closer_limit.days.ago.to_date))
 
     @time_slots = current_user.current_account.time_slots.order("start_at ASC")
