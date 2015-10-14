@@ -1,6 +1,6 @@
 <% att = @attendances.select {|a| a.attendance_on == date && a.time_slot == time_slot}.first %>
 <% if render_time_slot?(time_slot,date,att) -%>
-  <li class="list-group-item <%= 'today' if date.today? %> <%= 'other-users-ts' if time_slot.padma_uid != current_user.username %>"> <!-- if attendance initialized add class "complete" | if today & next lesson add class "next" -->
+  <li class="list-group-item <%= 'today' if date.today? %> <!-- if attendance initialized add class "complete" | if today & next lesson add class "next" -->
     <header class='timeslot-head'><%= time_slot.name %></header>
     <div class='timeslot-content'>
       <div class='timeslot-description'>

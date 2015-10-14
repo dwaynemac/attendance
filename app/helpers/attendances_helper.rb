@@ -1,7 +1,7 @@
 module AttendancesHelper
 
   def render_time_slot?(time_slot,date,att)
-    att.present? || ( time_slot.send(Date::DAYNAMES[date.wday].downcase.to_sym) && Time.zone.local(date.year, date.month, date.day, time_slot.start_at.hour, time_slot.start_at.min) <= Time.zone.now )
+    att.present? || ( time_slot.send(Date::DAYNAMES[date.wday].downcase.to_sym) )
   end
 
   def timeslot_description(timeslot)
