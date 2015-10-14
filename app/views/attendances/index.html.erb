@@ -56,7 +56,7 @@
 
   <section class='attendance-body'>
     <% @view_range.each do |n| %>
-      <div class="panel panel-default">
+      <div class="panel panel-default" data-order='<%= n %>'>
         <div class="panel-heading"> <!-- add class "current-day" when day is today -->
           <% date = n.days.ago.to_date %>
           <%= l(date, format: :in_context).capitalize %>
