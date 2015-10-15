@@ -1,6 +1,5 @@
 $(document).ready ->
 
-  console.log 'quickfilter'
   $("input#timeslots-filter").quickfilter("table#timeslots tbody tr")
 
 	$(document).on 'click', '#time_slot_padma_contacts .add', (event) ->

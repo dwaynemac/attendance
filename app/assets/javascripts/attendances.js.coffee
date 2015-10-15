@@ -13,9 +13,13 @@ $(document).ready ->
     return true # follow link
   
   $(document).on 'click', '#attendance_padma_contacts .add', (event) ->
+    $('.modal-footer .btn-danger').hide()
+    $('.modal-footer .btn-primary').show()
     $(this).removeClass('add').addClass('delete')
     $(this).parent().prepend("<input type='hidden' value='" + $(this).attr('data-padma-id') + "' name='attendance[padma_contacts][]'>")
     $('ul#attendance_contacts').append($(this).parent())
+    $(this).parents('.modal-footer .btn-danger').hide()
+    $(this).parents('.modal-footer .btn-primary').show()
     false
         
   $(document).on 'click', '#toggle-hidden-timeslots', (event) ->
