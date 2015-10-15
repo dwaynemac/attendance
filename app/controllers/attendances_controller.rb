@@ -24,7 +24,10 @@ class AttendancesController < ApplicationController
       @padma_contacts = @time_slot.recurrent_contacts
       @trial_lessons = TrialLesson.where(time_slot_id: @attendance.time_slot_id, trial_on: @attendance.attendance_on)
     end
-    respond_with @attendance
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def edit
