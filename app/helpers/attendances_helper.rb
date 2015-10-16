@@ -1,7 +1,7 @@
 module AttendancesHelper
 
-  def render_time_slot?(time_slot,date,att)
-    att.present? || ( time_slot.send(Date::DAYNAMES[date.wday].downcase.to_sym) )
+  def render_time_slot?(time_slot,date,att, only_pending)
+    (att.present? && !only_pending) || (att.blank? && time_slot.send(Date::DAYNAMES[date.wday].downcase.to_sym) )
   end
 
   def timeslot_description(timeslot)

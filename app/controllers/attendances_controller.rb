@@ -13,6 +13,9 @@ class AttendancesController < ApplicationController
     @attendances = @attendances.where(attendance_on: (further_limit.days.ago.to_date..closer_limit.days.ago.to_date))
 
     @time_slots = current_user.current_account.time_slots.order("start_at ASC")
+    @username = params[:username] if params[:username].present?
+    @time_slots = @time_slots.where(padma_uid: @username) if @username.present?
+    @only_pending = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:only_pending])
     @time_slots_wout_day = current_user.current_account.time_slots.without_schedule
 
     respond_with @attendances

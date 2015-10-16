@@ -9,10 +9,10 @@
   <nav class='attendance-navbar margin-bottom-10' role='navigation'>
     <div class='filter-controls'>
       <div class='btn-group'>
-        <%= link_to '<span class="glyphicon glyphicon-chevron-left"></span>'.html_safe, attendances_path(days_from: @days_to, days_to: @days_to.to_i + @day_span), class: 'btn btn-secondary btn-sm' %>
-        <%= link_to '<span class="glyphicon glyphicon-chevron-right"></span>'.html_safe, attendances_path(days_from: @days_from.to_i - @day_span, days_to: @days_to.to_i - @day_span), class: 'btn btn-secondary btn-sm' unless @days_from.to_i == 0 %>
+        <%= link_to '<span class="glyphicon glyphicon-chevron-left"></span>'.html_safe, attendances_path(username: @username, only_pending: @only_pending, days_from: @days_to, days_to: @days_to.to_i + @day_span), class: 'btn btn-secondary btn-sm' %>
+        <%= link_to '<span class="glyphicon glyphicon-chevron-right"></span>'.html_safe, attendances_path(username: @username, only_pending: @only_pending, days_from: @days_from.to_i - @day_span, days_to: @days_to.to_i - @day_span), class: 'btn btn-secondary btn-sm' unless @days_from.to_i == 0 %>
       </div>
-      <span class='label-filter label-filter-inline label-filter-datepicker'>7 - 13 de sept de 2015</span>
+      <span class='label-filter label-filter-inline label-filter-datepicker'><%= (Date.today - @days_to.to_i + 1).to_s(:short) %> - <%= (Date.today - @days_from.to_i).to_s(:short) %></span>
       <button type='button' class='btn btn-link btn-sm datepicker'>
         <span class='glyphicon glyphicon-calendar'></span>
       </button>
@@ -30,27 +30,29 @@
   </nav>
 
   <div id='attendance-filter' class='collapse'>
-    <form class='form-inline'>
-      <div class='form-group clearfix'>
+    <%= form_for :search, url: attendances_path, method: 'get', class: 'form-inline' do |f| %>
+      <%= hidden_field_tag :days_to, @days_to %>
+      <%= hidden_field_tag :days_from, @days_from %>
+      <div class="form-group clearfix">
         <label class='control-label'>Instructor</label>
-        <div class='select'>
-          <select class='form-control'>
-            <option>Alex Falke</option>
-            <option>Instructor 1</option>
-            <option>Instructor 2</option>
-            <option>Instructor 3</option>
-          </select>
+        <div class="select">
+          <%= select_tag :username, options_for_select(current_user.current_account.usernames, selected: params[:username]), prompt: "Todos los instructores", class: 'form-control' %>
         </div>
+
+	<%= check_box_tag :only_pending, '1', @only_pending , class: 'btn btn-secondary btn-sm attendance-pending' %>Ver sólo clases con asistencia pendiente
         <button id='filter-attendance-button' type='submit' class='btn btn-secondary btn-sm'>Filtrar</button>
-        <a href='' class='btn btn-secondary btn-sm attendance-pending' data-activates='nav-mobile'>Ver clases con asistencia pendiente</a>
       </div>
-    </form>
+    <% end %>
   </div>
 
-  <div class='attendance-filter-list margin-bottom-20 hide'> <!-- show when active filters -->
+  <div class='attendance-filter-list margin-bottom-20 <%= "hide" unless @username.present? or @only_pending.present?%>'> <!-- show when active filters -->
     <label class='label-filter'>Filter On:</label>
-    <div class='label label-success'>Pendientes <a href='' class='close'>&times;</a></div>
-    <div class='label label-success'>Alex Falke <a href='' class='close'>&times;</a></div>
+    <% if @only_pending.present? %>
+      <div class='label label-success'>Pendientes <%= link_to '&times;'.html_safe, attendances_path(username: @username, days_from: @days_from.to_i - @day_span, days_to: @days_to.to_i - @day_span), class: 'close' %></div>
+    <% end %>
+    <% if @username.present? %>
+      <div class='label label-success'><%= @username %> <%= link_to '&times;'.html_safe, attendances_path(only_pending: @only_pending, days_from: @days_from.to_i - @day_span, days_to: @days_to.to_i - @day_span), class: 'close' %></div>
+    <% end %>
   </div>
 
   <section class='attendance-body'>
@@ -66,7 +68,7 @@
         <div class="panel-body">
           <ul class="list-group">
             <% @time_slots.each do |time_slot| %>
-              <%= render 'attendances/time_slot', time_slot: time_slot, date: date %>
+	      <%= render 'attendances/time_slot', time_slot: time_slot, date: date, only_pending: @only_pending %>
             <% end %>
           </ul>
           <!--
