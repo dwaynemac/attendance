@@ -1,5 +1,4 @@
 $(document).ready ->
-
   $('#uninitialized_new_attendance').click ->
     registerEvent('registered-uninitialized-attendance')
     return true # follow link
@@ -28,7 +27,6 @@ $(document).ready ->
     $('#toggle-hidden-timeslots').toggleClass('active')
     $('.today.other-users-ts').toggle()
 
-$ ->
   $("#loader").hide()
   $(document).ajaxStart ->
     $("#loader").show()
@@ -40,7 +38,6 @@ $ ->
     
     
   $(".selectpicker").selectpicker()
-  $(".datepicker").datepicker()
 
   $(".trial_lessons").each (index, check_box_obj) -> 
     $("#"+check_box_obj.id).bootstrapSwitch({
