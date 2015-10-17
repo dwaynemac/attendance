@@ -18,6 +18,8 @@ class AttendancesController < ApplicationController
     @only_pending = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:only_pending])
     @time_slots_wout_day = current_user.current_account.time_slots.without_schedule
 
+    @recent = current_user.current_account.time_slots.where(padma_uid: current_user.username).where("#{Time.now.strftime('%A').downcase}".to_sym => true).select {|t| Time.zone.local(Time.zone.now.year, Time.zone.now.month, Time.zone.now.day, t.start_at.hour, t.start_at.min) <= Time.zone.now}.last
+
     respond_with @attendances
   end
 
