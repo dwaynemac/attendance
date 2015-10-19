@@ -13,9 +13,6 @@
         <%= link_to '<span class="glyphicon glyphicon-chevron-right"></span>'.html_safe, attendances_path(username: @username, only_pending: @only_pending, days_from: @days_from.to_i - @day_span, days_to: @days_to.to_i - @day_span), class: 'btn btn-secondary btn-sm' unless @days_from.to_i == 0 %>
       </div>
       <span class='label-filter label-filter-inline label-filter-datepicker'><%= (Date.today - @days_to.to_i + 1).to_s(:short) %> - <%= (Date.today - @days_from.to_i).to_s(:short) %></span>
-      <button type='button' class='btn btn-link btn-sm datepicker'>
-        <span class='glyphicon glyphicon-calendar'></span>
-      </button>
       <div class='filter-buttons' data-activates='nav-mobile'>
         <button type='button' class='btn btn-secondary btn-sm' data-toggle='collapse' data-target='#attendance-filter' title='Filters' aria-expanded='false'>
           <span class='glyphicon glyphicon-filter'></span> Filter
