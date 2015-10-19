@@ -32,15 +32,8 @@
 
           <div class='form-group'>
             <label class='control-label'>Instructor que da la clase</label>
-            <div class='select'>
-              <select class='form-control'>
-                <option value="id14431262211051">Mariela Adrover</option>
-                <option value="id-1">Alex Falke</option>
-                <option value="id-2">Tu nombre</option>
-                <option value="id144200393390848">Instructor 1</option>
-                <option value="id144200397912350">Instructor 2</option>
-                <option value="id144200398367551">Instructor 3</option>
-              </select>
+	    <div class='select'>
+	      <%= f.select :username, options_for_select(current_user.current_account.usernames, :selected => current_user.username), {:prompt => t('attendances.form.select_username')},{:class => 'form-control'} %>
             </div>
 	  </div>
 	  

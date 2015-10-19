@@ -4,7 +4,7 @@
     <header class='timeslot-head'><%= time_slot.name %></header>
     <div class='timeslot-content'>
       <div class='timeslot-description'>
-        <p><%= timeslot_description(time_slot) %></p>
+        <p><%= timeslot_description(time_slot, att) %></p>
         <% if att %> <!-- show count when initialized attendance | if attendances == 0 add class "attendances0" -->
           <span class='results-count-attendances' tabindex='0' data-toggle='popover' data-container='body' data-placement='right' data-html='true' data-trigger='click' data-content='
           <div class="students-list">

@@ -4,8 +4,8 @@ module AttendancesHelper
     (att.present? && !only_pending) || (att.blank? && time_slot.send(Date::DAYNAMES[date.wday].downcase.to_sym) )
   end
 
-  def timeslot_description(timeslot)
-    "#{timeslot_period(timeslot)} (#{timeslot.padma_uid})"
+  def timeslot_description(timeslot, attendance=nil)
+	  "#{timeslot_period(timeslot)} (#{attendance.present? ? attendance.username : timeslot.padma_uid})"
   end
 
   def timeslot_period(timeslot)
