@@ -14,7 +14,7 @@ describe StatsController do
 
   describe "GET /stats?easy_period=last_month" do
     let(:time_slot){create(:time_slot, :account => @user.current_account, :padma_uid => "dwayne")}
-    let(:attendance){create(:attendance, :account => @user.current_account, :attendance_on => 1.month.ago, :time_slot => time_slot)}
+    let(:attendance){create(:attendance, :account => @user.current_account, :attendance_on => 1.month.ago, :time_slot => time_slot, :username => 'dwayne')}
     let(:contact){create(:contact)}
 
     before do
