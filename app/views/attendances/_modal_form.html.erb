@@ -33,7 +33,7 @@
           <div class='form-group'>
             <label class='control-label'>Instructor que da la clase</label>
 	    <div class='select'>
-	      <%= f.select :username, options_for_select(current_user.current_account.usernames, :selected => current_user.username), {:prompt => t('attendances.form.select_username')},{:class => 'form-control'} %>
+	      <%= f.select :username, options_for_select(current_user.current_account.usernames, :selected => @attendance.username || current_user.username), {:prompt => t('attendances.form.select_username')},{:class => 'form-control'} %>
             </div>
 	  </div>
 	  

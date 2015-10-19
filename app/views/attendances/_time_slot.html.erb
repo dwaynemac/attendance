@@ -6,12 +6,12 @@
       <div class='timeslot-description'>
         <p><%= timeslot_description(time_slot, att) %></p>
         <% if att %> <!-- show count when initialized attendance | if attendances == 0 add class "attendances0" -->
-          <span class='results-count-attendances' tabindex='0' data-toggle='popover' data-container='body' data-placement='right' data-html='true' data-trigger='click' data-content='
+          <span class='results-count-attendances' tabindex='0' data-toggle='popover' data-container='body' data-placement='right' data-html='true' data-trigger='focus' data-content='
           <div class="students-list">
             <%= att.contacts.map{|c| link_to_contact_profile(c)}.join(', ').html_safe %> <!-- remove "," -->
           </div>
           <div class="popover-footer students-list-footer">
-            <%= link_to t('attendances.index.edit'), edit_attendance_path(att) %>
+  	    <%= link_to t('attendances.index.edit'), edit_attendance_path(att), {remote: true, data: {toggle: 'modal', target: '#dialog-check-attendance'}} %>
           </div>'>
 	    (<%= att.contacts.count %>) <!-- include count contacts
             <%= link_to t('attendances.index.destroy'), att, :method => :delete, data: { confirm: t('confirm') }, :class => 'btn btn-xs btn-danger' %> -->
