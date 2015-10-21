@@ -31,7 +31,7 @@
           </div>
 
           <div class='form-group'>
-            <label class='control-label'>Instructor que da la clase</label>
+            <label class='control-label'><%= t('attendances.form.username') %></label>
 	    <div class='select'>
 	      <%= f.select :username, options_for_select(current_user.current_account.usernames, :selected => @attendance.username || current_user.username), {:prompt => t('attendances.form.select_username')},{:class => 'form-control'} %>
             </div>
@@ -61,7 +61,7 @@
 	  </div>
 
           <div class='form-group'>
-            <label class='control-label'>Elige la lista de contactos:</label>
+            <label class='control-label'><%= t('attendances.form.select_contacts') %>:</label>
             <div class='select'>
               <%= select_tag :padma_contacts_select, options_for_select({t('attendances.form.recurrents_contacts') => :recurrent_contacts, t('attendances.form.all_contacts') => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| [t('attendances.form.students_of', teacher: username), username].flatten}]) ), {:class => 'form-control'} %>
             </div>
@@ -73,7 +73,7 @@
 	  </fieldset>
     
 	  <div class="modal-footer">
-	    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	    <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('cancel') %></button>
 	    <%= f.submit "Guardar asistencia", class: "btn btn-large btn-primary", style: ('display: none' if @attendance.contacts.count == 0)%>
 	    <%= f.submit "No vino nadie", class: "btn btn-large btn-danger", style: ('display: none' if @attendance.contacts.count > 0)%>
           </div>

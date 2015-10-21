@@ -80,6 +80,8 @@ pt-BR:
       students_of: "Alunos de %{teacher}"
       select_timeslot: Escolher uma turma
       select_username: Escolher um instrutor
+      username: Instrutor que deu a aula
+      select_contacts: Escolha os alunos que participaram da aula
     index:
       edit: Alterar
       ignore: Ignorar

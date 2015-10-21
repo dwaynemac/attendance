@@ -80,6 +80,8 @@ es:
       recurrents_contacts: Alumnos recurrentes de este horario
       select_timeslot: Seleccionar un horario
       select_username: Seleccionar un instructor
+      username: Instructor que dió la clase
+      select_contacts: Elige la lista de contactos
     index:
       older: Marcar asistencias de la semana anterior.
       newer: Marcar asistencia de la semana siguiente.
