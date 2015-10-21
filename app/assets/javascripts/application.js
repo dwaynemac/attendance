@@ -10,7 +10,7 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
+//= require padma-assets
 //= bootstrap-datepicker
 //= require jquery_ujs
 //= require turbolinks
@@ -18,10 +18,4 @@
 //= require angular-resource
 //= require select2
 //= require bootstrap-multiselect
-//= require mixpanel
-//= require ux-events
-//= require cache
-//= require padma-assets
-//= require async_render
-//= require initialize-lists-menu
 //= require_tree .
