@@ -54,33 +54,35 @@
     <% end %>
   </div>
 
+    <% @view_range.each_slice(7) do |slice| -%>
   <section class='attendance-body'>
-    <% @view_range.each do |n| %>
-      <div class="panel panel-default" data-order='<%= n %>'>
-        <div class="panel-heading"> <!-- add class "current-day" when day is today -->
-          <% date = n.days.ago.to_date %>
-          <%= l(date, format: :in_context).capitalize %>
-          <% if date.month != Date.today.month -%>
-            (<%= l(date, format: :month) %>)
-          <% end -%>
-        </div>
-        <div class="panel-body">
-          <ul class="list-group">
-            <% @time_slots.each do |time_slot| %>
-	      <%= render 'attendances/time_slot', time_slot: time_slot, date: date, only_pending: @only_pending %>
+      <% slice.each do |n| %>
+        <div class="panel panel-default" data-order='<%= n %>'>
+          <div class="panel-heading"> <!-- add class "current-day" when day is today -->
+            <% date = n.days.ago.to_date %>
+            <%= l(date, format: :in_context).capitalize %>
+            <% if date.month != Date.today.month -%>
+              (<%= l(date, format: :month) %>)
+            <% end -%>
+          </div>
+          <div class="panel-body">
+            <ul class="list-group">
+              <% @time_slots.each do |time_slot| %>
+          <%= render 'attendances/time_slot', time_slot: time_slot, date: date, only_pending: @only_pending %>
+              <% end %>
+            </ul>
+            <!--
+            <% if date.today? %>
+              <div class="alert alert-warning">
+                <p><%= t('.timeslots_hidden_warning') %> <%= link_to t('attendances.index.toggle_hidden_timeslots'), "#", :class => "btn btn-default btn-xs", :id => "toggle-hidden-timeslots" %></p>
+              </div>
             <% end %>
-          </ul>
-          <!--
-          <% if date.today? %>
-            <div class="alert alert-warning">
-              <p><%= t('.timeslots_hidden_warning') %> <%= link_to t('attendances.index.toggle_hidden_timeslots'), "#", :class => "btn btn-default btn-xs", :id => "toggle-hidden-timeslots" %></p>
-            </div>
-          <% end %>
-          -->
+            -->
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
   </section>
+    <% end -%>
 
   <div class="panel panel-default" hidden>
     <div class="panel-body">
