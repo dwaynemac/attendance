@@ -83,8 +83,11 @@ es:
       username: Instructor que dió la clase
       select_contacts: Elige la lista de contactos
     index:
+      only_pending: So aulas com chamada pendente
       recent_time_slot: Clase reciente
       enabled_filters: Filtros
+      filters:
+        pending: Pendientes 
       filter: filtrar
       older: Marcar asistencias de la semana anterior.
       newer: Marcar asistencia de la semana siguiente.
