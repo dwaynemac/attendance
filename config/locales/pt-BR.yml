@@ -83,6 +83,9 @@ pt-BR:
       username: Instrutor que deu a aula
       select_contacts: Escolha os alunos que participaram da aula
     index:
+      recent_time_slot: Aula recente
+      enabled_filters: Filtros
+      filter: filtro
       edit: Alterar
       ignore: Ignorar
       destroy: Apagar

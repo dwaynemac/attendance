@@ -15,15 +15,15 @@
       <span class='label-filter label-filter-inline label-filter-datepicker'><%= (Date.today - @days_to.to_i + 1).to_s(:short) %> - <%= (Date.today - @days_from.to_i).to_s(:short) %></span>
       <div class='filter-buttons' data-activates='nav-mobile'>
         <button type='button' class='btn btn-secondary btn-sm' data-toggle='collapse' data-target='#attendance-filter' title='Filters' aria-expanded='false'>
-          <span class='glyphicon glyphicon-filter'></span> Filter
+          <span class='glyphicon glyphicon-filter'></span> <%= t('.filter').capitalize %>
         </button>
       </div>
     </div>
     <% if @recent.present? %>
     <div class='filter-controls filter-controls-right'>
-      <span class='label-filter'>Clase reciente: <%= @recent.name %></span>
+      <span class='label-filter'><%= t('.recent_time_slot') %>: <%= @recent.name %></span>
       <%= link_to 'Marcar asistencia', new_attendance_path, {remote: true, data: {toggle: 'modal', target: '#dialog-check-attendance'}, class: 'btn btn-primary' } %>
-      <a href="" class='btn btn-danger'>No vino nadie</a>
+      <a href="" class='btn btn-danger'><%= t('.new_empty') %></a>
     </div>
     <% end %>
   </nav>
@@ -45,7 +45,7 @@
   </div>
 
   <div class='attendance-filter-list margin-bottom-20 <%= "hide" unless @username.present? or @only_pending.present?%>'> <!-- show when active filters -->
-    <label class='label-filter'>Filter On:</label>
+    <label class='label-filter'><%= t('.enabled_filters') %>:</label>
     <% if @only_pending.present? %>
       <div class='label label-success'>Pendientes <%= link_to '&times;'.html_safe, attendances_path(username: @username, days_from: @days_from.to_i - @day_span, days_to: @days_to.to_i - @day_span), class: 'close' %></div>
     <% end %>
