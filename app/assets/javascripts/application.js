@@ -21,7 +21,6 @@
 //= require mixpanel
 //= require ux-events
 //= require cache
-//= require jquery.quickfilter
 //= require padma-assets
 //= require async_render
 //= require initialize-lists-menu
