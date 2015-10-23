@@ -24,6 +24,7 @@ class AttendancesController < ApplicationController
   end
 
   def new
+    @back_w_params = params.select{|k,v| k.in?(%W(days_to days_from only_pending username))}
     @time_slot = @attendance.time_slot
     unless @time_slot.nil?
       @padma_contacts = @time_slot.recurrent_contacts
@@ -50,11 +51,12 @@ class AttendancesController < ApplicationController
   end
 
   def create
+    back_w_params = ActiveSupport::JSON.decode(params[:redirect_back_w_params]) if params[:redirect_back_w_params]
     update_trial_lessons params[:trial_lessons] if params[:trial_lessons]
     @attendance.account = current_user.current_account
     @attendance.save
     @padma_contacts = @attendance.time_slot.recurrent_contacts
-    redirect_to attendances_url
+    redirect_to attendances_url(back_w_params)
   end
 
   def update

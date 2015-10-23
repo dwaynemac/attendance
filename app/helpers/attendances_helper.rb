@@ -1,5 +1,13 @@
 module AttendancesHelper
 
+  def keep_params
+    params.select{|k,v| k.in?(%W(days_to days_from only_pending username))}
+  end
+
+  def keep_params_hidden_tag
+    hidden_field_tag :redirect_back_w_params, @back_w_params.to_json
+  end
+
   def render_time_slot?(time_slot,date,att, only_pending)
     (att.present? && !only_pending) || (att.blank? && time_slot.send(Date::DAYNAMES[date.wday].downcase.to_sym) )
   end

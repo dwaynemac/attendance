@@ -6,6 +6,7 @@
     </div>
     <div class="modal-body">
       <%= form_for @attendance, html: { class: 'checkattendance-form', role: 'form'} do |f| %>
+        <%= keep_params_hidden_tag %>
 
         <div class='form-group'>
           <%= f.label :attendance_on, :class => 'control-label' %>
