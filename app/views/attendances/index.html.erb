@@ -33,9 +33,9 @@
       <%= hidden_field_tag :days_to, @days_to %>
       <%= hidden_field_tag :days_from, @days_from %>
       <div class="form-group clearfix">
-        <label class='control-label'>Instructor</label>
+        <label class='control-label'><%= Attendance.human_attribute_name('username').capitalize %></label>
         <div class="select">
-          <%= select_tag :username, options_for_select(current_user.current_account.usernames, selected: params[:username]), prompt: "Todos los instructores", class: 'form-control' %>
+          <%= select_tag :username, options_for_select(current_user.current_account.usernames, selected: params[:username]), prompt: t('.all_teachers'), class: 'form-control' %>
         </div>
 
 	<%= check_box_tag :only_pending, '1', @only_pending , class: 'btn btn-secondary btn-sm attendance-pending' %><%= t('.only_pending') %>
