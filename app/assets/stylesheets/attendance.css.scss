@@ -67,6 +67,7 @@
       }
     }
   }
+
   .attendance-body {
     display: -webkit-box;
     display: -webkit-flex;
@@ -96,6 +97,7 @@
       }
     }
   }
+
 }
 
 @media (min-width: 768px) {
@@ -126,6 +128,16 @@
 
   .filter-controls-right {
     text-align: right;
+    .recent-time-slot {
+      padding-bottom: 5px;
+      padding-right: 100px;
+    }
+  }
+
+  .legend-date-day {
+    .label-filter {
+      padding: 5px 0;
+    }
   }
 
   .attendance-body {
@@ -143,8 +155,51 @@
   }
 }
 
+.form-attendance {
+  display: inline-block;
+  margin: 0;
+  @media (max-width: 767px) {
+    .form-group {
+      display: inline-block;
+      margin-bottom: 0;
+      vertical-align: middle;
+    }
+  }
+  .group-instructor {
+    margin-top: -23px;
+    -webkit-margin-before: -22px;
+    .control-label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 0;
+      padding-bottom: 5px;
+    }
+    .select:after {
+      bottom: 0;
+      height: calc(100% - 23px);
+      top: inherit;
+    }
+  }
+  .form-control {
+    display: block;
+  }
+}
+
+.checkbox-attendance-pending {
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  &:hover,
+  &:focus,
+  &.active {
+    background-color: #5bbd72;
+    border-color: #5bbd72;
+    color: #fff;
+  }
+}
+
 .attendance-body {
   .panel-heading {
+    border-radius: 0;
     font: {
       size: 16px;
     }
@@ -153,16 +208,20 @@
     text-align: center;
     white-space: nowrap;
     &.current-day {
-      background-color: #ebebeb;
+      background-color: #0971b7;
+      border-color: #0971b7;
+      color: #fff;
       font-weight: bold;
     }
   }
+
   .panel-body {
     padding: 0;
     @media (max-width: 767px) {
       min-height: 15px;
     }
   }
+
   .list-group-item {
     background-color: #fff;
     border-width: 0 0 1px 0;
@@ -252,22 +311,10 @@
 }
 
 .timeslot-description {
-  -webkit-box-align: end;
-  -webkit-align-items: flex-end;
-  -ms-flex-align: end;
-  align-items: flex-end;
   color: #666;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   margin: 5px 0 10px;
   width: 100%;
   > p {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
     margin: 0;
     word-break: break-word;
   }
@@ -281,11 +328,11 @@
 }
 
 .results-count-attendances {
+  color: #5bbd72;
   cursor: pointer;
   font-weight: bold;
-  margin-left: 5px;
   outline: none;
-  &.attendences0 {
+  &.attendances0 {
     color: #d11111;
   }
 }
@@ -357,6 +404,7 @@
     }
     margin: 0 10px 0 0;
   }
+
   .label {
     border-radius: 0;
     display: inline-block;
@@ -388,6 +436,7 @@
     }
     margin-bottom: 0;
   }
+
   .btn-group {
     .btn-link {
       position: relative;
@@ -404,6 +453,7 @@
       }
     }
   }
+
   .checkbox {
     margin-left: -20px;
   }
@@ -416,6 +466,7 @@
     margin-bottom: 5px;
     margin-top: 5px;
   }
+
   .btn {
     &:hover,
     &:focus,
