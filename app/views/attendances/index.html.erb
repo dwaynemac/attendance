@@ -1,6 +1,6 @@
 <%- breadcrum t("attendances.index.title") -%>
 <%= content_for :header_submenu do %>
-  <%= link_to 'Marcar asistencia', new_attendance_path, {remote: true, data: {toggle: 'modal', target: '#dialog-check-attendance'}, id: 'uninitialized_new_attendance'} %>
+  <%= link_to t('attendances.index.new'), new_attendance_path, {remote: true, data: {toggle: 'modal', target: '#dialog-check-attendance'}, id: 'uninitialized_new_attendance'} %>
 <% end -%>
 
 <%= render 'warn_unscheduled_timeslots' %>
@@ -24,15 +24,7 @@
         </button>
       </div>
     </div>
-    <% if @recent.present? %>
-    <div class='filter-controls filter-controls-right'>
-      <div class='recent-time-slot'>
-        <span class='label-filter'><%= t('.recent_time_slot') %>: <%= @recent.name %></span>
-      </div>
-      <%= link_to 'Marcar asistencia', new_attendance_path, {remote: true, data: {toggle: 'modal', target: '#dialog-check-attendance'}, class: 'btn btn-primary' } %>
-      <a href="" class='btn btn-danger'><%= t('.new_empty') %></a>
-    </div>
-    <% end %>
+    <%= render 'new_recent_attendance' %>
   </nav>
 
   <div id='attendance-filter' class='collapse' hidden>

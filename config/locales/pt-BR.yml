@@ -74,6 +74,8 @@ pt-BR:
       'on': 
   attendances:
     form:
+      save_attendance: Salvar chamada
+      save_empty: Ninguém veio
       contact_assisted: '%{name} fez a aula?'
       recurrents_contacts: 'Alunos frequêntes'
       all_contacts: 'Todos os alunos'

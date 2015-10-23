@@ -74,6 +74,8 @@ es:
       'on': 
   attendances:
     form:
+      save_attendance: Guardar asistencia
+      save_empty: No vino nadie
       contact_assisted: ¿%{name} asisitió?
       students_of: Alumnos de %{teacher}
       all_contacts: Todos los alumnos
