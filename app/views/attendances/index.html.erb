@@ -67,15 +67,7 @@
     <% end %>
   </div>
 
-  <div class='attendance-filter-list margin-bottom-20 <%= "hide" unless @username.present? or @only_pending.present?%>'> <!-- show when active filters -->
-    <label class='label-filter'><%= t('.enabled_filters') %>:</label>
-    <% if @only_pending.present? %>
-      <div class='label label-success'><%= t('.filters.pending') %><%= link_to '&times;'.html_safe, attendances_path(username: @username, days_from: @days_from.to_i - @day_span, days_to: @days_to.to_i - @day_span), class: 'close' %></div>
-    <% end %>
-    <% if @username.present? %>
-      <div class='label label-success'><%= @username %> <%= link_to '&times;'.html_safe, attendances_path(only_pending: @only_pending, days_from: @days_from.to_i - @day_span, days_to: @days_to.to_i - @day_span), class: 'close' %></div>
-    <% end %>
-  </div>
+  <%= render 'filters_explanation' %>
 
     <% @view_range.each_slice(7) do |slice| -%>
   <section class='attendance-body'>
