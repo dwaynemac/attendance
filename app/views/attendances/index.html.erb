@@ -28,7 +28,7 @@
         </div>
         <div class='form-group group-instructor'>
           <div class="select">
-            <label class='control-label'>Instructor</label>
+            <label class='control-label'><%= Attendance.human_attribute_name('username').capitalize %></label>
             <%= select_tag :username, options_for_select(current_user.current_account.usernames, selected: params[:username]), prompt: "Todos los instructores", class: 'form-control' %>
           </div>
           <!--<button id='filter-attendance-button' type='submit' class='btn btn-secondary btn-sm'><%= t('.filter') %></button>-->
