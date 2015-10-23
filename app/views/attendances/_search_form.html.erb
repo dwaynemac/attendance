@@ -1,0 +1,22 @@
+<%= form_for :search, url: attendances_path, method: 'get', html: {id: 'filter-attendances', class: 'form-inline form-attendance'} do |f| %>
+  <%= hidden_field_tag :days_to, @days_to %>
+  <%= hidden_field_tag :days_from, @days_from %>
+  <div class="form-group">
+    <div class='btn-group' data-toggle='buttons'>
+      <label class='btn btn-secondary btn-sm checkbox-attendance-pending <%= 'active' if @only_pending %>'>
+        <%= check_box_tag :only_pending, '1', @only_pending, class: 'attendance-pending' %><%= t('attendances.index.only_pending') %>
+      </label>
+    </div>
+  </div>
+  <div class='form-group group-instructor'>
+    <div class="select">
+      <label class='control-label'><%= Attendance.human_attribute_name('username').capitalize %></label>
+      <%= select_tag :username, options_for_select(current_user.current_account.usernames, selected: params[:username]), prompt: t('attendances.index.all_teachers'), class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="btn-group">
+      <button id='filter-attendance-button' type='submit' class='btn btn-secondary btn-sm'><%= t('attendances.index.apply_changes') %></button>
+    </div>
+  </div>
+<% end %>

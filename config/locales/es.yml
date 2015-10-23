@@ -83,6 +83,7 @@ es:
       username: Instructor que dió la clase
       select_contacts: Elige la lista de contactos
     index:
+      apply_changes: actualizar agenda
       all_teachers: Todos los instructores
       only_pending: So aulas com chamada pendente
       recent_time_slot: Clase reciente

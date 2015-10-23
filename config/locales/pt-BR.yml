@@ -83,6 +83,7 @@ pt-BR:
       username: Instrutor que deu a aula
       select_contacts: Escolha os alunos que participaram da aula
     index:
+      apply_changes: atualizar agenda
       all_teachers: Todos os instrutores
       only_pending: Ver sólo clases con asistencia pendiente
       recent_time_slot: Aula recente
