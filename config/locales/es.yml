@@ -88,7 +88,7 @@ es:
     index:
       apply_changes: actualizar agenda
       all_teachers: Todos los instructores
-      only_pending: So aulas com chamada pendente
+      only_pending: Solo clases con asistencia pendiente
       recent_time_slot: Clase reciente
       enabled_filters: Filtros
       filters:
