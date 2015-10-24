@@ -38,7 +38,7 @@
         <% end %>
 
         <div class='form-group'>
-          <%= f.label :padma_contacts, :class => 'control-label' %>
+          <%= f.label :padma_contacts, "#{t('attendances.form.participants')}:", :class => 'control-label' %>
           <ul id="attendance_contacts" class='list-unstyled'>
             <% @attendance.contacts.each do |c| %>
               <li>

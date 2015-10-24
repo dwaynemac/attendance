@@ -74,6 +74,7 @@ pt-BR:
       'on': 
   attendances:
     form:
+      participants: Alunos que participaram
       save_attendance: Salvar chamada
       save_empty: Ninguém veio
       contact_assisted: '%{name} fez a aula?'

@@ -74,6 +74,7 @@ es:
       'on': 
   attendances:
     form:
+      participants: Alumnos que participaron
       save_attendance: Guardar asistencia
       save_empty: No vino nadie
       contact_assisted: ¿%{name} asisitió?
