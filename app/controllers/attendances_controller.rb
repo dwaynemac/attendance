@@ -28,6 +28,9 @@ class AttendancesController < ApplicationController
 	      Time.zone.now <= (Time.zone.local(Time.zone.now.year, Time.zone.now.month, Time.zone.now.day, t.end_at.hour, t.end_at.min) + 30.minutes)
     }.last # Get the last one
 
+    # If there is an attendance already set for the recent timeslot dont show it
+    @recent = nil if @attendances.select {|a| a.attendance_on == Time.zone.now.to_date && a.time_slot == @recent}.count > 0
+    
     respond_with @attendances
   end
 
