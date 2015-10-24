@@ -18,18 +18,7 @@ class AttendancesController < ApplicationController
     @only_pending = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:only_pending])
     @time_slots_wout_day = current_user.current_account.time_slots.without_schedule
 
-    @recent = current_user.current_account.time_slots # Get all account timeslots
-	    .where(padma_uid: current_user.username) # for current user
-	    .where("#{Time.now.strftime('%A').downcase}".to_sym => true) # That ocurr today
-	    .select {|t|
-	      # Select those that already started 
-	      Time.zone.local(Time.zone.now.year, Time.zone.now.month, Time.zone.now.day, t.start_at.hour, t.start_at.min) <= Time.zone.now and
-	      # And that finished (or not) 1/2 hour ago
-	      Time.zone.now <= (Time.zone.local(Time.zone.now.year, Time.zone.now.month, Time.zone.now.day, t.end_at.hour, t.end_at.min) + 30.minutes)
-    }.last # Get the last one
-
-    # If there is an attendance already set for the recent timeslot dont show it
-    @recent = nil if @attendances.select {|a| a.attendance_on == Time.zone.now.to_date && a.time_slot == @recent}.count > 0
+    @recent = get_recent_time_slot
     
     respond_with @attendances
   end
@@ -83,6 +72,25 @@ class AttendancesController < ApplicationController
   end
   
   private
+
+  def get_recent_time_slot
+    recent = current_user.current_account.time_slots # Get all account timeslots
+	    .where(padma_uid: current_user.username) # for current user
+	    .where("#{Time.now.strftime('%A').downcase}".to_sym => true) # That ocurr today
+	    .select {|t|
+	      # Select those that already started 
+	      Time.zone.local(Time.zone.now.year, Time.zone.now.month, Time.zone.now.day, t.start_at.hour, t.start_at.min) <= Time.zone.now and
+	      # And that finished (or not) 1/2 hour ago
+	      Time.zone.now <= (Time.zone.local(Time.zone.now.year, Time.zone.now.month, Time.zone.now.day, t.end_at.hour, t.end_at.min) + 30.minutes)
+    }.last # Get the last one
+
+    # If there is an attendance already set for the recent timeslot dont show it
+    if @attendances.select {|a| a.attendance_on == Time.zone.now.to_date && a.time_slot == recent}.count > 0
+      nil
+    else
+      recent
+    end
+  end
   
   def update_trial_lessons trial_lesson_ids
     trial_lesson_ids.each do |id|
