@@ -86,7 +86,7 @@
       -webkit-flex: 1 100%;
       -ms-flex: 1 100%;
       flex: 1 100%;
-      @for $i from 0 through 6 {
+      @for $i from 0 through 100 {
         &[data-order='#{$i}'] {
           order: $i;
         }
