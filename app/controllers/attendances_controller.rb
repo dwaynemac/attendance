@@ -18,7 +18,15 @@ class AttendancesController < ApplicationController
     @only_pending = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:only_pending])
     @time_slots_wout_day = current_user.current_account.time_slots.without_schedule
 
-    @recent = current_user.current_account.time_slots.where(padma_uid: current_user.username).where("#{Time.now.strftime('%A').downcase}".to_sym => true).select {|t| Time.zone.local(Time.zone.now.year, Time.zone.now.month, Time.zone.now.day, t.start_at.hour, t.start_at.min) <= Time.zone.now}.last
+    @recent = current_user.current_account.time_slots # Get all account timeslots
+	    .where(padma_uid: current_user.username) # for current user
+	    .where("#{Time.now.strftime('%A').downcase}".to_sym => true) # That ocurr today
+	    .select {|t|
+	      # Select those that already started 
+	      Time.zone.local(Time.zone.now.year, Time.zone.now.month, Time.zone.now.day, t.start_at.hour, t.start_at.min) <= Time.zone.now and
+	      # And that finished (or not) 1/2 hour ago
+              Time.zone.now <= Time.zone.local(Time.zone.now.year, Time.zone.now.month, Time.zone.now.day, t.end_at.hour, t.end_at.min + 30)
+    }.last # Get the last one
 
     respond_with @attendances
   end
