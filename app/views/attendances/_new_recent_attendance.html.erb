@@ -4,6 +4,6 @@
     <span class='label-filter'><%= t('attendances.index.recent_time_slot') %>: <%= @recent.name %></span>
   </div>
   <%= link_to t('attendances.index.new'), new_attendance_path(keep_params.merge({attendance: {attendance_on: Time.zone.now.to_date, time_slot_id: @recent.id}})), {remote: true, data: {toggle: 'modal', target: '#dialog-check-attendance'}, class: 'btn btn-primary' } %>
-  <a href="" class='btn btn-danger'><%= t('attendances.index.new_empty') %></a>
+  <%= link_to t('attendances.index.new_empty'), attendances_path({redirect_back_w_params: keep_params.to_json}.merge({attendance: {attendance_on: Time.zone.now.to_date, time_slot_id: @recent.id}})), confirm: t('confirm'), method: :post, class: 'btn btn-danger empty_attendance' %>
 </div>
 <% end %>
