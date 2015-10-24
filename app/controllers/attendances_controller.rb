@@ -27,6 +27,7 @@ class AttendancesController < ApplicationController
     @back_w_params = params.select{|k,v| k.in?(%W(days_to days_from only_pending username))}
     @time_slot = @attendance.time_slot
     unless @time_slot.nil?
+      @attendance.username = @time_slot.padma_uid # default attendance teacher to timeslot teacher
       @padma_contacts = @time_slot.recurrent_contacts
       @trial_lessons = TrialLesson.where(time_slot_id: @attendance.time_slot_id, trial_on: @attendance.attendance_on)
     end

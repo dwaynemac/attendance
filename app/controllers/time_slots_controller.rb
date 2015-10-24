@@ -9,6 +9,10 @@ class TimeSlotsController < ApplicationController
 
   def show
     @students = @time_slot.contacts.students_on(current_user.current_account)
+    respond_to do |format|
+      format.html
+      format.json { render json: @time_slot }
+    end
   end
 
   def vacancies
