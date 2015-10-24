@@ -25,7 +25,7 @@ class AttendancesController < ApplicationController
 	      # Select those that already started 
 	      Time.zone.local(Time.zone.now.year, Time.zone.now.month, Time.zone.now.day, t.start_at.hour, t.start_at.min) <= Time.zone.now and
 	      # And that finished (or not) 1/2 hour ago
-              Time.zone.now <= Time.zone.local(Time.zone.now.year, Time.zone.now.month, Time.zone.now.day, t.end_at.hour, t.end_at.min + 30)
+	      Time.zone.now <= (Time.zone.local(Time.zone.now.year, Time.zone.now.month, Time.zone.now.day, t.end_at.hour, t.end_at.min) + 30.minutes)
     }.last # Get the last one
 
     respond_with @attendances
