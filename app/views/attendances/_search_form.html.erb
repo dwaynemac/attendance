@@ -11,7 +11,7 @@
   <div class='form-group group-instructor'>
     <div class="select">
       <label class='control-label'><%= Attendance.human_attribute_name('username').capitalize %></label>
-      <%= select_tag :username, options_for_select(current_user.current_account.usernames, selected: params[:username]), prompt: t('attendances.index.all_teachers'), class: 'form-control' %>
+      <%= select_tag :username, options_for_select(current_user.current_account.usernames, selected: @username), prompt: t('attendances.index.all_teachers'), class: 'form-control' %>
     </div>
   </div>
   <div class="form-group">
