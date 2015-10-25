@@ -59,6 +59,9 @@ describe AttendancesController do
   end
 
   describe "GET index" do
+    before do 
+      Account.any_instance.stub(:usernames).and_return([current_user.username])
+    end
     let!(:attendance){create(:attendance, :account => current_account)}
     it "assigns last week's attendances as @attendances" do
       get :index, {}
