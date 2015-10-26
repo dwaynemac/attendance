@@ -70,6 +70,9 @@
         }
       }
     }
+    .btn-group-tofrom {
+      z-index: 2;
+    }
   }
 
   .attendance-body {
@@ -131,6 +134,7 @@
   }
 
   .filter-controls-right {
+    max-width: 35%;
     text-align: right;
     .recent-time-slot {
       padding-bottom: 5px;
@@ -159,24 +163,42 @@
   }
 }
 
+@media (max-width: 320px) {
+  .btn-group-tofrom,
+  .group-checkbox {
+    .btn {
+      font: {
+        size: 11.5px;
+      }
+    }
+  }
+}
+
 .form-attendance {
   display: inline-block;
   margin: 0;
+  position: relative;
   @media (max-width: 767px) {
+    margin-top: -33px;
     .form-group {
       display: inline-block;
       margin-bottom: 0;
       vertical-align: middle;
+      &.group-checkbox {
+        float: right;
+      }
     }
   }
+  @media (max-width: 320px) {
+    margin-top: -31px;
+  }
   .group-instructor {
-    margin-top: -23px;
-    -webkit-margin-before: -22px;
+    vertical-align: bottom;
     .control-label {
       display: block;
       font-size: 13px;
       margin-bottom: 0;
-      padding-bottom: 5px;
+      padding: 5px 0;
     }
     .select:after {
       bottom: 0;
@@ -242,8 +264,14 @@
     &:last-child {
       border-radius: 0;
     }
-    &.next {
+    &.pending {
+      background-color: #fff;
       z-index: 1;
+      @media (max-width: 767px) {
+        .timeslot-content {
+          margin-top: -20px;
+        }
+      }
       &:before {
         border: 2px solid #1f9dd9;
         bottom: -2px;
@@ -257,21 +285,13 @@
         z-index: -1;
       }
     }
-    &.pending {
-      background-color: #fff;
-      @media (max-width: 767px) {
-        .timeslot-content {
-          margin-top: -20px;
-        }
-      }
-    }
     &:hover {
       .timeslot-controls {
         opacity: 1;
         visibility: visible;
       }
     }
-    &.hide-lesson-filtered {
+    &.future-lesson {
       background-color: #ebebeb;
       opacity: .6;
       &:hover {
@@ -396,11 +416,6 @@
 }
 
 @media (max-width: 767px) {
-  #filter-attendance-button {
-    margin-left: 7px;
-    width: calc(50% - 5px);
-  }
-
   .attendance-pending {
     &[data-activates='nav-mobile'] {
         display: block;
