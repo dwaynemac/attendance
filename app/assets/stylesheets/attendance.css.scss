@@ -292,6 +292,9 @@
       }
     }
     &.future-lesson {
+      @media (max-width: 767px) { 
+        display: none;
+      }
       background-color: #ebebeb;
       opacity: .6;
       &:hover {
