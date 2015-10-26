@@ -4,8 +4,8 @@
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <h4 class="modal-title"><%= t('attendances.index.new') %></h4>
     </div>
-    <div class="modal-body">
-      <%= form_for @attendance, html: { class: 'checkattendance-form', role: 'form'} do |f| %>
+    <%= form_for @attendance, html: { class: 'checkattendance-form', role: 'form'} do |f| %>
+      <div class="modal-body">
         <%= keep_params_hidden_tag %>
 
         <div class='form-group'>
@@ -60,15 +60,13 @@
         <fieldset id="attendance_padma_contacts">
           <%= render :partial => 'shared/padma_contacts' %>
         </fieldset>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('cancel') %></button>
-          <%= f.submit t('attendances.form.save_attendance'), class: "btn btn-primary", style: ('display: none' if @attendance.contacts.count == 0)%>
-          <%= f.submit t('attendances.form.save_empty'), class: "btn btn-danger", style: ('display: none' if @attendance.contacts.count > 0)%>
-        </div>
-
-      <% end %>
-    </div>
+      </div>
+      <footer class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('cancel') %></button>
+        <%= f.submit t('attendances.form.save_attendance'), class: "btn btn-primary", style: ('display: none' if @attendance.contacts.count == 0)%>
+        <%= f.submit t('attendances.form.save_empty'), class: "btn btn-danger", style: ('display: none' if @attendance.contacts.count > 0)%>
+      </footer>
+    <% end %>
   </div>
 </div>
 

@@ -470,6 +470,12 @@
 
 // Modal check attendance
 .checkattendance-form {
+  position: absolute;
+  height: calc(100% - 51px);
+  width: 100%;
+  .modal-body {
+    height: calc(100% - 71px) !important;;
+  }
   .label-checkbox {
     color: #999;
     font: {
