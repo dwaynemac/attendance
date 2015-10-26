@@ -8,7 +8,7 @@
         <% if att %> <!-- show count when initialized attendance | if attendances == 0 add class 'attendances0' -->
           <span class='results-count-attendances' tabindex='0' data-toggle='popover' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
           <div class="students-list">
-            <%= att.contacts.map{|c| link_to_contact_profile(c)}.join(', ').html_safe %> <!-- remove "," -->
+            <%= att.contacts.map{|c| link_to_contact_profile(c)}.join(' ').html_safe %>
           </div>
           <div class="popover-footer students-list-footer">
   	    <%= link_to t('attendances.index.edit'), edit_attendance_path(att), {remote: true, data: {toggle: 'modal', target: '#dialog-check-attendance'}} %>
