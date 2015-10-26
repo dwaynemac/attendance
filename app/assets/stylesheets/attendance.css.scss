@@ -36,11 +36,14 @@
 
 @media (max-width: 767px) {
   .attendance-navbar {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
     .filter-controls {
-      + .filter-controls {
-        border-top: 1px solid #ddd;
-        margin-top: 10px;
-      }
       .label-filter {
         display: block;
         padding: 10px;
@@ -54,6 +57,14 @@
       }
     }
     .filter-controls-right {
+      border-bottom: 1px solid #ddd;
+      -webkit-box-flex: 1 100%;
+      -webkit-flex: 1 100%;
+      -ms-flex: 1 100%;
+      flex: 1 100%;
+      margin-bottom: 10px;
+      order: -1;
+      padding-bottom: 10px;
       &:before,
       &:after {
         display: table;
@@ -493,6 +504,8 @@
 // New attendance
 #attendance_contacts,
 #padma_contacts {
+  max-height: 200px;
+  overflow-y: auto; // vertical
   > li {
     margin-bottom: 5px;
     margin-top: 5px;
