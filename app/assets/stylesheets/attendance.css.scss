@@ -114,10 +114,10 @@
   }
 
   .attendance-navbar {
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;
     .btn.datepicker {
       margin-left: -10px;
     }
@@ -259,12 +259,10 @@
     }
     &.pending {
       background-color: #fff;
-    }
-    &.complete {
-      background-color: #ebebeb;
-      opacity: .6;
-      .timeslot-content {
-        margin-top: 0;
+      @media (max-width: 767px) {
+        .timeslot-content {
+          margin-top: -20px;
+        }
       }
     }
     &:hover {
@@ -273,11 +271,21 @@
         visibility: visible;
       }
     }
+    &.hide-lesson-filtered {
+      background-color: #ebebeb;
+      opacity: .6;
+      &:hover {
+        .timeslot-controls {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+      .timeslot-content {
+        margin-top: 0;
+      }
+    }
     + .list-group-item {
       border-top: 1px solid #ddd;
-    }
-    .glyphicon-check {
-      display: none;
     }
   }
 }
@@ -292,7 +300,6 @@
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    margin-top: -20px;
     .timeslot-controls {
       -webkit-box-flex: 0;
       -webkit-flex: none;
