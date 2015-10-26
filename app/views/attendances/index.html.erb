@@ -15,34 +15,14 @@
 
       <%= render 'search_form' %>
 
-      <div class='filter-buttons hide' data-activates='nav-mobile' hidden>
-        <button type='button' class='btn btn-secondary btn-sm' data-toggle='collapse' data-target='#attendance-filter' title='Filters' aria-expanded='false'>
-          <span class='glyphicon glyphicon-filter'></span> <%= t('.filter').capitalize %>
-        </button>
-      </div>
     </div>
     <%= render 'new_recent_attendance' %>
   </nav>
 
-  <div id='attendance-filter' class='collapse' hidden>
-    <%= form_for :search, url: attendances_path, method: 'get', class: 'form-inline' do |f| %>
-      <%= hidden_field_tag :days_to, @days_to %>
-      <%= hidden_field_tag :days_from, @days_from %>
-      <div class="form-group clearfix">
-        <label class='control-label'><%= Attendance.human_attribute_name('username').capitalize %></label>
-        <div class="select">
-          <%= select_tag :username, options_for_select(current_user.current_account.usernames, selected: params[:username]), prompt: t('.all_teachers'), class: 'form-control' %>
-        </div>
-        <%= check_box_tag :only_pending, '1', @only_pending , class: 'btn btn-secondary btn-sm attendance-pending' %><%= t('.only_pending') %>
-        <button id='filter-attendance-button' type='submit' class='btn btn-secondary btn-sm'><%= t('.filter') %></button>
-      </div>
-    <% end %>
-  </div>
-
   <%# render 'filters_explanation' %>
 
-    <% @view_range.each_slice(7) do |slice| -%>
-  <section class='attendance-body'>
+  <% @view_range.each_slice(7) do |slice| -%>
+    <section class='attendance-body'>
       <% slice.each do |n| %>
         <div class="panel panel-default" data-order='<%= n %>'>
           <div class="panel-heading"> <!-- add class "current-day" when day is today -->
@@ -68,8 +48,8 @@
           </div>
         </div>
       <% end %>
-  </section>
-    <% end -%>
+    </section>
+  <% end -%>
 
   <div class="panel panel-default" hidden>
     <div class="panel-body">
