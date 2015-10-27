@@ -91,7 +91,7 @@ class AttendancesController < ApplicationController
 
     # If there is an attendance already set for the recent timeslot dont show it
     if recent.present?
-      if Attendance.where(time_slot_id: recent.time_slot_id, attendance_on: Time.zone.today).exists?
+      if Attendance.where(time_slot_id: recent.id, attendance_on: Time.zone.today).exists?
         nil
       else
         recent
