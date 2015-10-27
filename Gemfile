@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 1.0.1'
 # Use twitter bootstrap as ui framework
 gem 'less-rails-bootstrap', '~> 3.0.6'
 gem 'padma-assets', github: 'dwaynemac/padma-assets', tag: 'attendance-ui'
+gem 'rails_serve_static_assets'
 
 # Javascript runtime for bootstrap's LESS files to compile to CSS.
 gem 'therubyracer', '0.12.1', :platforms => :ruby
