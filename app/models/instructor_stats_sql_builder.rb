@@ -90,12 +90,12 @@ class InstructorStatsSQLBuilder
 		query	
 	end
 
-	# select count for the specified time slot and 0 otherwise
+	# select count for the specified instructor and 0 otherwise
 	def instructors_count_select username
 		select = ""
 		distribution.each do |u|
 			if u == username
-				u_select = "COUNT(DISTINCT contacts.id) as #{username}"
+				u_select = "COUNT(DISTINCT attendances.id) as #{username}"
 			else
 				u_select = "0 as #{u}"
 			end
