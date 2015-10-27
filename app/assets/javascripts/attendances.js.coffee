@@ -1,5 +1,22 @@
 $(document).ready ->
-  $('#uninitialized_new_attendance').click ->
+
+  $('#submit-attendance').click ->
+    registerEvent('submitted-attendance-form')
+    return true # follow link
+
+  $('#cancel-attendance').click ->
+    registerEvent('cancelled-attendance-form')
+    return true # follow link
+
+  $('#recent-call-to-action').click ->
+    registerEvent('registered-attendance-with-recent-call-to-action')
+    return true # follow link
+
+  $('#empty-call-to-action').click ->
+    registerEvent('registered-attendance-with-recent-empty-call-to-action')
+    return true # follow link
+
+  $('#generic-call-to-action').click ->
     registerEvent('registered-uninitialized-attendance')
     return true # follow link
 
