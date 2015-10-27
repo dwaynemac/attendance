@@ -90,7 +90,7 @@ class AttendancesController < ApplicationController
     }.last # Get the last one
 
     # If there is an attendance already set for the recent timeslot dont show it
-    if @attendances.select {|a| a.attendance_on == Time.zone.now.to_date && a.time_slot == recent}.count > 0
+    if Attendance.where(time_slot_id: recent.time_slot_id, attendance_on: Time.zone.today).exists?
       nil
     else
       recent
