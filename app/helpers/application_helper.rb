@@ -2,7 +2,7 @@ module ApplicationHelper
 
 
   def flash_notice_is_login_message?
-    flash.notice.to_s == t('devise.failure.unauthenticated')
+    flash.notice.to_s == I18n.t('devise.failure.unauthenticated')
   end
 
   def link_to_contact_profile(contact)
