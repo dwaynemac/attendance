@@ -15,6 +15,37 @@ describe Attendance do
      expect(attendance.trial_lessons).to eq [yes_trial]
     end
   end
+  
+  describe "padma_contacts=" do
+    let(:contact){ create(:contact, padma_id: 'contact-a') }
+    describe "when account_id is set" do
+      let(:att){ create(:attendance) }
+      it "sets contact_ids from padma contact ids array" do
+        att.padma_contacts = [contact.padma_id]
+        expect(att.contact_ids).to eq [contact.id]
+      end
+    end
+    describe "when account_id is nil" do
+      let(:att){ build(:attendance, account_id: nil) }
+      it "sets contact_ids from padma contact ids array" do
+        att.padma_contacts = [contact.padma_id]
+        expect(att.contact_ids).to eq [contact.id]
+      end
+    end
+    describe "when time_slot is nil" do
+      let(:att){ build(:attendance, time_slot_id: nil) }
+      it "sets contact_ids from padma contact ids array" do
+        att.padma_contacts = [contact.padma_id]
+        expect(att.contact_ids).to eq [contact.id]
+      end
+    end
+    describe "when account AND time_slot are nil" do
+      let(:att){ build(:attendance, account_id: nil, time_slot_id: nil) }
+      it "fails with exception" do
+        expect{att.padma_contacts = [contact.padma_id]}.to raise_exception
+      end
+    end
+  end
 
   it "allows only one attendance per slot per day" do
     a = build(:attendance)

@@ -27,7 +27,7 @@ class Attendance < ActiveRecord::Base
   def padma_contacts= padma_contacts
     contact_ids = []
     padma_contacts.each do |padma_contact_id|
-      contact = Contact.get_by_padma_id(padma_contact_id, time_slot.account_id)
+      contact = Contact.get_by_padma_id(padma_contact_id, account_id || time_slot.account_id)
       contact_ids << contact.id
     end
     self.contact_ids = contact_ids
