@@ -1,10 +1,5 @@
 module ApplicationHelper
 
-
-  def flash_notice_is_login_message?
-    flash.notice.to_s == I18n.t('devise.failure.unauthenticated')
-  end
-
   def link_to_contact_profile(contact)
     link_to contact.name, "#{APP_CONFIG['crm-url']}/contacts/#{contact.padma_id}"
   end

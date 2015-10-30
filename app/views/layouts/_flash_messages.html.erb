@@ -1,11 +1,11 @@
 <% if flash.present? %>
-  <% if flash.notice.present? && !flash_notice_is_login_message? %>
+  <% if !flash.notice.blank? %>
     <div class="alert alert-success">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <%= flash.notice %>
     </div>
   <% end %>
-  <% if flash.alert.present? %>
+  <% if !flash.alert.blank? %>
     <div class="alert">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <%= flash.alert %>
