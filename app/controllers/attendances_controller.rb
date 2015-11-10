@@ -23,7 +23,8 @@ class AttendancesController < ApplicationController
     @only_pending = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:only_pending])
     @time_slots_wout_day = current_user.current_account.time_slots.without_schedule
 
-    @recent = get_recent_time_slot
+    @recent = nil # disable until bug #107776460 fixed
+    # @recent = get_recent_time_slot
     
     respond_with @attendances
   end
