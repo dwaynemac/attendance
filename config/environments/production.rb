@@ -45,6 +45,7 @@ Assistance::Application.configure do
 
   # Set to :debug to see everything in the log.
   config.log_level = :info
+  config.action_view.logger = nil # don't log partials rendering
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
