@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/dwaynemac/padma-assets.git
-  revision: 8f483b8161df60d1062cf37a47c14bf064190893
-  tag: attendance-ui
+  revision: 242cff780cc1924b64511e0f6171c020dc09ce0a
+  tag: public-search
   specs:
     padma-assets (0.1.26)
       railties (>= 3.1)
