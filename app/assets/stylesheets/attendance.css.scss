@@ -400,15 +400,11 @@
 // Students list popover
 .students-list-footer {
   a {
-    color: #999;
-    display: block;
     padding: 2.5px 5px;
-    text-align: center;
     &:focus,
     &:hover {
-      background-color: #f5f5f5;
-      color: #666;
-      text-decoration: none;
+      color: #357ebd;
+      text-decoration: underline;
     }
   }
 }
