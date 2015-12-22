@@ -27,7 +27,7 @@
           <%= f.label :time_slot_id, :class => 'col-sm-2 control-label col-xs-5 col-md-4' %>
           <div class="col-xs-7 col-md-8">
             <div class='select'>
-              <%= f.collection_select :time_slot_id, current_user.current_account.time_slots, :id, :description_with_day, {},{:class => 'form-control'} %>
+              <%= f.collection_select :time_slot_id, current_user.current_account.time_slots.order("name"), :id, :description_with_day, {},{:class => 'form-control'} %>
             </div>
           </div>
         </div>
