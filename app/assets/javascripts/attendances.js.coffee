@@ -27,7 +27,7 @@ $(document).ready ->
   $('.empty_attendance').click ->
     registerEvent('registered-empty-attendance')
     return true # follow link
-  
+    
   $(document).on 'click', '#attendance_padma_contacts .add', (event) ->
     $('.modal-footer .btn-danger').hide()
     $('.modal-footer .btn-primary').show()
@@ -73,3 +73,7 @@ $(document).ready ->
       success: (data, textStatus, jqXHR) ->
         warning_entry.remove()
 
+class @TrialLessonSelect
+  @setup: (div_id) ->
+    $(div_id).parent().removeClass('select')
+    $(div_id).select2()
