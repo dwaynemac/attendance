@@ -15,7 +15,7 @@
           </div>
           <%= f.label :time_slot_id, :class => 'control-label' %>
           <div class='select'>
-            <%= f.collection_select :time_slot_id, current_user.current_account.time_slots.order("name"), :id, :name, {:prompt => t('attendances.form.select_timeslot')}, {:class => 'form-control'} %>
+            <%= f.collection_select :time_slot_id, current_user.current_account.time_slots.order("name"), :id, :description_with_day, {:prompt => t('attendances.form.select_timeslot')}, {:class => 'form-control'} %>
           </div>
         </div>
 
