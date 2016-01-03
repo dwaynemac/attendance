@@ -39,7 +39,7 @@ gem 'rails_serve_static_assets'
 gem 'therubyracer', '0.12.1', :platforms => :ruby
 
 gem 'angularjs-rails'
-gem "select2-rails"
+gem "select2-rails", '~> 4.0.0'
 
 gem 'bootstrap-multiselect-rails'
 
