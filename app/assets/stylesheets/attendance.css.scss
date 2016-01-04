@@ -531,3 +531,12 @@
     }
   }
 }
+
+.select2-container--default .select2-selection--single {
+  border: 0 !important;
+  background-color: transparent !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: inherit !important;
+}
