@@ -75,5 +75,6 @@ $(document).ready ->
 
 class @TrialLessonSelect
   @setup: (div_id) ->
-    $(div_id).parent().removeClass('select')
+    $(div_id).parent().removeClass("select")
     $(div_id).select2()
+    $($(div_id)[0].nextElementSibling).addClass("form-control")
