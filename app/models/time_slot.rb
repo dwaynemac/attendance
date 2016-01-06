@@ -55,17 +55,6 @@ class TimeSlot < ActiveRecord::Base
     description + " [#{time_slot_days}]"
   end
 
-  private
-
-  def set_defaults
-    if self.cultural_activity.nil?
-      self.cultural_activity = false
-    end
-
-    # return true to avoid this filter breaking the callback queue.
-    return true
-  end
-
   def time_slot_days
     response = ""
     days = [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday]
@@ -77,4 +66,16 @@ class TimeSlot < ActiveRecord::Base
     end
     response
   end
+
+  private
+
+  def set_defaults
+    if self.cultural_activity.nil?
+      self.cultural_activity = false
+    end
+
+    # return true to avoid this filter breaking the callback queue.
+    return true
+  end
+
 end
