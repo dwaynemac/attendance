@@ -4,6 +4,16 @@ describe TimeSlot do
   
   it { should have_many :trial_lessons }
 
+  describe "time_slot_days" do
+    let!(:ts){ create(:time_slot, monday: true) }
+
+    expected = "Mon"
+    it "should render '#{expected}'" do
+      expect(ts.time_slot_days).to eq expected
+    end
+
+  end
+  
   describe "has schedule scopes:" do
     let!(:with_sched){ create(:time_slot, monday: true) }
     let!(:without_sched_all_nil){ create(:time_slot) }

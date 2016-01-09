@@ -61,7 +61,7 @@ class TimeSlot < ActiveRecord::Base
     days.each do |day|
       if send(day)
         response += ", " unless response.empty?
-        response += I18n.t('date.abbr_day_names')[days.find_index(day)]
+        response += I18n.t('date.abbr_day_names')[days.find_index(day)+1]
       end
     end
     response
