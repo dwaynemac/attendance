@@ -6,10 +6,15 @@ describe TimeSlot do
 
   describe "time_slot_days" do
     let!(:ts){ create(:time_slot, monday: true) }
+    let!(:ts_w_s){ create(:time_slot) }
 
     expected = "Mon"
     it "should render '#{expected}'" do
       expect(ts.time_slot_days).to eq expected
+    end
+
+    it "should render ''" do
+      expect(ts_w_s.time_slot_days).to eq ''
     end
 
   end
