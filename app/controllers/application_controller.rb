@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
   before_filter :set_timezone
   before_filter :set_locale
 
+  before_filter :tag_request_on_appsignal
+
   private
 
   def set_locale
@@ -53,6 +55,14 @@ class ApplicationController < ActionController::Base
   def set_timezone
     if signed_in? && current_user.padma_enabled?
       Time.zone = current_user.current_account.padma.timezone
+    end
+  end
+
+  def tag_request_on_appsignal
+    if signed_in?
+      Appsignal.tag_request(
+        intercom_user_id: current_user.username
+      )
     end
   end
 end

@@ -118,9 +118,10 @@ group :development do
   gem 'git-pivotal-tracker-integration'
 end
 
+gem 'appsignal', '1.0'
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
-  gem 'appsignal', '1.0'
   gem 'le' # logentries
 end
