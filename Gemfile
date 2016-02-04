@@ -121,6 +121,6 @@ end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
-  gem 'appsignal', '0.11.9'
+  gem 'appsignal', '1.0'
   gem 'le' # logentries
 end
