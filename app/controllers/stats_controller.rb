@@ -16,7 +16,10 @@ class StatsController < ApplicationController
     @distribution_names = @stats.distribution_names
     respond_to do |format|
       format.html
-      format.csv
+      format.csv do
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers['Content-Disposition'] = 'attachment; filename="stats.csv"'
+      end
     end
   end
 
