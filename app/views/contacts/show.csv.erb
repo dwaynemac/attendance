@@ -1,0 +1,9 @@
+<%- require 'csv' -%>
+<%= CSV.generate(current_user.csv_options) do |csv|
+  csv << ['date', 'time_slot_name']
+  @attendances_by_month.each do |month, attendances|
+    attendances.each do |attendance|
+      csv << [attendance.attendance_on, attendance.time_slot.try(:name)]
+    end
+  end
+end.html_safe %>

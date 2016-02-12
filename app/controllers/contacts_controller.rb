@@ -1,7 +1,7 @@
 class ContactsController < ApplicationController
   before_filter :find_contact_by_padma_id, :only => :show
   load_and_authorize_resource
-  respond_to :html, :js
+  respond_to :html, :js, :csv
 
   def index
     if params[:time_slot_id].present?
