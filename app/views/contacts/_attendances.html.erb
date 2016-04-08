@@ -9,7 +9,7 @@
           <% for attendance in attendances %>
             <tr><td>
             <div class="attendances">
-              <%= I18n.l(attendance.attendance_on, format: :in_context) %> - <strong><%= attendance.time_slot.try :name %></strong> (<%= link_to t('view'), attendance_path(attendance) %>)
+              <%= I18n.l(attendance.attendance_on, format: :in_context) %> - <strong><%= attendance.time_slot.try :name %></strong> - <%= attendance.username %> - (<%= link_to t('view'), attendance_path(attendance) %>)
             </div>
             </td></tr>
           <% end %>
