@@ -44,6 +44,7 @@ class AttendancesController < ApplicationController
   end
 
   def edit
+    @remote_form = true
     @padma_contacts = @attendance.time_slot.recurrent_contacts
     @trial_lessons = TrialLesson.where(time_slot_id: @attendance.time_slot_id, trial_on: @attendance.attendance_on)
     respond_to do |format|
@@ -69,7 +70,10 @@ class AttendancesController < ApplicationController
   def update
     update_trial_lessons params[:trial_lessons] if params[:trial_lessons]
     @attendance.update(params[:attendance])
-    redirect_to attendances_url
+    respond_to do |format|
+      format.html { redirect_to attendances_url }
+      format.json { render json: {id: @attendance.id, message: "updated"}, status: 201 }
+    end
   end
 
   def destroy

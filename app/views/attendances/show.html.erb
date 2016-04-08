@@ -42,5 +42,8 @@
 	<% end %>
 </ul>
 
-<%= link_to t('back'), attendances_path, :class => 'btn' %>
+<%= link_to t('edit'), edit_attendance_path(@attendance), {remote: true, data: {toggle: 'modal', target: '#dialog-check-attendance'}, :class => "btn btn-primary"} %>
 <%= link_to t('destroy'), @attendance, :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+
+<div class="modal fade modal-fixed-footer" id='dialog-check-attendance'>
+</div>

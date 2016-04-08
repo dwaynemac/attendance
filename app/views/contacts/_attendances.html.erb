@@ -9,7 +9,8 @@
           <% for attendance in attendances %>
             <tr><td>
             <div class="attendances">
-              <%= I18n.l(attendance.attendance_on, format: :in_context) %> - <strong><%= attendance.time_slot.try :name %></strong> - <%= attendance.username %> - (<%= link_to t('view'), attendance_path(attendance) %>)
+              <%= I18n.l(attendance.attendance_on, format: :in_context) %> - <strong><%= attendance.time_slot.try :name %></strong> - <%= attendance.username %> - 
+              <%= link_to t('edit'), edit_attendance_path(attendance), {remote: true, data: {toggle: 'modal', target: '#dialog-check-attendance'}} %>
             </div>
             </td></tr>
           <% end %>
@@ -17,4 +18,7 @@
       </table>
     <% end %>
   </div>
+</div>
+
+<div class="modal fade modal-fixed-footer" id='dialog-check-attendance'>
 </div>
