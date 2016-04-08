@@ -13,6 +13,11 @@
   <%= @attendance.time_slot.name %>
 </p>
 
+<p>
+  <b><%= t('.teacher_on_this_attendace') %></b><br>
+  <%= @attendance.username %>
+</p>
+
 <b><%= Attendance.human_attribute_name :trial_lessons %></b><br>
 <ul>
 	<% @trial_lessons.each do |tl| %>

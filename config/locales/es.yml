@@ -107,6 +107,7 @@ es:
       toggle_hidden_timeslots: Mostrar los horarios de todos los instructores
     show:
       title: Asistencia
+      teacher_on_this_attendace: Instructor que dió la clase
   back: volver
   confirm: ¿Está seguro?
   date:

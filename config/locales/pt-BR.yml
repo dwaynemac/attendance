@@ -107,6 +107,7 @@ pt-BR:
       timeslots_hidden_warning: As turmas futuras e de outros instrutores estāo ocultas para facilitar o cadastro.
     show:
       title: Presenças
+      teacher_on_this_attendace: Instrutor nesta aula
   back: voltar
   confirm: Tem certeza?
   date:
