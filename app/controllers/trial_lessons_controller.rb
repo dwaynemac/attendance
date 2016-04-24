@@ -14,6 +14,13 @@ class TrialLessonsController < ApplicationController
   def new
     @trial_lesson = current_account.trial_lessons.build
     @trial_lesson.attributes=params[:trial_lesson]
+    @initialize_select = if @trial_lesson.contact_id && !@trial_lesson.persisted? 
+                  {name: params[:padma_contact_name], id: params[:trial_lesson][:padma_contact_id]}
+                elsif @trial_lesson.contact
+                  {name: "#{@trial_lesson.contact.name}", id: @trial_lesson.contact.padma_id}
+                else
+                  {name: "", id: ""}
+                end
   end
 
   # GET /trial_lessons/1/edit

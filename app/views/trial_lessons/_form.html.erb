@@ -35,17 +35,8 @@
         <div class="form-group">
           <%= f.label :padma_contact_id, :class => 'control-label col-xs-5 col-md-4' %>
           <div class="col-xs-7 col-md-8">
-            <% initialize_select =
-                if @trial_lesson.contact_id && !@trial_lesson.persisted?
-                  {name: params[:padma_contact_name], id: params[:trial_lesson][:padma_contact_id]}
-                elsif @trial_lesson.contact
-                  {name: "#{@trial_lesson.contact.name}", id: @trial_lesson.contact.padma_id}
-                else
-                  {name: "", id: ""}
-                end
-            %>
-            <%= hidden_field_tag 'contact_name', initialize_select[:name] %>
-            <%= hidden_field_tag 'contact_id', initialize_select[:id] %>
+            <%= hidden_field_tag 'contact_name', @initialize_select[:name] %>
+            <%= hidden_field_tag 'contact_id', @initialize_select[:id] %>
             <%= f.select :padma_contact_id, [] %>
           </div>
         </div>
