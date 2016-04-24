@@ -55,7 +55,7 @@ class TrialLesson < ActiveRecord::Base
 
   def padma_contact_id= padma_contact_id
     c = Contact.get_by_padma_id(padma_contact_id, self.account_id)
-    self.contact_id = c.id
+    self.contact_id = c.id if c
   end
 
   def padma_contact_id

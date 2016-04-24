@@ -84,6 +84,8 @@ class Contact < ActiveRecord::Base
   # @param [Hash] new_contact_attributes (nil)
   # @return [Contact]
   def self.get_by_padma_id(padma_contact_id,account_id,padma_contact=nil,new_contact_attributes=nil)
+    return if padma_contact_id.blank?
+      
     account = Account.find(account_id)
     if contact = Contact.find_by_padma_id(padma_contact_id)
       #Local Contact found, associate to account if necessary
