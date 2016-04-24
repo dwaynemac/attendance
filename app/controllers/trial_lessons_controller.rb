@@ -34,7 +34,7 @@ class TrialLessonsController < ApplicationController
     if @trial_lesson.save
       redirect_to @trial_lesson, notice: 'Trial lesson was successfully created.'
     else
-      render action: 'new'
+      redirect_to new_trial_lesson_path, alert: "#{@trial_lesson.errors.full_messages.to_sentence}"
     end
   end
 
