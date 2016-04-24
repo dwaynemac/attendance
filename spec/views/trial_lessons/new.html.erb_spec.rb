@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "trial_lessons/new" do
   before(:each) do
     assign(:trial_lesson, build(:trial_lesson))
+    assign(:initialize_select, {name: "", id: ""})
 
 	@user = build(:user)
     User.any_instance.stub(:padma_user).and_return(PadmaUser.new(:username => @user.username, :email => "test@test.com"))
