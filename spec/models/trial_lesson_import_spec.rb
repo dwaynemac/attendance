@@ -38,9 +38,9 @@ describe TrialLessonImport do
       TrialLesson.any_instance.stub(:broadcast_create).and_return(true)
       TrialLesson.any_instance.stub(:create_activity).and_return(true)
       PadmaContact.stub!(:find_by_kshema_id).and_return(
-        PadmaContact.new(first_name: 'fn', last_name: 'ln')
+        PadmaContact.new(id: "1", first_name: 'fn', last_name: 'ln')
       )
-      PadmaContact.stub!(:find).and_return(PadmaContact.new())
+      PadmaContact.stub!(:find).and_return(PadmaContact.new(id: "1"))
     end
     describe "#process_CSV" do
       it "creates a trial_lesson for every valid row" do
