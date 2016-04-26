@@ -88,7 +88,7 @@ describe TrialLessonsController do
         # Trigger the behavior that occurs when invalid params are submitted
         TrialLesson.any_instance.stub(:save).and_return(false)
         post :create, {:trial_lesson => {  }}
-        response.should render_template("new")
+        response.should redirect_to(new_trial_lesson_url)
       end
     end
   end
