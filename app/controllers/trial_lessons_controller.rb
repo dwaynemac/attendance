@@ -14,17 +14,12 @@ class TrialLessonsController < ApplicationController
   def new
     @trial_lesson = current_account.trial_lessons.build
     @trial_lesson.attributes=params[:trial_lesson]
-    @initialize_select = if @trial_lesson.contact_id && !@trial_lesson.persisted? 
-                  {name: params[:padma_contact_name], id: params[:trial_lesson][:padma_contact_id]}
-                elsif @trial_lesson.contact
-                  {name: "#{@trial_lesson.contact.name}", id: @trial_lesson.contact.padma_id}
-                else
-                  {name: "", id: ""}
-                end
+    @initialize_select = get_initialize_select
   end
 
   # GET /trial_lessons/1/edit
   def edit
+    @initialize_select = get_initialize_select
   end
 
   # POST /trial_lessons
@@ -56,4 +51,17 @@ class TrialLessonsController < ApplicationController
     @trial_lesson.destroy
     redirect_to trial_lessons_url, notice: 'Trial lesson was successfully destroyed.'
   end
+
+  private
+
+  def get_initialize_select
+    if @trial_lesson.contact_id && !@trial_lesson.persisted? 
+      {name: params[:padma_contact_name], id: params[:trial_lesson][:padma_contact_id]}
+    elsif @trial_lesson.contact
+      {name: "#{@trial_lesson.contact.name}", id: @trial_lesson.contact.padma_id}
+    else
+      {name: "", id: ""}
+    end
+  end
+
 end
