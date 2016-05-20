@@ -25,6 +25,7 @@ es:
         distribution: Agrupar por
         end_on: Hasta
         include_cultural_activities: Incluir actividades culturales
+        include_former_students: Incluir ex-alumnos
         start_on: Desde
         month: 
       time_slot:

@@ -25,6 +25,7 @@ pt-BR:
         distribution: Agrupar por
         end_on: Atê
         include_cultural_activities: Contabilizar atividades culturais
+        include_former_students: Incluir ex-alunos
         start_on: 
         month: 
       time_slot:

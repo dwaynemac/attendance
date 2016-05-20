@@ -1,9 +1,10 @@
 class InstructorStatsSQLBuilder
-	attr_accessor :start_on, :end_on, :account, :include_cultural_activities
+	attr_accessor :start_on, :end_on, :account, :include_cultural_activities, :include_former_students
 
 	DEFAULTS = {
 		# include/exclude cultural activities from stats. excluded by default
 		:include_cultural_activities => false,
+		:include_former_students => false,
 		# start/end date. defaults to this month.
 		:start_on => Date.today.beginning_of_month,
 		:end_on => Date.today.end_of_month
