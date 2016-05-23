@@ -14,6 +14,10 @@ class Ability
     # user can do everything on templates of his account.
 
     self.merge GeneralAbility.new(user)
+
+    if alpha?(user)
+      can :include_former_students, :stats
+    end
     
     can :manage, TimeSlot, account_id: user.current_account_id
     can :manage, Attendance, account_id: user.current_account_id
@@ -40,4 +44,16 @@ class Ability
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
   end
+
+  private
+
+  def alpha?(user)
+    user.current_account.padma.try(:tester_level) == 'alpha'
+  end
+
+  def beta?(user)
+    tl = user.current_account.padma.try(:tester_level)
+    tl == 'alpha' || tl == 'beta'
+  end
+
 end
