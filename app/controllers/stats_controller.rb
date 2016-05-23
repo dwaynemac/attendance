@@ -38,7 +38,6 @@ class StatsController < ApplicationController
   end
 
   def stats_attributes
-
     s = params[:stats].merge({:account => current_user.current_account})
     case params[:easy_period].try(:to_sym)
       when :current_month

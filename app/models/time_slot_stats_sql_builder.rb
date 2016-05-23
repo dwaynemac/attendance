@@ -21,6 +21,7 @@ class TimeSlotStatsSQLBuilder
 			end
 		end	
 		options["include_cultural_activities"] = options["include_cultural_activities"] == '1' if options["include_cultural_activities"]
+		options["include_former_students"] = options["include_former_students"] == '1' if options["include_former_students"]
 
 		# initialize builder using defaults
 		DEFAULTS.merge(options.symbolize_keys).each do |attr_name, value|
@@ -39,7 +40,7 @@ class TimeSlotStatsSQLBuilder
 			FROM contacts
 			INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 			WHERE #{account_condition}
-			AND accounts_contacts.padma_status = 'student'
+			AND #{status_condition}
 			GROUP BY contacts.id
 
 			-- unions for each time slot
@@ -49,6 +50,15 @@ class TimeSlotStatsSQLBuilder
 		ORDER BY name ASC
 	  )
 	end	
+
+  def status_condition
+    condition = "( accounts_contacts.padma_status = 'student'"
+    if include_former_students
+      condition = "#{condition} OR accounts_contacts.padma_status = 'former_student'"
+    end
+    condition = "#{condition} )"
+    condition
+  end
 
 	# filters contacts by account_id
 	def account_condition
@@ -81,7 +91,7 @@ class TimeSlotStatsSQLBuilder
 				WHERE attendances.time_slot_id = #{time_slot.id} 
 				AND #{account_condition}
 				AND #{attendance_between_dates_condition}
-				AND accounts_contacts.padma_status = 'student'
+				AND #{status_condition}
 				GROUP BY contacts.id
 			)
 		end

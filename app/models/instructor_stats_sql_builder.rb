@@ -20,6 +20,7 @@ class InstructorStatsSQLBuilder
 			end
 		end	
 		options["include_cultural_activities"] = options["include_cultural_activities"] == '1' if options["include_cultural_activities"]
+		options["include_former_students"] = options["include_former_students"] == '1' if options["include_former_students"]
 
 		# initialize builder using defaults
 		DEFAULTS.merge(options.symbolize_keys).each do |attr_name, value|
@@ -36,7 +37,7 @@ class InstructorStatsSQLBuilder
 			FROM contacts
 			INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 			WHERE #{account_condition}
-			AND accounts_contacts.padma_status = 'student'
+			AND #{status_condition}
 			GROUP BY contacts.id
 
 			-- unions for each instructor
@@ -55,6 +56,15 @@ class InstructorStatsSQLBuilder
 		end
 		condition
 	end
+
+  def status_condition
+    condition = "( accounts_contacts.padma_status = 'student'"
+    if include_former_students
+      condition = "#{condition} OR accounts_contacts.padma_status = 'former_student'"
+    end
+    condition = "#{condition} )"
+    condition
+  end
 
 	# filters attendances by start/end dates
 	def attendance_between_dates_condition
@@ -82,7 +92,7 @@ class InstructorStatsSQLBuilder
 				WHERE attendances.username = '#{username.tr("_",".")}' 
 				AND #{account_condition}
 				AND #{attendance_between_dates_condition}
-				AND accounts_contacts.padma_status = 'student'
+				AND #{status_condition}
 				#{cultural_activity_condition}
 				GROUP BY contacts.id
 			)
