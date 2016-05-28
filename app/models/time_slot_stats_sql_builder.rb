@@ -83,7 +83,7 @@ class TimeSlotStatsSQLBuilder
 				UNION
 
 				-- select contact attributes and count attendances on a time slot
-				SELECT contacts.*, accounts_contacts.padma_status status, #{time_slots_count_select time_slot}
+				SELECT contacts.*, MAX(accounts_contacts.padma_status) status, #{time_slots_count_select time_slot}
 				FROM contacts
 				INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 				INNER JOIN attendance_contacts ON contacts.id = attendance_contacts.contact_id
