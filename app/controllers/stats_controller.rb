@@ -12,6 +12,9 @@ class StatsController < ApplicationController
   	end
     @stats = builder_clazz.new stats_attributes
     @contacts = Contact.find_by_sql(@stats.sql)
+
+    @contacts.reject!{|c| c.status == 'former_student' && c.attendance_total == 0 }
+
     @distribution = @stats.distribution
     @distribution_names = @stats.distribution_names
     respond_to do |format|
