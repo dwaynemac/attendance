@@ -31,9 +31,9 @@ class InstructorStatsSQLBuilder
 	def sql
 	  %(
 	  	-- select contact attributes and stats
-	  	SELECT id, padma_id, name, #{instructors_sum_select} FROM (
+	  	SELECT id, padma_id, name, status, #{instructors_sum_select} FROM (
 	  		-- select all contacts for that account
-			SELECT contacts.*, #{instructors_count_select nil}
+			SELECT contacts.*, accounts_contacts.padma_status status, #{instructors_count_select nil}
 			FROM contacts
 			INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 			WHERE #{account_condition}
@@ -83,7 +83,7 @@ class InstructorStatsSQLBuilder
 			query << %(
 				UNION
 				-- select contact attributes and count attendances on a time slot
-				SELECT DISTINCT contacts.*, #{instructors_count_select username}
+				SELECT DISTINCT contacts.*, accounts_contacts.padma_status status, #{instructors_count_select username}
 				FROM contacts
 				INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 				INNER JOIN attendance_contacts ON contacts.id = attendance_contacts.contact_id

@@ -33,10 +33,10 @@ class TimeSlotStatsSQLBuilder
 	def sql
 	  %(
 	  	-- select contact attributes and stats
-	  	SELECT id, padma_id, name, #{time_slots_sum_select} FROM (
+	  	SELECT id, padma_id, name, status, #{time_slots_sum_select} FROM (
 
 	  		-- select all contacts for that account
-			SELECT contacts.*, #{time_slots_count_select nil}
+			SELECT contacts.*, accounts_contacts.padma_status status, #{time_slots_count_select nil}
 			FROM contacts
 			INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 			WHERE #{account_condition}
@@ -83,7 +83,7 @@ class TimeSlotStatsSQLBuilder
 				UNION
 
 				-- select contact attributes and count attendances on a time slot
-				SELECT contacts.*, #{time_slots_count_select time_slot}
+				SELECT contacts.*, accounts_contacts.padma_status status, #{time_slots_count_select time_slot}
 				FROM contacts
 				INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 				INNER JOIN attendance_contacts ON contacts.id = attendance_contacts.contact_id
