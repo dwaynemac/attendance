@@ -33,7 +33,7 @@ class TimeSlotStatsSQLBuilder
 	def sql
 	  %(
 	  	-- select contact attributes and stats
-	  	SELECT id, padma_id, name, status, #{time_slots_sum_select} FROM (
+	  	SELECT id, padma_id, name, MAX(status) as status, #{time_slots_sum_select} FROM (
 
 	  		-- select all contacts for that account
 			SELECT contacts.*, MAX(accounts_contacts.padma_status) status, #{time_slots_count_select nil}

@@ -31,7 +31,7 @@ class InstructorStatsSQLBuilder
 	def sql
 	  %(
 	  	-- select contact attributes and stats
-	  	SELECT id, padma_id, name, status, #{instructors_sum_select} FROM (
+	  	SELECT id, padma_id, name, MAX(status) status, #{instructors_sum_select} FROM (
 	  		-- select all contacts for that account
 			SELECT contacts.*, MAX(accounts_contacts.padma_status) status, #{instructors_count_select nil}
 			FROM contacts
