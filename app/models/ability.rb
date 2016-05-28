@@ -16,6 +16,11 @@ class Ability
     self.merge GeneralAbility.new(user)
 
     if alpha?(user)
+      # alpha only
+    end
+
+    if beta?(user)
+      # beta only
       can :include_former_students, :stats
     end
     
