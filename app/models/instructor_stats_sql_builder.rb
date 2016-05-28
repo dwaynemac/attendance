@@ -33,7 +33,7 @@ class InstructorStatsSQLBuilder
 	  	-- select contact attributes and stats
 	  	SELECT id, padma_id, name, status, #{instructors_sum_select} FROM (
 	  		-- select all contacts for that account
-			SELECT contacts.*, accounts_contacts.padma_status status, #{instructors_count_select nil}
+			SELECT contacts.*, MAX(accounts_contacts.padma_status) status, #{instructors_count_select nil}
 			FROM contacts
 			INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 			WHERE #{account_condition}

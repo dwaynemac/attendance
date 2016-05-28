@@ -36,7 +36,7 @@ class TimeSlotStatsSQLBuilder
 	  	SELECT id, padma_id, name, status, #{time_slots_sum_select} FROM (
 
 	  		-- select all contacts for that account
-			SELECT contacts.*, accounts_contacts.padma_status status, #{time_slots_count_select nil}
+			SELECT contacts.*, MAX(accounts_contacts.padma_status) status, #{time_slots_count_select nil}
 			FROM contacts
 			INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 			WHERE #{account_condition}
