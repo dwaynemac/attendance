@@ -15,3 +15,15 @@
   form.prop 'action', '<%= url.last_month_stats_path %>'
   form.submit()
 
+$(document).ready ->
+  $("#show-custom-period").click ->
+    showCustomMenu()
+    return false;
+
+  $("#open-last-month").click ->
+    openLastMonth()
+    return false
+
+  $("#open-current-month").click ->
+    openCurrentMonth()
+    return false

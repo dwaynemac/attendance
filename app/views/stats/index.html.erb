@@ -10,9 +10,9 @@
             <%= f.label :easy_period, t('.period'), :class => 'control-label col-xs-5 col-md-2' %>
             <div class="col-xs-7 col-md-8 date">
               <ul class="nav nav-pills">
-                <li <%= active_pill :current_month %>><%= link_to t('.current_month'), 'javascript: openCurrentMonth(); ' %></li>
-                <li <%= active_pill :last_month %>><%= link_to t('.last_month'), 'javascript: openLastMonth();' %></li>
-                <li <%= active_pill nil %>><%= link_to t('.custom_period'), 'javascript: showCustomMenu();' %></li>
+                <li <%= active_pill :current_month %>><%= link_to t('.current_month'), '#', id: 'open-current-month' %></li>
+                <li <%= active_pill :last_month %>><%= link_to t('.last_month'), '#', id: 'open-last-month' %></li>
+                <li <%= active_pill nil %>><%= link_to t('.custom_period'), '#', id: 'show-custom-period' %></li>
               </ul>
             </div>
           </div>
