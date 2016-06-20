@@ -12,7 +12,7 @@ class AttendancesController < ApplicationController
     @view_range = (further_limit - 1).downto(closer_limit)
     @attendances = @attendances.where(attendance_on: (further_limit.days.ago.to_date..closer_limit.days.ago.to_date))
 
-    @time_slots = current_user.current_account.time_slots.order("start_at ASC")
+    @time_slots = current_user.current_account.time_slots
 
     unless params[:username].nil?
       cookies[:filter_attendances_by_username] = params[:username]

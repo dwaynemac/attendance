@@ -4,7 +4,7 @@ class TimeSlotsController < ApplicationController
   load_and_authorize_resource 
 
   def index
-    @time_slots = @time_slots.order(:start_at)
+    @time_slots = @time_slots
   end
 
   def show

@@ -1,4 +1,7 @@
 class TimeSlot < ActiveRecord::Base
+
+  default_scope order('name ASC')
+
   belongs_to :account
   
   has_many :contact_time_slots
