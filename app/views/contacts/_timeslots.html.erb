@@ -13,7 +13,7 @@
           <%= f.collection_check_boxes(:time_slot_ids,
                                        current_user.current_account.time_slots,
                                        :id,
-                                       :description
+                                       :description_with_day
               ) do |b|
                 b.label { b.check_box + b.text }
               end
