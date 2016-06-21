@@ -100,7 +100,7 @@ describe TimeSlotsController do
 
       it "redirects to the created time_slot" do
         post :create, {:time_slot => attributes_for(:time_slot)}
-        response.should redirect_to(TimeSlot.last)
+        response.should redirect_to(TimeSlot.order(:id).last)
       end
     end
 
