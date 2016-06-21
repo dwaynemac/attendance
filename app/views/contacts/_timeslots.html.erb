@@ -23,7 +23,7 @@
     </div>
     <ul class="list-group">
       <% @time_slots.each do |t| -%>
-        <li class="list-group-item"><%= t.description %></li>
+        <li class="list-group-item"><%= t.description_with_day %></li>
       <% end -%>
     </ul>
   </div>
