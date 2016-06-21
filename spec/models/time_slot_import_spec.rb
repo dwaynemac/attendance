@@ -38,7 +38,7 @@ describe TimeSlotImport do
     end
     it "sets TimeSlots attributes from rows" do
       time_slot_import.process_CSV
-      t = TimeSlot.last
+      t = TimeSlot.order(:id).last
       t.name.should == "Entrenamiento de respiracion"
       t.padma_uid.should == 'leda.bianucci'
       t.monday.should be_true
@@ -46,7 +46,7 @@ describe TimeSlotImport do
     end
     it "links contacts and time_slots" do
       expect{time_slot_import.process_CSV}.to change{ContactTimeSlot.count}.by 5
-      t = TimeSlot.last
+      t = TimeSlot.order(:id).last
       t.contacts.count.should == 5
     end
     it "stores imported rows ids" do
