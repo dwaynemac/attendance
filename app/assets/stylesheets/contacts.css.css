@@ -6,3 +6,7 @@
 a#save_timeslots {
   display: none;
 }
+
+#timeslots-filter {
+  display: none;
+}

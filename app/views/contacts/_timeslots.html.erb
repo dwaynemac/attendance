@@ -8,14 +8,17 @@
     </div>
     <div class="panel-body">
       <%= form_for @contact, remote: true, method: 'PUT', id: 'timeslots_form' do |f|  %>
-        <%= f.collection_check_boxes(:time_slot_ids,
-                                     current_user.current_account.time_slots,
-                                     :id,
-                                     :description
-            ) do |b|
-              b.label { b.check_box + b.text }  + "<br/>".html_safe
-            end
-        %>
+        <input id="timeslots-filter" class='form-control' type='text' placeholder='<%= t('time_slots.index.filter_timeslots') %>' />
+        <div id="timeslots-checkboxes">
+          <%= f.collection_check_boxes(:time_slot_ids,
+                                       current_user.current_account.time_slots,
+                                       :id,
+                                       :description
+              ) do |b|
+                b.label { b.check_box + b.text }
+              end
+          %>
+        </div>
       <% end -%>
     </div>
     <ul class="list-group">

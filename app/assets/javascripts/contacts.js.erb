@@ -1,4 +1,7 @@
 $(document).ready(function(){
+
+  $("input#timeslots-filter").quickfilter("div#timeslots-checkboxes label");
+  
   $('#edit-timeslots').click(function(){
     toggleTimeSlotsForm();
     return false;
@@ -20,6 +23,7 @@ $(document).ready(function(){
 var toggleTimeSlotsForm = function(){
   $('#contacts-timeslots div.panel-body').toggle();
   $('#contacts-timeslots ul.list-group').toggle();
+  $('#timeslots-filter').toggle();
   $('#save_timeslots').toggle();
   
   t = $('#edit-timeslots');
