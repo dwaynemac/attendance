@@ -36,11 +36,12 @@ Assistance::Application.routes.draw do
 
   namespace 'api' do
     namespace 'v0' do
+      resources :merges, only: [:create]
       resources :trial_lessons, only: [:index]
       resources :contacts, only: [:show, :index] do
-	collection do
+        collection do
           post :list, to: 'contacts#index'
-	end
+        end
         member do
           get :last_trial
         end
