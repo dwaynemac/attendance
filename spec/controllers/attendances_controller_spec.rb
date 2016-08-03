@@ -23,6 +23,20 @@ describe AttendancesController do
           PadmaContact.new first_name: pid, last_name: pid, id: pid
         end
       end
+      describe "setting no 'no people in attendance'" do
+        let!(:ca){create(:contact, padma_id: 'a')}
+        let!(:ca){create(:contact, padma_id: 'b')}
+        let(:time_slot){create(:time_slot)}
+        let!(:attendance){create(:attendance,
+                                 padma_contacts: ['a', 'b'],
+                                 account: current_account)}
+        before do
+          patch :update, id: attendance.id, attendance: { username: 'blah' }
+        end
+        it "empties attendances contacts" do
+          expect(attendance.reload.contacts).to be_empty
+        end
+      end
       describe "specifying contacts" do
         let!(:ca){create(:contact, padma_id: 'a')}
         let!(:ca){create(:contact, padma_id: 'b')}
