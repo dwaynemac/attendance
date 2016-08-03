@@ -69,7 +69,7 @@ class AttendancesController < ApplicationController
 
   def update
     update_trial_lessons params[:trial_lessons] if params[:trial_lessons]
-    @attendance.update(params[:attendance])
+    @attendance.update(attendance_params_for_update)
     respond_to do |format|
       format.html { redirect_to attendances_url }
       format.json { render json: {id: @attendance.id, message: "updated"}, status: 201 }
@@ -82,6 +82,13 @@ class AttendancesController < ApplicationController
   end
   
   private
+
+  def attendance_params_for_update
+    if params[:attendance] && params[:attendance][:padma_contacts].nil?
+      params[:attendance][:padma_contacts] = []
+    end
+    params[:attendance]
+  end
 
   def get_recent_time_slot
     recent = current_user.current_account.time_slots # Get all account timeslots
