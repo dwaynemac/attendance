@@ -30,6 +30,7 @@ class AttendancesController < ApplicationController
   end
 
   def new
+    @remote_form = true
     @back_w_params = params.select{|k,v| k.in?(%W(days_to days_from only_pending username))}
     @time_slot = @attendance.time_slot
     unless @time_slot.nil?
@@ -64,7 +65,10 @@ class AttendancesController < ApplicationController
     @attendance.account = current_user.current_account
     @attendance.save
     @padma_contacts = @attendance.time_slot.recurrent_contacts
-    redirect_to attendances_url(back_w_params)
+    respond_to do |format|
+      format.html { redirect_to attendances_url(back_w_params) }
+      format.js { render 'update' }
+    end
   end
 
   def update
