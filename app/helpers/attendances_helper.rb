@@ -24,6 +24,10 @@ module AttendancesHelper
     "#{timeslot.start_at.hour}:#{minutes(timeslot.start_at)}-#{timeslot.end_at.hour}:#{minutes(timeslot.end_at)}"
   end
 
+  def time_slot_attendace_html_id(time_slot,date)
+    "time_slot_#{time_slot.id}_date_#{date.strftime('%d%m%y')}"
+  end
+
   private
 
   def minutes(datetime)

@@ -4,7 +4,7 @@
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <h4 class="modal-title"><%= t('attendances.index.new') %></h4>
     </div>
-    <% format = (@remote_form)? 'json' : 'html' -%>
+    <% format = (@remote_form)? 'js' : 'html' -%>
     <%= form_for @attendance, remote: @remote_form, format: format, html: { class: 'checkattendance-form', role: 'form'} do |f| %>
       <div class="modal-body">
         <%= keep_params_hidden_tag %>

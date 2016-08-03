@@ -73,6 +73,7 @@ class AttendancesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to attendances_url }
       format.json { render json: {id: @attendance.id, message: "updated"}, status: 201 }
+      format.js
     end
   end
 

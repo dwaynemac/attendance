@@ -35,7 +35,9 @@
           <div class="panel-body">
             <ul class="list-group">
               <% @time_slots.each do |time_slot| %>
-          <%= render 'attendances/time_slot', time_slot: time_slot, date: date, only_pending: @only_pending %>
+                <div id="<%= time_slot_attendace_html_id(time_slot,date) %>">
+                  <%= render 'attendances/time_slot', time_slot: time_slot, date: date, only_pending: @only_pending %>
+                </div>
               <% end %>
             </ul>
             <!--
