@@ -47,7 +47,8 @@ class Merge
         local_father.reload
 
         # recalculate last_seen_at on father ONCE on each account and in the background using AttendanceContact after_save callback
-        local_father.attendance_contacts.joins(:attendance).group('attendances.account_id').each do |ac|
+				# group by attendance_contacts.id to avoid PG error
+        local_father.attendance_contacts.joins(:attendance).group('attendances.account_id, attendance_contacts.id').each do |ac|
           AttendanceContact.find(ac.id).save
         end
 
