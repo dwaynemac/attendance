@@ -1,5 +1,9 @@
+<% content_for :title do t("trial_lessons.index.title") end -%>
 <%- breadcrum t("trial_lessons.index.title") -%>
 <div class='trial-lesson-container'>
+  <div class="top-actions">
+    <%= link_to t('trial_lessons.index.new'), new_trial_lesson_path, class: 'btn btn-default' %>
+  </div>
   <section class='trial-lesson-content'>
     <ul class='trial-lesson-list'>
       <% @trial_lessons.group_by { |t| t.trial_on }.each do |date, trial_lessons| %>
@@ -25,7 +29,4 @@
       <% end %>
     </ul>
   </section>
-  <footer class='footer-actions'>
-    <%= link_to t('trial_lessons.index.new'), new_trial_lesson_path, :class => 'btn btn-default' %>
-  </footer>
 </div>
