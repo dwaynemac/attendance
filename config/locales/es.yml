@@ -41,10 +41,10 @@ es:
         start_at: Inicio
       trial_lesson:
         assisted: Asistió
-        contact: 
+        contact: Contacto
         padma_contact_id: Contacto
         padma_uid: 
-        time_slot: 
+        time_slot: Horario
         time_slot_id: Horario
         trial_on: Fecha de la clase de prueba
       user:

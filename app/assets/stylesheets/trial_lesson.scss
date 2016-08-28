@@ -19,3 +19,25 @@
 		weight: bold;
 	}
 }
+
+.absent {
+  display: inline;
+  background-color: #c13e2c;
+  color: #fff;
+  font-weight: 700;
+  border-radius: .25em;
+  padding: .2em .6em .3em;
+  text-align: center;
+  font-size: 75%;
+}
+
+.assisted {
+  display: inline;
+  background-color: #FF9900;
+  color: #fff;
+  font-weight: 700;
+  border-radius: .25em;
+  padding: .2em .6em .3em;
+  text-align: center;
+  font-size: 75%;
+}

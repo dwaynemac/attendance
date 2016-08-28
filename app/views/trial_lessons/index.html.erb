@@ -5,28 +5,48 @@
     <%= link_to t('trial_lessons.index.new'), new_trial_lesson_path, class: 'btn btn-default' %>
   </div>
   <section class='trial-lesson-content'>
-    <ul class='trial-lesson-list'>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <td><%= TrialLesson.human_attribute_name('contact') %></td>
+        <td><%= TrialLesson.human_attribute_name('time_slot') %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      </thead>
+      <tbody>
       <% @trial_lessons.group_by { |t| t.trial_on }.each do |date, trial_lessons| %>
-        <li class='trial-lesson-list-head'><%= date %></li>
+        <tr>
+          <td><%= date %></td>
+        </tr>
         <% trial_lessons.each do |trial_lesson| %>
-        <li>
-          <% if trial_lesson.contact -%>
-            <%= link_to_contact_profile trial_lesson.contact %>
-          <% else -%>
-            <%= t('trial_lessons.index.contact_without_name') %>
-          <% end -%>
-          @ <%= trial_lesson.time_slot.try(:name) || t('trial_lessons.index.time_slot_deleted') %>
-          <%- if trial_lesson.assisted? -%>
-            <span class="label label-success"><%= t('trial_lesson.status.assisted') %></span>
-          <%- else -%>
-            <%= content_tag( :span, t('trial_lesson.status.absent'), class: 'label label-important') if trial_lesson.trial_at < Time.zone.now %>
-          <%- end -%>
-          <%= link_to t('edit'), edit_trial_lesson_path(trial_lesson), :class => 'btn btn-link btn-xs' %>
-          <%= link_to t('destroy'), trial_lesson, method: :delete, data: { confirm: t('confirm')}, :class => 'btn btn-danger btn-xs' %>
-          <%= link_to t('trial_lessons.index.archive'), trial_lesson_path(id: trial_lesson.id,trial_lesson: {archived: true},redirect_to: 'index'), method: :put, class: 'btn btn-secondary btn-xs' %>
-          </li>
+          <tr>
+            <td>
+              <% if trial_lesson.contact -%>
+                <%= link_to_contact_profile trial_lesson.contact %>
+              <% else -%>
+                <%= t('trial_lessons.index.contact_without_name') %>
+              <% end -%>
+            </td>
+            <td>
+              <%= trial_lesson.time_slot.try(:name) || t('trial_lessons.index.time_slot_deleted') %>
+            </td>
+            <td>
+              <%- if trial_lesson.assisted? -%>
+                <span class="label label-success assisted"><%= t('trial_lesson.status.assisted') %></span>
+              <%- else -%>
+                <%= content_tag( :span, t('trial_lesson.status.absent'), class: 'absent label label-important') if trial_lesson.trial_at < Time.zone.now %>
+              <%- end -%>
+            </td>
+            <td>
+              <%= link_to t('edit'), edit_trial_lesson_path(trial_lesson), :class => 'btn btn-link btn-xs' %>
+              <%= link_to t('destroy'), trial_lesson, method: :delete, data: { confirm: t('confirm')}, :class => 'btn btn-danger btn-xs' %>
+              <%= link_to t('trial_lessons.index.archive'), trial_lesson_path(id: trial_lesson.id,trial_lesson: {archived: true},redirect_to: 'index'), method: :put, class: 'btn btn-secondary btn-xs' %>
+            </td>
+          </tr>
         <% end %>
       <% end %>
-    </ul>
+      </tbody>
+    </table>
   </section>
 </div>
