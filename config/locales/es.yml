@@ -100,6 +100,7 @@ es:
       new: Marcar asistencia
       ignore: Ignorar
       new_empty: No vino nadie
+      suspended: No hubo clase
       title: Asistencias
       view: Ver asistencia
       timeslots_hidden_warning: Los horarios futuros y los pertenecientes a otros instructores se encuentran escondidos para facilitar el registro.

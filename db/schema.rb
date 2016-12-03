@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151013120343) do
+ActiveRecord::Schema.define(version: 20161203022927) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20151013120343) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
+    t.boolean  "suspended"
   end
 
   add_index "attendances", ["account_id"], name: "index_attendances_on_account_id"

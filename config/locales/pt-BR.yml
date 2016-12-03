@@ -101,6 +101,7 @@ pt-BR:
       older: Lançar presença de aulas anteriores.
       new: Lançar presença
       new_empty: Ninguém veio
+      suspended: Nāo houve aula
       title: Presenças
       view: Ver presenças
       timeslots_wout_schedule_warning: Estas turmas nāo tem configurados seus días de aula e por tanto nāo sāo incluidas na agenda de cadastro de presenças. Para facilitar o cadastro día a día recomendamos colocar em cada turma os dias de aula.
