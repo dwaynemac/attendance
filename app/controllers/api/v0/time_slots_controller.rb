@@ -6,12 +6,25 @@ class Api::V0::TimeSlotsController < Api::V0::ApiController
   
   before_filter :set_scope
   
+  # @param account_name filters TimeSlots by account
+  # @param include_recurrent_contacts
   def index
-    @time_slots = @scope.includes(:account).all
-    respond_with({
-      collection: api_json_for_collection(@time_slots),
+    @scope = @scope.where(params[:where])
+    @time_slots = @scope.includes(:account, :contacts).all
+    render json: {
+      collection: api_json_for_collection(@time_slots,
+        { include_recurrent_contacts: params[:include_recurrent_contacts] }
+      ),
       total: @time_slots.count
-    })
+    }
+  end
+  
+  def show
+    @time_slot = TimeSlot.find(params[:id])
+    render json: api_json(
+      @time_slot,
+      {include_recurrent_contacts: params[:include_recurrent_contacts]}
+    )
   end
   
   private
