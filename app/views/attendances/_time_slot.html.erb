@@ -12,7 +12,7 @@
             <div class="clearfix popover-footer students-list-footer">
               <%= link_to t('attendances.index.destroy'), att, :method => :delete, data: { confirm: t('confirm') }, :class => 'btn btn-xs btn-block' %>
             </div>'>
-              Suspendida
+              <%= t('attendances.index.suspended') %>
             </span>
           <% else %>
             <span class='results-count-attendances <%= 'attendances0' if att.contacts.count == 0 %>' tabindex='0' data-toggle='popover' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
