@@ -23,7 +23,7 @@ module Api::V0::TimeSlotsHelper
       contacts: time_slot.contacts.map(&:padma_id)
     }
     if options[:include_recurrent_contacts]
-      ret.merge!({recurrent_contacts: time_slot.recurrent_contacts.map(&:padma_id)})
+      ret.merge!({recurrent_contacts: time_slot.recurrent_contacts.map(&:_id)})
     end
     ret
   end

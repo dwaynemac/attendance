@@ -13,7 +13,7 @@ class Api::V0::TimeSlotsController < Api::V0::ApiController
     @time_slots = @scope.includes(:account, :contacts).all
     render json: {
       collection: api_json_for_collection(@time_slots,
-        { include_recurrent_contacts: params[:include_recurrent_contacts] }
+        { include_recurrent_contacts: to_bool(params[:include_recurrent_contacts]) }
       ),
       total: @time_slots.count
     }
@@ -23,7 +23,7 @@ class Api::V0::TimeSlotsController < Api::V0::ApiController
     @time_slot = TimeSlot.find(params[:id])
     render json: api_json(
       @time_slot,
-      {include_recurrent_contacts: params[:include_recurrent_contacts]}
+      {include_recurrent_contacts: to_bool(params[:include_recurrent_contacts])}
     )
   end
   
@@ -41,5 +41,12 @@ class Api::V0::TimeSlotsController < Api::V0::ApiController
     end
     # TODO filter by contact (for frequently assisted)
     # TODO filter by contact (for inscription in timeslot)
+  end
+  
+  # cast strings 'f', 'false', '0' to FALSE
+  def to_bool(string)
+    return false if string.nil?
+    return false if string.in?(%W(false 0 f))
+    !!string
   end
 end
