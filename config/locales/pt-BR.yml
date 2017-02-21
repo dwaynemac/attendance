@@ -352,6 +352,9 @@ pt-BR:
       title: Turma
       filter_timeslots: Buscar turma
       vacancies: Verificar vagas
+      delete_time_slot_modal:
+        warning: ATENÇĀO!!
+        youre_about_to_delete_time_slot: Você esta por apagar o modelo <em>'%{time_slot_name}'</em>. Este modelo nāo poderá ser recuperado depois de apagá-lo.
     new:
       title: Nova turma
     show:
