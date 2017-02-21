@@ -31,9 +31,39 @@
         <td class='td-actions'>
           <%= link_to 'Show', ts, :class => 'btn btn-primary btn-xs' %>
           <%= link_to t('edit'), edit_time_slot_path(ts), :class => 'btn secondary btn-xs' %>
-          <%= link_to t('destroy'), time_slot_path(ts), :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs' %>
+          <% link_to t('destroy'), time_slot_path(ts), :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs' %>
+        </td>
+        <td>
+          <button type="button"
+                  class="delete-btn btn btn-mini btn-link"
+                  data-toggle="modal"
+                  data-target="#delete_time_slot_<%= ts.id %>_modal">
+            <%= t('destroy') %>
+        </button>
         </td>
       </tr>
+      <div id="delete_time_slot_<%= ts.id %>_modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title"><%= t('time_slots.index.delete_time_slot_modal.warning') %></h4>
+            </div>
+            <div class="modal-body">
+              <p><%= t('time_slots.index.delete_time_slot_modal.youre_about_to_delete_time_slot', time_slot_name: ts.name).html_safe %></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('cancel') %></button>
+              <%= button_to t('destroy'),
+                          ts,
+                          method: :delete,
+                          #confirm: t('confirm'),
+                          :onclick => "return confirm('#{t('confirm')}')",
+                          class: 'btn btn-danger' %>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
   </tbody>
 </table>
