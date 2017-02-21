@@ -31,7 +31,6 @@
         <td class='td-actions'>
           <%= link_to 'Show', ts, :class => 'btn btn-primary btn-xs' %>
           <%= link_to t('edit'), edit_time_slot_path(ts), :class => 'btn secondary btn-xs' %>
-          <% link_to t('destroy'), time_slot_path(ts), :method => :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs' %>
         </td>
         <td>
           <button type="button"
@@ -39,7 +38,7 @@
                   data-toggle="modal"
                   data-target="#delete_time_slot_<%= ts.id %>_modal">
             <%= t('destroy') %>
-        </button>
+          </button>
         </td>
       </tr>
       <div id="delete_time_slot_<%= ts.id %>_modal" class="modal fade" tabindex="-1">
