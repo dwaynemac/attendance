@@ -20,7 +20,7 @@ module TimeSlotsHelper
   end
   
   def crm_contacts_list_url( time_slot )
-    columns_query = $W(full_name local_teacher level time_since_first_enrollment last_seen_at membership_name membership_value).map{|col| "contact_search[chosen_columns][]=#{col}" }.join('&')
+    columns_query = %W(full_name local_teacher level time_since_first_enrollment last_seen_at membership_name membership_value).map{|col| "contact_search[chosen_columns][]=#{col}" }.join('&')
     "#{APP_CONFIG['crm-url']}/contacts?contact_search[linked_to_time_slot_ids][]=#{time_slot.id}&#{columns_query}"
   end
 
