@@ -30,7 +30,6 @@
             <%= ts.time_slot_days %>
           <% end -%>
         </td>
-        <td><%= link_to ts.contacts.count, "#{APP_CONFIG['crm-url']}/contacts?contact_search[linked_to_time_slot_ids][]=#{ts.id}", target: '_blank' %></td>
         <td><%= link_to ts.contacts.count, crm_contacts_list_url(ts), target: '_blank' %></td>
         <td class='td-actions'>
           <%= link_to 'Show', ts, :class => 'btn btn-primary btn-xs' %>
