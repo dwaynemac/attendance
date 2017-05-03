@@ -11,6 +11,7 @@
       <th><%= TimeSlot.human_attribute_name(:start_at) %></th>
       <th><%= TimeSlot.human_attribute_name(:end_at) %></th>
       <th><%= TimeSlot.human_attribute_name(:schedule) %></th>
+      <th><%= TimeSlot.human_attribute_name(:contacts) %></th>
       <th></th>
       <th></th>
     </tr>
@@ -29,6 +30,7 @@
             <%= ts.time_slot_days %>
           <% end -%>
         </td>
+        <td><%= ts.contacts.count %></td>
         <td class='td-actions'>
           <%= link_to 'Show', ts, :class => 'btn btn-primary btn-xs' %>
           <%= link_to t('edit'), edit_time_slot_path(ts), :class => 'btn secondary btn-xs' %>
