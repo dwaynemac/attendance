@@ -349,6 +349,7 @@ es:
       new: Nuevo horario
       title: Horarios
       vacancies: Verificar vacantes
+      quantity_signed_up: Cantidad de inscriptos
       delete_time_slot_modal:
         warning: ATENCIÓN!
         youre_about_to_delete_time_slot: Estas por eliminar el horario <em>'%{time_slot_name}'</em>. Después de eliminarlo este no podrá ser recuperado.
