@@ -386,9 +386,3 @@ DEPENDENCIES
   workless
   yard (~> 0.8.3)
   yard-restful
-
-RUBY VERSION
-   ruby 2.0.0p648
-
-BUNDLED WITH
-   1.12.5
