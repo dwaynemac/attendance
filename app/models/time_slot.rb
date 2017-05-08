@@ -25,7 +25,7 @@ class TimeSlot < ActiveRecord::Base
   end
 
   def minutes(hour)
-    ":#{hour.min}" unless hour.min == 0
+    ":#{hour.min}" unless hour.min.zero?
   end
 
   def recurrent_contacts
