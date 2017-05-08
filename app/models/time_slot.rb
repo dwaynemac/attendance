@@ -21,7 +21,11 @@ class TimeSlot < ActiveRecord::Base
   scope :without_schedule, ->{ where("(monday = :false OR monday IS NULL) and (tuesday = :false OR tuesday IS NULL) and (wednesday = :false OR wednesday IS NULL) and (thursday = :false OR thursday IS NULL) and (friday = :false OR friday IS NULL) and (saturday = :false OR saturday IS NULL) and (sunday = :false OR sunday IS NULL) and (unscheduled = :false OR unscheduled IS NULL)",false: false) }
 
   def description
-    "#{self.name} (#{self.start_at.hour}hs-#{self.end_at.hour}hs)"
+    "#{self.name} (#{self.start_at.hour}#{minutes(self.start_at)}hs-#{self.end_at.hour}#{minutes(self.end_at)}hs)"
+  end
+
+  def minutes(hour)
+    ":#{hour.min}" unless hour.min.zero?
   end
 
   def recurrent_contacts
