@@ -360,6 +360,8 @@ pt-BR:
       title: Nova turma
     show:
       students: Alunos inscritos na turma
+      regular_participants: Alunos frecuentes
+      last_attendances: Ultimas presenças
       is_a_cultural_activity: É atividade cultural
       days_of_the_week: Dias da semana
       title: Turma

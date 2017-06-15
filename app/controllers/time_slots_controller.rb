@@ -9,6 +9,11 @@ class TimeSlotsController < ApplicationController
 
   def show
     @students = @time_slot.contacts.students_on(current_user.current_account)
+    @regular_participants = @time_slot.recurrent_contacts
+    @attendances_by_month = @time_slot.attendances
+                                      .where("attendance_on > ?",3.months.ago)
+                                      .order('attendance_on DESC')
+                                      .group_by { |att| att.attendance_on.beginning_of_month }
     respond_to do |format|
       format.html
       format.json { render json: @time_slot }

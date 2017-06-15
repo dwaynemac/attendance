@@ -47,6 +47,55 @@
           </div>
         </div>
       </div>
+      <div class="col-md-8">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <%= t('.regular_participants') %>
+          </div>
+          <div class="panel-body">
+            <ul class="list-group">
+              <% @regular_participants.each do |contact| -%>
+                <li class="list-group-item"><%= link_to contact.name, "#{APP_CONFIG['crm-url']}/contacts/#{contact.padma_id}" %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <%= t('.last_attendances') %>
+          </div>
+          <div class="panel-body">
+              <% @attendances_by_month.each do |month, attendances| %>
+                <b><%= I18n.l(month, :format => "%B") %></b>
+                <ul class="list-group">
+                  <% attendances.each do |att| -%>
+                    <li class="list-group-item">
+                      <%= I18n.l(att.attendance_on, format: :in_context) %> -
+                      
+                      <% if att.suspended? %>
+                        <span class='results-count-attendances <%= 'attendances0' if att.contacts.count == 0 %>' tabindex='0' data-toggle='popover' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
+                        <div class="students-list"> </div>'>
+                          <%= t('attendances.index.suspended') %>
+                        </span>
+                      <% else %>
+                        <span class='results-count-attendances <%= 'attendances0' if att.contacts.count == 0 %>' tabindex='0' data-toggle='popover' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
+                        <div class="students-list">
+                          <%= att.contacts.map{|c| link_to_contact_profile(c)}.join(' ').html_safe %>
+                        </div>'>
+                          <%= Attendance.human_attribute_name('contacts').capitalize %> (<%= att.contacts.count %>)
+                        </span>
+                      <% end %>
+          
+                      - <%= att.username %>
+                    </li>
+                  <% end %>
+                </ul>
+              <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
