@@ -55,7 +55,7 @@
           <div class="panel-body">
             <ul class="list-group">
               <% @regular_participants.each do |contact| -%>
-                <li class="list-group-item"><%= link_to contact.first_name, "#{APP_CONFIG['crm-url']}/contacts/#{contact.padma_id}" %></li>
+                <li class="list-group-item"><%= link_to contact.first_name, "#{APP_CONFIG['crm-url']}/contacts/#{contact.id}" %></li>
               <% end %>
             </ul>
           </div>
