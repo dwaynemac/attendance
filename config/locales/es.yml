@@ -357,6 +357,8 @@ es:
       title: Nueva clase
     show:
       students: Alumnos inscriptos en esta clase
+      regular_participants: Alumnos frecuentes
+      last_attendances: Últimas asistencias
       is_a_cultural_activity: Es actividad cultural
       days_of_the_week: Días de la semana
       title: Horario

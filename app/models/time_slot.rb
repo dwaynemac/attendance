@@ -6,6 +6,8 @@ class TimeSlot < ActiveRecord::Base
   
   has_many :contact_time_slots
   has_many :contacts, through: :contact_time_slots
+  
+  has_many :attendances
 
   has_many :trial_lessons, dependent: :nullify
 
