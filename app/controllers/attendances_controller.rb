@@ -86,9 +86,6 @@ class AttendancesController < ApplicationController
     account = @attendance.account
     @attendance.destroy
     Contact.find(contacts).map{|c| c.update_last_seen_at(account)}
-    #contacts.each do |c|
-    #  Contact.find(c).update_last_seen_at(account)
-    #end
 
     respond_with @attendance
   end
