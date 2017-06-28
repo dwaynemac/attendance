@@ -31,13 +31,10 @@ class Contact < ActiveRecord::Base
     return if last_seen_at.nil?
 
     if padma_contact(account)
-      padma_last_seen_at = padma_contact(account).last_seen_at
-      if padma_last_seen_at.blank? || last_seen_at > padma_last_seen_at
-        padma_contact(account).update({contact: {last_seen_at: last_seen_at},
-                                      ignore_validation: true,
-                                      username: last_attendance.time_slot.padma_uid,
-                                      account_name: account.name})
-      end
+      padma_contact(account).update({contact: {last_seen_at: last_seen_at},
+                                    ignore_validation: true,
+                                    username: last_attendance.time_slot.padma_uid,
+                                    account_name: account.name})
     else
       Rails.logger.info "couldnt update last_seen_at for contact #{self.id}"
       raise "couldnt update last_seen_at for contact #{self.id}"
