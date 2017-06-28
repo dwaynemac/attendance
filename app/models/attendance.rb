@@ -3,7 +3,7 @@ class Attendance < ActiveRecord::Base
   belongs_to :time_slot
 
   has_many :attendance_contacts, inverse_of: :attendance
-  has_many :contacts, through: :attendance_contacts
+  has_many :contacts, through: :attendance_contacts, dependent: :destroy
 
   validates :account, presence: true
   validates :time_slot, presence: true

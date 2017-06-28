@@ -82,7 +82,11 @@ class AttendancesController < ApplicationController
   end
 
   def destroy
+    contacts = @attendance.contacts.map(&:id)
+    account = @attendance.account
     @attendance.destroy
+    Contact.find(contacts).map{|c| c.update_last_seen_at(account)}
+
     respond_with @attendance
   end
   
