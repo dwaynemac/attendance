@@ -81,4 +81,28 @@ describe Attendance do
     attendance = create(:attendance, :account => account, :time_slot => ts, :contact_ids => [contact.id])
     attendance.attendance_contacts.should have(1).attendance_contact
   end
+
+  context "when deleted" do
+    before do
+      c = create(:contact)
+      c2 = create(:contact)
+      a = build(:attendance)
+      a.save! # valid
+      @att = Attendance.new 
+      @att.account = a.account
+      @att.time_slot = a.time_slot
+      @att.attendance_on = a.attendance_on
+      @att.contacts << c
+      @att.contacts << c2
+      @att.save
+    end
+    it "should have associated attendanceContacts before" do
+      AttendanceContact.where(attendance_id: @att.id).count.should == 2
+    end
+    it "should delete all associated attendanceContacts" do
+      att_id = @att.id
+      @att.destroy
+      AttendanceContact.where(attendance_id: att_id).should be_empty
+    end
+  end
 end
