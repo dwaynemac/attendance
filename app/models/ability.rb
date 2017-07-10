@@ -21,9 +21,9 @@ class Ability
 
     if beta?(user)
       # beta only
-      can :include_former_students, :stats
     end
     
+    can :include_former_students, :stats
     can :manage, TimeSlot, account_id: user.current_account_id
     can :manage, Attendance, account_id: user.current_account_id
     can :manage, TrialLesson, account_id: user.current_account_id
