@@ -19,7 +19,9 @@
   <tbody>
     <% @time_slots.each do |ts| %>
       <tr>
-        <td><%= ts.name %></td>
+        <td>
+          <%= link_to ts.name, ts %>
+        </td>
         <td><%= ts.padma_uid %></td>
         <td><%= ts.start_at.strftime('%H:%M') %></td>
         <td><%= ts.end_at.strftime('%H:%M') %></td>
@@ -32,7 +34,6 @@
         </td>
         <td><%= link_to ts.contacts.count, crm_contacts_list_url(ts), target: '_blank' %></td>
         <td class='td-actions'>
-          <%= link_to 'Show', ts, :class => 'btn btn-primary btn-xs' %>
           <%= link_to t('edit'), edit_time_slot_path(ts), :class => 'btn secondary btn-xs' %>
         </td>
         <td>
