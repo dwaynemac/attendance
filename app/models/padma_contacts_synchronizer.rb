@@ -21,7 +21,6 @@ class PadmaContactsSynchronizer
                                                     :local_statuses,
                                                     :global_teacher_username],
                                            where: {
-                                             # local_status: [:student, :former_student], -- BUG - currently not working if used with together with updated_at filter
                                              updated_at: since.to_date
                                            },
                                            account_name: @account.name)
@@ -31,7 +30,6 @@ class PadmaContactsSynchronizer
     if padma_contacts
       # Iterate over them
       padma_contacts.each do |padma_contact|
-        next unless padma_contact.local_status.try(:to_sym).in?([:student,:former_student]) # -- BUG -- filter here until local_status bug solved
         contact = Contact.find_or_create_by padma_id: padma_contact.id
 
         if contact
