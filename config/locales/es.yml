@@ -2,6 +2,10 @@ es:
   cancel: Cancelar
   save: Guardar
   module_name: Módulo de clases
+  contacts:
+    attendances:
+      total: Total
+      average_per_week: Promedio semanal
   activerecord:
     attendance:
       text:
