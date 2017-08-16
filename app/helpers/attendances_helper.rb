@@ -1,4 +1,6 @@
+require 'weeks_in_month'
 module AttendancesHelper
+  include WeeksInMonth
 
   def future_lesson?(date,time_slot)
 	  lesson_time = Time.zone.local(date.year, date.month, date.day, time_slot.start_at.hour, time_slot.start_at.min) >= Time.zone.now
