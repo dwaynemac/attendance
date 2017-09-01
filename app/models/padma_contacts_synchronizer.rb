@@ -32,7 +32,7 @@ class PadmaContactsSynchronizer
       padma_contacts.each do |padma_contact|
         contact = Contact.find_by_padma_id padma_contact.id
         if contact.nil? && padma_contact.local_status.try(:to_sym).in?([:student,:former_student])
-          # only create contact if it's a student or former_student
+          # only create contact if it's a student or former_student, avoid replicating prospects unnecessarily
           contact = Contact.create(padma_id: padma_contact.id)
         end
 
