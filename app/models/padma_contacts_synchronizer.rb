@@ -28,7 +28,6 @@ class PadmaContactsSynchronizer
     end
 
     if padma_contacts
-      # Iterate over them
       padma_contacts.each do |padma_contact|
         contact = Contact.find_by_padma_id padma_contact.id
         if contact.nil? && padma_contact.local_status.try(:to_sym).in?([:student,:former_student])
