@@ -166,11 +166,17 @@ describe TimeSlotsController do
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested time_slot" do
+    it "sets :deleted to true in requested time_slot" do
+      time_slot = create(:time_slot, :account => @user.current_account)
+      expect(time_slot.deleted).to be_nil
+      delete :destroy, {:id => time_slot.to_param}
+      expect(time_slot.reload.deleted).to be_true
+    end
+    it "DOES NOT destroys the requested time_slot" do
       time_slot = create(:time_slot, :account => @user.current_account)
       expect {
         delete :destroy, {:id => time_slot.to_param}
-      }.to change(TimeSlot, :count).by(-1)
+      }.not_to change(TimeSlot, :count).by(-1)
     end
 
     it "redirects to the time_slots list" do
