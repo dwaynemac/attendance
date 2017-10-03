@@ -61,8 +61,9 @@ class TimeSlotsController < ApplicationController
 
   def destroy
     # @time_slot initialized by load_and_authorize_resource
-    @time_slot.destroy
-    redirect_to time_slots_url, notice: 'Time slot was successfully destroyed.'
+    # @time_slot.destroy
+    @time_slot.update_attribute(:deleted, true)
+    redirect_to time_slots_url, notice: t('time_slots.destroy.success')
   end	
   
   private

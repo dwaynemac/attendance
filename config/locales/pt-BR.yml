@@ -347,6 +347,8 @@ pt-BR:
       short: '%d/%m, %H:%M h'
     pm: ''
   time_slots:
+    destroy:
+      success: Turma apagada
     create:
       title: 
     edit:

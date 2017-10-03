@@ -344,6 +344,8 @@ es:
       short: '%d de %b %H:%M'
     pm: pm
   time_slots:
+    destroy:
+      success: Horario eliminado
     create:
       title: Nuevo horario
     edit:
