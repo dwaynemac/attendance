@@ -1,7 +1,7 @@
-$(document).ready ->
+$(document).on 'ready page:load', ->
 
-  console.log("js loaded_!")
-
+  $('[data-toggle="popover"]').popover()
+  
   $('#submit-attendance').click ->
     registerEvent('submitted-attendance-form')
     return true # follow link
