@@ -1,5 +1,5 @@
 <%- require 'csv' -%>
-<%= CSV.generate(current_user.csv_options.merge(params[:csv_options]||{}) do |csv|
+<%= CSV.generate(current_user.csv_options.merge(params[:csv_options]||{})) do |csv|
   header = [
       to_current_encoding(t('stats.table.name')),
       to_current_encoding(t('stats.table.total'))
