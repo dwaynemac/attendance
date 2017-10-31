@@ -3,8 +3,11 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_filter :secret_key_login
   before_filter :mock_login
+  
   before_filter :authenticate_user!
+  
   before_filter :require_padma_account
   before_filter :set_current_account
   before_filter :set_timezone
@@ -20,6 +23,22 @@ class ApplicationController < ActionController::Base
     end
     if params[:locale]
       I18n.locale = params[:locale]
+    end
+  end
+
+  def secret_key_login
+    unless signed_in?
+      unless params[:secret_key_login].blank?
+        key = params[:secret_key_login]
+        apikey = Rails.cache.fetch("apikey#{key}", expires_in: 10.minutes) do
+          ApiKey.find key
+        end
+        if apikey.access == 'login_key'
+          a = Account.find_by_name(apikey.account_name)
+          user = User.find_by_username(a.usernames.first)
+          sign_in(user)
+        end
+      end
     end
   end
 
