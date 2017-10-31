@@ -1,14 +1,7 @@
-$(document).ready ->
+$(document).on 'ready page:load', ->
 
   $("input#timeslots-filter").quickfilter("table#timeslots tbody tr")
 
-	$(document).on 'click', '#time_slot_padma_contacts .add', (event) ->
-		$(this).removeClass('add').addClass('delete')
-		$(this).parent().prepend("<input type='hidden' value='" + $(this).attr('data-padma-id') + "' name='time_slot[padma_contacts][]'>")
-		$('ul#time_slot_students').append($(this).parent())
-		false
-
-$ ->
   $(".selectpicker").selectpicker()
   
   $("#time_slot_cultural_activity").bootstrapSwitch({
@@ -26,11 +19,19 @@ $ ->
   })
   
   $("#loading").hide()
-  $(document).ajaxStart ->
-    $("#loading").show()
+
+$(document).on 'click', '#time_slot_padma_contacts .add', (event) ->
+  $(this).removeClass('add').addClass('delete')
+  $(this).parent().prepend("<input type='hidden' value='" + $(this).attr('data-padma-id') + "' name='time_slot[padma_contacts][]'>")
+  $('ul#time_slot_students').append($(this).parent())
+  false
+
   
-  $(document).ajaxComplete ->
-    $("#loading").hide()
+$(document).ajaxStart ->
+  $("#loading").show()
+
+$(document).ajaxComplete ->
+  $("#loading").hide()
 
 @checkVacancies = (e) ->
   td = $(e).parent()
