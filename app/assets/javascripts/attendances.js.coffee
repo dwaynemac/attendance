@@ -30,31 +30,7 @@ $(document).on 'ready page:load', ->
     registerEvent('registered-empty-attendance')
     return true # follow link
     
-  $(document).on 'click', '#attendance_padma_contacts .add', (event) ->
-    $('.modal-footer .btn-danger').hide()
-    $('.modal-footer .btn-primary').show()
-    $(this).removeClass('add').addClass('delete')
-    $(this).parent().prepend("<input type='hidden' value='" + $(this).attr('data-padma-id') + "' name='attendance[padma_contacts][]'>")
-    $('ul#attendance_contacts').append($(this).parent())
-    $(this).parents('.modal-footer .btn-danger').hide()
-    $(this).parents('.modal-footer .btn-primary').show()
-    false
-        
-  $(document).on 'click', '#toggle-hidden-timeslots', (event) ->
-    event.preventDefault()
-    registerEvent('showed-hidden-timeslots')
-    $('#toggle-hidden-timeslots').toggleClass('active')
-    $('.today.other-users-ts').toggle()
-
   $("#loader").hide()
-  $(document).ajaxStart ->
-    $("#loader").show()
-    $('.selectpicker').attr('disabled', true).selectpicker('refresh')
-    
-  $(document).ajaxComplete ->
-    $("#loader").hide()
-    $('.selectpicker').attr('disabled', false).selectpicker('refresh')
-    
     
   $(".selectpicker").selectpicker()
 
@@ -74,6 +50,30 @@ $(document).on 'ready page:load', ->
       dataType: 'json'
       success: (data, textStatus, jqXHR) ->
         warning_entry.remove()
+
+$(document).on 'click', '#attendance_padma_contacts .add', (event) ->
+  $('.modal-footer .btn-danger').hide()
+  $('.modal-footer .btn-primary').show()
+  $(this).removeClass('add').addClass('delete')
+  $(this).parent().prepend("<input type='hidden' value='" + $(this).attr('data-padma-id') + "' name='attendance[padma_contacts][]'>")
+  $('ul#attendance_contacts').append($(this).parent())
+  $(this).parents('.modal-footer .btn-danger').hide()
+  $(this).parents('.modal-footer .btn-primary').show()
+  false
+      
+$(document).on 'click', '#toggle-hidden-timeslots', (event) ->
+  event.preventDefault()
+  registerEvent('showed-hidden-timeslots')
+  $('#toggle-hidden-timeslots').toggleClass('active')
+  $('.today.other-users-ts').toggle()
+
+$(document).ajaxStart ->
+  $("#loader").show()
+  $('.selectpicker').attr('disabled', true).selectpicker('refresh')
+  
+$(document).ajaxComplete ->
+  $("#loader").hide()
+  $('.selectpicker').attr('disabled', false).selectpicker('refresh')
 
 class @TrialLessonSelect
   @setup: (div_id) ->
