@@ -5,7 +5,7 @@
     </div>
     <% @attendances_by_month.each do |month, attendances| %>
       <table class="table">
-        <tr><th><%= I18n.l(month, :format => "%B") %> (<%= t('.total') %>: <%= attendances.count %> , <%= t('.average_per_week') %>: <%= number_with_precision(attendances.count.to_f / weeks_in_month(month), precision: 2) %> )</th></tr>
+        <tr><th><%= I18n.l(month, :format => "%B") %> (<%= t('.total') %>: <%= attendances.count %>)</th></tr>
           <% for attendance in attendances %>
             <tr><td>
             <div class="attendances">
