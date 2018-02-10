@@ -28,8 +28,9 @@ module ActivityStream
   end
 end
 
-
 module Messaging
   HYDRA = ::HYDRA
-  API_KEY = ENV['messaging_key'] || CONFIG['messaging_key']
+  KEY = ENV['messaging_key'] || CONFIG['messaging_key']
+  SNS_KEY_ID = ENV['padma_aws_key_id']
+  SNS_SECRET_ACCESS_KEY = ENV['padma_aws_secret_access_key']
 end

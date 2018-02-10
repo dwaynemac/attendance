@@ -67,6 +67,15 @@ GEM
       rack
       thread_safe
     arel (4.0.0)
+    aws-partitions (1.59.0)
+    aws-sdk-core (3.15.0)
+      aws-partitions (~> 1.0)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-sns (1.1.0)
+      aws-sdk-core (~> 3)
+      aws-sigv4 (~> 1.0)
+    aws-sigv4 (1.0.2)
     bcrypt-ruby (3.0.1)
     better_errors (0.8.0)
       coderay (>= 1.0.0)
@@ -155,6 +164,7 @@ GEM
       activesupport (> 3.0)
     jbuilder (1.0.2)
       activesupport (>= 3.0.0)
+    jmespath (1.3.1)
     jquery-rails (2.2.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -183,14 +193,15 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    messaging_client (0.0.4)
+    messaging_client (0.1.8)
+      aws-sdk-sns (~> 1)
       logical_model (>= 0.5.0)
       railties (>= 3.1)
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
-    multi_json (1.12.1)
+    multi_json (1.13.1)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
@@ -299,8 +310,8 @@ GEM
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
-    thor (0.19.4)
-    thread_safe (0.3.5)
+    thor (0.20.0)
+    thread_safe (0.3.6)
     tilt (1.4.0)
     timeliness (0.3.7)
     tins (0.13.1)
@@ -311,7 +322,7 @@ GEM
       coffee-rails
     typhoeus (0.5.0.alpha)
       ethon (~> 0.4.2)
-    tzinfo (0.3.52)
+    tzinfo (0.3.53)
     uglifier (2.0.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
@@ -362,7 +373,7 @@ DEPENDENCIES
   le
   less-rails-bootstrap (~> 3.0.6)
   logical_model (= 0.6.4)
-  messaging_client (~> 0.0.4)
+  messaging_client (~> 0.1)
   padma-assets (= 0.2.19)
   pg
   protected_attributes
@@ -386,3 +397,9 @@ DEPENDENCIES
   workless
   yard (~> 0.8.3)
   yard-restful
+
+RUBY VERSION
+   ruby 2.0.0p648
+
+BUNDLED WITH
+   1.12.5
