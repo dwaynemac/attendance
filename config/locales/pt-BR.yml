@@ -361,7 +361,7 @@ pt-BR:
       quantity_signed_up: Quantidade de inscritos
       delete_time_slot_modal:
         warning: ATENÇĀO!!
-        youre_about_to_delete_time_slot: Você esta por apagar o modelo <em>'%{time_slot_name}'</em>. Este modelo nāo poderá ser recuperado depois de apagá-lo.
+        youre_about_to_delete_time_slot: Você esta por apagar o modelo <em>'%{time_slot_name}'</em>.
     new:
       title: Nova turma
     show:
