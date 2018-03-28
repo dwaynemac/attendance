@@ -66,7 +66,7 @@ gem 'logical_model', '0.6.4'
 gem 'activity_stream_client', '0.0.16'
 gem 'contacts_client', '~> 0.0.40'
 gem 'accounts_client', '0.2.28'
-gem 'messaging_client','~> 0.1'
+gem 'messaging_client','~> 0.2'
 
 gem 'carrierwave'
 gem 'fog', github: 'fog/fog', ref: '272bc6b2a2769f8d1a8b50b1f6cd9741db4969b4' # TODO waiting release of version 1.20

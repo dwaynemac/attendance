@@ -67,8 +67,8 @@ GEM
       rack
       thread_safe
     arel (4.0.0)
-    aws-partitions (1.59.0)
-    aws-sdk-core (3.15.0)
+    aws-partitions (1.73.0)
+    aws-sdk-core (3.17.1)
       aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
@@ -193,7 +193,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    messaging_client (0.1.8)
+    messaging_client (0.2.0)
       aws-sdk-sns (~> 1)
       logical_model (>= 0.5.0)
       railties (>= 3.1)
@@ -322,7 +322,7 @@ GEM
       coffee-rails
     typhoeus (0.5.0.alpha)
       ethon (~> 0.4.2)
-    tzinfo (0.3.53)
+    tzinfo (0.3.54)
     uglifier (2.0.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
@@ -373,7 +373,7 @@ DEPENDENCIES
   le
   less-rails-bootstrap (~> 3.0.6)
   logical_model (= 0.6.4)
-  messaging_client (~> 0.1)
+  messaging_client (~> 0.2)
   padma-assets (= 0.2.26)
   pg
   protected_attributes
