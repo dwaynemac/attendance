@@ -1,37 +1,38 @@
+<%= content_for(:title){t("trial_lessons.new.title")} %>
 <%- breadcrum t("trial_lessons.new.title") -%>
 
-<div class='attendance-container'>
-  <nav class='attendance-navbar margin-bottom-10' role='navigation'>
-    <div class='btn-group btn-group-tofrom'>
-      <%= link_to '<span class="glyphicon glyphicon-chevron-left"></span>'.html_safe, new_trial_lesson_path(ref_date: @ref_date-1.week), class: 'btn btn-secondary btn-sm' %>
-      <%= link_to '<span class="glyphicon glyphicon-chevron-right"></span>'.html_safe, new_trial_lesson_path(ref_date: @ref_date+1.week), class: 'btn btn-secondary btn-sm' %>
-    </div>
-  </nav>
+<div class='container' data-controller="trial_selector" data-trial_selector-time_slot_id="" data-trial_selector-trial_on="">
+  <div class="row">
+    <nav class='attendance-navbar margin-bottom-10' role='navigation'>
+      <div class='btn-group btn-group-tofrom'>
+        <%= link_to '<span class="glyphicon glyphicon-chevron-left"></span>'.html_safe, new_trial_lesson_path(ref_date: @ref_date-1.week), class: 'btn btn-secondary btn-sm' %>
+        <%= link_to '<span class="glyphicon glyphicon-chevron-right"></span>'.html_safe, new_trial_lesson_path(ref_date: @ref_date+1.week), class: 'btn btn-secondary btn-sm' %>
+      </div>
+    </nav>
+    
+    <section class='attendance-body'>
+      <% (monday(@ref_date)..sunday(@ref_date)).each do |date| %>
+        <div class="panel panel-default">
+          <div class="panel-heading <%= 'current-day' if date == Time.zone.today %>">
+            <%= l(date, format: :in_context).capitalize %>
+            <% if date.month != Date.today.month -%>
+              (<%= l(date, format: :month) %>)
+            <% end -%>
+          </div>
+          <div class="panel-body">
+            <ul class="list-group">
+              <% @time_slots.each do |time_slot| %>
+                <% if time_slot.scheduled_for_wday?(date.wday) %>
+                  <div> <%= render 'trial_lessons/time_slot', time_slot: time_slot, date: date %> </div>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </section>
+  </div>
+
+  <%= render 'form', hide_datetime: true %>
+
 </div>
-
-<section class='attendance-body'>
-  <% (monday(@ref_date)..sunday(@ref_date)).each do |date| %>
-    <div class="panel panel-default">
-      <div class="panel-heading <%= 'current-day' if date == Time.zone.today %>">
-        <%= l(date, format: :in_context).capitalize %>
-        <% if date.month != Date.today.month -%>
-          (<%= l(date, format: :month) %>)
-        <% end -%>
-      </div>
-      <div class="panel-body">
-        <ul class="list-group">
-          <% @time_slots.each do |time_slot| %>
-            <% if time_slot.scheduled_for_wday?(date.wday) %>
-              <div> <%= render 'trial_lessons/time_slot', time_slot: time_slot, date: date %> </div>
-            <% end %>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
-</section>
-
-
-
-
-<%= render 'form' %>

@@ -14,6 +14,11 @@
           </div>
         <% end %>
 
+        <% if hide_datetime %>
+          <%= f.hidden_field :trial_on, data: { target: 'trial_selector.trialOn' } %>
+          <%= f.hidden_field :time_slot_id, data: { target: 'trial_selector.timeSlotId' } %>
+        <% else %>
+        
         <div class="form-group">
           <%= f.label :trial_on, :class => 'control-label col-xs-5 col-md-4' %>
           <div class="col-xs-7 col-md-8">
@@ -36,6 +41,7 @@
             </div>
           </div>
         </div>
+        <% end %>
 
         <div class="form-group">
           <%= f.label :padma_contact_id, :class => 'control-label col-xs-5 col-md-4' %>

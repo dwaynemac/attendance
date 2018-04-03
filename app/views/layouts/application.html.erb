@@ -3,6 +3,7 @@
 <head>
   <title><%= content_for?(:title) ? yield(:title) : "- Aulas - PADMA" %></title>
   <%= favicon_link_tag "/favicon.ico" %>
+  <script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
