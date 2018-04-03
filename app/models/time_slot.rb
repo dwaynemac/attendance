@@ -76,6 +76,11 @@ class TimeSlot < ActiveRecord::Base
     end
     response
   end
+  
+  def scheduled_for_wday?(wday)
+    days = [:sunday,:monday, :tuesday, :wednesday, :thursday, :friday, :saturday]
+    send(days[wday])
+  end
 
   private
 

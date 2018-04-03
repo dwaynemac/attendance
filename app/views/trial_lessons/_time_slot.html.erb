@@ -1,0 +1,17 @@
+<li class="list-group-item <%= 'today' if date.today? %>">
+  <header class='timeslot-head'><%= time_slot.name %></header>
+  <div class='timeslot-content'>
+    <div class='timeslot-description'>
+      <p><%= timeslot_description(time_slot, nil) %></p>
+    </div>
+    <div class='timeslot-controls'>
+      <%= link_to t('.select'),
+                  '#',
+                  data: {
+                    time_slot_id: time_slot.id,
+                    date: date
+                  },
+                  class: 'btn btn-primary btn-xs btn-block selectTrialDate' %>
+    </div>
+  </div>
+</li>

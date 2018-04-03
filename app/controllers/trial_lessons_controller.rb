@@ -1,4 +1,6 @@
 class TrialLessonsController < ApplicationController
+  include TrialLessonsHelper
+  
   load_and_authorize_resource :through => :current_account, :except => [:new, :create]
 
   # GET /trial_lessons
@@ -14,6 +16,14 @@ class TrialLessonsController < ApplicationController
   def new
     @trial_lesson = current_account.trial_lessons.build
     @trial_lesson.attributes=params[:trial_lesson]
+    
+    begin
+      @ref_date = Date.parse params[:ref_date]
+    rescue
+      @ref_date = Time.zone.today
+    end
+    @time_slots = current_user.current_account.time_slots.order(:start_at)
+    
     @initialize_select = get_initialize_select
   end
 

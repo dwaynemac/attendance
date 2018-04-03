@@ -14,4 +14,13 @@ module TrialLessonsHelper
       }
     end
   end
+      
+  def monday(date)
+    date.beginning_of_week(:monday)
+  end
+  
+  def sunday(date)
+    date.end_of_week(:monday)
+  end
+    
 end
