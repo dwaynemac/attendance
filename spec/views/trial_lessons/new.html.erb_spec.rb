@@ -11,6 +11,8 @@ describe "trial_lessons/new" do
     User.any_instance.stub(:enabled_accounts).and_return([PadmaAccount.new(:name => @user.current_account.name)])
     Account.any_instance.stub(:usernames).and_return(["username"])
     @user.save
+    @ref_date = Date.today
+    @time_slots = []
     
 	view.stub(:current_user) { @user }
   end
