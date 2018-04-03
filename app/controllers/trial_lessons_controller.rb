@@ -17,11 +17,8 @@ class TrialLessonsController < ApplicationController
     @trial_lesson = current_account.trial_lessons.build
     @trial_lesson.attributes=params[:trial_lesson]
     
-    begin
-      @ref_date = Date.parse params[:ref_date]
-    rescue
-      @ref_date = Time.zone.today
-    end
+    set_ref_date
+    
     @time_slots = current_user.current_account.time_slots.order(:start_at)
     
     @initialize_select = get_initialize_select
@@ -71,6 +68,17 @@ class TrialLessonsController < ApplicationController
       {name: "#{@trial_lesson.contact.name}", id: @trial_lesson.contact.padma_id}
     else
       {name: "", id: ""}
+    end
+  end
+  
+  def set_ref_date
+    begin
+      @ref_date = Date.parse params[:ref_date]
+    rescue
+      @ref_date = Time.zone.today
+    end
+    if @ref_date.nil?
+      @ref_date = Time.zone.today
     end
   end
 
