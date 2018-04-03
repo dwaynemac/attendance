@@ -5,8 +5,8 @@
   <div class="row">
     <nav class='attendance-navbar margin-bottom-10' role='navigation'>
       <div class='btn-group btn-group-tofrom'>
-        <%= link_to '<span class="glyphicon glyphicon-chevron-left"></span>'.html_safe, new_trial_lesson_path(ref_date: @ref_date-1.week), class: 'btn btn-secondary btn-sm' %>
-        <%= link_to '<span class="glyphicon glyphicon-chevron-right"></span>'.html_safe, new_trial_lesson_path(ref_date: @ref_date+1.week), class: 'btn btn-secondary btn-sm' %>
+        <%= link_to '<span class="glyphicon glyphicon-chevron-left"></span>'.html_safe, new_trial_lesson_path(params.merge({ref_date: @ref_date-1.week})), class: 'btn btn-secondary btn-sm' %>
+        <%= link_to '<span class="glyphicon glyphicon-chevron-right"></span>'.html_safe, new_trial_lesson_path(params.merge({ref_date: @ref_date+1.week})), class: 'btn btn-secondary btn-sm' %>
       </div>
     </nav>
     
