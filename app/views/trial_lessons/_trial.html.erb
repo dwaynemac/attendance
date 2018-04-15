@@ -11,7 +11,8 @@
           <% trials.each do |trial| %>
             <span class="trialItem">
               <% if trial.contact -%>
-                <%= link_to trial.contact.name, edit_trial_lesson_path(trial) %>
+                <%= link_to_contact_profile(trial.contact) %> - 
+                <%= link_to t('edit'), edit_trial_lesson_path(trial) %>
               <% else -%>
                 <%= t('trial_lessons.index.contact_without_name') %>
               <% end -%>
@@ -30,7 +31,8 @@
             <% assisted_trials.each do |trial| %>
               <span class="trialItem">
                 <% if trial.contact -%>
-                  <%= link_to trial.contact.name, edit_trial_lesson_path(trial) %>
+                  <%= link_to_contact_profile(trial.contact) %> - 
+                  <%= link_to t('edit'), edit_trial_lesson_path(trial) %>
                 <% else -%>
                   <%= t('trial_lessons.index.contact_without_name') %>
                 <% end -%>
@@ -48,7 +50,8 @@
             <% absent_trials.each do |trial| %>
               <span class="trialItem">
                 <% if trial.contact -%>
-                  <%= link_to trial.contact.name, edit_trial_lesson_path(trial) %>
+                  <%= link_to_contact_profile(trial.contact) %> - 
+                  <%= link_to t('edit'), edit_trial_lesson_path(trial) %>
                 <% else -%>
                   <%= t('trial_lessons.index.contact_without_name') %>
                 <% end -%>
