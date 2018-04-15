@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "trial_lessons/index" do
   before(:each) do
+    assign(:ref_date,Date.today)
     assign(:trial_lessons, [
       create(:trial_lesson),
       create(:trial_lesson)
