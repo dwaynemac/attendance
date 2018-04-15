@@ -136,7 +136,7 @@
 
         <footer class="form-footer margin-top-20">
           <%= f.submit class: 'btn btn-primary' %>
-          <%= link_to t('back'), trial_lessons_path, :class => 'btn btn-link' %>
+          <%= link_to t('back'), trial_lessons_path(ref_date: @trial_lesson.trial_on), :class => 'btn btn-link' %>
         </footer>
       <% end %>
     </div>
