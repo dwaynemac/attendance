@@ -1,0 +1,65 @@
+<li class="list-group-item <%= 'today' if date.today? %>">
+  <header class='timeslot-head'><%= time_slot.name %></header>
+  <div class='timeslot-content'>
+    <div class='timeslot-description'>
+      <p><%= timeslot_description(time_slot, nil) %></p>
+      
+      <% if trials.first.trial_at.in_time_zone >= Time.zone.now %>
+      <%# future %>
+        <span class='results-count-attendances' tabindex='0' data-toggle='popover' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
+        <div class="timeslot-trials-list">
+          <% trials.each do |trial| %>
+            <span class="trialItem">
+              <% if trial.contact -%>
+                <%= link_to trial.contact.name, trial %>
+              <% else -%>
+                <%= t('trial_lessons.index.contact_without_name') %>
+              <% end -%>
+            </span>
+          <% end %>
+        </div>'>
+          (<%= trials.count %>)
+        </span>
+      <% else %>
+      <%# past %>
+        <span class='results-count-attendances green' tabindex='0' data-toggle='popover' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
+        <div class="timeslot-trials-list">
+          <span class="label label-success assisted"><%= t('trial_lesson.status.assisted') %></span>
+          <% count = 0 %>
+          <% trials.select{|tl| tl.assisted? }.each do |trial| %>
+            <% count += 1 %>
+            <span class="trialItem">
+              <% if trial.contact -%>
+                <%= link_to trial.contact.name, trial %>
+              <% else -%>
+                <%= t('trial_lessons.index.contact_without_name') %>
+              <% end -%>
+            </span>
+          <% end %>
+        </div>'>
+          (<%= count %>)
+        </span>      
+        <span class='results-count-attendances red' tabindex='0' data-toggle='popover' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
+        <div class="timeslot-trials-list">
+          <%= content_tag( :span, t('trial_lesson.status.absent'), class: 'absent label label-important') %>
+          <% count = 0 %>
+          <% trials.select{|tl| !tl.assisted? }.each do |trial| %>
+            <% count += 1 %>
+            <span class="trialItem">
+              <% if trial.contact -%>
+                <%= link_to trial.contact.name, trial %>
+              <% else -%>
+                <%= t('trial_lessons.index.contact_without_name') %>
+              <% end -%>
+            </span>
+          <% end %>
+        </div>'>
+          (<%= count %>)
+        </span>
+      <% end %>
+      
+      
+
+    </div>
+  </div>
+</li>

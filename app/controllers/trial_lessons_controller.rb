@@ -5,6 +5,8 @@ class TrialLessonsController < ApplicationController
 
   # GET /trial_lessons
   def index
+    set_ref_date
+    
     @trial_lessons = @trial_lessons.includes(:time_slot, :contact).where(archived: false).order(trial_on: :desc)
   end
 
