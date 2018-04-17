@@ -9,11 +9,9 @@
       </p>
       
       <span class='results-count-attendances' tabindex='0' data-toggle='popover' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
-        <div class="timeslot-trials-list">
+        <div class="students-list">
           <% time_slot.contacts.each do |contact| %>
-            <span class="trialItem">
-              <%= link_to_contact_profile(contact) %> - 
-            </span>
+            <%= link_to_contact_profile(contact) %>
           <% end %>
         </div>'>
         (<%= time_slot.contacts.count %>)
