@@ -25,7 +25,7 @@
         <div class="panel-body">
           <ul class="list-group">
             <% @time_slots.select{|ts| ts.scheduled_for_wday?(wday%7) }
-                          .sort_by{|ts| ts.start_at.strftime("%I:%M%p") }
+                          .sort_by{|ts| ts.start_at.strftime("%H:%M") }
                           .each do |time_slot| %>
               <div>
                 <%= render 'time_slot', time_slot: time_slot %>
