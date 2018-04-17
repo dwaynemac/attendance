@@ -1,0 +1,27 @@
+<li class="list-group-item">
+  <header class='timeslot-head'><%= link_to time_slot.name, time_slot %></header>
+  <div class='timeslot-content'>
+    <div class='timeslot-description'>
+      <p>
+        <%= time_slot.time_slot_days %><br/>
+        <%= timeslot_period(time_slot) %><br/>
+        <%= time_slot.padma_uid %>
+      </p>
+      
+      <span class='results-count-attendances' tabindex='0' data-toggle='popover' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
+        <div class="timeslot-trials-list">
+          <% time_slot.contacts.each do |contact| %>
+            <span class="trialItem">
+              <%= link_to_contact_profile(contact) %> - 
+            </span>
+          <% end %>
+        </div>'>
+        (<%= time_slot.contacts.count %>)
+      </span>
+    </div>
+    <div class='timeslot-controls'>
+      <%= link_to t('edit'), edit_time_slot_path(time_slot), :class => 'btn btn-primary btn-xs btn-block' %>
+      <%= link_to t('destroy'), time_slot, confirm: t('confirm'), method: :delete, class: 'btn btn-danger btn-xs btn-block' %>
+    </div>
+  </div>
+</li>

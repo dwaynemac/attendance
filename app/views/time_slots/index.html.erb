@@ -1,8 +1,44 @@
 <%- breadcrum t("time_slots.index.title") -%>
+<% content_for :title do t("time_slots.index.title") end -%>
 
 <div id="search-field-container" class='margin-bottom-20'>
   <input id="timeslots-filter" class='form-control' type='text' placeholder='<%= t('.filter_timeslots') %>' />
 </div>
+
+<div class='attendance-container'>
+  <nav class='attendance-navbar margin-bottom-10' role='navigation'>
+    <div class="filter-controls">
+      
+    </div>
+    
+    <div class='filter-controls filter-controls-right'>
+      <%= link_to t('time_slots.index.new'), new_time_slot_path, class: 'btn btn-primary' %>
+    </div>
+  </nav>
+
+  <section class='attendance-body'>
+    <% (1..7).each do |wday| %>
+      <div class="panel panel-default">
+        <div class="panel-heading" >
+          <%= t('date.day_names')[wday%7].capitalize %>
+        </div>
+        <div class="panel-body">
+          <ul class="list-group">
+            <% @time_slots.select{|ts| ts.scheduled_for_wday?(wday%7) }
+                          .sort_by{|ts| ts.start_at.strftime("%I:%M%p") }
+                          .each do |time_slot| %>
+              <div>
+                <%= render 'time_slot', time_slot: time_slot %>
+              </div>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </section>
+</div>
+
+<% unless @unscheduled_time_slots.empty? %>
 <table id="timeslots" class="table table-striped">
   <thead>
     <tr>
@@ -10,14 +46,13 @@
       <th><%= TimeSlot.human_attribute_name(:padma_uid) %></th>
       <th><%= TimeSlot.human_attribute_name(:start_at) %></th>
       <th><%= TimeSlot.human_attribute_name(:end_at) %></th>
-      <th><%= TimeSlot.human_attribute_name(:schedule) %></th>
       <th><%= t('.quantity_signed_up') %></th>
       <th></th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <% @time_slots.each do |ts| %>
+    <% @unscheduled_time_slots.each do |ts| %>
       <tr>
         <td>
           <%= link_to ts.name, ts %>
@@ -25,51 +60,15 @@
         <td><%= ts.padma_uid %></td>
         <td><%= ts.start_at.strftime('%H:%M') %></td>
         <td><%= ts.end_at.strftime('%H:%M') %></td>
-        <td>
-          <% if ts.unscheduled? -%>
-            -
-          <% else -%>
-            <%= ts.time_slot_days %>
-          <% end -%>
-        </td>
         <td><%= link_to ts.contacts.count, crm_contacts_list_url(ts), target: '_blank' %></td>
         <td class='td-actions'>
           <%= link_to t('edit'), edit_time_slot_path(ts), :class => 'btn secondary btn-xs' %>
         </td>
         <td>
-          <button type="button"
-                  class="delete-btn btn btn-mini btn-link"
-                  data-toggle="modal"
-                  data-target="#delete_time_slot_<%= ts.id %>_modal">
-            <%= t('destroy') %>
-          </button>
+          <%= link_to t('destroy'), ts, confirm: t('confirm'), method: :delete, class: 'delete-btn btn btn-mini btn-link' %>
         </td>
       </tr>
-      <div id="delete_time_slot_<%= ts.id %>_modal" class="modal fade" tabindex="-1">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title"><%= t('time_slots.index.delete_time_slot_modal.warning') %></h4>
-            </div>
-            <div class="modal-body">
-              <p><%= t('time_slots.index.delete_time_slot_modal.youre_about_to_delete_time_slot', time_slot_name: ts.name).html_safe %></p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('cancel') %></button>
-              <%= button_to t('destroy'),
-                          ts,
-                          method: :delete,
-                          #confirm: t('confirm'),
-                          :onclick => "return confirm('#{t('confirm')}')",
-                          class: 'btn btn-danger' %>
-            </div>
-          </div>
-        </div>
-      </div>
     <% end %>
   </tbody>
 </table>
-
-<%= link_to t('time_slots.index.new'), new_time_slot_path, :class => 'btn btn-primary' %>
-<%= link_to t('.vacancies'), vacancies_time_slots_path, :class => 'btn btn-default' %>
+<% end %>

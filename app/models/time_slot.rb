@@ -1,6 +1,6 @@
 class TimeSlot < ActiveRecord::Base
 
-  default_scope where("NOT deleted OR deleted IS NULL").order('name ASC')
+  default_scope where("deleted= :false OR deleted IS NULL", false: false).order('name ASC')
 
   belongs_to :account
   

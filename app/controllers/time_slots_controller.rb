@@ -4,7 +4,8 @@ class TimeSlotsController < ApplicationController
   load_and_authorize_resource 
 
   def index
-    @time_slots = @time_slots
+    @unscheduled_time_slots = @time_slots.where(unscheduled: true)
+    @time_slots = @time_slots.with_schedule
   end
 
   def show
