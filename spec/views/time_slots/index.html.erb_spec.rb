@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "time_slots/index" do
   before(:each) do
+    assign(:unscheduled_time_slots,[])
     assign(:time_slots, [
       create(:time_slot),
       create(:time_slot)

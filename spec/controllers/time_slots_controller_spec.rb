@@ -55,7 +55,7 @@ describe TimeSlotsController do
 
   describe "GET index" do
     it "assigns all time_slots as @time_slots" do
-      time_slot = create(:time_slot, :account => @user.current_account)
+      time_slot = create(:time_slot, account: @user.current_account, monday: true)
       get :index, {}
       assigns(:time_slots).should eq([time_slot])
     end
@@ -176,7 +176,7 @@ describe TimeSlotsController do
       time_slot = create(:time_slot, :account => @user.current_account)
       expect {
         delete :destroy, {:id => time_slot.to_param}
-      }.not_to change(TimeSlot, :count).by(-1)
+      }.not_to change(TimeSlot.unscoped, :count).by(-1)
     end
 
     it "redirects to the time_slots list" do
