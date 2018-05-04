@@ -71,7 +71,7 @@
                 <b><%= I18n.l(month, :format => "%B") %></b>
                 <ul class="list-group">
                   <% attendances.each do |att| -%>
-                    <li class="list-group-item">
+                    <li class="list-group-item" data-controller="attendance">
                       <%= I18n.l(att.attendance_on, format: :in_context) %> -
                       
                       <% if att.suspended? %>
