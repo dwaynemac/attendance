@@ -396,6 +396,7 @@ es:
       title: Clases de prueba
     new:
       title: Marcar clase de prueba
+      confirm_trial: Guardar clase de prueba
     search_contact: Buscar contacto
     show:
       title: Clase de prueba

@@ -397,7 +397,8 @@ pt-BR:
       time_slot_deleted: (A turma foi apagada)
       contact_without_name: (O contato foi apagado)
     new:
-      title: 
+      title: Nova aula experimental
+      confirm_trial: Salvar aula experimental
     search_contact: Buscar contato
     show:
       title: 
