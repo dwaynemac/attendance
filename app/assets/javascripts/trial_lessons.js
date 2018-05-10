@@ -23,7 +23,13 @@
       this.highlightSelectedOption(event)
       this.updateHiddenFields()
       
+      this.showSecondStep()
+      
       event.preventDefault()
+    }
+    
+    showSecondStep(){
+      $("#secondStep").modal("show")
     }
     
     highlightSelectedOption(event){

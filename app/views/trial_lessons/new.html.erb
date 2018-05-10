@@ -1,7 +1,23 @@
 <%= content_for(:title){t("trial_lessons.new.title")} %>
 <%- breadcrum t("trial_lessons.new.title") -%>
 
-<div class='container' data-controller="trial_selector" data-trial_selector-time_slot_id="" data-trial_selector-trial_on="">
+<div data-controller="trial_selector" data-trial_selector-time_slot_id="" data-trial_selector-trial_on="">
+
+  <div class="modal" id="secondStep">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><%= t('.confirm_trial') %></h4>
+      </div>
+      <div class="modal-body">
+        <%= render 'form', hide_datetime: true, hide_back: true %>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+<div class='container'>
   <div class="row">
     <nav class='attendance-navbar margin-bottom-10' role='navigation'>
       <div class='btn-group btn-group-tofrom'>
@@ -32,7 +48,5 @@
       <% end %>
     </section>
   </div>
-
-  <%= render 'form', hide_datetime: true %>
-
+</div>
 </div>
