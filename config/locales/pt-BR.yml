@@ -401,7 +401,8 @@ pt-BR:
       confirm_trial: Salvar aula experimental
     search_contact: Buscar contato
     show:
-      title: 
+      title: Aula experimental
+      see_all: voltar ao calendario de aulas experimentais
   unauthorized: 
   validates_timeliness:
     error_value_formats:

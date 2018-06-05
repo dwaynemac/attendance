@@ -400,6 +400,7 @@ es:
     search_contact: Buscar contacto
     show:
       title: Clase de prueba
+      see_all: Volver al calendario de clases de prueba
   unauthorized: 
   validates_timeliness:
     error_value_formats:

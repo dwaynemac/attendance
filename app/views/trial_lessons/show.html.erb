@@ -27,7 +27,8 @@
     </p>
   </section>
   <footer class='footer-actions margin-top-20'>
-    <%= link_to 'Edit', edit_trial_lesson_path(@trial_lesson), :class => 'btn btn-secondary' %>
-    <%= link_to t('back'), trial_lessons_path, :class => 'btn btn-link' %>
+    <%= link_to t('destroy'), trial_lesson_path(@trial_lesson), method: :DELETE, confirm: t('confirm'), :class => 'btn btn-danger' %>
+    <%= link_to t('edit'), edit_trial_lesson_path(@trial_lesson), :class => 'btn btn-secondary' %>
+    <%= link_to t('.see_all'), trial_lessons_path, :class => 'btn btn-link' %>
   </footer>
 </div>
