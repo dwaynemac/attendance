@@ -12,7 +12,8 @@
             <span class="trialItem">
               <% if trial.contact -%>
                 <%= link_to_contact_profile(trial.contact) %> - 
-                <%= link_to t('edit'), edit_trial_lesson_path(trial) %>
+                <%= link_to t('edit'), edit_trial_lesson_path(trial) %> -
+                <%= link_to t('destroy'), trial, method: :DELETE, confirm: t('confirm') %>
               <% else -%>
                 <%= t('trial_lessons.index.contact_without_name') %>
               <% end -%>
