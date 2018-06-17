@@ -388,6 +388,8 @@ es:
       avoid_mailing_triggers: Ignorar mails automáticos
     edit:
       title: Editar clase de prueba
+    destroy:
+      success: Clase de prueba eliminada
     index:
       archive: Archivar
       new: Marcar clase de prueba

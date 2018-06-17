@@ -57,8 +57,9 @@ class TrialLessonsController < ApplicationController
 
   # DELETE /trial_lessons/1
   def destroy
+    ref_date = @trial_lesson.trial_on
     @trial_lesson.destroy
-    redirect_to trial_lessons_url, notice: 'Trial lesson was successfully destroyed.'
+    redirect_to trial_lessons_url(ref_date: ref_date), notice: t('trial_lessons.destroy.success')
   end
 
   private

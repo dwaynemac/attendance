@@ -152,8 +152,9 @@ describe TrialLessonsController do
 
     it "redirects to the trial_lessons list" do
       trial_lesson = create(:trial_lesson, :account => @user.current_account)
+      ref_date = trial_lesson.trial_on
       delete :destroy, {:id => trial_lesson.to_param}
-      response.should redirect_to(trial_lessons_url)
+      response.should redirect_to(trial_lessons_url(ref_date: ref_date))
     end
   end
 

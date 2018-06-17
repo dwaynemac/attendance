@@ -391,6 +391,8 @@ pt-BR:
       avoid_mailing_triggers: Ignorar mails automáticos
     edit:
       title: 
+    destroy:
+      success: Registro de aula experimental apagado.
     index:
       archive: 
       new: Cadastrar aula experimental
