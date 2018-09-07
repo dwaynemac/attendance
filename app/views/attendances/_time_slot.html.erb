@@ -1,7 +1,7 @@
 <% att = @attendances.select {|a| a.attendance_on == date && a.time_slot == time_slot}.first %>
 <% if render_time_slot?(time_slot,date,att, only_pending) -%>
   <li class="list-group-item <%= 'today' if date.today? %> <%= 'pending' if !only_pending && att.blank? && !future_lesson?(date,time_slot) %> <%= 'future-lesson' if future_lesson?(date,time_slot) %>" <%= 'future-lesson' if att.try(:suspended?) %>>
-    <header class='timeslot-head'><%= time_slot.name %></header>
+    <header class='timeslot-head'><%= link_to time_slot.name, time_slot %></header>
     <div class='timeslot-content'>
       <div class='timeslot-description'>
         <p><%= timeslot_description(time_slot, att) %></p>
