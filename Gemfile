@@ -36,7 +36,7 @@ gem 'padma-assets', '0.2.26'
 gem 'rails_serve_static_assets'
 
 # Javascript runtime for bootstrap's LESS files to compile to CSS.
-gem 'therubyracer', '0.12.1', :platforms => :ruby
+gem 'therubyracer', '0.12.2', :platforms => :ruby
 
 gem 'angularjs-rails'
 gem "select2-rails", '~> 4.0.0'
