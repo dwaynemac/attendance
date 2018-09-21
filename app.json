@@ -1,0 +1,85 @@
+{
+  "name": "attendance",
+  "scripts": {
+  },
+  "env": {
+    "accounts_key": {
+      "required": true
+    },
+    "activities_key": {
+      "required": true
+    },
+    "app_key": {
+      "required": true
+    },
+    "APP_NAME": {
+      "required": true
+    },
+    "APPSIGNAL_PUSH_API_KEY": {
+      "required": true
+    },
+    "contacts_key": {
+      "required": true
+    },
+    "doorbellio_key": {
+      "required": true
+    },
+    "HEROKU_API_KEY": {
+      "required": true
+    },
+    "HEROKU_POSTGRESQL_BLACK_URL": {
+      "required": true
+    },
+    "intercom_secret": {
+      "required": true
+    },
+    "messaging_key": {
+      "required": true
+    },
+    "padma_aws_key_id": {
+      "required": true
+    },
+    "padma_aws_secret_access_key": {
+      "required": true
+    },
+    "PGBACKUPS_AWS_ACCESS_KEY_ID": {
+      "required": true
+    },
+    "PGBACKUPS_AWS_SECRET_ACCESS_KEY": {
+      "required": true
+    },
+    "PGBACKUPS_BUCKET": {
+      "required": true
+    },
+    "RACK_ENV": {
+      "required": true
+    },
+    "RAILS_ENV": {
+      "required": true
+    },
+    "S3_KEY_ID": {
+      "required": true
+    },
+    "S3_SECRET_KEY": {
+      "required": true
+    }
+  },
+  "formation": {
+    "worker": {
+      "quantity": 1
+    },
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "heroku-postgresql",
+    "logentries",
+    "scheduler"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
