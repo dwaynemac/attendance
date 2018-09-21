@@ -16,6 +16,7 @@ gem "intercom-rails"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0.rc1'
 
+gem 'sprockets', '2.12.5' # https://blog.heroku.com/rails-asset-pipeline-vulnerability
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
