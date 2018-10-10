@@ -147,6 +147,12 @@ class InstructorStatsSQLBuilder
 			@distribution = account.usernames
 		end
 
+    # quick patch until code refactored to consider @ in usernames
+    # quick patch possible because in theory @ users are not teachers. 
+    if @distribution
+      @distribution = @distribution.reject{ |username| username =~ /@/ }
+    end
+
 		@distribution.collect {|username| username.tr(".", "_")}
 	end
 
