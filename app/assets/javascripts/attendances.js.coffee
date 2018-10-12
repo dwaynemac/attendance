@@ -1,6 +1,26 @@
 $(document).on 'ready page:load', ->
 
-  $('[data-toggle="popover"]').popover()
+  # this is a workaround for links in popovers
+  # if the link is clicked but the button not released immediately
+  # then the popover dissapears and the action is not taken place
+  # the same happens when you touch the link with the touchpad
+  # instead of clicking with the buttons of the touchpad
+  $('[data-toggle="popover"]').popover(html: true).on('focus', ->
+    $(this).popover 'show'
+    return
+  ).on 'focusout', ->
+    _this = this
+    if !$('.popover:hover').length
+      $(this).popover 'hide'
+    else
+      $(".popover-edit").click ->
+        $(_this).popover 'hide'
+        return
+      $('.popover').mouseleave ->
+        $(_this).popover 'hide'
+        $(this).off 'mouseleave'
+        return
+    return
   
   $('#submit-attendance').click ->
     registerEvent('submitted-attendance-form')
