@@ -11,11 +11,14 @@ $('[data-toggle="popover"]').popover({ html: true })
     }
     else {
       $('.popover').mouseleave(function() {
-                        $(_this).popover("hide");
-                        $(this).off('mouseleave');
+        $(_this).popover("hide");
+        $(this).off('mouseleave');
       });
+      return;
       $('.popover-edit').click(function() {
-                        $(_this).popover("hide");
+        $(_this).popover("hide");
+        $(this).off('mouseleave');
       });
+      return;
     }
   });

@@ -13,13 +13,13 @@ $(document).on 'ready page:load', ->
     if !$('.popover:hover').length
       $(this).popover 'hide'
     else
-      $(".popover-edit").click ->
-        $(_this).popover 'hide'
-        return
       $('.popover').mouseleave ->
         $(_this).popover 'hide'
         $(this).off 'mouseleave'
-        return
+      return
+      $(".popover-edit").click ->
+        $(_this).popover 'hide'
+      return
     return
   
   $('#submit-attendance').click ->
