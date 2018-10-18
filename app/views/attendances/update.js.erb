@@ -14,11 +14,9 @@ $('[data-toggle="popover"]').popover({ html: true })
         $(_this).popover("hide");
         $(this).off('mouseleave');
       });
-      return;
       $('.popover-edit').click(function() {
+        $(".popover").off('mouseleave');
         $(_this).popover("hide");
-        $(this).off('mouseleave');
       });
-      return;
     }
   });
