@@ -210,7 +210,7 @@ GEM
     nokogiri-happymapper (0.5.9)
       nokogiri (~> 1.5)
     orm_adapter (0.4.0)
-    padma-assets (0.2.28)
+    padma-assets (0.2.29)
       accounts_client (>= 0.2.28)
       railties (>= 3.1)
     pg (0.15.1)
@@ -374,7 +374,7 @@ DEPENDENCIES
   less-rails-bootstrap (~> 3.0.6)
   logical_model (= 0.6.4)
   messaging_client (~> 0.2)
-  padma-assets (= 0.2.28)
+  padma-assets (= 0.2.29)
   pg
   protected_attributes
   pry
