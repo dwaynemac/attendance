@@ -1,4 +1,4 @@
-<li class="list-group-item <%= 'today' if date.today? %>">
+<li class="list-group-item <%= 'today' if date.today? %>" data-target="trialagenda.timeSlot" data-timeslot_id="<%= time_slot.id %>" data-date="<%= @ref_date %>">
   <header class='timeslot-head'><%= time_slot.name %></header>
   <div class='timeslot-content'>
     <div class='timeslot-description'>

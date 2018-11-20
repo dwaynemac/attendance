@@ -43,6 +43,29 @@
     }
 
   });
+
+  application.register("trialagenda", class extends Stimulus.Controller {
+
+    static get targets(){
+      return ["timeSlot","day"];
+    }
+
+    initialize(){
+      this.openTimeSlot();
+    }
+
+    openTimeSlot(){
+      if(this.data.get("openTimeslotId") && this.data.get("openTimeslotId") != ""){
+        if(this.data.get("openRefdate") && this.data.get("openRefdate") != ""){
+          var el = this.timeSlotTargets.filter((d)=>{
+            return d.dataset.date == this.data.get("openRefdate") && d.dataset.timeslot_id == this.data.get("openTimeslotId");
+          })[0].querySelector("[data-toggle=popover]");
+          $(el).popover("show");
+        }
+      }
+    }
+
+  });
     
 })();
 

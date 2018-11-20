@@ -1,6 +1,12 @@
 <% content_for :title do t("trial_lessons.index.title") end -%>
 <%- breadcrum t("trial_lessons.index.title") -%>
-<div class='attendance-container'>
+
+<div class='attendance-container'
+     data-controller="trialagenda"
+     data-trialagenda-open-refdate="<%= params[:ref_date] %>"
+     data-trialagenda-open-timeslot-id="<%= params[:open_time_slot_id] %>"
+     >
+
   <nav class='attendance-navbar margin-bottom-10' role='navigation'>
     <div class='filter-controls'>
       <div class='btn-group btn-group-tofrom'>
@@ -16,7 +22,7 @@
 
   <section class='attendance-body'>
     <% (monday(@ref_date)..sunday(@ref_date)).each do |date| %>
-      <div class="panel panel-default">
+      <div class="panel panel-default" data-target="trialagenda.day" data-date="<%= date %>">
         <div class="panel-heading <%= 'current-day' if date == Time.zone.today %>">
           <%= l(date, format: :in_context).capitalize %>
           <% if date.month != Date.today.month -%>
