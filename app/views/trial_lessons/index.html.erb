@@ -32,10 +32,12 @@
         <div class="panel-body">
           <ul class="list-group">
             <% @trial_lessons.select{|t| t.trial_on == date }.group_by{|t| t.time_slot_id}.each do |time_slot_id, trials| %>
-              <% time_slot = TimeSlot.find(time_slot_id) %>
-              <div>
-                <%= render 'trial', time_slot: time_slot, date: date, trials: trials %>
-              </div>
+              <% time_slot = TimeSlot.where(id: time_slot_id).first # to void exception if not found %>
+              <% if time_slot %>
+                <div>
+                  <%= render 'trial', time_slot: time_slot, date: date, trials: trials %>
+                </div>
+              <% end %>
             <% end %>
           </ul>
         </div>
