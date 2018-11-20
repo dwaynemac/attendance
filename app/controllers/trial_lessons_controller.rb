@@ -12,7 +12,9 @@ class TrialLessonsController < ApplicationController
 
   # GET /trial_lessons/1
   def show
-    redirect_to trial_lessons_path(ref_date: @trial_lesson.trial_on, open_time_slot_id: @trial_lesson.time_slot_id)
+    unless @trial_lesson.time_slot.nil?
+      redirect_to trial_lessons_path(ref_date: @trial_lesson.trial_on, open_time_slot_id: @trial_lesson.time_slot_id)
+    end
   end
 
   # GET /trial_lessons/new
