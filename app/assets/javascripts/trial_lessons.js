@@ -47,7 +47,7 @@
   application.register("trialagenda", class extends Stimulus.Controller {
 
     static get targets(){
-      return ["timeSlot","day"];
+      return ["timeSlot","day","trialCount"];
     }
 
     initialize(){
@@ -55,13 +55,13 @@
     }
 
     openTimeSlot(){
-      if(this.data.get("openTimeslotId") && this.data.get("openTimeslotId") != ""){
-        if(this.data.get("openRefdate") && this.data.get("openRefdate") != ""){
-          var el = this.timeSlotTargets.filter((d)=>{
-            return d.dataset.date == this.data.get("openRefdate") && d.dataset.timeslot_id == this.data.get("openTimeslotId");
-          })[0].querySelector("[data-toggle=popover]");
-          $(el).popover("show");
-        }
+      if(this.data.get("openTrialId") && this.data.get("openTrialId") != ""){
+        var el = this.trialCountTargets.filter((tc)=>{
+          return JSON.parse(tc.dataset.trialIds).filter((tid)=>{
+                   return tid == this.data.get("openTrialId");
+                 }).length == 1;
+        })[0];
+        $(el).popover("show");
       }
     }
 

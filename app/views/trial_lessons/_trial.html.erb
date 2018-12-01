@@ -6,7 +6,18 @@
       
       <% if trials.first.trial_at.in_time_zone >= Time.zone.now %>
       <%# future %>
-        <span class='results-count-attendances' tabindex='0' data-toggle='popover' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
+      <span class='results-count-attendances'
+            tabindex='0'
+            data-target="trialagenda.trialCount"
+            data-trial-ids="<%= trial.map(&:id).to_json %>"
+            data-timeslot_id="<%= time_slot.id %>"
+            data-date="<%= @ref_date %>"
+            data-toggle='popover'
+            data-container='body'
+            data-placement='bottom'
+            data-html='true'
+            data-trigger='focus'
+            data-content='
         <div class="timeslot-trials-list">
           <% trials.each do |trial| %>
             <span class="trialItem">
@@ -26,7 +37,18 @@
       <%# past %>
         <% assisted_trials = trials.select{|tl| tl.assisted? } %>
         <% if assisted_trials.count > 0 %>
-          <span class='results-count-attendances green' tabindex='0' data-toggle='popover' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
+          <span class='results-count-attendances green'
+                tabindex='0'
+                data-target="trialagenda.trialCount"
+                data-trial-ids="<%= assisted_trials.map(&:id).to_json %>"
+                data-timeslot_id="<%= time_slot.id %>"
+                data-date="<%= @ref_date %>"
+                data-toggle='popover'
+                data-container='body'
+                data-placement='bottom'
+                data-html='true'
+                data-trigger='focus'
+                data-content='
           <div class="timeslot-trials-list">
             <span class="label label-success assisted"><%= t('trial_lesson.status.assisted') %></span>
             <% assisted_trials.each do |trial| %>
@@ -46,7 +68,18 @@
         <% end %>
         <% absent_trials = trials.select{|tl| !tl.assisted? } %>
         <% if absent_trials.count > 0 %>
-          <span class='results-count-attendances red' tabindex='0' data-toggle='popover' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
+          <span class='results-count-attendances red'
+                tabindex='0'
+                data-target="trialagenda.trialCount"
+                data-trial-ids="<%= absent_trials.map(&:id).to_json %>"
+                data-timeslot_id="<%= time_slot.id %>"
+                data-date="<%= @ref_date %>"
+                data-toggle='popover'
+                data-container='body'
+                data-placement='bottom'
+                data-html='true'
+                data-trigger='focus'
+                data-content='
           <div class="timeslot-trials-list">
             <%= content_tag( :span, t('trial_lesson.status.absent'), class: 'absent label label-important') %>
             <% absent_trials.each do |trial| %>
