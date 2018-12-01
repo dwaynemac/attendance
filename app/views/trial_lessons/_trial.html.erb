@@ -9,7 +9,7 @@
       <span class='results-count-attendances'
             tabindex='0'
             data-target="trialagenda.trialCount"
-            data-trial-ids="<%= trial.map(&:id).to_json %>"
+            data-trial-ids="<%= trials.map(&:id).to_json %>"
             data-timeslot_id="<%= time_slot.id %>"
             data-date="<%= @ref_date %>"
             data-toggle='popover'
