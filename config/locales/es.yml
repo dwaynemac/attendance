@@ -377,6 +377,9 @@ es:
       vacancies: Vacantes
   trial_lesson:
     activity_content:
+      assisted:
+        :true: Asistió a la clase de prueba
+        :false: No asistió a la clase de prueba
       create: Clase de prueba creada
       deleted: Clase de prueba cancelada.
     status:
