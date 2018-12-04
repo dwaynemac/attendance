@@ -62,6 +62,24 @@ class TrialLesson < ActiveRecord::Base
     self.contact.try(:padma_id)
   end
 
+  def assisted_activity(assisted)
+    if !self.contact_id.nil?
+      created_at = (self.activity_on_trial_time)? self.trial_at.to_s : Time.zone.now.to_s
+      updated_at = (self.activity_on_trial_time)? self.trial_at.to_s : Time.zone.now.to_s
+
+      a = ActivityStream::Activity.new(target_id: self.contact.padma_id, target_type: 'Contact',
+                                 object_id: self.id, object_type: 'TrialLesson',
+                                 generator: ActivityStream::LOCAL_APP_NAME,
+                                 content: I18n.t("trial_lesson.activity_content.assisted.#{assisted}"),
+                                 public: false,
+                                 username: self.padma_uid,
+                                 account_name: self.account.name,
+                                 created_at: created_at,
+                                 updated_at: updated_at )
+      a.create(username: self.padma_uid, account_name: self.account.name)
+    end
+  end
+
   def create_activity
     # Send notification to activities
     if !self.contact_id.nil?
@@ -102,7 +120,7 @@ class TrialLesson < ActiveRecord::Base
   def broadcast_create
     unless self.skip_broadcast
       # Send notification using the messaging system
-      Messaging::Client.post_message('trial_lesson',self.as_json_for_messaging)
+      #Messaging::Client.post_message('trial_lesson',self.as_json_for_messaging)
     end
   end
 
