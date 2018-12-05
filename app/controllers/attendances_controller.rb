@@ -130,8 +130,8 @@ class AttendancesController < ApplicationController
       end
     end
 
-    not_attended = attendance.trial_lessons.pluck(:id) - ( trial_lesson_ids.map(&:to_i) || [] )
-    unless not_attended.blank?
+    unless attendance.trial_lessons.empty?
+      not_attended = attendance.trial_lessons.pluck(:id) - ( trial_lesson_ids.map(&:to_i) || [] )
       not_attended.each do |id|
         tl = TrialLesson.where(:account_id => current_user.current_account.id).find(id)
         tl.assisted_activity(false)
