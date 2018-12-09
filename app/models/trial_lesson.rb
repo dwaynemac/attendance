@@ -62,11 +62,19 @@ class TrialLesson < ActiveRecord::Base
     self.contact.try(:padma_id)
   end
 
-  def assisted_activity(assisted)
-    if !self.contact_id.nil?
-      created_at = (self.activity_on_trial_time)? self.trial_at.to_s : Time.zone.now.to_s
-      updated_at = (self.activity_on_trial_time)? self.trial_at.to_s : Time.zone.now.to_s
+  def inform_activity_stream(action, assisted = true)
+    case action
+    when :create
+      assistance_create_activity(assisted)
+    when :update
+      assistance_update_activity(assisted)
+    when :destroy
+      assistance_destroy_activity
+    end
+  end
 
+  def assistance_create_activity(assisted)
+    if !self.contact_id.nil?
       a = ActivityStream::Activity.new(target_id: self.contact.padma_id, target_type: 'Contact',
                                  object_id: self.id, object_type: 'TrialLesson',
                                  generator: ActivityStream::LOCAL_APP_NAME,
@@ -74,9 +82,54 @@ class TrialLesson < ActiveRecord::Base
                                  public: false,
                                  username: self.padma_uid,
                                  account_name: self.account.name,
-                                 created_at: created_at,
-                                 updated_at: updated_at )
+                                 created_at: self.trial_at.to_s,
+                                 updated_at: self.trial_at.to_s )
       a.create(username: self.padma_uid, account_name: self.account.name)
+    end
+  end
+
+  def assistance_update_activity(assisted)
+    activities = ActivityStream::Activity.paginate(
+      where: {
+        object_id: self.id,
+        object_type: 'TrialLesson',
+        content: I18n.t("trial_lesson.activity_content.assisted.#{!assisted}")
+      },
+      per_page: 9999
+    )
+    activities.each do |activity|
+      if activity.content == I18n.t("trial_lesson.activity_content.assisted.#{!assisted}")
+        res = activity.update(
+          'activity' => {
+            content: I18n.t("trial_lesson.activity_content.assisted.#{assisted}")
+          },
+          account_name: self.account.name
+        )
+        if res.nil?
+          Rails.logger.warn "couldnt update activity #{activity.id} for trial lesson #{self.id}"
+        end
+      end
+    end
+  end
+
+  def assistance_destroy_activity
+    activities = ActivityStream::Activity.paginate(
+      where: {
+        object_id: self.id,
+        object_type: 'TrialLesson'
+      },
+      per_page: 9999
+    )
+    activities.each do |activity|
+      if activity.content == I18n.t("trial_lesson.activity_content.assisted.true") ||
+          activity.content == I18n.t("trial_lesson.activity_content.assisted.false")
+        res = activity.destroy(
+          account_name: self.account.name
+        )
+        if res.nil?
+          Rails.logger.warn "couldnt destroy activity #{activity.id} for trial lesson #{self.id}"
+        end
+      end
     end
   end
 
@@ -120,7 +173,7 @@ class TrialLesson < ActiveRecord::Base
   def broadcast_create
     unless self.skip_broadcast
       # Send notification using the messaging system
-      #Messaging::Client.post_message('trial_lesson',self.as_json_for_messaging)
+      Messaging::Client.post_message('trial_lesson',self.as_json_for_messaging)
     end
   end
 

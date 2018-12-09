@@ -61,7 +61,7 @@ class AttendancesController < ApplicationController
 
   def create
     back_w_params = ActiveSupport::JSON.decode(params[:redirect_back_w_params]) if params[:redirect_back_w_params]
-    update_trial_lessons @attendance, params[:trial_lessons]
+    update_trial_lessons @attendance, params[:trial_lessons], :create
     
     @attendance.account = current_user.current_account
     @attendance.save
@@ -73,7 +73,7 @@ class AttendancesController < ApplicationController
   end
 
   def update
-    update_trial_lessons @attendance, params[:trial_lessons]
+    update_trial_lessons @attendance, params[:trial_lessons], :update
     @attendance.update(attendance_params_for_update)
     respond_to do |format|
       format.html { redirect_to attendances_url }
@@ -83,6 +83,7 @@ class AttendancesController < ApplicationController
   end
 
   def destroy
+    update_trial_lessons @attendance, params[:trial_lessons], :destroy
     contacts = @attendance.contacts.map(&:id)
     account = @attendance.account
     @attendance.destroy
@@ -121,20 +122,20 @@ class AttendancesController < ApplicationController
     end
   end
   
-  def update_trial_lessons attendance, trial_lesson_ids
+  def update_trial_lessons attendance, trial_lesson_ids, action
     unless trial_lesson_ids.nil?
       trial_lesson_ids.each do |id|
         tl = TrialLesson.where(:account_id => current_user.current_account.id).find(id)
-        tl.assisted_activity(true)
+        tl.inform_activity_stream(action, true)
         tl.update_attribute(:assisted, true)
       end
     end
 
     unless attendance.trial_lessons.empty?
-      not_attended = attendance.trial_lessons.pluck(:id) - ( trial_lesson_ids.map(&:to_i) || [] )
+      not_attended = attendance.trial_lessons.pluck(:id) - ( trial_lesson_ids.try(:map,&:to_i) || [] )
       not_attended.each do |id|
         tl = TrialLesson.where(:account_id => current_user.current_account.id).find(id)
-        tl.assisted_activity(false)
+        tl.inform_activity_stream(action, false)
       end
     end
   end
