@@ -87,6 +87,7 @@ class TrialLesson < ActiveRecord::Base
       a.create(username: self.padma_uid, account_name: self.account.name)
     end
   end
+  handle_asynchronously :assistance_create_activity
 
   def assistance_update_activity(assisted)
     activities = ActivityStream::Activity.paginate(
@@ -111,6 +112,7 @@ class TrialLesson < ActiveRecord::Base
       end
     end
   end
+  handle_asynchronously :assistance_update_activity
 
   def assistance_destroy_activity
     activities = ActivityStream::Activity.paginate(
@@ -132,6 +134,7 @@ class TrialLesson < ActiveRecord::Base
       end
     end
   end
+  handle_asynchronously :assistance_destroy_activity
 
   def create_activity
     # Send notification to activities
