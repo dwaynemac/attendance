@@ -342,6 +342,9 @@ en:
       vacancies: 
   trial_lesson:
     activity_content:
+      assisted:
+        :true: Came to the trial lesson 
+        :false: Did not come to the trial lesson 
       create: Trial Lesson created
       deleted: Trial lesson canceled
     status:

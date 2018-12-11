@@ -387,6 +387,12 @@ pt-BR:
       assisted: participou
       pending: pendente
   trial_lessons:
+    activity_content:
+      assisted:
+        :true: Participou da aula experimental
+        :false: Não compareceu à aula de teste
+      create: Aula experimental creada
+      deleted: Aula experimental apagada
     form:
       avoid_mailing_triggers: Ignorar mails automáticos
     edit:
