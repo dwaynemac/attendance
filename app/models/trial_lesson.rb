@@ -62,7 +62,7 @@ class TrialLesson < ActiveRecord::Base
     self.contact.try(:padma_id)
   end
 
-  def inform_activity_stream(action, assisted = true, locale)
+  def inform_activity_stream(action, locale, assisted = true)
     case action
     when :create
       assistance_create_activity(assisted, locale)
