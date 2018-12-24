@@ -62,18 +62,19 @@ class TrialLesson < ActiveRecord::Base
     self.contact.try(:padma_id)
   end
 
-  def inform_activity_stream(action, assisted = true)
+  def inform_activity_stream(action, locale, assisted = true)
     case action
     when :create
-      assistance_create_activity(assisted)
+      assistance_create_activity(assisted, locale)
     when :update
-      assistance_update_activity(assisted)
+      assistance_update_activity(assisted, locale)
     when :destroy
-      assistance_destroy_activity
+      assistance_destroy_activity(locale)
     end
   end
 
   def assistance_create_activity(assisted)
+    I18n.locale = locale
     if !self.contact_id.nil?
       a = ActivityStream::Activity.new(target_id: self.contact.padma_id, target_type: 'Contact',
                                  object_id: self.id, object_type: 'TrialLesson',
@@ -89,7 +90,8 @@ class TrialLesson < ActiveRecord::Base
   end
   handle_asynchronously :assistance_create_activity
 
-  def assistance_update_activity(assisted)
+  def assistance_update_activity(assisted, locale)
+    I18n.locale = locale
     activities = ActivityStream::Activity.paginate(
       where: {
         object_id: self.id,
@@ -114,7 +116,8 @@ class TrialLesson < ActiveRecord::Base
   end
   handle_asynchronously :assistance_update_activity
 
-  def assistance_destroy_activity
+  def assistance_destroy_activity(locale)
+    I18n.locale = locale
     activities = ActivityStream::Activity.paginate(
       where: {
         object_id: self.id,

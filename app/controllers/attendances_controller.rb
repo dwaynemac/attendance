@@ -123,10 +123,11 @@ class AttendancesController < ApplicationController
   end
   
   def update_trial_lessons attendance, trial_lesson_ids, action
+
     unless trial_lesson_ids.nil?
       trial_lesson_ids.each do |id|
         tl = TrialLesson.where(:account_id => current_user.current_account.id).find(id)
-        tl.inform_activity_stream(action, true)
+        tl.inform_activity_stream(action, I18n.locale, true)
         tl.update_attribute(:assisted, true)
       end
     end
@@ -135,7 +136,7 @@ class AttendancesController < ApplicationController
       not_attended = attendance.trial_lessons.pluck(:id) - ( trial_lesson_ids.try(:map,&:to_i) || [] )
       not_attended.each do |id|
         tl = TrialLesson.where(:account_id => current_user.current_account.id).find(id)
-        tl.inform_activity_stream(action, false)
+        tl.inform_activity_stream(action, I18n.locale, false)
       end
     end
   end
