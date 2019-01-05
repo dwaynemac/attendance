@@ -73,7 +73,7 @@ class TrialLesson < ActiveRecord::Base
     end
   end
 
-  def assistance_create_activity(assisted)
+  def assistance_create_activity(assisted, locale)
     I18n.locale = locale
     if !self.contact_id.nil?
       a = ActivityStream::Activity.new(target_id: self.contact.padma_id, target_type: 'Contact',
