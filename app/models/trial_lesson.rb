@@ -73,8 +73,8 @@ class TrialLesson < ActiveRecord::Base
     end
   end
 
-  def assistance_create_activity(assisted)
-    I18n.locale = locale
+  def assistance_create_activity(assisted, locale = nil)
+    I18n.locale = locale unless locale.nil?
     if !self.contact_id.nil?
       a = ActivityStream::Activity.new(target_id: self.contact.padma_id, target_type: 'Contact',
                                  object_id: self.id, object_type: 'TrialLesson',
@@ -90,8 +90,8 @@ class TrialLesson < ActiveRecord::Base
   end
   handle_asynchronously :assistance_create_activity
 
-  def assistance_update_activity(assisted, locale)
-    I18n.locale = locale
+  def assistance_update_activity(assisted, locale = nil)
+    I18n.locale = locale unless locale.nil?
     activities = ActivityStream::Activity.paginate(
       where: {
         object_id: self.id,
@@ -116,8 +116,8 @@ class TrialLesson < ActiveRecord::Base
   end
   handle_asynchronously :assistance_update_activity
 
-  def assistance_destroy_activity(locale)
-    I18n.locale = locale
+  def assistance_destroy_activity(locale = nil)
+    I18n.locale = locale unless locale.nil?
     activities = ActivityStream::Activity.paginate(
       where: {
         object_id: self.id,
