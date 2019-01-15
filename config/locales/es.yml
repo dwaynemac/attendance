@@ -406,6 +406,7 @@ es:
     show:
       title: Clase de prueba
       see_all: Volver al calendario de clases de prueba
+      time_slot_deleted: Horario eliminado
   unauthorized: 
   validates_timeliness:
     error_value_formats:

@@ -411,6 +411,7 @@ pt-BR:
     show:
       title: Aula experimental
       see_all: voltar ao calendario de aulas experimentais
+      time_slot_deleted: Turma apagada
   unauthorized: 
   validates_timeliness:
     error_value_formats:

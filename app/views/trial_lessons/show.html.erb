@@ -8,7 +8,11 @@
 
     <p>
       <strong><%= TrialLesson.human_attribute_name :time_slot %></strong><br>
-      <%= @trial_lesson.time_slot.name %>
+      <% if @trial_lesson.time_slot %>
+        <%= @trial_lesson.time_slot.name %>
+      <% else %>
+        <%= t('.time_slot_deleted') %>.
+      <% end %>
     </p>
 
     <p>
