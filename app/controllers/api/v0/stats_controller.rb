@@ -1,4 +1,4 @@
-class Api::V0::StatsController < ApplicationController
+class Api::V0::StatsController < Api::V0::ApiController
 
   def show
     @account = Account.find_by_name params[:account_name]
