@@ -36,6 +36,7 @@ Assistance::Application.routes.draw do
 
   namespace 'api' do
     namespace 'v0' do
+      resource :stats
       resources :merges, only: [:create]
       resources :trial_lessons, only: [:index]
       resources :time_slots, only: [:show, :index]

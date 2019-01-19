@@ -17,6 +17,8 @@ class InstructorStatsSQLBuilder
 				options[multipart_attr_name] = Date.new(options.delete("#{multipart_attr_name}(1i)").to_i, 
 														options.delete("#{multipart_attr_name}(2i)").to_i, 
 														options.delete("#{multipart_attr_name}(3i)").to_i)
+      elsif options[multipart_attr_name].is_a?(String)
+        options[multipart_attr_name] = options[multipart_attr_name].to_date
 			end
 		end	
 		options["include_cultural_activities"] = options["include_cultural_activities"] == '1' if options["include_cultural_activities"]
