@@ -32,3 +32,4 @@ public/uploads
 /config/application.yml
 
 coverage/*
+config/database.yml
