@@ -86,6 +86,7 @@ gem "workless"
 # Use debugger
 
 gem 'rake', '< 12'
+gem 'pg'
 
 group :test, :development do
 
@@ -121,10 +122,9 @@ group :development do
   gem 'git-pivotal-tracker-integration'
 end
 
-gem 'appsignal', '1.0'
+gem 'appsignal', '~> 2.8'
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
   gem 'le' # logentries
 end
