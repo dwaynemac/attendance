@@ -35,7 +35,13 @@ class ApplicationController < ActionController::Base
         end
         if apikey.access == 'login_key'
           a = Account.find_by_name(apikey.account_name)
-          user = User.find_by_username(a.usernames.first)
+          user = nil
+          if apikey.username
+            user = User.find_by_username(apikey.username)
+          end
+          if user.nil?
+            user = User.find_by_username(a.usernames.first)
+          end
           sign_in(user)
         end
       end
