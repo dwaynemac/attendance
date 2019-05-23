@@ -66,7 +66,7 @@ gem 'cancan'
 gem 'logical_model', '0.6.4'
 gem 'activity_stream_client', '0.0.16'
 gem 'contacts_client', '~> 0.0.40'
-gem 'accounts_client', '0.2.28'
+gem 'accounts_client', '0.2.36'
 gem 'messaging_client','~> 0.2'
 
 gem 'carrierwave'
