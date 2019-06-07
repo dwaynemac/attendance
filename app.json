@@ -23,9 +23,6 @@
     "contacts_key": {
       "required": true
     },
-    "doorbellio_key": {
-      "required": true
-    },
     "HEROKU_API_KEY": {
       "required": true
     },

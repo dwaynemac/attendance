@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+
+  include ApplicationHelper
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -34,16 +37,16 @@ class ApplicationController < ActionController::Base
           ApiKey.find key
         end
         if apikey.access == 'login_key'
+
           a = Account.find_by_name(apikey.account_name)
+          @session_current_account = a
+
           user = nil
           if apikey.username
             user = User.find_by_username(apikey.username)
           end
           if user.nil?
             user = User.find_by_username(a.usernames.first)
-          end
-          if user && a
-            user.update_attribute :current_account_id, a.id
           end
           sign_in(user)
         end
