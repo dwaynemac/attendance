@@ -42,6 +42,9 @@ class ApplicationController < ActionController::Base
           if user.nil?
             user = User.find_by_username(a.usernames.first)
           end
+          if user && a
+            user.update_attribute :current_account_id, a.id
+          end
           sign_in(user)
         end
       end
