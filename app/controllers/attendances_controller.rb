@@ -72,7 +72,12 @@ class AttendancesController < ApplicationController
       end
     else
       respond_to do |format|
-        flash.now[:alert] = "Attendance failed with the following errors: #{@attendance.errors.full_messages}"
+        e = ""
+        @attendance.errors.each do |k,v|
+          e << "," unless e.blank?
+          e << "#{k}: #{v}"
+        end
+        flash.now[:alert] = "Attendance failed with the following errors: #{e}"
         format.js { render 'update' }
       end
     end
