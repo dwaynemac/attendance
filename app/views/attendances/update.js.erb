@@ -1,3 +1,4 @@
+$("#flash_messages").html("<%= j(render 'layouts/flash_messages')%>");
 <% if @attendance.valid? %>
   <% @attendances = [@attendance] -%>
   $("#<%= time_slot_attendace_html_id(@attendance.time_slot,@attendance.attendance_on) %>").html("<%= escape_javascript(render partial: 'time_slot', locals: { time_slot: @attendance.time_slot, date: @attendance.attendance_on, only_pending: false} ) %>");
@@ -21,6 +22,4 @@
         });
       }
     });
-<% else %>
-  $("#flash_messages").html("<%= j(render 'layouts/flash_messages')%>");
 <% end %>
