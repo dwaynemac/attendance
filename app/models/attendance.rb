@@ -50,7 +50,7 @@ class Attendance < ActiveRecord::Base
 
   def no_duplicate_contact_ids
     if contact_ids.uniq.length != contact_ids.length
-      errors.add(:contacts, "One or more contacts has been added more than once")
+      errors.add(:contacts, :duplicated)
     end
   end
 end

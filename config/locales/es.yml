@@ -422,6 +422,7 @@ es:
       accepted: debe ser aceptado
       blank: no puede estar en blanco
       confirmation: no coincide con la confirmación
+      duplicated: Uno o más alumnos están duplicados en la lista
       empty: no puede estar vacío
       equal_to: debe ser igual a %{count}
       even: debe ser par
