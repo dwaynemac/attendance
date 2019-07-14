@@ -77,7 +77,7 @@ class AttendancesController < ApplicationController
           e << "," unless e.blank?
           e << "#{k}: #{v}"
         end
-        flash.now[:alert] = "Attendance failed with the following errors: #{e}"
+        flash.now[:alert] = "#{e}"
         format.js { render 'update' }
       end
     end
