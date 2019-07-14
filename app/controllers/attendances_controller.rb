@@ -72,12 +72,7 @@ class AttendancesController < ApplicationController
       end
     else
       respond_to do |format|
-        e = ""
-        @attendance.errors.each do |k,v|
-          e << "," unless e.blank?
-          e << "#{k}: #{v}"
-        end
-        flash.now[:alert] = "#{e}"
+        flash.now[:alert] = "#{clean_errors(@attendance.errors)}"
         format.js { render 'update' }
       end
     end
@@ -93,12 +88,7 @@ class AttendancesController < ApplicationController
       end
     else
       respond_to do |format|
-        e = ""
-        @attendance.errors.each do |k,v|
-          e << "," unless e.blank?
-          e << "#{k}: #{v}"
-        end
-        flash.now[:alert] = "#{e}"
+        flash.now[:alert] = "#{clean_errors(@attendance.errors)}"
         format.js { render 'update' }
       end
     end
@@ -161,6 +151,15 @@ class AttendancesController < ApplicationController
         tl.inform_activity_stream(action, I18n.locale, false)
       end
     end
+  end
+
+  def clean_errors(error_hash)
+    e = ""
+    error_hash.each do |k,v|
+      e << "," unless e.blank?
+      e << "#{k}: #{v}"
+    end
+    e
   end
 
 end
