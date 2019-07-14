@@ -85,11 +85,22 @@ class AttendancesController < ApplicationController
 
   def update
     update_trial_lessons @attendance, params[:trial_lessons], :update
-    @attendance.update(attendance_params_for_update)
-    respond_to do |format|
-      format.html { redirect_to attendances_url }
-      format.json { render json: {id: @attendance.id, message: "updated"}, status: 201 }
-      format.js
+    if @attendance.update(attendance_params_for_update)
+      respond_to do |format|
+       format.html { redirect_to attendances_url }
+       format.json { render json: {id: @attendance.id, message: "updated"}, status: 201 }
+       format.js
+      end
+    else
+      respond_to do |format|
+        e = ""
+        @attendance.errors.each do |k,v|
+          e << "," unless e.blank?
+          e << "#{k}: #{v}"
+        end
+        flash.now[:alert] = "#{e}"
+        format.js { render 'update' }
+      end
     end
   end
 
