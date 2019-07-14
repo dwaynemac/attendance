@@ -58,17 +58,22 @@ class AttendancesController < ApplicationController
     @trial_lessons = @attendance.trial_lessons
     respond_with @attendance
   end
-
   def create
     back_w_params = ActiveSupport::JSON.decode(params[:redirect_back_w_params]) if params[:redirect_back_w_params]
     update_trial_lessons @attendance, params[:trial_lessons], :create
     
     @attendance.account = current_user.current_account
-    @attendance.save
-    @padma_contacts = @attendance.time_slot.recurrent_contacts
-    respond_to do |format|
-      format.html { redirect_to attendances_url(back_w_params) }
-      format.js { render 'update' }
+    if @attendance.save
+      @padma_contacts = @attendance.time_slot.recurrent_contacts
+      respond_to do |format|
+        format.html { redirect_to attendances_url(back_w_params) }
+        format.js { render 'update' }
+      end
+    else
+      respond_to do |format|
+        flash.now[:alert] = "Attendance failed with the following errors: #{@attendance.errors.full_messages}"
+        format.js { render 'update' }
+      end
     end
   end
 
