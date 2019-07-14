@@ -58,6 +58,7 @@ class AttendancesController < ApplicationController
     @trial_lessons = @attendance.trial_lessons
     respond_with @attendance
   end
+
   def create
     back_w_params = ActiveSupport::JSON.decode(params[:redirect_back_w_params]) if params[:redirect_back_w_params]
     update_trial_lessons @attendance, params[:trial_lessons], :create
