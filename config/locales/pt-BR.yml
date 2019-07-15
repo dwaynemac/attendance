@@ -54,6 +54,8 @@ pt-BR:
       user:
         username: 
     errors:
+      messages:
+        duplicated: Um ou mais alunos são duplicados na lista
       models:
         time_slot:
           attributes:

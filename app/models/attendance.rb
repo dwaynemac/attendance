@@ -11,6 +11,7 @@ class Attendance < ActiveRecord::Base
   validates :username, presence: true
   validates_date :attendance_on, on_or_before: :today
   validate :only_on_per_day_per_slot
+  validate :no_duplicate_contact_ids
 
   attr_accessor :padma_contacts
 
@@ -27,7 +28,7 @@ class Attendance < ActiveRecord::Base
   def padma_contacts= padma_contacts
     return if time_slot.nil?
     contact_ids = []
-    padma_contacts.each do |padma_contact_id|
+    padma_contacts.uniq.each do |padma_contact_id|
       contact = Contact.get_by_padma_id(padma_contact_id, account_id || time_slot.account_id)
       contact_ids << contact.id
     end
@@ -44,6 +45,12 @@ class Attendance < ActiveRecord::Base
                         time_slot_id: self.time_slot_id,
                         attendance_on: self.attendance_on).count > ((self.persisted?)? 1 : 0)
       errors.add(:attendance_on, :already_registered)
+    end
+  end
+
+  def no_duplicate_contact_ids
+    if contact_ids.uniq.length != contact_ids.length
+      errors.add(:contacts, :duplicated)
     end
   end
 end

@@ -64,21 +64,33 @@ class AttendancesController < ApplicationController
     update_trial_lessons @attendance, params[:trial_lessons], :create
     
     @attendance.account = current_user.current_account
-    @attendance.save
-    @padma_contacts = @attendance.time_slot.recurrent_contacts
-    respond_to do |format|
-      format.html { redirect_to attendances_url(back_w_params) }
-      format.js { render 'update' }
+    if @attendance.save
+      @padma_contacts = @attendance.time_slot.recurrent_contacts
+      respond_to do |format|
+        format.html { redirect_to attendances_url(back_w_params) }
+        format.js { render 'update' }
+      end
+    else
+      respond_to do |format|
+        flash.now[:alert] = "#{clean_errors(@attendance.errors)}"
+        format.js { render 'update' }
+      end
     end
   end
 
   def update
     update_trial_lessons @attendance, params[:trial_lessons], :update
-    @attendance.update(attendance_params_for_update)
-    respond_to do |format|
-      format.html { redirect_to attendances_url }
-      format.json { render json: {id: @attendance.id, message: "updated"}, status: 201 }
-      format.js
+    if @attendance.update(attendance_params_for_update)
+      respond_to do |format|
+       format.html { redirect_to attendances_url }
+       format.json { render json: {id: @attendance.id, message: "updated"}, status: 201 }
+       format.js
+      end
+    else
+      respond_to do |format|
+        flash.now[:alert] = "#{clean_errors(@attendance.errors)}"
+        format.js { render 'update' }
+      end
     end
   end
 
@@ -139,6 +151,15 @@ class AttendancesController < ApplicationController
         tl.inform_activity_stream(action, I18n.locale, false)
       end
     end
+  end
+
+  def clean_errors(error_hash)
+    e = ""
+    error_hash.each do |k,v|
+      e << "," unless e.blank?
+      e << "#{k}: #{v}"
+    end
+    e
   end
 
 end

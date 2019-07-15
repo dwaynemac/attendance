@@ -1,22 +1,25 @@
-<% @attendances = [@attendance] -%>
-$("#<%= time_slot_attendace_html_id(@attendance.time_slot,@attendance.attendance_on) %>").html("<%= escape_javascript(render partial: 'time_slot', locals: { time_slot: @attendance.time_slot, date: @attendance.attendance_on, only_pending: false} ) %>");
+$("#flash_messages").html("<%= j(render 'layouts/flash_messages')%>");
+<% if @attendance.valid? %>
+  <% @attendances = [@attendance] -%>
+  $("#<%= time_slot_attendace_html_id(@attendance.time_slot,@attendance.attendance_on) %>").html("<%= escape_javascript(render partial: 'time_slot', locals: { time_slot: @attendance.time_slot, date: @attendance.attendance_on, only_pending: false} ) %>");
 
-$('[data-toggle="popover"]').popover({ html: true })
-  .on("focus", function () {
-            $(this).popover("show");
-  }).on("focusout", function () {
-            var _this = this;
-    if (!$(".popover:hover").length) {
-                  $(this).popover("hide");
-    }
-    else {
-      $('.popover').mouseleave(function() {
-        $(_this).popover("hide");
-        $(this).off('mouseleave');
-      });
-      $('.popover-edit').click(function() {
-        $(".popover").off('mouseleave');
-        $(_this).popover("hide");
-      });
-    }
-  });
+  $('[data-toggle="popover"]').popover({ html: true })
+    .on("focus", function () {
+              $(this).popover("show");
+    }).on("focusout", function () {
+              var _this = this;
+      if (!$(".popover:hover").length) {
+                    $(this).popover("hide");
+      }
+      else {
+        $('.popover').mouseleave(function() {
+          $(_this).popover("hide");
+          $(this).off('mouseleave');
+        });
+        $('.popover-edit').click(function() {
+          $(".popover").off('mouseleave');
+          $(_this).popover("hide");
+        });
+      }
+    });
+<% end %>
