@@ -328,6 +328,7 @@ es:
       last_month: Mes pasado
       custom_period: elegir período
       period: período
+      attendances_detail: Descargar detalle de asistencias
     table:
       name: Nombre
       total: Total

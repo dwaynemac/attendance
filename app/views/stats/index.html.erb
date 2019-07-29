@@ -91,5 +91,14 @@
         <% end %>
       </tbody>
     </table>
+
+    <div class="row">
+      <div class='col-xs-8 col-md-8'>
+      </div>
+      <div class='col-xs-4 col-md-4 text-right'>
+        <%= link_to t(".attendances_detail"), attendance_contacts_path(format: :csv) %>
+      </div>
+    </div>
+
   </section>
 </div>

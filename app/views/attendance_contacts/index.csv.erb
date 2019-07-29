@@ -1,0 +1,21 @@
+<%- require 'csv' -%>
+<%= CSV.generate(current_user.csv_options.merge((params[:csv_options]||{}).to_hash.symbolize_keys!)) do |csv|
+
+  csv << [
+    I18n.t("activerecord.attributes.attendance.attendance_on"),
+    I18n.t("activerecord.attributes.attendance.username"),
+    I18n.t("activerecord.attributes.time_slot.name"),
+    I18n.t("activerecord.attributes.attendance.time_slot")
+  ]
+
+  @attendance_contacts.each do |ac|
+    csv << [
+      ac.attendance.attendance_on,
+      ac.attendance.username,
+      ac.contact.try(:name),
+      ac.attendance.time_slot.try(:description)
+    ]
+  end
+
+
+end.html_safe %>

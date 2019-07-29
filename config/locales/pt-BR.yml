@@ -333,6 +333,7 @@ pt-BR:
       custom_period: selecionar o período
       last_month: mês passado
       period: periodo
+      attendances_detail: Download detalhe das presenças
     table:
       name: Nome
       total: Total

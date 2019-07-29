@@ -25,6 +25,8 @@ Assistance::Application.routes.draw do
     end
   end
   resources :attendances
+  resources :attendance_contacts, only: [:index]
+  get 'attendances_details', to: "attendance_contacts#index"
   resources :trial_lessons
   resources :contacts, :only => [:index, :show, :update]
   resources :stats, :only => [:index] do

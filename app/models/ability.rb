@@ -26,6 +26,7 @@ class Ability
     can :include_former_students, :stats
     can :manage, TimeSlot, account_id: user.current_account_id
     can :manage, Attendance, account_id: user.current_account_id
+    can :manage, AttendanceContact, attendance: { account_id: user.current_account_id }
     can :manage, TrialLesson, account_id: user.current_account_id
     can :manage, Contact do |c|
       c.accounts.where(:id => user.current_account_id)
