@@ -5,6 +5,7 @@ class AttendanceContactsController < ApplicationController
   def index
 
     @attendance_contacts = @attendance_contacts.includes({attendance: [:time_slot]}, :contact)
+                                               .order("attendances.attendance_on DESC")
 
     respond_to do |format|
       format.csv do
