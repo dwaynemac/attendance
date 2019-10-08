@@ -2,7 +2,10 @@ class MessageDoorController < ApplicationController
   include SnsHelper
   include SsoSessionsHelper
 
+  skip_before_filter :verify_authenticity_token
+
   skip_before_filter :get_sso_session
+
   skip_before_filter :mock_login
   skip_before_filter :authenticate_user!
   skip_before_filter :require_padma_account
