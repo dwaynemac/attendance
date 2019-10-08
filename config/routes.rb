@@ -2,13 +2,16 @@ Assistance::Application.routes.draw do
 
   devise_for :users 
   devise_scope :user do
-    get "/login", :to => "devise/cas_sessions#new"
-    get '/logout', to: "devise/cas_sessions#destroy"
-    post '/logout', to: "devise/cas_sessions#destroy"
+    get "/login",   to: "sso_sessions#show"
+    get '/logout',  to: "sso_sessions#destroy"
+    post '/logout', to: "sso_sessions#destroy"
   end
+  resource :sso_session
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
+  get 'sns', to: 'message_door#sns'
   # You can have the root of your site routed with "root"
   root 'attendances#index'
 

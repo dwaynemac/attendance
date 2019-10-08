@@ -1,13 +1,14 @@
 class ApplicationController < ActionController::Base
 
   include ApplicationHelper
+  include SsoSessionsHelper
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_filter :get_sso_session
   before_filter :secret_key_login
-  before_filter :mock_login
   
   before_filter :authenticate_user!
   
@@ -47,16 +48,6 @@ class ApplicationController < ActionController::Base
           sign_in(user)
         end
       end
-    end
-  end
-
-  # Mocks CAS login in development
-  def mock_login
-    if Rails.env.development?
-      a = Account.find_or_create_by(name: "development")
-      user = User.find_or_create_by(username: "luis.perichon", current_account_id: a.id)
-
-      sign_in(user)
     end
   end
 

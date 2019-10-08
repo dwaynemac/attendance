@@ -56,7 +56,6 @@ gem 'protected_attributes'
 
 # CAS authentication
 gem 'devise', github: 'plataformatec/devise', :branch => 'rails4'
-gem 'devise_cas_authenticatable', '~> 1.3.7'
 gem 'activerecord-session_store'
 
 # authorization
@@ -66,7 +65,7 @@ gem 'cancan'
 gem 'logical_model', '0.6.4'
 gem 'activity_stream_client', '0.0.16'
 gem 'contacts_client', '~> 0.0.40'
-gem 'accounts_client', '0.2.36'
+gem 'accounts_client', '0.2.38'
 gem 'messaging_client','~> 0.2'
 
 gem 'carrierwave'

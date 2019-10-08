@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
   attr_accessible :username, :current_account_id
 
-  devise :cas_authenticatable
+  devise :database_authenticatable
+  def encrypted_password
+  end
 
   validates_uniqueness_of :username
   validates_presence_of :username
