@@ -11,7 +11,7 @@ Assistance::Application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  get 'sns', to: 'message_door#sns'
+  post 'sns', to: 'message_door#sns'
   # You can have the root of your site routed with "root"
   root 'attendances#index'
 
