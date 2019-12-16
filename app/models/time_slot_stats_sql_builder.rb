@@ -1,6 +1,6 @@
 class TimeSlotStatsSQLBuilder
 
-	attr_accessor :start_on, :end_on, :account, :include_cultural_activities, :include_former_students
+	attr_accessor :start_on, :end_on, :account, :include_cultural_activities, :include_former_students, :include_former_teachers
 
 	DEFAULTS = {
 		# include/exclude cultural activities from stats. excluded by default
