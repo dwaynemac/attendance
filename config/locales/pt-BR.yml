@@ -30,6 +30,7 @@ pt-BR:
         end_on: Atê
         include_cultural_activities: Contabilizar atividades culturais
         include_former_students: Incluir ex-alunos que participaram de aulas durante o período selecionado
+        include_former_teachers: Incluir ex-instrutores que deram aulas durante o período selecionado
         start_on: 
         month: 
       time_slot:

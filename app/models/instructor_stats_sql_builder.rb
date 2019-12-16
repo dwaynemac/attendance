@@ -1,10 +1,11 @@
 class InstructorStatsSQLBuilder
-	attr_accessor :start_on, :end_on, :account, :include_cultural_activities, :include_former_students
+	attr_accessor :start_on, :end_on, :account, :include_cultural_activities, :include_former_students, :include_former_teachers
 
 	DEFAULTS = {
 		# include/exclude cultural activities from stats. excluded by default
 		:include_cultural_activities => false,
 		:include_former_students => false,
+		:include_former_teachers => false,
 		# start/end date. defaults to this month.
 		:start_on => Date.today.beginning_of_month,
 		:end_on => Date.today.end_of_month
@@ -23,6 +24,7 @@ class InstructorStatsSQLBuilder
 		end	
 		options["include_cultural_activities"] = options["include_cultural_activities"] == '1' if options["include_cultural_activities"]
 		options["include_former_students"] = options["include_former_students"] == '1' if options["include_former_students"]
+		options["include_former_teachers"] = options["include_former_teachers"] == '1' if options["include_former_teachers"]
 
 		# initialize builder using defaults
 		DEFAULTS.merge(options.symbolize_keys).each do |attr_name, value|
@@ -144,10 +146,22 @@ class InstructorStatsSQLBuilder
 		time_slots
 	end
 
+  # ids (in this case they are usernames)
 	def distribution
-		unless @distribution
-			@distribution = account.usernames
-		end
+    if @distribution.nil?
+      if include_former_teachers
+        @distribution = account.attendances.where("attendance_on between ? and ?", start_on, end_on)
+                               .group(:username) 
+                               .pluck(:username)
+                               .compact
+        if @distribution.empty?
+          # 0 attendances case
+          @distribution = account.usernames
+        end
+      else
+        @distribution = account.usernames
+      end
+    end
 
     # quick patch until code refactored to consider @ in usernames
     # quick patch possible because in theory @ users are not teachers. 
@@ -155,9 +169,11 @@ class InstructorStatsSQLBuilder
       @distribution = @distribution.reject{ |username| username =~ /@/ }
     end
 
+
 		@distribution.collect {|username| username.tr(".", "_")}
 	end
 
+  # usernames (in this case they are usernames)
 	def distribution_names
 		unless @distribution
 			@distribution = account.usernames

@@ -141,10 +141,12 @@ class TimeSlotStatsSQLBuilder
 		@time_slots
 	end
 
+  # ids
 	def distribution
 		time_slots.collect {|ts| "ts_#{ts.id}"}
 	end
 
+  # names
 	def distribution_names
 		time_slots.collect {|ts| ts.name}
 	end
