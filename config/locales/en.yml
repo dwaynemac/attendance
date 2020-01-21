@@ -308,6 +308,7 @@ en:
     table:
       name: Name
       total: Total
+      instructor: Instructor
   support:
     array:
       last_word_connector: ', and '

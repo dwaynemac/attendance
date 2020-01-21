@@ -338,6 +338,7 @@ pt-BR:
     table:
       name: Nome
       total: Total
+      instructor: Instrutor
   support:
     array:
       last_word_connector: ' e '
