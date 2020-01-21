@@ -2,6 +2,7 @@
 <%= CSV.generate(current_user.csv_options.merge((params[:csv_options]||{}).to_hash.symbolize_keys!)) do |csv|
   header = [
       to_current_encoding(t('stats.table.name')),
+      to_current_encoding(t('stats.table.instructor')),
       to_current_encoding(t('stats.table.total'))
   ]
 
@@ -15,6 +16,8 @@
     dist_array = []
 
     dist_array << to_current_encoding(c.name)
+    dist_array << to_current_encoding(
+      @teachers.select{ |pc| pc.id == c.padma_id }.first.try :local_teacher)
     dist_array << to_current_encoding(number_with_precision(c.attendance_total || 0, 
                                                             precision: 0))
     
