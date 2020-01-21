@@ -96,6 +96,13 @@ $(document).ajaxComplete ->
   $("#loader").hide()
   $('.selectpicker').attr('disabled', false).selectpicker('refresh')
 
+$(".search-contacts-with-ajax").select2({
+  ajax: {
+    url: "http://localhost:3002/v0/contacts/search_for_select",
+    dataType: "json"
+  }
+})
+
 class @TrialLessonSelect
   @setup: (div_id) ->
     $(div_id).parent().removeClass("select")
