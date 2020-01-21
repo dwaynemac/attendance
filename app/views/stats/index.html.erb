@@ -79,6 +79,7 @@
       <thead>
       	<tr>
       	  <th><%= t('stats.table.name')%></th>
+          <th><%= t('stats.table.instructor') %></th>
       	  <th><%= t('stats.table.total')%></th>
       	  <% @distribution_names.each do |name| %>
       	  	<th colspan="2"><%= name %></th>
@@ -89,6 +90,7 @@
         <% @contacts.each do |contact| %>
         	<tr>
         	  <td><%= link_to contact.name, contact_path(:id => contact.padma_id) %></td>
+            <td><%= @teachers.select{ |c| c.id == contact.padma_id }.first.try :local_teacher %></td>
         	  <td><%= number_with_precision(contact.attendance_total || 0, precision: 0) %></td>
         	  <% @distribution.each do |name| %>
         	  	<td><%= number_with_precision contact.send("sum_#{name}"), precision: 0 %></td>
