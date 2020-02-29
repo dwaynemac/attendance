@@ -84,7 +84,7 @@ gem "workless"
 
 # Use debugger
 
-gem 'rake', '< 12'
+gem 'rake', '< 13'
 gem 'pg'
 
 group :test, :development do
