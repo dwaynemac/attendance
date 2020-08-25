@@ -33,3 +33,6 @@ public/uploads
 
 coverage/*
 config/database.yml
+
+# Ignore RubyMine files
+.idea/
