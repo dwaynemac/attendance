@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20171003013638) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "accounts", force: true do |t|
     t.string   "name"
     t.datetime "synchronized_at"
@@ -29,8 +32,8 @@ ActiveRecord::Schema.define(version: 20171003013638) do
     t.integer "contact_id"
   end
 
-  add_index "attendance_contacts", ["attendance_id"], name: "index_attendance_contacts_on_attendance_id"
-  add_index "attendance_contacts", ["contact_id"], name: "index_attendance_contacts_on_contact_id"
+  add_index "attendance_contacts", ["attendance_id"], name: "index_attendance_contacts_on_attendance_id", using: :btree
+  add_index "attendance_contacts", ["contact_id"], name: "index_attendance_contacts_on_contact_id", using: :btree
 
   create_table "attendances", force: true do |t|
     t.integer  "account_id"
@@ -42,8 +45,8 @@ ActiveRecord::Schema.define(version: 20171003013638) do
     t.boolean  "suspended"
   end
 
-  add_index "attendances", ["account_id"], name: "index_attendances_on_account_id"
-  add_index "attendances", ["time_slot_id"], name: "index_attendances_on_time_slot_id"
+  add_index "attendances", ["account_id"], name: "index_attendances_on_account_id", using: :btree
+  add_index "attendances", ["time_slot_id"], name: "index_attendances_on_time_slot_id", using: :btree
 
   create_table "contact_time_slots", force: true do |t|
     t.integer  "contact_id"
@@ -63,7 +66,7 @@ ActiveRecord::Schema.define(version: 20171003013638) do
     t.string   "padma_status"
   end
 
-  add_index "contacts", ["account_id"], name: "index_contacts_on_account_id"
+  add_index "contacts", ["account_id"], name: "index_contacts_on_account_id", using: :btree
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -79,7 +82,7 @@ ActiveRecord::Schema.define(version: 20171003013638) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "import_details", force: true do |t|
     t.integer  "value"
@@ -107,8 +110,8 @@ ActiveRecord::Schema.define(version: 20171003013638) do
     t.datetime "updated_at"
   end
 
-  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id"
-  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "time_slots", force: true do |t|
     t.string   "padma_uid"
@@ -146,9 +149,9 @@ ActiveRecord::Schema.define(version: 20171003013638) do
     t.string   "absence_reason"
   end
 
-  add_index "trial_lessons", ["account_id"], name: "index_trial_lessons_on_account_id"
-  add_index "trial_lessons", ["contact_id"], name: "index_trial_lessons_on_contact_id"
-  add_index "trial_lessons", ["time_slot_id"], name: "index_trial_lessons_on_time_slot_id"
+  add_index "trial_lessons", ["account_id"], name: "index_trial_lessons_on_account_id", using: :btree
+  add_index "trial_lessons", ["contact_id"], name: "index_trial_lessons_on_contact_id", using: :btree
+  add_index "trial_lessons", ["time_slot_id"], name: "index_trial_lessons_on_time_slot_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username"
