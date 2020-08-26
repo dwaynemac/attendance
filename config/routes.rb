@@ -45,6 +45,7 @@ Assistance::Application.routes.draw do
       resources :merges, only: [:create]
       resources :trial_lessons, only: [:index]
       resources :time_slots, only: [:show, :index]
+      resources :attendance_contacts, only: [:create,:destroy]
       resources :contacts, only: [:show, :index] do
         collection do
           post :list, to: 'contacts#index'
