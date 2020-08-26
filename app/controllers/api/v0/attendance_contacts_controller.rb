@@ -36,5 +36,11 @@ class Api::V0::AttendanceContactsController < Api::V0::ApiController
 
   end
 
+  def destroy
+    @attendance_contact = AttendanceContact.find(params[:id])
+    @attendance_contact.destroy
+    render json: "ok"
+  end
+
 end
 
