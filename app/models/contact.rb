@@ -84,7 +84,7 @@ class Contact < ActiveRecord::Base
     return if padma_contact_id.blank?
       
     account = Account.find(account_id)
-    if contact = Contact.find_by_padma_id(padma_contact_id)
+    if (contact = Contact.find_by_padma_id(padma_contact_id))
       #Local Contact found, associate to account if necessary
       unless contact.accounts.include?(account)
         # Get PadmaContact unless it is already present
@@ -111,23 +111,22 @@ class Contact < ActiveRecord::Base
                                           username: account.usernames.try(:first),
                                           account_name: account.name)
       end
+      if padma_contact
+        #New contact attributes from PadmaContacts
+        args = {
+          padma_id: padma_contact_id,
+          name: "#{padma_contact.first_name} #{padma_contact.last_name}"
+        }
 
-      #New contact attributes from PadmaContacts
-      args = {
-              padma_id: padma_contact_id,
-              name: "#{padma_contact.first_name} #{padma_contact.last_name}"
-            }
+        # Merge with local attributes if they are present
+        args = args.merge(new_contact_attributes) if new_contact_attributes.present?
 
+        # Create new local Contact
+        contact = Contact.create!(args)
 
-      # Merge with local attributes if they are present
-      args = args.merge(new_contact_attributes) if new_contact_attributes.present?
-      
-      # Create new local Contact
-      contact = Contact.create!(args)
-
-      # Associate to account
-      contact.accounts_contacts.create(:account => account, :padma_status => padma_contact.local_status) if padma_contact.present?
-
+        # Associate to account
+        contact.accounts_contacts.create(:account => account, :padma_status => padma_contact.local_status) if padma_contact.present?
+      end
     end
     contact
   end
