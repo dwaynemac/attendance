@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby "2.0.0"
+ruby "2.3.8"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0.rc1'
+gem 'rails', '4.1.0'
 
 gem 'rack-cors'
 
@@ -55,7 +55,7 @@ gem 'figaro'
 gem 'protected_attributes'
 
 # CAS authentication
-gem 'devise', github: 'plataformatec/devise', :branch => 'rails4'
+gem 'devise', '3.4.1' 
 gem 'activerecord-session_store'
 
 # authorization
@@ -73,6 +73,7 @@ gem 'fog', github: 'fog/fog', ref: '272bc6b2a2769f8d1a8b50b1f6cd9741db4969b4' # 
 gem 'delayed_job_active_record' # must be declared after 'protected_attributes' gem
 gem "workless"
 
+gem 'json', '1.8.6'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -85,12 +86,12 @@ gem "workless"
 # Use debugger
 
 gem 'rake', '< 12'
-gem 'pg'
+gem 'pg', '~> 0.20'
 
 group :test, :development do
 
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
+  gem 'sqlite3', '1.3.11'
 
   gem 'rspec-rails'
   gem 'shoulda-matchers'
@@ -106,7 +107,7 @@ group :development do
   gem 'foreman'
   #gem 'subcontractor', '0.6.1'
 
-  gem 'byebug'
+  gem 'byebug', '~> 11.0.1'
   #
   # for easier error debugging in development.
   gem 'better_errors'
