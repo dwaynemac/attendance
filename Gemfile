@@ -51,9 +51,6 @@ end
 
 gem 'figaro'
 
-# Rails 4 support for Mass Assignment Security
-gem 'protected_attributes'
-
 # CAS authentication
 gem 'devise', '3.4.1' 
 gem 'activerecord-session_store'
@@ -62,7 +59,7 @@ gem 'activerecord-session_store'
 gem 'cancan'
 
 # Padma Clients
-gem 'logical_model', '0.6.4'
+gem 'logical_model', '0.6.6'
 gem 'activity_stream_client', '0.0.16'
 gem 'contacts_client', '~> 0.0.40'
 gem 'accounts_client', '0.2.38'

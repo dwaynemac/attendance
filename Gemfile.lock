@@ -178,7 +178,7 @@ GEM
     less-rails-bootstrap (3.0.6)
       less-rails (~> 2.4.2)
     libv8 (3.16.14.19)
-    logical_model (0.6.4)
+    logical_model (0.6.6)
       activemodel
       activesupport
       ethon (= 0.4.2)
@@ -221,8 +221,6 @@ GEM
       moneta (~> 1.0.0)
       rate_throttle_client (~> 0.1.0)
     polyglot (0.3.5)
-    protected_attributes (1.1.4)
-      activemodel (>= 4.0.1, < 5.0)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -383,11 +381,10 @@ DEPENDENCIES
   json (= 1.8.6)
   le
   less-rails-bootstrap (~> 3.0.6)
-  logical_model (= 0.6.4)
+  logical_model (= 0.6.6)
   messaging_client (~> 0.2)
   padma-assets (= 0.2.29)
   pg (~> 0.20)
-  protected_attributes
   pry
   rack-cors
   rails (= 4.1.2)
