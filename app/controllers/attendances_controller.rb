@@ -114,10 +114,11 @@ class AttendancesController < ApplicationController
   private
 
   def attendance_params_for_update
+    permitted_params = attendance_params
     if params[:attendance] && params[:attendance][:padma_contacts].nil?
-      params[:attendance][:padma_contacts] = []
+      permitted_params = permitted_params.merge!({padma_contacts: []})
     end
-    params[:attendance]
+    permitted_params
   end
 
   def get_recent_time_slot
@@ -178,12 +179,14 @@ class AttendancesController < ApplicationController
   end
 
   def attendance_params
-    params.require(:attendance).permit(:account_id,
-                                       :time_slot_id,
-                                       :attendance_on,
-                                       :padma_contacts,
-                                       :username,
-                                       :suspended)
+    params.require(:attendance).permit(
+        :account_id,
+        :time_slot_id,
+        :attendance_on,
+        :username,
+        :suspended,
+        :padma_contacts => []
+    )
   end
 
 end
