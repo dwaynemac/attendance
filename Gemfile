@@ -99,12 +99,12 @@ group :test, :development do
 end
 
 gem 'validates_timeliness'
+gem 'byebug', '~> 11.0.1'
 
 group :development do
   gem 'foreman'
   #gem 'subcontractor', '0.6.1'
 
-  gem 'byebug', '~> 11.0.1'
   #
   # for easier error debugging in development.
   gem 'better_errors'
