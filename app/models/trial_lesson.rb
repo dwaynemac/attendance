@@ -13,7 +13,7 @@ class TrialLesson < ActiveRecord::Base
 
   attr_accessor :padma_contact_id
 
-  attr_accessible :trial_on, :time_slot_id, :padma_uid, :padma_contact_id, :assisted, :confirmed, :archived, :absence_reason
+  # attr_accessible :trial_on, :time_slot_id, :padma_uid, :padma_contact_id, :assisted, :confirmed, :archived, :absence_reason
 
   attr_accessor :activity_on_trial_time
   after_create :create_activity
@@ -22,7 +22,7 @@ class TrialLesson < ActiveRecord::Base
   after_create :broadcast_create, unless: :skip_broadcast
 
   attr_accessor :avoid_mailing_triggers
-  attr_accessible :avoid_mailing_triggers
+  # attr_accessible :avoid_mailing_triggers
 
   after_destroy :destroy_activity
 

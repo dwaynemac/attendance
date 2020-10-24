@@ -1,6 +1,6 @@
 class TimeSlot < ActiveRecord::Base
 
-  default_scope where("deleted= :false OR deleted IS NULL", false: false).order('name ASC')
+  default_scope { where("deleted= :false OR deleted IS NULL", false: false).order('name ASC') }
 
   belongs_to :account
   
@@ -15,7 +15,7 @@ class TimeSlot < ActiveRecord::Base
   validates :name,  :presence => true #, :uniqueness => {:scope => :account_id}
   validates_time :end_at, :after => :start_at
 
-  attr_accessible :padma_uid, :name, :start_at, :end_at, :padma_contacts, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :cultural_activity, :external_id, :unscheduled
+  # attr_accessible :padma_uid, :name, :start_at, :end_at, :padma_contacts, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :cultural_activity, :external_id, :unscheduled
 
   before_create :set_defaults
 
