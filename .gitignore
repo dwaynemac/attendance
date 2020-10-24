@@ -34,5 +34,8 @@ public/uploads
 coverage/*
 config/database.yml
 
+# Ignore byebug history
+.byebug_history
+
 # Ignore RubyMine files
 .idea/
