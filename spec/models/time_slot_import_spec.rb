@@ -27,7 +27,7 @@ describe TimeSlotImport do
   let(:time_slot_import){ create(:time_slot_import, csv_file: csv_file, headers: headers, account: (Account.first || create(:account))) }
 
   before do
-    PadmaContact.stub!(:find_by_kshema_id) do |arg1|
+    PadmaContact.stub(:find_by_kshema_id) do |arg1|
       PadmaContact.new(id: arg1, first_name: 'fn', last_name: 'ln')
     end
   end

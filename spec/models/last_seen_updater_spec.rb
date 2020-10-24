@@ -6,11 +6,11 @@ describe LastSeenUpdater do
   let(:attendance) {create(:attendance)}
   
   before do
-    PadmaContact.stub!(:paginate) do
+    PadmaContact.stub(:paginate) do
       [contact]
     end
     #Contact.any_instance.stub(:padma_contact).and_return(PadmaContact.new(first_name: 'fn', last_name: 'ln'))
-    PadmaAccount.stub!(:find) do
+    PadmaAccount.stub(:find) do
       account
     end
   end
