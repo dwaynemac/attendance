@@ -1,7 +1,7 @@
 class ContactsController < ApplicationController
   before_filter :find_contact_by_padma_id, :only => :show
   load_and_authorize_resource
-  respond_to :html, :js, :csv
+  # respond_to :html, :js, :csv
 
   def index
     if params[:time_slot_id].present?
@@ -20,7 +20,16 @@ class ContactsController < ApplicationController
     else
       @padma_contacts = current_user.current_account.students
     end
-    respond_with @padma_contacts
+
+    # TODO removed respond_with method as it is no longer included in rails
+    # and compatible gem is for Rails 4.1.2
+    #
+    # check if it is responding correctly for JS and if
+    # CSV response is needed
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def update

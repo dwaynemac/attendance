@@ -1,6 +1,6 @@
 class AttendancesController < ApplicationController
+  before_action :load_attendance, only: [:create, :update]
   load_and_authorize_resource
-  respond_to :html
 
   def index
     @day_span = 7
@@ -26,7 +26,9 @@ class AttendancesController < ApplicationController
     @recent = nil # disable until bug #107776460 fixed
     # @recent = get_recent_time_slot
     
-    respond_with @attendances
+    respond_to do |format|
+      format.html
+    end
   end
 
   def new
@@ -56,7 +58,10 @@ class AttendancesController < ApplicationController
   
   def show
     @trial_lessons = @attendance.trial_lessons
-    respond_with @attendance
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   def create
@@ -101,7 +106,9 @@ class AttendancesController < ApplicationController
     @attendance.destroy
     Contact.find(contacts).map{|c| c.update_last_seen_at(account)}
 
-    respond_with @attendance
+    respond_to do |format|
+      format.html
+    end
   end
   
   private
@@ -160,6 +167,23 @@ class AttendancesController < ApplicationController
       e << "#{k}: #{v}"
     end
     e
+  end
+
+  def load_attendance
+    if params.has_key?(:id)
+      @attendance = Attendance.find(params[:id])
+    else
+      @attendance = Attendance.new(attendance_params)
+    end
+  end
+
+  def attendance_params
+    params.require(:attendance).permit(:account_id,
+                                       :time_slot_id,
+                                       :attendance_on,
+                                       :padma_contacts,
+                                       :username,
+                                       :suspended)
   end
 
 end
