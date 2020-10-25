@@ -101,8 +101,8 @@ describe TrialLessonsController do
         # specifies that the TrialLesson created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        TrialLesson.any_instance.should_receive(:update).with({ "these" => "params" })
-        put :update, {:id => trial_lesson.to_param, :trial_lesson => { "these" => "params" }}
+        TrialLesson.any_instance.should_receive(:update).with({ "padma_uid" => "params" })
+        put :update, {:id => trial_lesson.to_param, :trial_lesson => { "padma_uid" => "params" }}
       end
 
       it "assigns the requested trial_lesson as @trial_lesson" do
