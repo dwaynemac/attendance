@@ -23,7 +23,7 @@ class TrialLessonsController < ApplicationController
   # GET /trial_lessons/new
   def new
     @trial_lesson = current_account.trial_lessons.build
-    @trial_lesson.attributes = params.has_key?(:trial_lesson) ? trial_lesson_params.to_h : {}
+    @trial_lesson.attributes = trial_lesson_params
     
     set_ref_date
     
@@ -92,15 +92,19 @@ class TrialLessonsController < ApplicationController
   end
 
   def trial_lesson_params
-    params.require(:trial_lesson).permit(
-        :trial_on,
-        :time_slot_id,
-        :padma_uid,
-        :padma_contact_id,
-        :assisted,
-        :confirmed,
-        :archived,
-        :absence_reason
-    )
+    if params.has_key?(:trial_lesson) && !params[:trial_lesson].blank?
+      params.require(:trial_lesson).permit(
+          :trial_on,
+          :time_slot_id,
+          :padma_uid,
+          :padma_contact_id,
+          :assisted,
+          :confirmed,
+          :archived,
+          :absence_reason
+      )
+    else
+      {}
+    end
   end
 end
