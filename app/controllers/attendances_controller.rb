@@ -1,5 +1,5 @@
 class AttendancesController < ApplicationController
-  before_action :load_attendance, only: [:create, :update]
+  before_action :load_attendance, only: [:create, :update, :new]
   load_and_authorize_resource
 
   def index
@@ -68,7 +68,6 @@ class AttendancesController < ApplicationController
     back_w_params = ActiveSupport::JSON.decode(params[:redirect_back_w_params]) if params[:redirect_back_w_params]
     update_trial_lessons @attendance, params[:trial_lessons], :create
     
-    @attendance.account = current_user.current_account
     if @attendance.save
       @padma_contacts = @attendance.time_slot.recurrent_contacts
       respond_to do |format|
@@ -173,8 +172,10 @@ class AttendancesController < ApplicationController
   def load_attendance
     if params.has_key?(:id)
       @attendance = Attendance.find(params[:id])
+      @attendance.account_id = current_user.current_account.id
     else
       @attendance = Attendance.new(attendance_params)
+      @attendance.account_id = current_user.current_account.id
     end
   end
 
