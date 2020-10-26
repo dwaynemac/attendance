@@ -129,8 +129,8 @@ describe TimeSlotsController do
         # specifies that the TimeSlot created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        TimeSlot.any_instance.should_receive(:update).with(hash_including({ "these" => "params" }))
-        put :update, {:id => time_slot.to_param, :time_slot => { "these" => "params" }}
+        TimeSlot.any_instance.should_receive(:update).with(hash_including({ "padma_uid" => "params" }))
+        put :update, {:id => time_slot.to_param, :time_slot => { "padma_uid" => "params" }}
       end
 
       it "assigns the requested time_slot as @time_slot" do
@@ -176,7 +176,7 @@ describe TimeSlotsController do
       time_slot = create(:time_slot, :account => @user.current_account)
       expect {
         delete :destroy, {:id => time_slot.to_param}
-      }.not_to change(TimeSlot.unscoped, :count).by(-1)
+      }.not_to change(TimeSlot.unscoped, :count)
     end
 
     it "redirects to the time_slots list" do
