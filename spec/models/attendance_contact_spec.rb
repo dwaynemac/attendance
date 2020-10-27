@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe AttendanceContact do
   it "should be valid with default attributes" do

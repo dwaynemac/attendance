@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Api::V0::TrialLessonsController do
   include TrialLessonsHelper

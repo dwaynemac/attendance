@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Api::V0::ContactsController do
   describe "GET /api/v0/contacts" do

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe TrialLesson do
   it "should be valid with default attributes" do

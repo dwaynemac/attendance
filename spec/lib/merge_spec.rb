@@ -1,5 +1,5 @@
 require 'merge'
-require 'spec_helper'
+require 'rails_helper'
 
 describe Merge do
 

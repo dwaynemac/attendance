@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe TimeSlotImport do
   let(:i18n){ I18n.locale }
