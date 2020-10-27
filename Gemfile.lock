@@ -96,8 +96,8 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     commonjs (0.2.7)
-    contacts_client (0.0.41)
-      logical_model (>= 0.6.3)
+    contacts_client (0.0.54)
+      logical_model (>= 0.6.5)
       railties (>= 3.1)
     coveralls (0.8.23)
       json (>= 1.8, < 3)
@@ -364,7 +364,7 @@ DEPENDENCIES
   cancan
   carrierwave
   coffee-rails (~> 4.0.0)
-  contacts_client (~> 0.0.40)
+  contacts_client (~> 0.0.54)
   coveralls
   database_cleaner
   delayed_job_active_record
