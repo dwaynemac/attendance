@@ -42,7 +42,7 @@ class TimeSlotsController < ApplicationController
 
   def update    
     respond_to do |format|
-      if @time_slot.update(time_slot_params)
+      if @time_slot.update(update_timeslot_params)
         format.html {
           redirect_to @time_slot, notice: 'Time slot was successfully updated.'
       	}
@@ -96,7 +96,7 @@ class TimeSlotsController < ApplicationController
       @time_slot = TimeSlot.find(params[:id])
       @time_slot.account = current_user.current_account
     else
-      @time_slot = TimeSlot.new(time_slot_params)
+      @time_slot = TimeSlot.new(update_timeslot_params)
       @time_slot.account = current_user.current_account
     end
   end
@@ -109,7 +109,9 @@ class TimeSlotsController < ApplicationController
       day_name = day_name.downcase
       # params[:time_slot][day_name.to_sym] = (selected_day_names.include? day_name) ? "1" : "0"
       permitted_params[day_name.to_sym] = (selected_day_names.include? day_name) ? "1" : "0"
+      
     end
+    permitted_params
   end 
 
 end
