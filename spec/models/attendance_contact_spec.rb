@@ -22,12 +22,12 @@ describe AttendanceContact do
 
       it "saves attendances anyway" do
         ac = build(:attendance_contact)
-        ac.save.should be_true
+        ac.save.should be_truthy
       end
       it "queues delayed job to set last_seen_at" do
         expect do
           ac = build(:attendance_contact)
-          ac.save.should be_true
+          ac.save.should be_truthy
         end.to change{ Delayed::Job.count }
       end
 
@@ -39,19 +39,19 @@ describe AttendanceContact do
       end
       it "saves attendances" do
         ac = build(:attendance_contact)
-        ac.save.should be_true
+        ac.save.should be_truthy
       end
       it "queues delayed job to set last_seen_at" do
         expect do
           ac = build(:attendance_contact)
-          ac.save.should be_true
+          ac.save.should be_truthy
         end.to change{ Delayed::Job.count }
       end
       context "and skip_update_last_seen_at flag is set to true" do
         it "should not queue delayed job to set last_seen_at" do
           expect do
             ac = build(:attendance_contact, skip_update_last_seen_at: true)
-            ac.save.should be_true
+            ac.save.should be_truthy
           end.not_to change { Delayed::Job.count }
         end
       end

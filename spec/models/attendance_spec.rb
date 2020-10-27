@@ -79,7 +79,7 @@ describe Attendance do
     Contact.any_instance.stub(:padma_contact).and_return(PadmaContact.new(first_name: 'fn', last_name: 'ln', last_seen_at: 1.day.ago.to_s))
     ts = create(:time_slot, :account => account)
     attendance = create(:attendance, :account => account, :time_slot => ts, :contact_ids => [contact.id])
-    attendance.attendance_contacts.should have(1).attendance_contact
+    attendance.attendance_contacts.count.should eq 1
   end
 
   context "when deleted" do
@@ -88,10 +88,10 @@ describe Attendance do
       c2 = create(:contact)
       a = build(:attendance)
       a.save! # valid
-      @att = Attendance.new 
+      @att = FactoryGirl.build :attendance
       @att.account = a.account
       @att.time_slot = a.time_slot
-      @att.attendance_on = a.attendance_on
+      @att.attendance_on = a.attendance_on - 1.day
       @att.contacts << c
       @att.contacts << c2
       @att.save

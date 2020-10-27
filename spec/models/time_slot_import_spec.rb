@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe TimeSlotImport do
-
+  let(:i18n){ I18n.locale }
   let(:headers){ ['external_id',
                   'name',
                   'padma_uid',
@@ -27,9 +27,14 @@ describe TimeSlotImport do
   let(:time_slot_import){ create(:time_slot_import, csv_file: csv_file, headers: headers, account: (Account.first || create(:account))) }
 
   before do
+    I18n.locale = :en
     PadmaContact.stub(:find_by_kshema_id) do |arg1|
       PadmaContact.new(id: arg1, first_name: 'fn', last_name: 'ln')
     end
+  end
+
+  after do
+    I18n.locale = i18n
   end
 
   describe "#process_CSV" do
@@ -38,15 +43,15 @@ describe TimeSlotImport do
     end
     it "sets TimeSlots attributes from rows" do
       time_slot_import.process_CSV
-      t = TimeSlot.order(:id).last
+      t = TimeSlot.unscoped.order(:id).last
       t.name.should == "Entrenamiento de respiracion"
       t.padma_uid.should == 'leda.bianucci'
-      t.monday.should be_true
-      t.sunday.should be_false
+      t.monday.should be_truthy
+      t.sunday.should be_falsey
     end
     it "links contacts and time_slots" do
       expect{time_slot_import.process_CSV}.to change{ContactTimeSlot.count}.by 5
-      t = TimeSlot.order(:id).last
+      t = TimeSlot.unscoped.order(:id).last
       t.contacts.count.should == 5
     end
     it "stores imported rows ids" do

@@ -1,6 +1,14 @@
 require "spec_helper"
 
 describe TimeSlot do
+  let(:i18n){ I18n.locale }
+  before do
+    I18n.locale = :en
+  end
+
+  after do
+    I18n.locale = i18n
+  end
   
   it { should have_many :trial_lessons }
 
