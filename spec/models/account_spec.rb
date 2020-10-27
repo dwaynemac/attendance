@@ -7,7 +7,7 @@ describe Account do
   describe "#usernames" do
     context "if contacts-ws is online" do
       before do
-        PadmaUser.stub(:paginate).and_return [
+        allow(PadmaUser).to receive(:paginate).and_return [
           PadmaUser.new( username: 'zoe'),
           PadmaUser.new( username: 'albert'),
           PadmaUser.new( username: 'dwayne')

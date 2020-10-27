@@ -131,10 +131,10 @@ GEM
       mime-types (~> 1.18)
     excon (0.31.0)
     execjs (2.7.0)
-    factory_girl (4.9.0)
+    factory_bot (4.11.1)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.9.0)
-      factory_girl (~> 4.9.0)
+    factory_bot_rails (4.11.1)
+      factory_bot (~> 4.11.1)
       railties (>= 3.0.0)
     ffi (1.0.11)
     figaro (1.2.0)
@@ -369,7 +369,7 @@ DEPENDENCIES
   database_cleaner
   delayed_job_active_record
   devise (= 3.4.1)
-  factory_girl_rails
+  factory_bot_rails
   figaro
   fog!
   foreman

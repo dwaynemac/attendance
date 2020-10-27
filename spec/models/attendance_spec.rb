@@ -57,29 +57,29 @@ describe Attendance do
   end
 
   it "should be valid with default attributes" do
-	  build(:attendance).should be_valid
+	  expect(build(:attendance)).to be_valid
 	end
 
 	it "should require an account" do
-	  build(:attendance, :account => nil).should_not be_valid
+	  expect(build(:attendance, :account => nil)).not_to be_valid
 	end	
 
 	it "should require time slot" do
-	  build(:attendance, :time_slot => nil).should_not be_valid
+	  expect(build(:attendance, :time_slot => nil)).not_to be_valid
 	end
 
 	it "should have a date in the past" do
-	  build(:attendance, :attendance_on => Date.tomorrow).should_not be_valid
+	  expect(build(:attendance, :attendance_on => Date.tomorrow)).not_to be_valid
   end
 
   it "should create nested attendance_contacts" do
     account.contacts.delete_all
     contact = create(:contact)
     account.contacts << contact
-    Contact.any_instance.stub(:padma_contact).and_return(PadmaContact.new(first_name: 'fn', last_name: 'ln', last_seen_at: 1.day.ago.to_s))
+    allow_any_instance_of(Contact).to receive(:padma_contact).and_return(PadmaContact.new(first_name: 'fn', last_name: 'ln', last_seen_at: 1.day.ago.to_s))
     ts = create(:time_slot, :account => account)
     attendance = create(:attendance, :account => account, :time_slot => ts, :contact_ids => [contact.id])
-    attendance.attendance_contacts.count.should eq 1
+    expect(attendance.attendance_contacts.count).to eq 1
   end
 
   context "when deleted" do
@@ -88,7 +88,7 @@ describe Attendance do
       c2 = create(:contact)
       a = build(:attendance)
       a.save! # valid
-      @att = FactoryGirl.build :attendance
+      @att = FactoryBot.build :attendance
       @att.account = a.account
       @att.time_slot = a.time_slot
       @att.attendance_on = a.attendance_on - 1.day
@@ -97,12 +97,12 @@ describe Attendance do
       @att.save
     end
     it "should have associated attendanceContacts before" do
-      AttendanceContact.where(attendance_id: @att.id).count.should == 2
+      expect(AttendanceContact.where(attendance_id: @att.id).count).to eq 2
     end
     it "should delete all associated attendanceContacts" do
       att_id = @att.id
       @att.destroy
-      AttendanceContact.where(attendance_id: att_id).should be_empty
+      expect(AttendanceContact.where(attendance_id: att_id)).to be_empty
     end
   end
 end

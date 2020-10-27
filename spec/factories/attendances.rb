@@ -1,10 +1,10 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :attendance do
     account
     time_slot
-    attendance_on Date.yesterday
+    attendance_on { Date.yesterday } 
     username {'username'}
   end
 end

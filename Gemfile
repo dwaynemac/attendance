@@ -92,7 +92,7 @@ group :test, :development do
 
   gem 'rspec-rails'
   gem 'shoulda-matchers'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'database_cleaner'
 
   gem 'coveralls', require: false

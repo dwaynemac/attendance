@@ -23,8 +23,8 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
 
-  # Add FactoryGirl
-  config.include FactoryGirl::Syntax::Methods
+  # Add FactoryBot
+  config.include FactoryBot::Syntax::Methods
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -54,9 +54,9 @@ RSpec.configure do |config|
   config.before(:each) do
     DatabaseCleaner.start
 
-    TrialLesson.any_instance.stub(:create_activity).and_return(true)
-    TrialLesson.any_instance.stub(:destroy_activity).and_return(true)
-    TrialLesson.any_instance.stub(:broadcast_create).and_return(true)
+    allow_any_instance_of(TrialLesson).to receive(:create_activity).and_return(true)
+    allow_any_instance_of(TrialLesson).to receive(:destroy_activity).and_return(true)
+    allow_any_instance_of(TrialLesson).to receive(:broadcast_create).and_return(true)
   end
 
   config.after(:each) do
