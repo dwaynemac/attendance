@@ -15,13 +15,13 @@ class InstructorStatsSQLBuilder
 		# prepare date and boolean params
 		["start_on", "end_on"].each do |multipart_attr_name|
 			if options["#{multipart_attr_name}(3i)"]
-				options[multipart_attr_name] = Date.new(options.delete("#{multipart_attr_name}(1i)").to_i, 
-														options.delete("#{multipart_attr_name}(2i)").to_i, 
+				options[multipart_attr_name] = Date.new(options.delete("#{multipart_attr_name}(1i)").to_i,
+														options.delete("#{multipart_attr_name}(2i)").to_i,
 														options.delete("#{multipart_attr_name}(3i)").to_i)
       elsif options[multipart_attr_name].is_a?(String)
         options[multipart_attr_name] = options[multipart_attr_name].to_date
 			end
-		end	
+		end
 		options["include_cultural_activities"] = options["include_cultural_activities"] == '1' if options["include_cultural_activities"]
 		options["include_former_students"] = options["include_former_students"] == '1' if options["include_former_students"]
 		options["include_former_teachers"] = options["include_former_teachers"] == '1' if options["include_former_teachers"]
@@ -29,7 +29,7 @@ class InstructorStatsSQLBuilder
 		# initialize builder using defaults
 		DEFAULTS.merge(options.symbolize_keys).each do |attr_name, value|
 			self.send("#{attr_name}=", value)
-		end	
+		end
 	end
 
 	def sql
@@ -50,7 +50,7 @@ class InstructorStatsSQLBuilder
 		GROUP BY id, padma_id, name
 		ORDER BY name ASC
 	  )
-	end	
+	end
 
 	# filters contacts by account_id
 	def account_condition
@@ -77,7 +77,7 @@ class InstructorStatsSQLBuilder
 
 	def cultural_activity_condition
 		"AND time_slots.cultural_activity = 'f'" unless include_cultural_activities
-	end	
+	end
 
 	# unions for each instructor.
 	def instructor_queries
@@ -93,7 +93,7 @@ class InstructorStatsSQLBuilder
 				INNER JOIN attendance_contacts ON contacts.id = attendance_contacts.contact_id
 				INNER JOIN attendances ON attendance_contacts.attendance_id = attendances.id
 				INNER JOIN time_slots ON attendances.time_slot_id = time_slots.id
-				WHERE attendances.username = '#{username.tr("_",".")}' 
+				WHERE attendances.username = '#{username.tr("_",".").tr("$","@")}'
 				AND #{account_condition}
 				AND #{attendance_between_dates_condition}
 				AND #{status_condition}
@@ -102,7 +102,7 @@ class InstructorStatsSQLBuilder
 			)
 		end
 
-		query	
+		query
 	end
 
 	# select count for the specified instructor and 0 otherwise
@@ -115,7 +115,7 @@ class InstructorStatsSQLBuilder
 				u_select = "0 as #{u}"
 			end
 
-			u_select << ", " unless u.tr("_", ".") == distribution_names.last
+			u_select << ", " unless u.tr("_", ".").tr("$","@") == distribution_names.last
 
 			select << u_select
 		end
@@ -129,7 +129,7 @@ class InstructorStatsSQLBuilder
 		distribution.each do |username|
 			select << "SUM(#{username}) as sum_#{username}, "
 			total << "#{username}"
-			total << " + " unless username.tr("_",".") == distribution_names.last			
+			total << " + " unless username.tr("_",".").tr("$","@") == distribution_names.last
 		end
 		select << "SUM(#{total}) as attendance_total"
 		select
@@ -151,7 +151,7 @@ class InstructorStatsSQLBuilder
     if @distribution.nil?
       if include_former_teachers
         @distribution = account.attendances.where("attendance_on between ? and ?", start_on, end_on)
-                               .group(:username) 
+                               .group(:username)
                                .pluck(:username)
                                .compact
         if @distribution.empty?
@@ -164,13 +164,13 @@ class InstructorStatsSQLBuilder
     end
 
     # quick patch until code refactored to consider @ in usernames
-    # quick patch possible because in theory @ users are not teachers. 
-    if @distribution
-      @distribution = @distribution.reject{ |username| username =~ /@/ }
-    end
+    # quick patch possible because in theory @ users are not teachers.
+    # if @distribution
+    #   @distribution = @distribution.reject{ |username| username =~ /@/ }
+    # end
 
 
-		@distribution.collect {|username| username.tr(".", "_")}
+		@distribution.collect {|username| username.tr(".", "_").tr("@","$")}
 	end
 
   # usernames (in this case they are usernames)
