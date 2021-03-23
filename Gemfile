@@ -3,25 +3,25 @@ source 'https://rubygems.org'
 ruby "2.3.8"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.2'
+gem 'rails', '5.2.4.5'
 
 gem 'rack-cors'
 
 #Translations
-gem 'i18n', '~> 0.6.6'
+gem 'i18n', '~> 1.8.9'
 gem 'rails-i18n'
 
 gem "intercom-rails"
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0.rc1'
+gem 'sass-rails', '~> 5.0.7'
 
-gem "sprockets", "2.12.5" # https://blog.heroku.com/rails-asset-pipeline-vulnerability
+gem "sprockets", "3.7.2" # https://blog.heroku.com/rails-asset-pipeline-vulnerability
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 5.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
@@ -32,8 +32,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.0.1'
 
 # Use twitter bootstrap as ui framework
-gem 'less-rails-bootstrap', '~> 3.0.6'
-gem 'padma-assets', '0.2.29'
+gem 'less-rails-bootstrap', '~> 3.3.5'
+gem 'padma-assets', '0.3.1'
 gem 'rails_serve_static_assets'
 
 # Javascript runtime for bootstrap's LESS files to compile to CSS.
@@ -52,7 +52,7 @@ end
 gem 'figaro'
 
 # CAS authentication
-gem 'devise', '3.4.1' 
+gem 'devise', '4.7.3' 
 gem 'activerecord-session_store'
 
 # authorization
