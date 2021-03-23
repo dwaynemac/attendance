@@ -6,7 +6,7 @@ class AccountsContact < ActiveRecord::Base
   validates :contact, presence: true
 
   validates_uniqueness_of :contact_id, scope: [:account_id]
-  attr_accessible :account_id, :account, :contact_id, :contact, :padma_status
+  # attr_accessible :account_id, :account, :contact_id, :contact, :padma_status
 
-  attr_accessible :account_id, :contact_id, :padma_status
+  # attr_accessible :account_id, :contact_id, :padma_status
 end

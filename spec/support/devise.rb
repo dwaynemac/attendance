@@ -8,12 +8,12 @@ module ValidUserRequestHelper
     def sign_in_as_a_valid_user
       cur_acc = create(:account)
       @user = build(:user, current_account: cur_acc)
-      User.any_instance.stub(:padma_user).and_return(PadmaUser.new(:username => @user.username, :email => "test@test.com", current_account_name: cur_acc.name))
-      User.any_instance.stub(:padma).and_return(PadmaUser.new(:username => @user.username, :email => "test@test.com", current_account_name: cur_acc.name))
-      Account.any_instance.stub(:padma).and_return(PadmaAccount.new(:name => @user.current_account.name))
-      User.any_instance.stub(:enabled_accounts).and_return([PadmaAccount.new(:name => @user.current_account.name)])
+      allow_any_instance_of(User).to receive(:padma_user).and_return(PadmaUser.new(:username => @user.username, :email => "test@test.com", current_account_name: cur_acc.name))
+      allow_any_instance_of(User).to receive(:padma).and_return(PadmaUser.new(:username => @user.username, :email => "test@test.com", current_account_name: cur_acc.name))
+      allow_any_instance_of(Account).to receive(:padma).and_return(PadmaAccount.new(:name => @user.current_account.name))
+      allow_any_instance_of(User).to receive(:enabled_accounts).and_return([PadmaAccount.new(:name => @user.current_account.name)])
       @user.save!
-      @user.reload.current_account.should_not be_nil
+      expect(@user.reload.current_account).not_to be_nil
       sign_in @user
       @user
     end

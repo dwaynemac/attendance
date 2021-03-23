@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 require 'habtm_migrator'
 
 describe HabtmMigrator do

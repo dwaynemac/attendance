@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe AttendancesController do
 
@@ -19,7 +19,7 @@ describe AttendancesController do
   describe "PATCH /attendances/:id" do
     context "if contacts-ws is online" do
       before do
-        PadmaContact.stub!(:find) do |pid|
+        allow(PadmaContact).to receive(:find) do |pid|
           PadmaContact.new first_name: pid, last_name: pid, id: pid
         end
       end
@@ -60,7 +60,7 @@ describe AttendancesController do
   describe "GET /attendances/new" do
     context "if accounts-ws is online" do
       before do
-        PadmaUser.stub(:paginate).and_return([PadmaUser.new(name: 'as')])
+        allow(PadmaUser).to receive(:paginate).and_return([PadmaUser.new(name: 'as')])
       end
       let(:time_slot){create(:time_slot)}
       context "if time_slot is specified" do
@@ -74,12 +74,12 @@ describe AttendancesController do
 
   describe "GET index" do
     before do 
-      Account.any_instance.stub(:usernames).and_return([current_user.username])
+      allow_any_instance_of(Account).to receive(:usernames).and_return([current_user.username])
     end
     let!(:attendance){create(:attendance, :account => current_account)}
     it "assigns last week's attendances as @attendances" do
       get :index, {}
-      assigns(:attendances).should eq([attendance])
+      expect(assigns(:attendances)).to eq([attendance])
     end
   end
 

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Contact do
   it { have_many(:accounts).through(:accounts_contact) }
@@ -23,13 +23,13 @@ describe Contact do
     let(:padma_id){'contact-id'}
     let(:contact){create(:contact, padma_id: padma_id)}
     before do
-      PadmaContact.stub(:find).and_return(PadmaContact.new)
+      allow(PadmaContact).to receive(:find).and_return(PadmaContact.new)
     end
 
     it "sets last_seen_at to last attendance time" do
       last = create(:attendance_contact, contact_id: contact.id, attendance: create(:attendance, attendance_on: Date.today, account: account))
       prev = create(:attendance_contact, contact_id: contact.id, attendance: create(:attendance, attendance_on: 1.day.ago, account: account))
-      PadmaContact.any_instance.should_receive(:update).with(hash_including(contact: { last_seen_at: Date.today }))
+      expect_any_instance_of(PadmaContact).to receive(:update).with(hash_including(contact: { last_seen_at: Date.today }))
       contact.update_last_seen_at(account)
     end
   end
@@ -65,7 +65,7 @@ describe Contact do
           {account_name: 'account-2', local_status: 'former_student'}
         ]}}
         it "wont call contacts-ws" do
-          PadmaContact.should_not_receive(:find)
+          expect(PadmaContact).not_to receive(:find)
           contact.sync_from_contacts_ws(padma_contact)
         end
         it "updates accounts_contacts statuses" do
@@ -87,7 +87,7 @@ describe Contact do
       describe "if it doesnt have local_statuses" do
         let(:pc_attributes){{first_name: 'a'}}
         it "fetches padma_contact from contacts-ws" do
-          PadmaContact.should_receive(:find)
+          expect(PadmaContact).to receive(:find)
           contact.sync_from_contacts_ws(padma_contact)
         end
       end
@@ -95,7 +95,7 @@ describe Contact do
     describe "if padma_contact not given" do
       let(:padma_contact){nil}
       it "fetches padma_contact from contacts-ws" do
-        PadmaContact.should_receive(:find)
+        expect(PadmaContact).to receive(:find)
         contact.sync_from_contacts_ws(padma_contact)
       end
     end
@@ -108,7 +108,7 @@ describe Contact do
         @contact = Contact.find_by_padma_id(padma_id) || create(:contact, padma_id: padma_id)
       end
       it "finds local_contact with given padma_id" do
-        Contact.get_by_padma_id(padma_id,account.id).should == @contact
+        expect(Contact.get_by_padma_id(padma_id,account.id)).to eq @contact
       end
       it "wont create a new contact" do
         expect{Contact.get_by_padma_id(padma_id,account.id)}.not_to change{Contact.count}
@@ -124,7 +124,7 @@ describe Contact do
       describe "with a padma_contact" do
         it "wont call contacts-ws" do
           pc = PadmaContact.new(id: padma_id, first_name: 'fn', last_name: 'ln')
-          PadmaContact.should_not_receive(:find)
+          expect(PadmaContact).not_to receive(:find)
           Contact.get_by_padma_id(padma_id,account.id, pc)
         end
         it "caches padma_contact" do
@@ -135,21 +135,21 @@ describe Contact do
       describe "witout a padma_contact" do
         it "fetches padma_contact from contacts-ws" do
           pc = PadmaContact.new(id: padma_id, first_name: 'fn', last_name: 'ln')
-          PadmaContact.should_receive(:find).and_return(pc)
+          expect(PadmaContact).to receive(:find).and_return(pc)
           Contact.get_by_padma_id(padma_id,account.id)
         end
         it "caches padma_contact" do
           pc = PadmaContact.new(id: padma_id, first_name: 'fn', last_name: 'ln')
-          PadmaContact.should_receive(:find).and_return(pc)
+          expect(PadmaContact).to receive(:find).and_return(pc)
           expect{Contact.get_by_padma_id(padma_id,account.id)}.to change{Contact.count}.by 1
         end
       end
       describe "with new_contact_attributes" do
         it "sets given attributes in created contact" do
           pc = PadmaContact.new(id: padma_id, first_name: 'fn', last_name: 'ln')
-          PadmaContact.should_receive(:find).and_return(pc)
+          expect(PadmaContact).to receive(:find).and_return(pc)
           Contact.get_by_padma_id(padma_id,account.id,nil,{external_id: 1})
-          Contact.last.external_id.should == "1"
+          expect(Contact.last.external_id).to eq "1"
         end
       end
     end

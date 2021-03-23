@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
 
           user = nil
           if apikey.username
-            user = User.find_or_create_by_username(apikey.username)
+            user = User.find_or_create_by(username: apikey.username)
           end
           sign_in(user)
         end

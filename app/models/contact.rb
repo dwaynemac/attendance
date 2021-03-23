@@ -10,7 +10,7 @@ class Contact < ActiveRecord::Base
 
   has_many :trial_lessons
 
-  attr_accessible :padma_id, :name, :external_id, :external_sysname, :padma_status, :time_slot_ids, :account_id
+  # attr_accessible :padma_id, :name, :external_id, :external_sysname, :padma_status, :time_slot_ids, :account_id
 
   validates_uniqueness_of :padma_id
 

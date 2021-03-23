@@ -1,8 +1,8 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe StatsController do
   before (:each) do
-    Account.any_instance.stub(:usernames).and_return ['dwayne']
+    allow_any_instance_of(Account).to receive(:usernames).and_return ['dwayne']
     sign_in_as_a_valid_user
   end
   describe "GET /stats" do
@@ -18,14 +18,14 @@ describe StatsController do
     let(:contact){create(:contact)}
 
     before do
-      PadmaContact.stub(:find).and_return PadmaContact.new
+      allow(PadmaContact).to receive(:find).and_return PadmaContact.new
       contact.accounts_contacts.create!(:account_id => @user.current_account.id, :padma_status => :student)
       attendance.contacts << contact
     end
     
     it "responds with the correct stats" do
       get :index, 'easy_period' => 'last_month'    
-      assigns(:contacts).first.attendance_total.should == 1
+      expect(assigns(:contacts).first.attendance_total).to eq 1
     end
   end
 end

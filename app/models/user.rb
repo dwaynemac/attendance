@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :username, :current_account_id
+  # attr_accessible :username, :current_account_id
 
   devise :database_authenticatable
   def encrypted_password

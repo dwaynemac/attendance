@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Api::V0::ImportsController do
   let(:csv_file) do
@@ -100,7 +100,9 @@ describe Api::V0::ImportsController do
     describe "created import" do
       before { post_req }
       subject{ assigns(:import)  }
-      its(:account){ should == @belgrano }
+      it "is expected to have correct account" do
+        expect(Import.last.account).to eq @belgrano
+      end
     end
 
     it "return import instance id" do
@@ -140,7 +142,7 @@ describe Api::V0::ImportsController do
     end
     context 'when CSV file has finished' do
       it "should send data" do
-        @controller.should_receive(:send_data).and_return{ @controller.render :nothing => true }
+        @controller.should_receive(:send_data) { @controller.render(:nothing => true) }
         get :failed_rows, id: @i.id,
                    app_key: ENV['app_key'],
                    format: :csv

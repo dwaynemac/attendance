@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe TrialLessonImport do
 
@@ -35,12 +35,12 @@ describe TrialLessonImport do
   describe "with external webservices working ok" do
     before(:each) do
       # avoid calls to external WSs
-      TrialLesson.any_instance.stub(:broadcast_create).and_return(true)
-      TrialLesson.any_instance.stub(:create_activity).and_return(true)
-      PadmaContact.stub!(:find_by_kshema_id).and_return(
+      allow_any_instance_of(TrialLesson).to receive(:broadcast_create).and_return(true)
+      allow_any_instance_of(TrialLesson).to receive(:create_activity).and_return(true)
+      allow(PadmaContact).to receive(:find_by_kshema_id).and_return(
         PadmaContact.new(id: "1", first_name: 'fn', last_name: 'ln')
       )
-      PadmaContact.stub!(:find).and_return(PadmaContact.new(id: "1"))
+      allow(PadmaContact).to receive(:find).and_return(PadmaContact.new(id: "1"))
     end
     describe "#process_CSV" do
       it "creates a trial_lesson for every valid row" do
@@ -48,21 +48,21 @@ describe TrialLessonImport do
       end
       it "saves imported trial_lesson's ids in imported_ids" do
         expect{trial_lesson_import.process_CSV}.to change{TrialLesson.count}.by 28
-        trial_lesson_import.imported_ids.map(&:value).should include TrialLesson.last.id
+        expect(trial_lesson_import.imported_ids.map(&:value)).to include TrialLesson.last.id
       end
       it "saves failed rows in failed_rows" do
         expect{trial_lesson_import.process_CSV}.to change{trial_lesson_import.failed_rows.count}.by 0
       end
       it "sets status to :finished" do
-        trial_lesson_import.status.should == :ready
+        expect(trial_lesson_import.status).to eq :ready
         trial_lesson_import.process_CSV
-        trial_lesson_import.status.should == :finished
+        expect(trial_lesson_import.status).to eq :finished
       end
       it "archives the correct lessons" do
-        trial_lesson_import.status.should == :ready
+        expect(trial_lesson_import.status).to eq :ready
         trial_lesson_import.process_CSV
-        trial_lesson_import.status.should == :finished
-        TrialLesson.where(archived: true).count.should == 7
+        expect(trial_lesson_import.status).to eq :finished
+        expect(TrialLesson.where(archived: true).count).to eq 7
       end
     end
   end

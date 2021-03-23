@@ -2,7 +2,7 @@ class AttendanceContact < ActiveRecord::Base
   belongs_to :contact
   belongs_to :attendance, inverse_of: :attendance_contacts
 
-  attr_accessible :contact_id, :attendance_id
+  # attr_accessible :contact_id, :attendance_id
   attr_accessor :skip_update_last_seen_at #default nil
 
   validates :contact_id, presence: true, uniqueness: { scope: :attendance_id }

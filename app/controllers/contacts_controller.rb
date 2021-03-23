@@ -1,7 +1,12 @@
 class ContactsController < ApplicationController
   before_filter :find_contact_by_padma_id, :only => :show
   load_and_authorize_resource
-  respond_to :html, :js, :csv
+
+  # TODO index.js call triggers a secutiry warning:
+  #  Security warning: an embedded <script> tag on another site requested protected JavaScript. If you know what you're doing, go ahead and disable forgery protection on this action to permit cross-origin JavaScript embedding
+  # for now I disabled forgery protection in this action, but we have to see if it can be enabled and handled differently
+  protect_from_forgery unless: -> { request.format.js? }
+  # respond_to :html, :js, :csv
 
   def index
     if params[:time_slot_id].present?
@@ -20,11 +25,20 @@ class ContactsController < ApplicationController
     else
       @padma_contacts = current_user.current_account.students
     end
-    respond_with @padma_contacts
+
+    # TODO removed respond_with method as it is no longer included in rails
+    # and compatible gem is for Rails 4.1.2
+    #
+    # check if it is responding correctly for JS and if
+    # CSV response is needed
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def update
-    @contact.update_attributes(params.require( :contact ))
+    @contact.update_attributes(contact_params)
 
     respond_to do |format|
       format.json do
@@ -52,6 +66,18 @@ class ContactsController < ApplicationController
 
   def find_contact_by_padma_id
     @contact = Contact.get_by_padma_id(params[:id],current_user.current_account.id)
+  end
+
+  def contact_params
+    params.requite(:contact).permit(
+      :padma_id,
+      :name,
+      :external_id,
+      :external_sysname,
+      :padma_status,
+      :time_slots_id,
+      :account_id
+    )
   end
 
 end

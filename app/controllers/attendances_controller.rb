@@ -1,6 +1,6 @@
 class AttendancesController < ApplicationController
+  before_action :load_attendance, only: [:create, :update, :new]
   load_and_authorize_resource
-  respond_to :html
 
   def index
     @day_span = 7
@@ -26,7 +26,9 @@ class AttendancesController < ApplicationController
     @recent = nil # disable until bug #107776460 fixed
     # @recent = get_recent_time_slot
     
-    respond_with @attendances
+    respond_to do |format|
+      format.html
+    end
   end
 
   def new
@@ -56,14 +58,16 @@ class AttendancesController < ApplicationController
   
   def show
     @trial_lessons = @attendance.trial_lessons
-    respond_with @attendance
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   def create
     back_w_params = ActiveSupport::JSON.decode(params[:redirect_back_w_params]) if params[:redirect_back_w_params]
     update_trial_lessons @attendance, params[:trial_lessons], :create
     
-    @attendance.account = current_user.current_account
     if @attendance.save
       @padma_contacts = @attendance.time_slot.recurrent_contacts
       respond_to do |format|
@@ -101,16 +105,19 @@ class AttendancesController < ApplicationController
     @attendance.destroy
     Contact.find(contacts).map{|c| c.update_last_seen_at(account)}
 
-    respond_with @attendance
+    respond_to do |format|
+      format.html
+    end
   end
   
   private
 
   def attendance_params_for_update
+    permitted_params = attendance_params
     if params[:attendance] && params[:attendance][:padma_contacts].nil?
-      params[:attendance][:padma_contacts] = []
+      permitted_params = permitted_params.merge!({padma_contacts: []})
     end
-    params[:attendance]
+    permitted_params
   end
 
   def get_recent_time_slot
@@ -160,6 +167,27 @@ class AttendancesController < ApplicationController
       e << "#{k}: #{v}"
     end
     e
+  end
+
+  def load_attendance
+    if params.has_key?(:id)
+      @attendance = Attendance.find(params[:id])
+      @attendance.account_id = current_user.current_account.id
+    else
+      @attendance = Attendance.new(attendance_params)
+      @attendance.account_id = current_user.current_account.id
+    end
+  end
+
+  def attendance_params
+    params.require(:attendance).permit(
+        :account_id,
+        :time_slot_id,
+        :attendance_on,
+        :username,
+        :suspended,
+        :padma_contacts => []
+    )
   end
 
 end

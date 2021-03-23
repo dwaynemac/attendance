@@ -15,7 +15,7 @@ class Attendance < ActiveRecord::Base
 
   attr_accessor :padma_contacts
 
-  attr_accessible :account_id, :time_slot_id, :attendance_on, :padma_contacts, :username, :suspended
+  #attr_accessible :account_id, :time_slot_id, :attendance_on, :padma_contacts, :username, :suspended
 
   accepts_nested_attributes_for :attendance_contacts
 

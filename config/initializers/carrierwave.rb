@@ -9,7 +9,7 @@ else
 
   CarrierWave.configure do |config|
     config.cache_dir = "#{Rails.root}/tmp/uploads"
-    config.storage = :fog
+    #config.storage = :fog
     if Rails.env.production?
       config.fog_credentials = {
           :provider               => 'AWS',
@@ -31,7 +31,7 @@ else
       config.fog_directory  = 'attendance-staging'
       config.asset_host       = "http://attendance-staging.s3.amazonaws.com"
     end
-    config.fog_public     = false
+    #config.fog_public     = false
   end
 
 end

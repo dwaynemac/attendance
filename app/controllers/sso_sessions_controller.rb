@@ -28,8 +28,8 @@ class SsoSessionsController < ApplicationController
     if st && !st.account_name.blank? && !st.username.blank?
 
       # user and account are created if not found
-      a = Account.find_or_create_by_name(st.account_name)
-      user = User.find_or_create_by_username(st.username, :current_account_id => a)
+      a = Account.find_or_create_by(name: st.account_name)
+      user = User.find_or_create_by(username: st.username, :current_account_id => a)
 
       sign_in(user)
 

@@ -149,7 +149,11 @@ class Api::V0::ImportsController < Api::V0::ApiController
   end
 
   def import_params
-    params.require(:import)
+    params.require(:import).permit(
+      :csv_file,
+      :object,
+      :headers => []
+    )
   end
 
 end

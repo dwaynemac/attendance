@@ -23,7 +23,7 @@ class TrialLessonsController < ApplicationController
   # GET /trial_lessons/new
   def new
     @trial_lesson = current_account.trial_lessons.build
-    @trial_lesson.attributes=params[:trial_lesson]
+    @trial_lesson.attributes = trial_lesson_params
     
     set_ref_date
     
@@ -40,7 +40,7 @@ class TrialLessonsController < ApplicationController
   # POST /trial_lessons
   def create
     @trial_lesson = current_account.trial_lessons.build
-    @trial_lesson.attributes = params[:trial_lesson]
+    @trial_lesson.attributes = trial_lesson_params.to_h
     if @trial_lesson.save
       redirect_to @trial_lesson, notice: 'Trial lesson was successfully created.'
     else
@@ -50,7 +50,7 @@ class TrialLessonsController < ApplicationController
 
   # PATCH/PUT /trial_lessons/1
   def update
-    if @trial_lesson.update(params[:trial_lesson])
+    if @trial_lesson.update(trial_lesson_params)
       if params[:redirect_to].blank?
         redirect_to trial_lessons_path(ref_date: @trial_lesson.trial_on), notice: 'Trial lesson was successfully updated.'
       elsif params[:redirect_to] == 'index'
@@ -91,4 +91,20 @@ class TrialLessonsController < ApplicationController
     end
   end
 
+  def trial_lesson_params
+    if params.has_key?(:trial_lesson) && !params[:trial_lesson].blank?
+      params.require(:trial_lesson).permit(
+          :trial_on,
+          :time_slot_id,
+          :padma_uid,
+          :padma_contact_id,
+          :assisted,
+          :confirmed,
+          :archived,
+          :absence_reason
+      )
+    else
+      {}
+    end
+  end
 end

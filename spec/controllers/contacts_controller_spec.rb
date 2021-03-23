@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe ContactsController do
 
@@ -37,7 +37,7 @@ describe ContactsController do
       context "with padma_uid" do
         let(:padma_uid){'12'}
         it "calls contact-ws with sort [:first_name,:asc]" do
-          PadmaContact.should_receive(:paginate)
+          expect(PadmaContact).to receive(:paginate)
                       .with(hash_including(sort: [:first_name, :asc]))
           get :index, padma_uid: padma_uid, format: format
         end

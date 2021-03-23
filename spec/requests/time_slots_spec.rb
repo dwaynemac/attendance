@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 #TODO: Figure out how to use devise_cas_authenticatable on request specs
 #describe "TimeSlots" do
 #  before (:each) do

@@ -1,7 +1,8 @@
 class TimeSlotsController < ApplicationController
 
+  before_filter :load_time_slot, only: [:create, :update]
   before_filter :update_timeslot_params, only: [:create, :update]
-  load_and_authorize_resource 
+  load_and_authorize_resource
 
   def index
     @unscheduled_time_slots = @time_slots.where(unscheduled: true)
@@ -32,7 +33,6 @@ class TimeSlotsController < ApplicationController
   end  
   
   def create
-    @time_slot.account = current_user.current_account
     if @time_slot.save
       redirect_to @time_slot, notice: 'Time slot was successfully created.'
     else
@@ -40,11 +40,9 @@ class TimeSlotsController < ApplicationController
     end
   end
 
-  def update
-    @time_slot.account = current_user.current_account
-    
+  def update    
     respond_to do |format|
-      if @time_slot.update(params[:time_slot])
+      if @time_slot.update(update_timeslot_params)
         format.html {
           redirect_to @time_slot, notice: 'Time slot was successfully updated.'
       	}
@@ -69,13 +67,51 @@ class TimeSlotsController < ApplicationController
   
   private
 
+  def time_slot_params
+    if params.has_key?(:time_slot) && !params[:time_slot].blank?
+      params.require(:time_slot).permit(
+        :padma_uid,
+        :name,
+        :start_at,
+        :end_at,
+        :monday,
+        :tuesday,
+        :wednesday,
+        :thursday,
+        :friday,
+        :saturday,
+        :sunday,
+        :cultural_activity,
+        :external_id,
+        :unscheduled,
+        :padma_contacts => []
+      )
+    else
+      {}
+    end
+  end
+
+  def load_time_slot
+    if params.has_key?(:id)
+      @time_slot = TimeSlot.find(params[:id])
+      @time_slot.account = current_user.current_account
+    else
+      @time_slot = TimeSlot.new(update_timeslot_params)
+      @time_slot.account = current_user.current_account
+    end
+  end
+
   def update_timeslot_params
+    permitted_params = time_slot_params
     selected_day_names = params[:dayname] ? params[:dayname].map{|day| day.downcase} : []
-    params.delete :dayname
+    permitted_params.delete(:dayname)
     Date::DAYNAMES.each do |day_name|
       day_name = day_name.downcase
-      params[:time_slot][day_name.to_sym] = (selected_day_names.include? day_name) ? "1" : "0"
+      # params[:time_slot][day_name.to_sym] = (selected_day_names.include? day_name) ? "1" : "0"
+      permitted_params[day_name.to_sym] = (selected_day_names.include? day_name) ? "1" : "0"
+      
     end
+    permitted_params
   end 
 
 end

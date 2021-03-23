@@ -1,13 +1,13 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe AttendanceImport do
 
   before do
-    PadmaContact.stub!(:find_by_kshema_id) do |arg1|
+    allow(PadmaContact).to receive(:find_by_kshema_id) do |arg1|
       PadmaContact.new(id: arg1, first_name: 'fn', last_name: 'ln')
     end
 
-    Contact.any_instance.stub(:padma_contact).and_return(PadmaContact.new(first_name: 'fn', last_name: 'ln'))
+    allow_any_instance_of(Contact).to receive(:padma_contact).and_return(PadmaContact.new(first_name: 'fn', last_name: 'ln'))
 
     # ensure there are no Attendances
     Attendance.destroy_all
@@ -63,7 +63,7 @@ describe AttendanceImport do
     end
 
     it "calls contacts-ws only once for each kshema_id" do
-      PadmaContact.should_receive(:find_by_kshema_id).exactly(13).times do |arg1|
+      expect(PadmaContact).to receive(:find_by_kshema_id).exactly(13).times do |arg1|
         PadmaContact.new(id: arg1, first_name: 'fn', last_name: 'ln')
       end
       attendance_import.process_CSV
@@ -80,7 +80,7 @@ describe AttendanceImport do
       expect{ attendance_import.process_CSV }.not_to change{ Delayed::Job.count }
     end
     it "should set last_seen_at to every student" do
-      LastSeenUpdater.should_receive(:update_account)
+      expect(LastSeenUpdater).to receive(:update_account)
       attendance_import.process_CSV
     end
     it "sets Attendance for every [time_slot_external_id,attendance_on] in rows" do
@@ -88,15 +88,15 @@ describe AttendanceImport do
     end
     it "stores in imported_ids ids of created Attendances" do
       attendance_import.process_CSV
-      attendance_import.imported_ids.map(&:value).should include AttendanceContact.last.id
+      expect(attendance_import.imported_ids.map(&:value)).to include AttendanceContact.last.id
     end
     it "stores failed rows numbers" do
       expect{attendance_import.process_CSV}.to change{attendance_import.failed_rows.count}.by 1
     end
     it "sets status to :finished" do
-      attendance_import.status.should == :ready
+      expect(attendance_import.status).to eq :ready
       attendance_import.process_CSV
-      attendance_import.status.should == :finished
+      expect(attendance_import.status).to eq :finished
     end
   end
 

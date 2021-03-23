@@ -3,7 +3,7 @@ require 'csv'
 
 class Import < ActiveRecord::Base
 
-  attr_accessible :headers, :csv_file
+  # attr_accessible :headers, :csv_file
 
   belongs_to :account
   validates_presence_of :account

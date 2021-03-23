@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Import do
 
@@ -18,18 +18,18 @@ describe Import do
   it "defaults status to ready" do
     i = build(:import, status: nil)
     i.save
-    i.status.should == :ready
+    expect(i.status).to eq :ready
   end
 
   it "saves CSV file" do
     i = build(:import, csv_file: csv_file)
     i.save!
-    i.csv_file.identifier.should == 'belgrano_horarios.csv'
+    expect(i.csv_file.identifier).to eq 'belgrano_horarios.csv'
   end
 
   describe "#process_CSV" do
     describe "if handle_row raises and exception" do
-      before { Import.any_instance.stub(:handle_row).and_raise 'error raised by handle_row' }
+      before { allow_any_instance_of(Import).to receive(:handle_row).and_raise 'error raised by handle_row' }
       it "adds row as failed_row and continues" do
         expect{import.process_CSV}.to change{import.failed_rows.count}.by 26
       end
@@ -42,16 +42,16 @@ describe Import do
   describe "#index_for" do
     it "returns index of given string in headers" do
       i = create(:time_slot_import, headers: [nil, 'name', 'observations'])
-      i.index_for('name').should == 1
-      i.index_for('observations').should == 2
+      expect(i.index_for('name')).to eq 1
+      expect(i.index_for('observations')).to eq 2
     end
   end
 
   describe "#account_name=" do
     it "link to local account with given name" do
-      i = build(:import,account: nil,  account_name: 'belgrano') # account: nil to avoid FactoryGirl to set account
+      i = build(:import,account: nil,  account_name: 'belgrano') # account: nil to avoid FactoryBot to set account
       i.save!
-      i.account.name.should == 'belgrano'
+      expect(i.account.name).to eq 'belgrano'
     end
   end
 end
