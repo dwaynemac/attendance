@@ -69,7 +69,7 @@ gem 'accounts_client', '0.2.38'
 gem 'messaging_client','~> 0.2'
 
 gem 'carrierwave'
-gem 'fog', github: 'fog/fog', ref: '272bc6b2a2769f8d1a8b50b1f6cd9741db4969b4' # TODO waiting release of version 1.20
+gem 'fog', '~> 1.38.0'
 gem 'delayed_job_active_record' # must be declared after 'protected_attributes' gem
 gem "workless"
 
