@@ -105,9 +105,7 @@ class AttendancesController < ApplicationController
     @attendance.destroy
     Contact.find(contacts).map{|c| c.update_last_seen_at(account)}
 
-    respond_to do |format|
-      format.html
-    end
+    redirect_to attendances_path
   end
   
   private
