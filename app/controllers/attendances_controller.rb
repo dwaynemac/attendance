@@ -180,7 +180,7 @@ class AttendancesController < ApplicationController
   end
 
   def attendance_params
-    params.permit(:attendance).permit(
+    params.require(:attendance).permit(
         :account_id,
         :time_slot_id,
         :attendance_on,
