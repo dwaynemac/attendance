@@ -319,6 +319,7 @@ GEM
     moneta (1.0.0)
     multi_json (1.15.0)
     netrc (0.11.0)
+    nio4r (2.5.2)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     nokogiri-happymapper (0.8.1)
@@ -343,6 +344,8 @@ GEM
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    puma (5.2.2)
+      nio4r (~> 2.0)
     rack (1.5.5)
     rack-cors (1.0.3)
     rack-test (0.6.3)
@@ -514,6 +517,7 @@ DEPENDENCIES
   padma-assets (= 0.2.29)
   pg (~> 0.20)
   pry
+  puma
   rack-cors
   rails (= 4.1.2)
   rails-i18n
