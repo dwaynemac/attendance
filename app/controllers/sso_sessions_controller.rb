@@ -29,7 +29,8 @@ class SsoSessionsController < ApplicationController
 
       # user and account are created if not found
       a = Account.find_or_create_by(name: st.account_name)
-      user = User.find_or_create_by(username: st.username, :current_account_id => a)
+      user = User.find_or_create_by(username: st.username)
+      user.update_attribute(:current_account_id, a.id) unless user.current_account_id == a.id
 
       sign_in(user)
 
