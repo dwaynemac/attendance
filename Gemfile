@@ -66,7 +66,7 @@ gem 'logical_model', '0.6.6'
 gem 'activity_stream_client', '0.0.16'
 gem 'contacts_client', '~> 0.0.54'
 gem 'accounts_client', '0.2.38'
-gem 'messaging_client','~> 0.2'
+gem 'messaging_client', '~> 0.2.1'
 
 gem 'carrierwave'
 gem 'fog', '~> 1.38.0'
