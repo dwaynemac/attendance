@@ -18,7 +18,7 @@ describe Import do
   it "defaults status to ready" do
     i = build(:import, status: nil)
     i.save
-    expect(i.status).to eq :ready
+    expect(i.status).to eq 'ready'
   end
 
   it "saves CSV file" do

@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :trial_lesson do
-    account
-    contact
-    time_slot
+    account { create(:account) }
+    contact { create(:contact) }
+    time_slot { create(:time_slot) }
     trial_on { Date.tomorrow } 
     sequence(:padma_uid) { |n| "username#{n}"}
   end

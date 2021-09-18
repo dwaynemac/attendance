@@ -94,9 +94,9 @@ describe AttendanceImport do
       expect{attendance_import.process_CSV}.to change{attendance_import.failed_rows.count}.by 1
     end
     it "sets status to :finished" do
-      expect(attendance_import.status).to eq :ready
+      expect(attendance_import.status).to eq 'ready'
       attendance_import.process_CSV
-      expect(attendance_import.status).to eq :finished
+      expect(attendance_import.status).to eq 'finished'
     end
   end
 

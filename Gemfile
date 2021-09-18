@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby "2.3.8"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.2'
+gem 'rails', '4.2.7'
 
 # Use Puma
 gem 'puma'
@@ -11,7 +11,7 @@ gem 'puma'
 gem 'rack-cors'
 
 #Translations
-gem 'i18n', '~> 0.6.6'
+gem 'i18n'
 gem 'rails-i18n'
 
 gem "intercom-rails"
@@ -46,6 +46,9 @@ gem 'angularjs-rails'
 gem "select2-rails", '~> 4.0.0'
 
 gem 'bootstrap-multiselect-rails'
+
+# Responders gem, to be able to use respond_with
+gem 'responders', '~> 2.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -101,7 +104,7 @@ group :test, :development do
   gem 'coveralls', require: false
 end
 
-gem 'validates_timeliness'
+gem 'validates_timeliness', '~> 4.0.2'
 gem 'byebug', '~> 11.0.1'
 
 group :development do
@@ -120,6 +123,7 @@ group :development do
   gem 'yard-restful'
 
   gem 'git-pivotal-tracker-integration'
+  gem 'web-console', '~> 2.0'
 end
 
 gem 'appsignal', '~> 2.8'

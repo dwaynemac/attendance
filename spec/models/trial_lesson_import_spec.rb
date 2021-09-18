@@ -54,14 +54,14 @@ describe TrialLessonImport do
         expect{trial_lesson_import.process_CSV}.to change{trial_lesson_import.failed_rows.count}.by 0
       end
       it "sets status to :finished" do
-        expect(trial_lesson_import.status).to eq :ready
+        expect(trial_lesson_import.status).to eq 'ready'
         trial_lesson_import.process_CSV
-        expect(trial_lesson_import.status).to eq :finished
+        expect(trial_lesson_import.status).to eq 'finished'
       end
       it "archives the correct lessons" do
-        expect(trial_lesson_import.status).to eq :ready
+        expect(trial_lesson_import.status).to eq 'ready' 
         trial_lesson_import.process_CSV
-        expect(trial_lesson_import.status).to eq :finished
+        expect(trial_lesson_import.status).to eq 'finished'
         expect(TrialLesson.where(archived: true).count).to eq 7
       end
     end

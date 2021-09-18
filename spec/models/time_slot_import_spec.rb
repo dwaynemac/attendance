@@ -63,9 +63,9 @@ describe TimeSlotImport do
       expect(time_slot_import.failed_rows.map(&:value)).to eq [4]
     end
     it "sets status to :finished" do
-      expect(time_slot_import.status).to eq :ready
+      expect(time_slot_import.status).to eq 'ready'
       time_slot_import.process_CSV
-      expect(time_slot_import.status).to eq :finished
+      expect(time_slot_import.status).to eq 'finished'
     end
   end
 
