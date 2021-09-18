@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :attendance do
-    account
-    time_slot
+    account { create(:account) }
+    time_slot { create(:time_slot) }
     attendance_on { Date.yesterday } 
     username {'username'}
   end

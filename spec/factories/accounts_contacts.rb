@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :accounts_contact do
-    account
-    contact
+    account { create(:account) }
+    contact { create(:contact) }
   end
 end

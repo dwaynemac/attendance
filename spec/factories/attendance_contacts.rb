@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :attendance_contact do
-    attendance
-    contact
+    attendance { create(:attendance) }
+    contact { create(:contact) }
   end
 end
