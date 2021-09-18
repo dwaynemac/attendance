@@ -20,7 +20,7 @@ class AttendancesController < ApplicationController
     @username = params[:username] || cookies[:filter_attendances_by_username]
 
     @time_slots = @time_slots.where(padma_uid: @username) if @username.present?
-    @only_pending = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(params[:only_pending])
+    @only_pending =  ActiveRecord::Type::Boolean.new.type_cast_from_database(params[:only_pending])
     @time_slots_wout_day = current_user.current_account.time_slots.without_schedule
 
     @recent = nil # disable until bug #107776460 fixed
