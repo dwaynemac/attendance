@@ -147,7 +147,7 @@ describe TrialLessonsController do
       trial_lesson = create(:trial_lesson, :account => @user.current_account)
       expect {
         delete :destroy, {:id => trial_lesson.to_param}
-      }.to change(TrialLesson, :count).by(-1)
+      }.to change{TrialLesson.count}.by(-1)
     end
 
     it "redirects to the trial_lessons list" do
