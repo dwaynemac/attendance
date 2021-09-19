@@ -65,12 +65,13 @@ gem 'activerecord-session_store'
 gem 'cancan'
 
 # Padma Clients
-gem 'logical_model', '0.6.6'
+gem 'logical_model', '0.7.0' 
 gem 'activity_stream_client', '0.0.16'
-gem 'contacts_client', '~> 0.0.54'
+gem 'contacts_client', path: '~/workspace/contacts_client'#'~> 0.0.56'
 gem 'accounts_client', '0.2.38'
 gem 'messaging_client', '~> 0.2.1'
 
+#gem 'typhoeus', '0.6.4'
 gem 'carrierwave'
 gem 'fog', '~> 1.38.0'
 gem 'delayed_job_active_record' # must be declared after 'protected_attributes' gem
