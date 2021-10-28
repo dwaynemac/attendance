@@ -1,3 +1,5 @@
+require "padma_crm_api"
+
 class Contact < ActiveRecord::Base
   has_many :accounts_contacts
   has_many :accounts, through: :accounts_contacts
@@ -35,6 +37,14 @@ class Contact < ActiveRecord::Base
                                     ignore_validation: true,
                                     username: last_attendance.time_slot.padma_uid,
                                     account_name: account.name})
+      begin
+        PadmaCrmApi.update_contact(padma_id,
+          {last_seen_at: last_seen_at},
+          {account_name: account.name}
+        )
+      rescue
+        Rails.logger.warn "couldnt update last_seen_at for contact #{self.id} ON CRM."
+      end
     else
       Rails.logger.info "couldnt update last_seen_at for contact #{self.id}"
       raise "couldnt update last_seen_at for contact #{self.id}"

@@ -12,3 +12,4 @@ S3_KEY_ID: secret
 S3_SECRET_KEY: secret
 activities_key: secret
 messaging_key: secret
+crm_contacts_v0_api_key: secret
