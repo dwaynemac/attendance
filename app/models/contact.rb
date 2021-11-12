@@ -33,10 +33,14 @@ class Contact < ActiveRecord::Base
     return if last_seen_at.nil?
 
     if padma_contact(account)
-      padma_contact(account).update({contact: {last_seen_at: last_seen_at},
-                                    ignore_validation: true,
-                                    username: last_attendance.time_slot.padma_uid,
-                                    account_name: account.name})
+      begin
+        padma_contact(account).update({contact: {last_seen_at: last_seen_at},
+                                      ignore_validation: true,
+                                      username: last_attendance.time_slot.padma_uid,
+                                      account_name: account.name})
+      rescue
+        Rails.logger.warn "couldnt update last_seen_at for contact #{self.id} ON contacts-ws."
+      end
       begin
         PadmaCrmApi.update_contact(padma_id,
           {last_seen_at: last_seen_at},
