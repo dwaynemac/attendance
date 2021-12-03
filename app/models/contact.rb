@@ -1,3 +1,4 @@
+require "crm_legacy_contact"
 require "padma_crm_api"
 
 class Contact < ActiveRecord::Base
@@ -57,9 +58,10 @@ class Contact < ActiveRecord::Base
 
   def padma_contact(account, options={})
     if @padma_contact.nil?
-      @padma_contact = PadmaContact.find(self.padma_id, {select: [:first_name, :last_name, :email, :last_seen_at],
-                                                         except: [:except_linked, :except_last_local_status],
-                                                         account_name: account.name})
+      @padma_contact = CrmLegacyContact.find(padma_id, account_name: account.name)
+      #@padma_contact = PadmaContact.find(self.padma_id, {select: [:first_name, :last_name, :email, :last_seen_at],
+                                                         #except: [:except_linked, :except_last_local_status],
+                                                         #account_name: account.name})
     end
     @padma_contact
   end
