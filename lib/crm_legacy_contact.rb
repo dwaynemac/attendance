@@ -1,7 +1,10 @@
 require "padma_crm_api"
 
 # encoding: UTF-8
-# igual a PadmaContact pero usa la api de crm agregando {legacy_format: true} a los argumentos.
+#
+# LEE de crm con formato antiguo
+# ESCRIBE a crm con formato NUEVO
+#
 class CrmLegacyContact < LogicalModel
 
   def self.crm_host
@@ -90,7 +93,15 @@ class CrmLegacyContact < LogicalModel
   end
 
   def update(params)
-    raise NotImplementedError
+    if id
+      attributes = params[:contact]
+      options = params.reject { |k,v| k==:contact }
+      PadmaCrmApi.update_contact(
+        id,
+        attributes,
+        options
+      )
+    end
   end
 
   def create(params)
