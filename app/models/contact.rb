@@ -42,14 +42,6 @@ class Contact < ActiveRecord::Base
       rescue
         Rails.logger.warn "couldnt update last_seen_at for contact #{self.id} ON contacts-ws."
       end
-      begin
-        PadmaCrmApi.update_contact(padma_id,
-          {last_seen_at: last_seen_at},
-          {account_name: account.name}
-        )
-      rescue
-        Rails.logger.warn "couldnt update last_seen_at for contact #{self.id} ON CRM."
-      end
     else
       Rails.logger.info "couldnt update last_seen_at for contact #{self.id}"
       raise "couldnt update last_seen_at for contact #{self.id}"
