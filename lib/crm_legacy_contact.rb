@@ -121,21 +121,6 @@ class CrmLegacyContact < LogicalModel
     self._id = id
   end
 
-  # @return [Array<Communication>]
-  def communications
-    Communication.where(contact_id: self.id)
-  end
-
-  # @return [Array<Comment>]
-  def comments
-    Comment.where(contact_id: self.id)
-  end
-
-  # @return [Array<Communication>]
-  def subscription_changes
-    SubscriptionChange.where(contact_id: self.id)
-  end
-
   # @argument [Hash] options
   # @return [Array<ActivityStream::Activity>]
   def activities(options={})
@@ -219,61 +204,6 @@ class CrmLegacyContact < LogicalModel
     self.in_active_merge
   end
 
-  # Links contact to given account
-  #
-  # @param [String] contact_id
-  # @param [String] account_name
-  #
-  # returns:
-  # @return false if linking failed
-  # @return nil if there was a connection problem
-  # @return true if successfull
-  #
-  # @example
-  #   @contact.link_to(account)
-  def self.link(contact_id, account_name)
-    params = { account_name: account_name }
-    params = self.merge_key(params)
-
-    response = nil
-    Timeout::timeout(self.timeout/1000) do
-      response = Typhoeus::Request.post( self.resource_uri(contact_id)+"/link", :params => params, :timeout => self.timeout )
-    end
-    case response.code
-      when 200
-        log_ok response
-        return true
-      when 400
-        log_failed response
-        return false
-      else
-        log_failed response
-        return nil
-    end
-  rescue Timeout::Error
-    self.logger.warn "timeout"
-    return nil
-  end
-
-  # @see count
-  # Same as count by will make a POST request instead of GET request
-  def self.count_by_post(options)
-    options[:page] = 1
-    options[:per_page] = 1
-
-    options = self.merge_key(options)
-
-    response = Typhoeus.post(self.resource_uri+'/search', body: options)
-    if response.success?
-      log_ok(response)
-      result_set = self.from_json(response.body)
-      return result_set[:total]
-    else
-      log_failed(response)
-      return nil
-    end
-  end
-
   DEFAULT_BATCH_SIZE = 500
   ##
   #
@@ -288,6 +218,7 @@ class CrmLegacyContact < LogicalModel
   # @option batch_options [Integer] total - Total amount of contacts.
   #         To avoid making an extra call for counting
   def self.batch_search(search_options = {}, batch_options = {})
+    raise NotImplementedError
     batch_options[:batch_size] ||= DEFAULT_BATCH_SIZE
     ret = nil
 
@@ -305,102 +236,6 @@ class CrmLegacyContact < LogicalModel
     self.hydra.run
     ret.sort!{|a,b| a.first_name <=> b.first_name} if ret
     return ret
-  end
-
-  def self.async_search(options={})
-    options[:page] ||= 1
-    options[:per_page] ||= 9999
-
-    options = self.merge_key(options)
-
-    request = Typhoeus::Request.new(
-      resource_uri('search'),
-      method: :post,
-      body: options,
-      headers: default_headers
-    )
-    request.on_complete do |response|
-      if response.code >= 200 && response.code < 400
-        log_ok(response)
-
-        result_set = self.from_json(response.body)
-
-        # this paginate is will_paginate's Array pagination
-        collection = Kaminari.paginate_array(
-          result_set[:collection],
-          {
-            :total_count=>result_set[:total],
-            :limit => options[:per_page],
-            :offset => options[:per_page] * ([options[:page], 1].max - 1)
-          }
-        )
-
-        yield collection
-      else
-        log_failed(response)
-      end
-    end
-    self.hydra.queue(request)
-  end
-
-  def self.find_by_kshema_id(kshema_id)
-    params = { kshema_id: kshema_id}
-    params = self.merge_key(params)
-
-    response = Typhoeus::Request.get(self.resource_uri+'/by_kshema_id', params: params)
-    if response.success?
-      unless response.body == 'null'
-        self.new.from_json(response.body)
-      else
-        return nil
-      end
-    else
-      return nil
-    end
-  end
-
-  ##
-  # Same parameters as search. Returns average age for scoped contacts
-  #
-  # Parameters:
-  #   @param options [Hash].
-  #   Valid options are:
-  #   * all other options will be sent in :params to WebService
-  #
-  # Usage:
-  #   -- Average age of students at 2014-3-31
-  #   Person.average_age(account_name: 'martinez', status: 'student', local_status: 'student', )
-  def self.average_age(options = {})
-    options = self.merge_key(options)
-
-    response = Typhoeus.post(self.resource_uri+'/calculate/average_age', body: options)
-
-    if response.success?
-      log_ok(response)
-      resp = ActiveSupport::JSON.decode(response.body)
-      return resp['result'].to_f
-    else
-      log_failed(response)
-      return nil
-    end
-  end
-
-  ##
-  # Returns contacts similar to the one specifid by id
-  def self.get_similar_to(contact_id,options={})
-    options[:page] = 1
-    options[:per_page] = 9999
-    similar = nil
-    do_with_resource_path("#{@resource_path}/#{contact_id}/similar") do
-      similar = paginate(options)
-    end
-    similar
-  end
-
-  ##
-  # Returns contacts similar to current on
-  def get_similar(options={})
-    self.class.get_similar_to(id,options)
   end
 
 end
