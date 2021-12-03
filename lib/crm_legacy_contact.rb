@@ -79,11 +79,12 @@ class CrmLegacyContact < LogicalModel
     super(id, params)
   end
 
-  def update(params)
-    raise NotImplementedError
+  def self.paginate(options = {})
+    options[:legacy_format] = true
+    super(options)
   end
 
-  def paginate(params)
+  def update(params)
     raise NotImplementedError
   end
 
