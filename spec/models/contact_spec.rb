@@ -23,13 +23,13 @@ describe Contact do
     let(:padma_id){'contact-id'}
     let(:contact){create(:contact, padma_id: padma_id)}
     before do
-      allow(PadmaContact).to receive(:find).and_return(PadmaContact.new)
+      allow(CrmLegacyContact).to receive(:find).and_return(CrmLegacyContact.new)
     end
 
     it "sets last_seen_at to last attendance time" do
       last = create(:attendance_contact, contact_id: contact.id, attendance: create(:attendance, attendance_on: Date.today, account: account))
       prev = create(:attendance_contact, contact_id: contact.id, attendance: create(:attendance, attendance_on: 1.day.ago, account: account))
-      expect_any_instance_of(PadmaContact).to receive(:update).with(hash_including(contact: { last_seen_at: Date.today }))
+      expect_any_instance_of(CrmLegacyContact).to receive(:update).with(hash_including(contact: { last_seen_at: Date.today }))
       contact.update_last_seen_at(account)
     end
   end
@@ -56,7 +56,7 @@ describe Contact do
                                 padma_status: 'former_student')
     end
     describe "if padma_contact given" do
-      let(:padma_contact){PadmaContact.new(pc_attributes)}
+      let(:padma_contact){CrmLegacyContact.new(pc_attributes)}
       describe "if it has local_statuses" do
         let(:pc_attributes){{first_name: 'new-first-name',
                              last_name: 'new-last-name',
@@ -65,7 +65,7 @@ describe Contact do
           {account_name: 'account-2', local_status: 'former_student'}
         ]}}
         it "wont call contacts-ws" do
-          expect(PadmaContact).not_to receive(:find)
+          expect(CrmLegacyContact).not_to receive(:find)
           contact.sync_from_contacts_ws(padma_contact)
         end
         it "updates accounts_contacts statuses" do
@@ -87,7 +87,7 @@ describe Contact do
       describe "if it doesnt have local_statuses" do
         let(:pc_attributes){{first_name: 'a'}}
         it "fetches padma_contact from contacts-ws" do
-          expect(PadmaContact).to receive(:find)
+          expect(CrmLegacyContact).to receive(:find)
           contact.sync_from_contacts_ws(padma_contact)
         end
       end
@@ -95,7 +95,7 @@ describe Contact do
     describe "if padma_contact not given" do
       let(:padma_contact){nil}
       it "fetches padma_contact from contacts-ws" do
-        expect(PadmaContact).to receive(:find)
+        expect(CrmLegacyContact).to receive(:find)
         contact.sync_from_contacts_ws(padma_contact)
       end
     end
@@ -123,31 +123,31 @@ describe Contact do
       end
       describe "with a padma_contact" do
         it "wont call contacts-ws" do
-          pc = PadmaContact.new(id: padma_id, first_name: 'fn', last_name: 'ln')
-          expect(PadmaContact).not_to receive(:find)
+          pc = CrmLegacyContact.new(id: padma_id, first_name: 'fn', last_name: 'ln')
+          expect(CrmLegacyContact).not_to receive(:find)
           Contact.get_by_padma_id(padma_id,account.id, pc)
         end
         it "caches padma_contact" do
-          pc = PadmaContact.new(id: padma_id, first_name: 'fn', last_name: 'ln')
+          pc = CrmLegacyContact.new(id: padma_id, first_name: 'fn', last_name: 'ln')
           expect{Contact.get_by_padma_id(padma_id,account.id, pc)}.to change{Contact.count}.by 1
         end
       end
       describe "witout a padma_contact" do
         it "fetches padma_contact from contacts-ws" do
-          pc = PadmaContact.new(id: padma_id, first_name: 'fn', last_name: 'ln')
-          expect(PadmaContact).to receive(:find).and_return(pc)
+          pc = CrmLegacyContact.new(id: padma_id, first_name: 'fn', last_name: 'ln')
+          expect(CrmLegacyContact).to receive(:find).and_return(pc)
           Contact.get_by_padma_id(padma_id,account.id)
         end
         it "caches padma_contact" do
-          pc = PadmaContact.new(id: padma_id, first_name: 'fn', last_name: 'ln')
-          expect(PadmaContact).to receive(:find).and_return(pc)
+          pc = CrmLegacyContact.new(id: padma_id, first_name: 'fn', last_name: 'ln')
+          expect(CrmLegacyContact).to receive(:find).and_return(pc)
           expect{Contact.get_by_padma_id(padma_id,account.id)}.to change{Contact.count}.by 1
         end
       end
       describe "with new_contact_attributes" do
         it "sets given attributes in created contact" do
-          pc = PadmaContact.new(id: padma_id, first_name: 'fn', last_name: 'ln')
-          expect(PadmaContact).to receive(:find).and_return(pc)
+          pc = CrmLegacyContact.new(id: padma_id, first_name: 'fn', last_name: 'ln')
+          expect(CrmLegacyContact).to receive(:find).and_return(pc)
           Contact.get_by_padma_id(padma_id,account.id,nil,{external_id: 1})
           expect(Contact.last.external_id).to eq "1"
         end

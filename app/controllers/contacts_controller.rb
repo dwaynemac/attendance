@@ -13,7 +13,7 @@ class ContactsController < ApplicationController
       @time_slot = current_user.current_account.time_slots.find(params[:time_slot_id])
       @padma_contacts = @time_slot.recurrent_contacts
     elsif params[:padma_uid].present?
-      @padma_contacts = PadmaContact.paginate(
+      @padma_contacts = CrmLegacyContact.paginate(
                                             select: [:first_name, :last_name],
                                             where: {
                                               local_status: :student,

@@ -63,7 +63,7 @@ describe TimeSlot do
 
   describe "padma_contacts=" do
     before do
-      allow(PadmaContact).to receive(:find).and_return(PadmaContact.new())
+      allow(CrmLegacyContact).to receive(:find).and_return(CrmLegacyContact.new())
     end
     let(:ts){create(:time_slot)}
     before do

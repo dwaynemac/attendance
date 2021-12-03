@@ -27,7 +27,7 @@ describe Api::V0::TrialLessonsController do
 
       describe "and contact_id" do
         before do
-          PadmaContact.stub(:find).and_return PadmaContact.new id: 'the-id'
+          CrmLegacyContact.stub(:find).and_return CrmLegacyContact.new id: 'the-id'
         end
         let!(:contact){ create(:contact, padma_id: 'the-id')}
         let!(:ctrial){create(:trial_lesson, account: belgrano, contact_id: contact.id)}

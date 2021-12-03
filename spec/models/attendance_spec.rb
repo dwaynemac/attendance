@@ -76,7 +76,7 @@ describe Attendance do
     account.contacts.delete_all
     contact = create(:contact)
     account.contacts << contact
-    allow_any_instance_of(Contact).to receive(:padma_contact).and_return(PadmaContact.new(first_name: 'fn', last_name: 'ln', last_seen_at: 1.day.ago.to_s))
+    allow_any_instance_of(Contact).to receive(:padma_contact).and_return(CrmLegacyContact.new(first_name: 'fn', last_name: 'ln', last_seen_at: 1.day.ago.to_s))
     ts = create(:time_slot, :account => account)
     attendance = create(:attendance, :account => account, :time_slot => ts, :contact_ids => [contact.id])
     expect(attendance.attendance_contacts.count).to eq 1

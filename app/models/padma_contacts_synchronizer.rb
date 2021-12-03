@@ -15,7 +15,7 @@ class PadmaContactsSynchronizer
     padma_contacts = nil
     while padma_contacts.nil? && attempts < MAX_ATTEMPTS do
       # Get all contacts updated since last sync.
-      padma_contacts = PadmaContact.batch_search(select: [:first_name,
+      padma_contacts = CrmLegacyContact.search(select: [:first_name,
                                                     :last_name,
                                                     :local_status,
                                                     :local_statuses,

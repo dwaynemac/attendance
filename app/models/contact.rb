@@ -58,10 +58,11 @@ class Contact < ActiveRecord::Base
 
   def padma_contact(account, options={})
     if @padma_contact.nil?
-      @padma_contact = CrmLegacyContact.find(padma_id, account_name: account.name)
-      #@padma_contact = PadmaContact.find(self.padma_id, {select: [:first_name, :last_name, :email, :last_seen_at],
-                                                         #except: [:except_linked, :except_last_local_status],
-                                                         #account_name: account.name})
+      @padma_contact = CrmLegacyContact.find(self.padma_id, {
+        select: [:first_name, :last_name, :email, :last_seen_at],
+        except: [:except_linked, :except_last_local_status],
+        account_name: account.name
+      })
     end
     @padma_contact
   end
@@ -69,7 +70,7 @@ class Contact < ActiveRecord::Base
   # Syncs local data with data from Contacts-ws
   def sync_from_contacts_ws(pc = nil)
     if pc.nil? || pc.local_statuses.blank?
-      pc = PadmaContact.find(padma_id, select: %W(full_name local_statuses))
+      pc = CrmLegacyContact.find(padma_id, select: %W(full_name local_statuses))
     end
 
     if pc
@@ -105,7 +106,7 @@ class Contact < ActiveRecord::Base
       unless contact.accounts.include?(account)
         # Get PadmaContact unless it is already present
         if padma_contact.blank?
-          padma_contact = PadmaContact.find(padma_contact_id,
+          padma_contact = CrmLegacyContact.find(padma_contact_id,
                                             select: [:first_name, :last_name, :local_status],
                                             username: account.usernames.try(:first),
                                             account_name: account.name)
@@ -122,7 +123,7 @@ class Contact < ActiveRecord::Base
       
       # Get PadmaContact unless it is already present
       if padma_contact.blank?
-        padma_contact = PadmaContact.find(padma_contact_id,
+        padma_contact = CrmLegacyContact.find(padma_contact_id,
                                           select: [:first_name, :last_name, :local_status],
                                           username: account.usernames.try(:first),
                                           account_name: account.name)

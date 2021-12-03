@@ -16,7 +16,7 @@ class StatsController < ApplicationController
     if @stats.include_former_students
       @contacts.reject!{|c| c.status == 'former_student' && c.attendance_total == 0 }
     end
-    @teachers = PadmaContact.search ids: @contacts.map(&:padma_id), 
+    @teachers = CrmLegacyContact.search ids: @contacts.map(&:padma_id),
       select: [:local_teacher],
       account_name: current_user.current_account.name
 

@@ -4,7 +4,7 @@ require 'rails_helper'
 describe Merge do
 
   before do
-    PadmaContact.stub(:find).and_return PadmaContact.new
+    CrmLegacyContact.stub(:find).and_return CrmLegacyContact.new
   end
 
   let(:son_id){ 'son-id' }

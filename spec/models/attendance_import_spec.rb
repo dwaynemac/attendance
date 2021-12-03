@@ -3,11 +3,11 @@ require 'rails_helper'
 describe AttendanceImport do
 
   before do
-    allow(PadmaContact).to receive(:find_by_kshema_id) do |arg1|
-      PadmaContact.new(id: arg1, first_name: 'fn', last_name: 'ln')
+    allow(CrmLegacyContact).to receive(:find_by_kshema_id) do |arg1|
+      CrmLegacyContact.new(id: arg1, first_name: 'fn', last_name: 'ln')
     end
 
-    allow_any_instance_of(Contact).to receive(:padma_contact).and_return(PadmaContact.new(first_name: 'fn', last_name: 'ln'))
+    allow_any_instance_of(Contact).to receive(:padma_contact).and_return(CrmLegacyContact.new(first_name: 'fn', last_name: 'ln'))
 
     # ensure there are no Attendances
     Attendance.destroy_all
@@ -63,8 +63,8 @@ describe AttendanceImport do
     end
 
     it "calls contacts-ws only once for each kshema_id" do
-      expect(PadmaContact).to receive(:find_by_kshema_id).exactly(13).times do |arg1|
-        PadmaContact.new(id: arg1, first_name: 'fn', last_name: 'ln')
+      expect(CrmLegacyContact).to receive(:find_by_kshema_id).exactly(13).times do |arg1|
+        CrmLegacyContact.new(id: arg1, first_name: 'fn', last_name: 'ln')
       end
       attendance_import.process_CSV
     end

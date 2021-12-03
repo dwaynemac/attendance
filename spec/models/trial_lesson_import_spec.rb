@@ -37,10 +37,10 @@ describe TrialLessonImport do
       # avoid calls to external WSs
       allow_any_instance_of(TrialLesson).to receive(:broadcast_create).and_return(true)
       allow_any_instance_of(TrialLesson).to receive(:create_activity).and_return(true)
-      allow(PadmaContact).to receive(:find_by_kshema_id).and_return(
-        PadmaContact.new(id: "1", first_name: 'fn', last_name: 'ln')
+      allow(CrmLegacyContact).to receive(:find_by_kshema_id).and_return(
+        CrmLegacyContact.new(id: "1", first_name: 'fn', last_name: 'ln')
       )
-      allow(PadmaContact).to receive(:find).and_return(PadmaContact.new(id: "1"))
+      allow(CrmLegacyContact).to receive(:find).and_return(CrmLegacyContact.new(id: "1"))
     end
     describe "#process_CSV" do
       it "creates a trial_lesson for every valid row" do

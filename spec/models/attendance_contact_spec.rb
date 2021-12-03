@@ -17,7 +17,7 @@ describe AttendanceContact do
 
     describe "if connection to contact-ws fails" do
       before do
-        allow(PadmaContact).to receive(:find).and_return nil
+        allow(CrmLegacyContact).to receive(:find).and_return nil
       end
 
       it "saves attendances anyway" do
@@ -35,7 +35,7 @@ describe AttendanceContact do
 
     describe "if connection to contacts-ws works" do
       before do
-        allow(PadmaContact).to receive(:find).and_return PadmaContact.new
+        allow(CrmLegacyContact).to receive(:find).and_return CrmLegacyContact.new
       end
       it "saves attendances" do
         ac = build(:attendance_contact)
@@ -61,7 +61,7 @@ describe AttendanceContact do
   describe "#set_last_seen_at_on_contacts" do
     describe "if connection to contact-ws fails" do
       before do
-        allow(PadmaContact).to receive(:find).and_return nil
+        allow(CrmLegacyContact).to receive(:find).and_return nil
       end
 
       it "raises exception with a readable message" do
@@ -73,7 +73,7 @@ describe AttendanceContact do
 
     describe "if connection to contacts-ws works" do
       before do
-        allow(PadmaContact).to receive(:find).and_return PadmaContact.new
+        allow(CrmLegacyContact).to receive(:find).and_return CrmLegacyContact.new
       end
       it "wont raise exception" do
         ac = build(:attendance_contact)

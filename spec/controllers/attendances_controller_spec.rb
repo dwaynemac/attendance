@@ -19,8 +19,8 @@ describe AttendancesController do
   describe "PATCH /attendances/:id" do
     context "if contacts-ws is online" do
       before do
-        allow(PadmaContact).to receive(:find) do |pid|
-          PadmaContact.new first_name: pid, last_name: pid, id: pid
+        allow(CrmLegacyContact).to receive(:find) do |pid|
+          CrmLegacyContact.new first_name: pid, last_name: pid, id: pid
         end
       end
       describe "setting no 'no people in attendance'" do

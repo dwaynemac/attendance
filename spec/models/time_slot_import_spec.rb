@@ -28,8 +28,8 @@ describe TimeSlotImport do
 
   before do
     I18n.locale = :en
-    allow(PadmaContact).to receive(:find_by_kshema_id) do |arg1|
-      PadmaContact.new(id: arg1, first_name: 'fn', last_name: 'ln')
+    allow(CrmLegacyContact).to receive(:find_by_kshema_id) do |arg1|
+      CrmLegacyContact.new(id: arg1, first_name: 'fn', last_name: 'ln')
     end
   end
 

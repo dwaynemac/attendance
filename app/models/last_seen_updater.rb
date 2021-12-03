@@ -16,7 +16,7 @@ class LastSeenUpdater < ActiveRecord::Base
 
   private
   def self.students(account_name)
-    PadmaContact.paginate(where: {local_status: :student},
+    CrmLegacyContact.paginate(where: {local_status: :student},
                           account_name: account_name,
                           per_page: 1000)
   end

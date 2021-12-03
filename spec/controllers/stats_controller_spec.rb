@@ -18,7 +18,7 @@ describe StatsController do
     let(:contact){create(:contact)}
 
     before do
-      allow(PadmaContact).to receive(:find).and_return PadmaContact.new
+      allow(CrmLegacyContact).to receive(:find).and_return CrmLegacyContact.new
       contact.accounts_contacts.create!(:account_id => @user.current_account.id, :padma_status => :student)
       attendance.contacts << contact
     end
