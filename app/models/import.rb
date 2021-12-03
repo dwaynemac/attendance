@@ -95,7 +95,7 @@ class Import < ActiveRecord::Base
     if local_contact
       local_contact
     else
-      c = PadmaContact.find_by_kshema_id(external_id)
+      c = CrmLegacyContact.find_by_kshema_id(external_id)
       if c
         Contact.get_by_padma_id(c.id,self.account.id, c, {external_sysname: 'Kshema', external_id: external_id})
       end
