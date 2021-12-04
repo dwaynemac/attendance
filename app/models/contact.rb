@@ -88,8 +88,9 @@ class Contact < ActiveRecord::Base
   # @param  account_id [Integer]
   # @param  padma_contact [PadmaContact] (nil)
   # @param new_contact_attributes [Hash] (nil)
+  # @param resync [Boolean]
   # @return [Contact]
-  def self.get_by_padma_id(padma_contact_id,account_id,padma_contact=nil,new_contact_attributes=nil)
+  def self.get_by_padma_id(padma_contact_id,account_id,padma_contact=nil,new_contact_attributes=nil, resync=nil)
     return if padma_contact_id.blank?
       
     account = Account.find(account_id)
@@ -109,6 +110,11 @@ class Contact < ActiveRecord::Base
                                            padma_status: padma_contact.local_status)
         end
       end
+
+      if resync
+        contact.sync_from_contacts_ws(padma_contact)
+      end
+
       contact
     else
       #Local Contact not found, create & associate to account
