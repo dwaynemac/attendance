@@ -3,7 +3,7 @@ task :synchronize  => :environment do
   Account.order(:synchronized_at).all.each do |account|
     if account.padma && account.padma.enabled?
       puts "Synchronizing Padma Contacts for #{account.name}..."
-      PadmaContactsSynchronizer.new(account).sync(1.day)
+      PadmaContactsSynchronizer.new(account).sync(30.minutes)
       puts "done."
     end
   end
@@ -13,7 +13,7 @@ task :daily_synchronize  => :environment do
   Account.order(:synchronized_at).all.each do |account|
     if account.padma && account.padma.enabled?
       puts "Synchronizing Padma Contacts for #{account.name}..."
-      PadmaContactsSynchronizer.new(account).sync(5.years)
+      PadmaContactsSynchronizer.new(account).sync(2.days)
       puts "done."
     end
   end
