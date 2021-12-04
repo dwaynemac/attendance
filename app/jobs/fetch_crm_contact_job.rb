@@ -7,11 +7,11 @@ class FetchCrmContactJob
   def perform
     ret = false
     if account
-      ret = Contact.get_by_padma_id(@attributes[:id], account.id, padma_contact, nil, true)
+      ret = get_for_account(account)
     elsif padma_contact.local_statuses
       padma_contact.local_statuses.each do |ls|
         if (a = Account.find_by_name ls["account_name"])
-          ret = Contact.get_by_padma_id(@attributes[:id], a.id, padma_contact, nil, true)
+          ret = get_for_account(a)
         end
       end
     end
@@ -19,6 +19,10 @@ class FetchCrmContactJob
   end
 
   private
+
+  def get_for_account(a)
+    Contact.get_by_padma_id(@attributes[:id], a.id, padma_contact, nil, true)
+  end
 
   def padma_contact
     @padma_contact ||= CrmLegacyContact.find @attributes[:id],
