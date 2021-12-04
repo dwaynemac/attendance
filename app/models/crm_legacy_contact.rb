@@ -21,6 +21,7 @@ class CrmLegacyContact < LogicalModel
   set_api_key :app_key, ENV["crm_contacts_v0_api_key"]
 
   attribute :_id
+  attribute :crm_padma_id
   attribute :first_name
   attribute :last_name
   attribute :gender
