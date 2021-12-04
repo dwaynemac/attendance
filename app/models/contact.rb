@@ -92,6 +92,15 @@ class Contact < ActiveRecord::Base
   # @return [Contact]
   def self.get_by_padma_id(padma_contact_id,account_id,padma_contact=nil,new_contact_attributes=nil, resync=nil)
     return if padma_contact_id.blank?
+
+    #
+    # TODO evitar que se duplique chequeando el crm_padma_id del padma_contact
+    #
+    #
+    #
+    #
+    #
+    #
       
     account = Account.find(account_id)
     if (contact = Contact.find_by_padma_id(padma_contact_id))
