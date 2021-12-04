@@ -87,11 +87,6 @@ class CrmLegacyContact < LogicalModel
     super(options)
   end
 
-  def self.search(options = {})
-    options[:legacy_format] = true
-    paginate(options)
-  end
-
   def update(params)
     if id
       attributes = params[:contact]
@@ -103,6 +98,47 @@ class CrmLegacyContact < LogicalModel
       )
     end
   end
+
+  ##
+  # Search is same as paginate but will make POST /search request instead of GET /index
+  #
+  # Parameters:
+  #   @param options [Hash].
+  #   Valid options are:
+  #   * :page - indicated what page to return. Defaults to 1.
+  #   * :per_page - indicates how many records to be returned per page. Defauls to 9999
+  #   * all other options will be sent in :params to WebService
+  #
+  # Usage:
+  #   Person.search(:page => params[:page])
+  def self.search(options = {})
+    options[:page] ||= 1
+    options[:per_page] ||= 9999
+    options[:legacy_format] = true
+
+    options = self.merge_key(options)
+
+    response = Typhoeus.post(self.resource_uri+'/search', body: options)
+
+    if response.success?
+      log_ok(response)
+      result_set = self.from_json(response.body)
+
+      # this paginate is will_paginate's Array pagination
+      return Kaminari.paginate_array(
+        result_set[:collection],
+        {
+          :total_count=>result_set[:total],
+          :limit => options[:per_page],
+          :offset => options[:per_page] * ([options[:page], 1].max - 1)
+        }
+      )
+    else
+      log_failed(response)
+      return nil
+    end
+  end
+
 
   def create(params)
     raise NotImplementedError
