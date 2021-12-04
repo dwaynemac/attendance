@@ -265,7 +265,7 @@ class CrmLegacyContact < LogicalModel
   # @option batch_options [Integer] total - Total amount of contacts.
   #         To avoid making an extra call for counting
   def self.batch_search(search_options = {}, batch_options = {})
-    raise NotImplementedError
+    search_options[:legacy_format] = true
     batch_options[:batch_size] ||= DEFAULT_BATCH_SIZE
     ret = nil
 
@@ -283,6 +283,63 @@ class CrmLegacyContact < LogicalModel
     self.hydra.run
     ret.sort!{|a,b| a.first_name <=> b.first_name} if ret
     return ret
+  end
+
+  def self.async_search(options={})
+    options[:page] ||= 1
+    options[:per_page] ||= 9999
+    options[:legacy_format] = true
+
+    options = self.merge_key(options)
+
+    request = Typhoeus::Request.new(
+      resource_uri('search'),
+      method: :post,
+      body: options,
+      headers: default_headers
+    )
+    request.on_complete do |response|
+      if response.code >= 200 && response.code < 400
+        log_ok(response)
+
+        result_set = self.from_json(response.body)
+
+        # this paginate is will_paginate's Array pagination
+        collection = Kaminari.paginate_array(
+          result_set[:collection],
+          {
+            :total_count=>result_set[:total],
+            :limit => options[:per_page],
+            :offset => options[:per_page] * ([options[:page], 1].max - 1)
+          }
+        )
+
+        yield collection
+      else
+        log_failed(response)
+      end
+    end
+    self.hydra.queue(request)
+  end
+
+  # @see count
+  # Same as count by will make a POST request instead of GET request
+  def self.count_by_post(options)
+    options[:page] = 1
+    options[:per_page] = 1
+    options[:legacy_format] = true
+
+    options = self.merge_key(options)
+
+    response = Typhoeus.post(self.resource_uri+'/search', body: options)
+    if response.success?
+      log_ok(response)
+      result_set = self.from_json(response.body)
+      return result_set[:total]
+    else
+      log_failed(response)
+      return nil
+    end
   end
 
 end
