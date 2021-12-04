@@ -84,10 +84,10 @@ class Contact < ActiveRecord::Base
   end
 
   # Find or create a local contact by given padma_contact_id
-  # @param [String] padma_contact_id ID of contact @ contacts-ws
-  # @param [Integer] account_id 
-  # @param [PadmaContact] padma_contact (nil)
-  # @param [Hash] new_contact_attributes (nil)
+  # @param  padma_contact_id [String] ID of contact @ contacts-ws
+  # @param  account_id [Integer]
+  # @param  padma_contact [PadmaContact] (nil)
+  # @param new_contact_attributes [Hash] (nil)
   # @return [Contact]
   def self.get_by_padma_id(padma_contact_id,account_id,padma_contact=nil,new_contact_attributes=nil)
     return if padma_contact_id.blank?

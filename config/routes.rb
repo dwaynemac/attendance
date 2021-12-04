@@ -54,6 +54,7 @@ Assistance::Application.routes.draw do
         end
         member do
           get :last_trial
+          post :sync_from_crm
         end
       end
       resources :imports, only: [:create, :show] do

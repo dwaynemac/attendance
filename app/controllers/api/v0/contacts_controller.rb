@@ -45,4 +45,19 @@ class Api::V0::ContactsController < Api::V0::ApiController
       format.json { render :json => contacts_json }  # note, no :location or :status options
     end
   end
+
+  # @required id
+  # @required account_name
+  def sync_from_crm
+    if params[:id] && params[:account_name]
+      j = FetchCrmContactJob.new(id: params[:id], account_name: params[:account_name])
+      if Delayed::Job.enqueue j
+        render json: "queued", status: 202
+      else
+        render json: "error", status: 400
+      end
+    else
+      render json: "id and account_name required", status: 400
+    end
+  end
 end
