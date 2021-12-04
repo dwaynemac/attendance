@@ -1,3 +1,16 @@
+namespace :scheduler do
+
+  #noinspection RubyLiteralArrayInspection
+  task :every_10_minutes => [
+    #"synchronize"
+  ]
+
+  #noinspection RubyLiteralArrayInspection
+  task :every_1_day => [
+    #"daily_synchronize"
+  ]
+end
+
 desc "This task is called by the Heroku scheduler add-on it synchronizes recently updated contacts"
 task :synchronize  => :environment do
   Account.order(:synchronized_at).all.each do |account|
