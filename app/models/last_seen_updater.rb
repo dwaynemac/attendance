@@ -9,6 +9,7 @@ class LastSeenUpdater < ActiveRecord::Base
           student.update({
             contact: {last_seen_at: attendance.attendance_on},
             ignore_validation: true,
+            async: true,
             username: attendance.time_slot.padma_uid,
             account_name: attendance.account.name
           })
