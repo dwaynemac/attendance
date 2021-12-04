@@ -5,7 +5,17 @@ class FetchCrmContactJob
   end
 
   def perform
-    Contact.get_by_padma_id(@attributes[:id], account.id, padma_contact, nil, true)
+    ret = false
+    if account
+      ret = Contact.get_by_padma_id(@attributes[:id], account.id, padma_contact, nil, true)
+    elsif padma_contact.local_statuses
+      padma_contact.local_statuses.each do |ls|
+        if (a = Account.find_by_name ls["account_name"])
+          ret = Contact.get_by_padma_id(@attributes[:id], a.id, padma_contact, nil, true)
+        end
+      end
+    end
+    ret
   end
 
   private
