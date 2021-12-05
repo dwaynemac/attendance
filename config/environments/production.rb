@@ -44,7 +44,7 @@ Rails.application.configure do
   # config.force_ssl = true
 
   # Set to :debug to see everything in the log.
-  config.log_level = :info
+  config.log_level = ENV["log_level"] || :info
   config.action_view.logger = nil # don't log partials rendering
 
   # Prepend all log lines with the following tags.
