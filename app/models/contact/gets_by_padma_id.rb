@@ -61,26 +61,40 @@ class Contact
               account_name: account.name)
           end
           if padma_contact
-            #New contact attributes from PadmaContacts
-            args = {
-              padma_id: padma_contact_id,
-              name: "#{padma_contact.first_name} #{padma_contact.last_name}"
-            }
+            if (contact = find_by_crm_padma_id(padma_contact))
+              if resync
+                contact.sync_from_contacts_ws(padma_contact)
+              end
+            else
+              #New contact attributes from PadmaContacts
+              args = {
+                padma_id: padma_contact_id,
+                name: "#{padma_contact.first_name} #{padma_contact.last_name}"
+              }
 
-            # Merge with local attributes if they are present
-            args = args.merge(new_contact_attributes) if new_contact_attributes.present?
+              # Merge with local attributes if they are present
+              args = args.merge(new_contact_attributes) if new_contact_attributes.present?
 
-            # Create new local Contact
-            contact = Contact.create!(args)
+              # Create new local Contact
+              contact = Contact.create!(args)
 
-            # Associate to account
-            contact.accounts_contacts.create(:account => account, :padma_status => padma_contact.local_status) if padma_contact.present?
+              # Associate to account
+              contact.accounts_contacts.create(:account => account, :padma_status => padma_contact.local_status) if padma_contact.present?
+            end
           end
         end
         contact
       end
 
+      private
 
+      def self.find_by_crm_padma_id(padma_contact)
+        ret = nil
+        if (ret = Contact.find_by_padma_id padma_contact.crm_padma_id)
+          ret.update_attribute :padma_id, padma_contact.id
+        end
+        ret
+      end
     end
   end
 end
