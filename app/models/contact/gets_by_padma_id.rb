@@ -50,8 +50,6 @@ class Contact
           if resync
             contact.sync_from_contacts_ws(padma_contact)
           end
-
-          contact
         else
           #Local Contact not found, create & associate to account
 
