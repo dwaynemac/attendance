@@ -7,11 +7,11 @@ class FetchCrmContactJob
   def perform
     ret = false
     if account
-      ret = get_for_account(account)
+      ret = get_and_resync_for_account(account)
     else
       padma_contact.local_statuses.each do |ls|
         if (a = Account.find_by_name ls["account_name"])
-          ret = get_for_account(a)
+          ret = get_and_resync_for_account(a)
         end
       end
     end
@@ -20,7 +20,7 @@ class FetchCrmContactJob
 
   private
 
-  def get_for_account(a)
+  def get_and_resync_for_account(a)
     Contact.get_by_padma_id(@attributes[:id], a.id, padma_contact, nil, true)
   end
 
