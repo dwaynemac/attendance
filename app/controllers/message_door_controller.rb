@@ -23,15 +23,15 @@ class MessageDoorController < ApplicationController
         else
 
           case sns_topic
-          when "sso_session_destroyed"
-            set_sso_session_destroyed_flag(sns_message[:username])
+            when "sso_session_destroyed"
+              set_sso_session_destroyed_flag(sns_message[:username])
             when "updated_contact", "created_contact"
-            if sns_message[:id]
-              Delayed::Job.enqueue FetchCrmContactJob.new(id: sns_message[:id],
-                account_name: sns_message[:account_name])
-            end
-          else
-            # ignore, do nothing
+              Rails.logger.debug sns_message
+              if sns_message[:id]
+                Delayed::Job.enqueue FetchCrmContactJob.new(id: sns_message[:id])
+              end
+            else
+              # ignore, do nothing
           end
           
           sns_set_as_received!
