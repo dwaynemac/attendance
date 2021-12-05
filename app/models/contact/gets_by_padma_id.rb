@@ -14,21 +14,6 @@ class Contact
       def self.get_by_padma_id(padma_contact_id,account_id,padma_contact=nil,new_contact_attributes=nil, resync=nil)
         return if padma_contact_id.blank?
 
-        #
-        # TODO evitar que se duplique chequeando el crm_padma_id del padma_contact
-        #
-        # situaciones:
-        #   padma_contact_id en un crm-id
-        #   padma-contact-id es un padma_id
-        #     si no encuentro el contacto
-        #       lo busco en crm
-        #       y busco x su crm-id
-        #
-        #
-        #
-        #
-        #
-
         account = Account.find(account_id)
         if (contact = Contact.find_by_padma_id(padma_contact_id))
           #Local Contact found, associate to account if necessary
