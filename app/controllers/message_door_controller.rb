@@ -1,15 +1,6 @@
-class MessageDoorController < ApplicationController
+class MessageDoorController < ActionController::Base
   include SnsHelper
   include SsoSessionsHelper
-
-  skip_before_filter :verify_authenticity_token
-
-  skip_before_filter :get_sso_session
-
-  skip_before_filter :mock_login
-  skip_before_filter :authenticate_user!
-  skip_before_filter :require_padma_account
-  skip_before_filter :set_current_account
 
   def sns
     case sns_type
@@ -26,7 +17,6 @@ class MessageDoorController < ApplicationController
             when "sso_session_destroyed"
               set_sso_session_destroyed_flag(sns_message[:username])
             when "updated_contact", "created_contact"
-              Rails.logger.debug sns_message
               if sns_message[:id]
                 Delayed::Job.enqueue FetchCrmContactJob.new(id: sns_message[:id])
               end
