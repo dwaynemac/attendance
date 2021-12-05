@@ -78,7 +78,7 @@ class Contact < ActiveRecord::Base
                                      padma_status: ls[:local_status])
           end
         end
-      end
+      end if pc.local_statuses
     end
   end
 end
