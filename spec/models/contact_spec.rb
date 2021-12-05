@@ -86,8 +86,8 @@ describe Contact do
       end
       describe "if it doesnt have local_statuses" do
         let(:pc_attributes){{first_name: 'a'}}
-        it "fetches padma_contact from contacts-ws" do
-          expect(CrmLegacyContact).to receive(:find)
+        it "wont re-call service" do
+          expect(CrmLegacyContact).not_to receive(:find)
           contact.sync_from_contacts_ws(padma_contact)
         end
       end
