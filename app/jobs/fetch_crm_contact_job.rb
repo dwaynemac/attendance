@@ -8,7 +8,7 @@ class FetchCrmContactJob
     ret = false
     if account
       ret = get_for_account(account)
-    elsif padma_contact.local_statuses
+    else
       padma_contact.local_statuses.each do |ls|
         if (a = Account.find_by_name ls["account_name"])
           ret = get_for_account(a)
