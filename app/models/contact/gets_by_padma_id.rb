@@ -46,7 +46,7 @@ class Contact
               account_name: account.name)
           end
           if padma_contact
-            if (contact = find_by_crm_padma_id(padma_contact))
+            if (contact = get_by_crm_padma_id(padma_contact))
               if resync
                 contact.sync_from_contacts_ws(padma_contact)
               end
@@ -73,10 +73,12 @@ class Contact
 
       private
 
-      def self.find_by_crm_padma_id(padma_contact)
+      # busco si tengo contacto con el crm_padma_id de este padma_id
+      # si encuentro le actualizo el padma_id
+      def self.get_by_crm_padma_id(padma_contact)
         ret = nil
         if (ret = Contact.find_by_padma_id padma_contact.crm_padma_id)
-          ret.update_attribute :padma_id, padma_contact.id
+          ret.update_column :padma_id, padma_contact.id
         end
         ret
       end

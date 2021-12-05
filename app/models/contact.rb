@@ -60,25 +60,27 @@ class Contact < ActiveRecord::Base
 
   # Syncs local data with data from Contacts-ws
   def sync_from_contacts_ws(pc = nil)
-    if pc.nil? || pc.local_statuses.blank?
+    if pc.nil?
       pc = CrmLegacyContact.find(padma_id, select: %W(full_name local_statuses))
     end
 
     if pc
-      update_attribute :name, "#{pc.first_name} #{pc.last_name}"
-      pc.local_statuses.each do |ls|
-        ls.symbolize_keys!
-        a = Account.find_or_create_by name: ls[:account_name]
-        if a
-          ac = accounts_contacts.where(account_id: a.id).first
-          if ac
-            ac.update_attribute :padma_status, ls[:local_status]
-          else
-            accounts_contacts.create(account_id: a.id,
-                                     padma_status: ls[:local_status])
+      update_column :name, "#{pc.first_name} #{pc.last_name}"
+      if pc.local_statuses
+        pc.local_statuses.each do |ls|
+          ls.symbolize_keys!
+          a = Account.find_or_create_by name: ls[:account_name]
+          if a
+            ac = accounts_contacts.where(account_id: a.id).first
+            if ac
+              ac.update_column :padma_status, ls[:local_status]
+            else
+              accounts_contacts.create(account_id: a.id,
+                padma_status: ls[:local_status])
+            end
           end
         end
-      end if pc.local_statuses
+      end
     end
   end
 end
