@@ -5,8 +5,7 @@ class Api::V0::ContactsController < Api::V0::ApiController
   respond_to :json
 
   def show
-    @contact = Contact.get_by_padma_id(params[:id], current_user.current_account.id,nil,nil,true)
-    #@contact = Contact.includes(:time_slots).find_by_padma_id(params[:id])
+    @contact = Contact.includes(:time_slots).find_by_padma_id(params[:id])
     if @contact
     contact_json = {
       time_slots: @contact.time_slots.map{|ts| {id: ts.id, name: ts.name, description: ts.description }}
