@@ -33,18 +33,14 @@ class Contact < ActiveRecord::Base
     last_seen_at = last_attendance.try(:attendance_on)
     return if last_seen_at.nil?
 
-    if padma_contact(account)
-      begin
-        padma_contact(account).update({contact: {last_seen_at: last_seen_at},
-                                      ignore_validation: true,
-                                      username: last_attendance.time_slot.padma_uid,
-                                      account_name: account.name})
-      rescue
-        Rails.logger.warn "couldnt update last_seen_at for contact #{self.id} ON contacts-ws."
-      end
-    else
-      Rails.logger.info "couldnt update last_seen_at for contact #{self.id}"
-      raise "couldnt update last_seen_at for contact #{self.id}"
+    begin
+      pc = CrmLegacyContact.new(id: padma_id)
+      pc.update({contact: {last_seen_at: last_seen_at},
+                       ignore_validation: true,
+                       username: last_attendance.time_slot.padma_uid,
+                       account_name: account.name})
+    rescue
+      Rails.logger.warn "couldnt update last_seen_at for contact #{self.id} ON contacts-ws."
     end
   end
 
