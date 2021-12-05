@@ -1,6 +1,9 @@
 require "crm_legacy_contact"
 require "padma_crm_api"
 
+# Representación local del Contacto
+# CRM emite un SNS cuando hay cambios y encolo un sync
+# En el show via UI también hago un sync
 class Contact < ActiveRecord::Base
 
   include GetsByPadmaId
