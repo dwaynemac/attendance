@@ -74,7 +74,9 @@ gem 'messaging_client', '~> 0.3.0'
 #gem 'typhoeus', '0.6.4'
 gem 'carrierwave'
 gem 'fog', '~> 1.38.0'
+
 gem 'delayed_job_active_record' # must be declared after 'protected_attributes' gem
+gem "workless", "~> 2.2.0"
 
 gem 'json', '1.8.6'
 # Use ActiveModel has_secure_password
