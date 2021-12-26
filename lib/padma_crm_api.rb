@@ -31,4 +31,29 @@ class PadmaCrmApi
     end
   end
 
+  # @param attributes
+  # @option username
+  # @option account_name
+  # @option observations
+  # @option commented_at
+  # @option contact_id
+  #
+  # @example
+  #   api = PadmaCrmApi.new
+  #   api.create_comment(contact_id: "52f2c45e598abe77c70000ec", account_name: "cervino", username: "system", observations: "test", commented_at: Time.zone.now)
+  #
+  # @return Boolean
+  def create_comment(attributes)
+    response = Typhoeus.post("#{crm_url}/api/v0/comments",
+      body: {
+          comment: attributes,
+      },
+      params: {
+        app_key: ENV["crm_v0_api_key"]
+      },
+    )
+    self.last_response = response
+    response.code == 201
+  end
+
 end
