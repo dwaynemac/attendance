@@ -73,4 +73,14 @@ class PadmaCrmApi
     res.code == 204
   end
 
+  def paginate_comments(where = {})
+    res = Typhoeus.get("#{crm_url}/api/v0/comments",
+      params: {app_key: ENV["crm_contacts_v0_api_key"], where: where}
+    )
+    self.last_response = res
+    if res.code == 200
+      ActiveSupport::JSON.decode(res.body)["collection"]
+    end
+  end
+
 end
