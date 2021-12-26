@@ -55,22 +55,22 @@
         <%= javascript_tag do %>
 
           function contactFormatResult(contact) {
-              var text = contact.name || contact.text;
+              var text = contact.first_name+" "+(contact.last_name||"") || contact.text;
               var markup = "<div>" + text + "</div>";
               return markup;
           }
 
           function contactFormatSelection(contact) {
-              return contact.name || contact.text;
+              return contact.first_name+" "+(contact.last_name||"") || contact.text;
           }
 
           var $element = $("#trial_lesson_padma_contact_id").select2({
             placeholder: "<%= t('trial_lessons.search_contact') %>",
             minimumInputLength: 3,
             ajax: {
-              url: "http://<%= Contacts::HOST %>/v0/contacts/search_for_select",
-              type: 'POST',
-              dataType: 'jsonp',
+              url: "<%= PadmaCrmApi.new.crm_url %>/contacts.json",
+              type: 'GET',
+              dataType: 'json',
               quietMillis: 100,
               data: function (params) {
                 return {
@@ -80,11 +80,8 @@
                     first_name: "asc",
                     last_name: "asc"
                   },
-                  username: "<%= current_user.username %>",
                   account_name: "<%= current_user.current_account.name %>",
-                  only_name: true,
-                  full_text: params.term,
-                  app_key: "<%= ENV['contacts_key'] %>"
+                  q: params.term,
                 };
               },
               processResults: function (data, params) {
