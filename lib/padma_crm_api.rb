@@ -48,12 +48,21 @@ class PadmaCrmApi
       body: {
           comment: attributes,
       },
-      params: {
-        app_key: ENV["crm_v0_api_key"]
-      },
+      params: {app_key: ENV["crm_v0_api_key"]},
     )
     self.last_response = response
     response.code == 201
+  end
+
+  def update_comment(id, new_attributes)
+    res = Typhoeus.put("#{crm_url}/api/v0/comments/#{id}",
+      params: {
+        comment: new_attributes,
+        app_key: ENV["crm_contacts_v0_api_key"]
+      }
+    )
+    self.last_response = res
+    res.code == 200
   end
 
 end
