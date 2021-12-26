@@ -62,7 +62,15 @@ class PadmaCrmApi
       }
     )
     self.last_response = res
-    res.code == 200
+    res.code == 204
+  end
+
+  def destroy_comment(id)
+    res = Typhoeus.delete("#{crm_url}/api/v0/comments/#{id}",
+      params: {app_key: ENV["crm_contacts_v0_api_key"]}
+    )
+    self.last_response = res
+    res.code == 204
   end
 
 end
