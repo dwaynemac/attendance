@@ -75,6 +75,7 @@ gem 'messaging_client', '~> 0.3.0'
 gem 'carrierwave'
 gem 'fog', '~> 1.38.0'
 
+gem "daemons"
 gem 'delayed_job_active_record' # must be declared after 'protected_attributes' gem
 gem "workless", "~> 2.2.0"
 
