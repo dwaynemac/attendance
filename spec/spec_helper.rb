@@ -38,8 +38,8 @@ RSpec.configure do |config|
   config.before(:each) do
     DatabaseCleaner.start
 
-    allow_any_instance_of(TrialLesson).to receive(:create_activity).and_return(true)
-    allow_any_instance_of(TrialLesson).to receive(:destroy_activity).and_return(true)
+    allow_any_instance_of(TrialLesson).to receive(:create_comment).and_return(true)
+    allow_any_instance_of(TrialLesson).to receive(:destroy_comment).and_return(true)
     allow_any_instance_of(TrialLesson).to receive(:broadcast_create).and_return(true)
   end
 

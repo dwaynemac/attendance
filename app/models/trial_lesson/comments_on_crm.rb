@@ -5,21 +5,21 @@ module TrialLesson::CommentsOnCRM
 
     attr_accessor :activity_on_trial_time
 
-    after_create :create_activity
-    after_destroy :destroy_activity
+    after_create :create_comment
+    after_destroy :destroy_comment
 
-    def inform_activity_stream(action, locale, assisted = true)
+    def inform_crm(action, locale, assisted = true)
       case action
         when :create
-          assistance_create_activity(assisted, locale)
+          assistance_create_comment(assisted, locale)
         when :update
-          assistance_update_activity(assisted, locale)
+          assistance_update_comment(assisted, locale)
         when :destroy
-          assistance_destroy_activity(locale)
+          assistance_destroy_comment(locale)
       end
     end
 
-    def assistance_create_activity(assisted, locale = nil)
+    def assistance_create_comment(assisted, locale = nil)
       I18n.locale = locale unless locale.nil?
       if !self.contact_id.nil?
         a = ActivityStream::Activity.new(target_id: self.contact.padma_id, target_type: 'Contact',
@@ -34,9 +34,9 @@ module TrialLesson::CommentsOnCRM
         a.create(username: self.padma_uid, account_name: self.account.name)
       end
     end
-    handle_asynchronously :assistance_create_activity
+    handle_asynchronously :assistance_create_comment
 
-    def assistance_update_activity(assisted, locale = nil)
+    def assistance_update_comment(assisted, locale = nil)
       I18n.locale = locale unless locale.nil?
       activities = ActivityStream::Activity.paginate(
         where: {
@@ -60,9 +60,9 @@ module TrialLesson::CommentsOnCRM
         end
       end
     end
-    handle_asynchronously :assistance_update_activity
+    handle_asynchronously :assistance_update_comment
 
-    def assistance_destroy_activity(locale = nil)
+    def assistance_destroy_comment(locale = nil)
       I18n.locale = locale unless locale.nil?
       activities = ActivityStream::Activity.paginate(
         where: {
@@ -83,9 +83,9 @@ module TrialLesson::CommentsOnCRM
         end
       end
     end
-    handle_asynchronously :assistance_destroy_activity
+    handle_asynchronously :assistance_destroy_comment
 
-    def create_activity
+    def create_comment
       # Send notification to activities
       if !self.contact_id.nil?
 
@@ -105,7 +105,7 @@ module TrialLesson::CommentsOnCRM
       end
     end
 
-    def destroy_activity
+    def destroy_comment
       # Send notification to activities
       if !self.contact_id.nil?
         a = ActivityStream::Activity.new(target_id: self.contact.padma_id, target_type: 'Contact',

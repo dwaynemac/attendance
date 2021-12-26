@@ -36,7 +36,7 @@ describe TrialLessonImport do
     before(:each) do
       # avoid calls to external WSs
       allow_any_instance_of(TrialLesson).to receive(:broadcast_create).and_return(true)
-      allow_any_instance_of(TrialLesson).to receive(:create_activity).and_return(true)
+      allow_any_instance_of(TrialLesson).to receive(:create_comment).and_return(true)
       allow(CrmLegacyContact).to receive(:find_by_kshema_id).and_return(
         CrmLegacyContact.new(id: "1", first_name: 'fn', last_name: 'ln')
       )
