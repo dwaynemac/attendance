@@ -46,9 +46,16 @@
         <div class="form-group">
           <%= f.label :padma_contact_id, :class => 'control-label col-xs-5 col-md-4' %>
           <div class="col-xs-7 col-md-8">
-            <%= hidden_field_tag 'contact_name', @initialize_select[:name] %>
-            <%= hidden_field_tag 'contact_id', @initialize_select[:id] %>
-            <%= f.select :padma_contact_id, [] %>
+            <% if @initialize_select[:id].blank? %>
+              <%= hidden_field_tag 'contact_name', @initialize_select[:name] %>
+              <%= hidden_field_tag 'contact_id', @initialize_select[:id] %>
+              <%= f.select :padma_contact_id, [] %>
+            <% else %>
+              <%= hidden_field_tag 'contact_name', @initialize_select[:name] %>
+              <%= hidden_field_tag 'contact_id', @initialize_select[:id] %>
+              <%= f.hidden_field 'padma_contact_id', value: @initialize_select[:id] %>
+              <span><%= @initialize_select[:name] %></span>
+            <% end %>
           </div>
         </div>
 
@@ -100,7 +107,7 @@
           });
 
           if($("#contact_name").length > 0 ){
-            var option = new Option($("#contact_name").val(), $("#contact_id").val(), true, true);
+            let option = new Option($("#contact_name").val(), $("#contact_id").val(), true, true);
             $element.append(option);
             $element.trigger('change');
           };
