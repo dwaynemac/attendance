@@ -8,6 +8,10 @@ module TrialLesson::CommentsOnCRM
     after_create :create_comment
     after_destroy :destroy_comment
 
+    def crm_reference
+      "attendance-trial_lesson-#{id}"
+    end
+
     def inform_crm(action, locale, assisted = true)
       case action
         when :create
@@ -21,42 +25,30 @@ module TrialLesson::CommentsOnCRM
 
     def assistance_create_comment(assisted, locale = nil)
       I18n.locale = locale unless locale.nil?
-      if !self.contact_id.nil?
-        a = ActivityStream::Activity.new(target_id: self.contact.padma_id, target_type: 'Contact',
-          object_id: self.id, object_type: 'TrialLesson',
-          generator: ActivityStream::LOCAL_APP_NAME,
-          content: I18n.t("trial_lesson.activity_content.assisted.#{assisted}"),
-          public: false,
-          username: self.padma_uid,
-          account_name: self.account.name,
-          created_at: self.trial_at.to_s,
-          updated_at: self.trial_at.to_s )
-        a.create(username: self.padma_uid, account_name: self.account.name)
+      unless contact_id.nil?
+        crm_api.create_comment(
+          external_reference: crm_reference,
+          username: padma_uid,
+          account_name: account.name,
+          contact_id: contact.padma_id,
+          observations: I18n.t("trial_lesson.activity_content.assisted.#{assisted}"),
+          commented_at: trial_at,
+          public: false
+        )
       end
     end
     handle_asynchronously :assistance_create_comment
 
+    def crm_comments(where = {})
+      @crm_comments ||= crm_api.paginate_comments(where: where.merge({external_reference: crm_reference}))
+    end
+
     def assistance_update_comment(assisted, locale = nil)
       I18n.locale = locale unless locale.nil?
-      activities = ActivityStream::Activity.paginate(
-        where: {
-          object_id: self.id,
-          object_type: 'TrialLesson',
-          content: I18n.t("trial_lesson.activity_content.assisted.#{!assisted}")
-        },
-        per_page: 9999
-      )
-      activities.each do |activity|
-        if activity.content == I18n.t("trial_lesson.activity_content.assisted.#{!assisted}")
-          res = activity.update(
-            'activity' => {
-              content: I18n.t("trial_lesson.activity_content.assisted.#{assisted}")
-            },
-            account_name: self.account.name
-          )
-          if res.nil?
-            Rails.logger.warn "couldnt update activity #{activity.id} for trial lesson #{self.id}"
-          end
+      crm_comments(observations: I18n.t("trial_lesson.activity_content.assisted.#{!assisted}")).each do |comment|
+        res = crm_api.update_comment(comment["id"], observations: I18n.t("trial_lesson.activity_content.assisted.#{assisted}"))
+        if res.nil?
+          Rails.logger.warn "couldnt update comment #{comment["id"]} for trial lesson #{self.id}"
         end
       end
     end
@@ -64,21 +56,12 @@ module TrialLesson::CommentsOnCRM
 
     def assistance_destroy_comment(locale = nil)
       I18n.locale = locale unless locale.nil?
-      activities = ActivityStream::Activity.paginate(
-        where: {
-          object_id: self.id,
-          object_type: 'TrialLesson'
-        },
-        per_page: 9999
-      )
-      activities.each do |activity|
-        if activity.content == I18n.t("trial_lesson.activity_content.assisted.true") ||
-          activity.content == I18n.t("trial_lesson.activity_content.assisted.false")
-          res = activity.destroy(
-            account_name: self.account.name
-          )
+      crm_comments.each do |comment|
+        if comment["observations"] == I18n.t("trial_lesson.activity_content.assisted.true") ||
+          comment["observations"] == I18n.t("trial_lesson.activity_content.assisted.false")
+          res = crm_api.destroy_comment(comment["id"])
           if res.nil?
-            Rails.logger.warn "couldnt destroy activity #{activity.id} for trial lesson #{self.id}"
+            Rails.logger.warn "couldnt destroy comment #{comment["id"]} for trial lesson #{self.id}"
           end
         end
       end
@@ -87,39 +70,38 @@ module TrialLesson::CommentsOnCRM
 
     def create_comment
       # Send notification to activities
-      if !self.contact_id.nil?
+      unless contact_id.nil?
+        created_at = (self.activity_on_trial_time) ? self.trial_at.to_s : Time.zone.now.to_s
 
-        created_at = (self.activity_on_trial_time)? self.trial_at.to_s : Time.zone.now.to_s
-        updated_at = (self.activity_on_trial_time)? self.trial_at.to_s : Time.zone.now.to_s
-
-        a = ActivityStream::Activity.new(target_id: self.contact.padma_id, target_type: 'Contact',
-          object_id: self.id, object_type: 'TrialLesson',
-          generator: ActivityStream::LOCAL_APP_NAME,
-          content: I18n.t('trial_lesson.activity_content.create'),
-          public: false,
-          username: self.padma_uid,
-          account_name: self.account.name,
-          created_at: created_at,
-          updated_at: updated_at )
-        a.create(username: self.padma_uid, account_name: self.account.name)
+        crm_api.create_comment(
+          external_reference: crm_reference,
+          username: padma_uid,
+          account_name: account.name,
+          contact_id: contact.padma_id,
+          observations: I18n.t('trial_lesson.activity_content.create'),
+          commented_at: created_at,
+          public: false
+        )
       end
     end
 
     def destroy_comment
       # Send notification to activities
-      if !self.contact_id.nil?
-        a = ActivityStream::Activity.new(target_id: self.contact.padma_id, target_type: 'Contact',
-          object_id: self.id, object_type: 'TrialLesson',
-          generator: ActivityStream::LOCAL_APP_NAME,
-          content: I18n.t('trial_lesson.activity_content.deleted'),
-          verb: 'deleted',
-          public: false,
-          username: self.padma_uid,
-          account_name: self.account.name,
-          created_at: Time.zone.now.to_s,
-          updated_at: Time.zone.now.to_s )
-        a.create(username: self.padma_uid, account_name: self.account.name)
+      unless contact_id.nil?
+        crm_api.create_comment(
+          external_reference: crm_reference,
+          username: padma_uid,
+          account_name: account.name,
+          contact_id: contact.padma_id,
+          observations: I18n.t('trial_lesson.activity_content.deleted'),
+          commented_at: Time.zone.now,
+          public: false
+        )
       end
+    end
+
+    def crm_api
+      @crm_api ||= PadmaCrmApi.new
     end
   end
 end
