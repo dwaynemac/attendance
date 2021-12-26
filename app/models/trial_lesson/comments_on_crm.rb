@@ -41,7 +41,7 @@ module TrialLesson::CommentsOnCRM
     handle_asynchronously :assistance_create_comment
 
     def crm_comments(where = {})
-      @crm_comments ||= crm_api.paginate_comments(where: where.merge({external_reference: crm_reference}))
+      @crm_comments ||= crm_api.paginate_comments(where.merge({external_reference: crm_reference}))
     end
 
     def assistance_update_comment(assisted, locale = nil)
