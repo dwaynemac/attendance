@@ -16,15 +16,15 @@ module TrialLesson::CommentsOnCRM
     def inform_crm(action, locale, assisted = true)
       case action
         when :create
-          assistance_create_comment(assisted, locale)
+          attendance_create_comment(assisted, locale)
         when :update
-          assistance_update_comment(assisted, locale)
+          attendance_update_comment(assisted, locale)
         when :destroy
-          assistance_destroy_comment(locale)
+          attendance_destroy_comment(locale)
       end
     end
 
-    def assistance_create_comment(assisted, locale = nil)
+    def attendance_create_comment(assisted, locale = nil)
       I18n.locale = locale unless locale.nil?
       unless contact_id.nil?
         crm_api.create_comment(
@@ -38,13 +38,13 @@ module TrialLesson::CommentsOnCRM
         )
       end
     end
-    handle_asynchronously :assistance_create_comment
+    handle_asynchronously :attendance_create_comment
 
     def crm_comments(where = {})
       @crm_comments ||= crm_api.paginate_comments(where.merge({external_reference: crm_reference}))
     end
 
-    def assistance_update_comment(assisted, locale = nil)
+    def attendance_update_comment(assisted, locale = nil)
       I18n.locale = locale unless locale.nil?
       crm_comments(observations: I18n.t("trial_lesson.activity_content.assisted.#{!assisted}")).each do |comment|
         res = crm_api.update_comment(comment["id"], observations: I18n.t("trial_lesson.activity_content.assisted.#{assisted}"))
@@ -53,9 +53,9 @@ module TrialLesson::CommentsOnCRM
         end
       end
     end
-    handle_asynchronously :assistance_update_comment
+    handle_asynchronously :attendance_update_comment
 
-    def assistance_destroy_comment(locale = nil)
+    def attendance_destroy_comment(locale = nil)
       I18n.locale = locale unless locale.nil?
       crm_comments.each do |comment|
         if comment["observations"] == I18n.t("trial_lesson.activity_content.assisted.true") ||
@@ -67,7 +67,7 @@ module TrialLesson::CommentsOnCRM
         end
       end
     end
-    handle_asynchronously :assistance_destroy_comment
+    handle_asynchronously :attendance_destroy_comment
 
     def create_comment
       # Send notification to activities
