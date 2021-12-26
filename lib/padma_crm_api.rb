@@ -1,6 +1,13 @@
 class PadmaCrmApi
 
-  def self.update_contact(padma_id, attributes = {}, options = {})
+  attr_accessor :last_response
+
+  def initialize(options = {})
+  end
+
+  # ENV["crm_v0_api_key"]
+
+  def update_contact(padma_id, attributes = {}, options = {})
     params = {
       app_key: ENV["crm_contacts_v0_api_key"]
     }
@@ -16,7 +23,7 @@ class PadmaCrmApi
     end
   end
 
-  def self.crm_url
+  def crm_url
     if Rails.env.development?
       "http://localhost:3000"
     else

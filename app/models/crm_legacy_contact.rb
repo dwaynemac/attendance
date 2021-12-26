@@ -92,7 +92,7 @@ class CrmLegacyContact < LogicalModel
     if id
       attributes = params[:contact]
       options = params.reject { |k,v| k==:contact }
-      PadmaCrmApi.update_contact(
+      PadmaCrmApi.new.update_contact(
         id,
         attributes,
         options
