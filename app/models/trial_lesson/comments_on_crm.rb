@@ -1,3 +1,4 @@
+require 'padma_crm_api'
 module TrialLesson::CommentsOnCRM
   extend ActiveSupport::Concern
 
