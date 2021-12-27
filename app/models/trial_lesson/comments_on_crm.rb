@@ -28,6 +28,7 @@ module TrialLesson::CommentsOnCRM
       I18n.locale = locale unless locale.nil?
       unless contact_id.nil?
         crm_api.create_comment(
+          comment_type: "System",
           external_reference: crm_reference,
           username: padma_uid,
           account_name: account.name,
@@ -75,6 +76,7 @@ module TrialLesson::CommentsOnCRM
         created_at = (self.activity_on_trial_time) ? self.trial_at.to_s : Time.zone.now.to_s
 
         crm_api.create_comment(
+          comment_type: "System",
           external_reference: crm_reference,
           username: padma_uid,
           account_name: account.name,
@@ -90,6 +92,7 @@ module TrialLesson::CommentsOnCRM
       # Send notification to activities
       unless contact_id.nil?
         crm_api.create_comment(
+          comment_type: "System",
           external_reference: crm_reference,
           username: padma_uid,
           account_name: account.name,
