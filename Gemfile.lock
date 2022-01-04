@@ -353,7 +353,7 @@ GEM
       nokogiri (~> 1.5)
     optimist (3.0.1)
     orm_adapter (0.5.0)
-    padma-assets (0.2.39)
+    padma-assets (0.3.10)
       railties (>= 3.1)
     pg (0.21.0)
     pivotal-tracker (0.5.13)
@@ -556,7 +556,7 @@ DEPENDENCIES
   less-rails-bootstrap (~> 3.0.6)
   logical_model (= 0.7.1)
   messaging_client (~> 0.3.0)
-  padma-assets (= 0.2.39)
+  padma-assets (= 0.3.10)
   pg (= 0.21)
   pry
   puma
