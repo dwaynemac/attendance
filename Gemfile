@@ -14,8 +14,6 @@ gem 'rack-cors'
 gem 'i18n'
 gem 'rails-i18n'
 
-gem "intercom-rails"
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0.rc1'
 

@@ -29,9 +29,6 @@
     "HEROKU_POSTGRESQL_BLACK_URL": {
       "required": true
     },
-    "intercom_secret": {
-      "required": true
-    },
     "messaging_key": {
       "required": true
     },
