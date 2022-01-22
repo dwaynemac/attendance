@@ -76,6 +76,7 @@
             minimumInputLength: 3,
             ajax: {
               url: "<%= PadmaCrmApi.new.crm_url %>/contacts.json",
+              xhrFields: {withCredentials: true},
               type: 'GET',
               dataType: 'json',
               quietMillis: 100,
