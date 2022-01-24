@@ -394,6 +394,8 @@ pt-BR:
   trial_lessons:
     activity_content:
       assisted:
+        true: Participou da aula experimental
+        false: Não compareceu à aula de teste
         :true: Participou da aula experimental
         :false: Não compareceu à aula de teste
       create: Aula experimental creada
