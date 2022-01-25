@@ -1,10 +1,10 @@
 class LastSeenUpdater < ActiveRecord::Base
   def self.update_account(account_name)
-    account = Account.find_by(name: account_name)
     st = students(account_name)
     if st.blank?
       Rails.logger.debug "Could not find students with account name: #{account_name}"
     else
+      account = Account.find_by(name: account_name)
       st.each do |student|
         if (attendance = last_attendance_for_contact(student, account))
           student.update({
