@@ -59,7 +59,7 @@ class ContactsController < ApplicationController
     @time_slots = @contact.time_slots
                           .order(:start_at)
                           .where(account_id: current_user.current_account.id)
-    @attendances_by_month = @contact.attendances.order("attendance_on DESC").group_by { |att| att.attendance_on.beginning_of_month }
+    @attendances_by_month = @contact.attendances.where(account_id: current_user.current_account.id).order("attendance_on DESC").group_by { |att| att.attendance_on.beginning_of_month }
   end
 
   private
