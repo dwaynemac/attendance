@@ -69,7 +69,7 @@ class ContactsController < ApplicationController
   end
 
   def contact_params
-    params.requite(:contact).permit(
+    params.require(:contact).permit(
       :padma_id,
       :name,
       :external_id,
