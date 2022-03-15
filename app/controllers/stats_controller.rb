@@ -33,7 +33,13 @@ class StatsController < ApplicationController
 
   def attendances_by_teacher
     @stats = AttendancesByTeacherStatsSQLBuilder.new stats_attributes
-    # despues de generar reporte, seteo para el form
+    respond_to do |format|
+      format.html
+      format.csv do
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers['Content-Disposition'] = 'attachment; filename="attendances_by_teacher.csv"'
+      end
+    end
   end
 
   private

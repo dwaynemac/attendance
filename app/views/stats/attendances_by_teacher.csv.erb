@@ -8,8 +8,7 @@
   
   @stats.result_hash.each_pair do |username, count|
    csv << [username, count]
+   csv
   end
-
-  csv
 
 end.html_safe %>
