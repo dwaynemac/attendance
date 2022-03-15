@@ -334,6 +334,8 @@ es:
       name: Nombre
       total: Total
       instructor: Instructor
+    attendances_by_teacher:
+      attendances: "Clases ministradas"
   support:
     array:
       last_word_connector: ', y '

@@ -339,6 +339,8 @@ pt-BR:
       name: Nome
       total: Total
       instructor: Instrutor
+    attendances_by_teacher:
+      attendances: "Aulas ministradas"
   support:
     array:
       last_word_connector: ' e '

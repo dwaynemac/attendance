@@ -309,6 +309,8 @@ en:
       name: Name
       total: Total
       instructor: Instructor
+    attendances_by_teacher:
+      attendances: "Lessons given"
   support:
     array:
       last_word_connector: ', and '

@@ -31,6 +31,12 @@ class StatsController < ApplicationController
     end
   end
 
+  def attendances_by_teacher
+    @stats = AttendancesByTeacherStatsSQLBuilder.new stats_attributes
+    # despues de generar reporte, seteo para el form
+    params[:easy_period] = :current_month if params[:easy_period].nil?
+  end
+
   private
 
   # default params[:stats] = {}
@@ -46,7 +52,7 @@ class StatsController < ApplicationController
   end
 
   def stats_attributes
-    s = params[:stats].merge({:account => current_account})
+    s = (params[:stats]||{}).merge({:account => current_account})
     case params[:easy_period].try(:to_sym)
       when :current_month
         s.delete_if{|k,_| k =~ /start_on|end_on/ }.merge(start_on: Date.today.beginning_of_month, end_on: Date.today.end_of_month)

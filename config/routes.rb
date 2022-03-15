@@ -36,6 +36,7 @@ Assistance::Application.routes.draw do
   resources :contacts, :only => [:index, :show, :update]
   resources :stats, :only => [:index] do
     collection do
+      get 'attendances_by_teacher', to: "stats#attendances_by_teacher"
       get 'current_month', as: 'current_month', to: 'stats#index', easy_period: :current_month
       get 'last_month', as: 'last_month', to: 'stats#index', easy_period: :last_month
     end

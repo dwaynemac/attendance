@@ -9,7 +9,7 @@ module StatsHelper
   end
 
   def active_pill( period )
-    if (period.nil? && params[:easy_period].nil?) || (period == params[:easy_period])
+    if (period.nil? && params[:easy_period].nil?) || (period.try(:to_s) == params[:easy_period].try(:to_s))
       "class=active"
     end
   end
