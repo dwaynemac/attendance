@@ -1,0 +1,15 @@
+<%- require 'csv' -%>
+<%= CSV.generate(current_user.csv_options.merge((params[:csv_options]||{}).to_hash.symbolize_keys!)) do |csv|
+  header = [
+      to_current_encoding(t('stats.table.instructor')),
+      to_current_encoding(t('stats.attendances_by_teacher.attendances'))
+  ]
+  csv << header
+  
+  @stats.result_hash.each_pair do |username, count|
+   csv << [username, count]
+  end
+
+  csv
+
+end.html_safe %>

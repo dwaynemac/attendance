@@ -34,7 +34,6 @@ class StatsController < ApplicationController
   def attendances_by_teacher
     @stats = AttendancesByTeacherStatsSQLBuilder.new stats_attributes
     # despues de generar reporte, seteo para el form
-    params[:easy_period] = :current_month if params[:easy_period].nil?
   end
 
   private
