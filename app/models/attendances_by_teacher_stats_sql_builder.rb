@@ -1,12 +1,11 @@
 # Reporte de cuántas clases dió cada instructor en un período
 #
 class AttendancesByTeacherStatsSQLBuilder
-	attr_accessor :start_on, :end_on, :account, :include_cultural_activities, :include_former_students, :include_former_teachers
+	attr_accessor :start_on, :end_on, :account, :include_cultural_activities
 
 	DEFAULTS = {
 		# include/exclude cultural activities from stats. excluded by default
 		:include_cultural_activities => true,
-		:include_former_teachers => false,
 		# start/end date. defaults to this month.
 		:start_on => Date.today.beginning_of_month,
 		:end_on => Date.today.end_of_month
@@ -24,7 +23,6 @@ class AttendancesByTeacherStatsSQLBuilder
 			end
 		end
 		options["include_cultural_activities"] = options["include_cultural_activities"] == '1' if options["include_cultural_activities"]
-		options["include_former_teachers"] = options["include_former_teachers"] == '1' if options["include_former_teachers"]
 
 		# initialize builder using defaults
 		DEFAULTS.merge(options.symbolize_keys).each do |attr_name, value|
