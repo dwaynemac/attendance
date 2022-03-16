@@ -1,3 +1,5 @@
+# Reporte de cuántas clases dió cada instructor en un período
+#
 class AttendancesByTeacherStatsSQLBuilder
 	attr_accessor :start_on, :end_on, :account, :include_cultural_activities, :include_former_students, :include_former_teachers
 
