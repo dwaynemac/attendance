@@ -19,21 +19,28 @@
               "easy-period-params-period": params[:easy_period]
             }
           } do |f| %>
+          <%= hidden_field_tag :easy_period, params[:easy_period], data: {target: "easy-period.field"} %>
           <div id="stats-easy-period" data-target="easy-period.easyPeriodContainer">
             <div class="form-group">
               <%= f.label :easy_period, t('.period'), class: 'control-label col-xs-5 col-md-2' %>
               <div class="col-xs-7 col-md-8 date">
                 <ul class="nav nav-pills">
                   <li <%= active_pill "current_month" %> data-target="easy-period.selector" data-selector-value="current_month">
-                    <%= link_to t('stats.index.current_month'), attendances_by_teacher_stats_url(params: {easy_period: "current_month"}) %>
+                    <%= link_to t('stats.index.current_month'),
+                      "#}",
+                      data: {action: "easy-period#setEasyPeriod", "easy-period": "current_month"}
+                    %>
                   </li>
                   <li <%= active_pill "last_month" %> data-target="easy-period.selector" data-selector-value="last_month">
-                    <%= link_to t('stats.index.last_month'), attendances_by_teacher_stats_url(params: {easy_period: :last_month}) %>
+                    <%= link_to t('stats.index.last_month'),
+                      "#",
+                      data: {action: "easy-period#setEasyPeriod", "easy-period": "last_month"}
+                    %>
                   </li>
                   <li <%= active_pill "" %> data-target="easy-period.selector" data-selector-value="custom">
                     <%= link_to t('stats.index.custom_period'),
                       "#",
-                      data: {action: "easy-period#showCustomPeriod"} %>
+                      data: {action: "easy-period#setEasyPeriod", "easy-period": "custom"} %>
                   </li>
                 </ul>
               </div>

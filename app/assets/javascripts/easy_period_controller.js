@@ -4,7 +4,7 @@
   stimulusApplication.register("easy-period", class extends Stimulus.Controller {
 
     static get targets(){
-      return ["customPeriodContainer", "easyPeriodContainer", "selector"];
+      return ["customPeriodContainer", "easyPeriodContainer", "selector", "field"];
     }
     
     initialize(){
@@ -19,19 +19,39 @@
       }
     }
 
+    setEasyPeriod(e){
+      if(e){ e.preventDefault() }
+      let newPeriod = e.target.dataset.easyPeriod
+
+      this.setActiveSelector(newPeriod)
+      if (newPeriod === "custom"){
+        this.fieldTarget.value = ""
+        this.showCustomPeriod()
+      } else {
+        this.fieldTarget.value = newPeriod
+        this.hideCustomPeriod()
+      }
+
+    }
+
     showCustomPeriod(e){
       if (e) {
         e.preventDefault();
       }
-      this.log("show custom start")
       let container = this.customPeriodContainerTarget
       container.querySelectorAll("select").forEach((input) => {
         input.disabled = false
       })
-      this.setActiveSelector("custom")
-      //this.easyPeriodContainerTarget.style.display = "none"
       container.style.display = "block"
-      this.log("show custom end")
+    }
+
+    hideCustomPeriod(e){
+      if(e){ e.preventDefault() }
+      let container = this.customPeriodContainerTarget
+      container.querySelectorAll("select").forEach((input) => {
+        input.disabled = true
+      })
+      container.style.display = "none"
     }
 
     isCustomPeriodSet(){
