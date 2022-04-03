@@ -3,7 +3,7 @@
   <header class='stats-head'><%= show_period %></header>
   <section class='stats-content clearfix'>
     <div class='col-xs-12 col-md-12'>
-      <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, stats_url(params.merge(format: 'csv')), class: 'btn btn-secondary pull-right', id: 'download-link' %>
+      <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, stats_url(params.merge(format: 'csv')), class: 'btn btn-secondary pull-right', id: 'download-link', data: {turbolinks: false} %>
       <%= form_for :stats, method: :get, url: stats_path, html: { class: 'form-horizontal', id: 'stats-form' } do |f| %>
         <div id="stats-easy-period">
           <div class="form-group">
