@@ -1,5 +1,6 @@
 $(document).ready ->
   $(document).on 'click', '.delete', (event) ->
+    event.preventDefault()
     $(this).parent().remove()
     if($('#attendance_contacts li').length == 0)
       $('.modal-footer .btn-danger').show()
