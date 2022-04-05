@@ -15,7 +15,7 @@
               <%= t('attendances.index.suspended') %>
             </span>
           <% else %>
-            <span class='results-count-attendances <%= 'attendances0' if att.contacts.count == 0 %>' tabindex='0' data-target="popover.container" data-toggle='popover' data-trigger='focus' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
+            <span class='results-count-attendances <%= 'attendances0' if att.contacts.count == 0 %>' tabindex='0' data-target="popover.container" data-toggle='popover' data-trigger='manual' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
             <div class="students-list">
               <%= att.contacts.map{|c| link_to_contact_profile(c)}.join(' ').html_safe %>
             </div>
