@@ -2,12 +2,12 @@
 <% if render_time_slot?(time_slot,date,att, only_pending) -%>
   <li class="list-group-item <%= 'today' if date.today? %> <%= 'pending' if !only_pending && att.blank? && !future_lesson?(date,time_slot) %> <%= 'future-lesson' if future_lesson?(date,time_slot) %>" <%= 'future-lesson' if att.try(:suspended?) %>>
     <header class='timeslot-head'><%= link_to time_slot.name, time_slot %></header>
-    <div class='timeslot-content'>
+    <div class='timeslot-content' data-controller="popover">
       <div class='timeslot-description'>
         <p><%= timeslot_description(time_slot, att) %></p>
         <% if att %>
           <% if att.suspended? %>
-            <span class='results-count-attendances <%= 'attendances0' if att.contacts.count == 0 %>' tabindex='0' data-toggle='popover' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
+            <span class='results-count-attendances <%= 'attendances0' if att.contacts.count == 0 %>' data-target="popover.container" tabindex='0' data-toggle='popover' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
             <div class="students-list"> </div>
             <div class="clearfix popover-footer students-list-footer">
               <%= link_to t('attendances.index.destroy'), att, :method => :delete, data: { confirm: t('confirm') }, :class => 'btn btn-xs btn-block' %>
@@ -15,7 +15,7 @@
               <%= t('attendances.index.suspended') %>
             </span>
           <% else %>
-            <span class='results-count-attendances <%= 'attendances0' if att.contacts.count == 0 %>' tabindex='0' data-toggle='popover' data-trigger='manual' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
+            <span class='results-count-attendances <%= 'attendances0' if att.contacts.count == 0 %>' tabindex='0' data-target="popover.container" data-toggle='popover' data-trigger='manual' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='
             <div class="students-list">
               <%= att.contacts.map{|c| link_to_contact_profile(c)}.join(' ').html_safe %>
             </div>
