@@ -43,6 +43,7 @@ class Contact < ActiveRecord::Base
       pc = CrmLegacyContact.new(id: padma_id)
       pc.update({contact: {last_seen_at: last_seen_at},
                        ignore_validation: true,
+                       skip_broadcasts: true,
                        username: last_attendance.time_slot.padma_uid,
                        account_name: account.name})
     rescue
