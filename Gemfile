@@ -56,7 +56,7 @@ end
 gem 'figaro'
 
 # CAS authentication
-gem 'devise', '4.4.0' 
+gem 'devise', '4.7.1' 
 gem 'activerecord-session_store'
 
 # authorization
