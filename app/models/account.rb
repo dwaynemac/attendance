@@ -29,8 +29,12 @@ class Account < ActiveRecord::Base
   # Returns usernames of this account
   # @return [Array <String>]
   def usernames
-    users = PadmaUser.paginate(account_name: self.name, per_page: 100)
-    users.nil? ? nil : users.map(&:username).sort
+    if @usernames
+      @usernames
+    else
+      users = PadmaUser.paginate(account_name: self.name, per_page: 100)
+      @usernames = users.nil? ? nil : users.map(&:username).sort
+    end
   end
 
   # Returns Students of this account
