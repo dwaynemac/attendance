@@ -1,3 +1,5 @@
+# @option padma_id [String]
+# @option account_name [String]
 class LastSeenAtJob < ApplicationJob
 
   def perform
