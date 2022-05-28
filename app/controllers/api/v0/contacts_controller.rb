@@ -50,7 +50,7 @@ class Api::V0::ContactsController < Api::V0::ApiController
   # @required account_name
   def sync_from_crm
     j = FetchCrmContactJob.new(id: params[:id], account_name: params[:account_name])
-    if Delayed::Job.enqueue j
+    if j.queue
       render json: "queued", status: 202
     else
       render json: "error", status: 400

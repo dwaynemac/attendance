@@ -18,7 +18,7 @@ class MessageDoorController < ActionController::Base
               set_sso_session_destroyed_flag(sns_message[:username])
             when "updated_contact", "created_contact"
               if sns_message[:id]
-                Delayed::Job.enqueue FetchCrmContactJob.new(id: sns_message[:id])
+                FetchCrmContactJob.new(id: sns_message[:id]).queue
               end
             else
               # ignore, do nothing
