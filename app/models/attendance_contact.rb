@@ -21,7 +21,7 @@ class AttendanceContact < ActiveRecord::Base
     return if skip_update_last_seen_at
 
     LastSeenAtJob.new(
-      padma_id: padma_id,
+      padma_id: contact.padma_id,
       account_name: attendance.account.name
     ).queue
   end
