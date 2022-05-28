@@ -36,6 +36,10 @@ class ApplicationJob
   # @return [ActiveRecord::Relation]
   def self.duplicate_jobs_for(delayed_job)
     job = YAML.load(delayed_job.handler)
-    job.duplicate_jobs.where.not(id: delayed_job.id)
+    if job.is_a?(self)
+      job.duplicate_jobs.where.not(id: delayed_job.id)
+    else
+      Delayed::Job.where("handler = ?", job.to_yaml).where.not(id: delayed_job.id)
+    end
   end
 end
