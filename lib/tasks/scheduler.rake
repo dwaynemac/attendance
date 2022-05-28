@@ -7,7 +7,6 @@ namespace :scheduler do
 
   #noinspection RubyLiteralArrayInspection
   task :every_1_day => [
-    :update_last_seens
     #"daily_synchronize"
   ]
 end
