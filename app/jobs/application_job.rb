@@ -25,6 +25,11 @@ class ApplicationJob
     duplicate_jobs.where("attempts < ?", Delayed::Worker.max_attempts).first
   end
 
+  def self.duplicate_jobs_for(delayed_job)
+    job = YAML.load(delayed_job.handler)
+    job.duplicate_jobs.where.not(id: delayed_job.id)
+  end
+
   # Encola el job. Si YA estaba encolado retorna el job existente
   # @return [Delayed::Job]
   def queue
