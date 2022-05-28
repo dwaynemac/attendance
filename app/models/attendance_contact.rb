@@ -20,7 +20,10 @@ class AttendanceContact < ActiveRecord::Base
   def queue_set_last_seen_at_on_contacts
     return if skip_update_last_seen_at
 
-    self.delay.set_last_seen_at_on_contacts
+    LastSeenAtJob.new(
+      padma_id: padma_id,
+      account_name: attendance.account.name
+    ).queue
   end
 
 end
