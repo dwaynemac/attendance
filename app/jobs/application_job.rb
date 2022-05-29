@@ -35,11 +35,13 @@ class ApplicationJob
   # @param [Delayed::Job] delayed_job
   # @return [ActiveRecord::Relation]
   def self.duplicate_jobs_for(delayed_job)
-    job = YAML.load(delayed_job.handler)
-    if job.is_a?(self)
-      job.duplicate_jobs.where.not(id: delayed_job.id)
-    else
-      Delayed::Job.where("handler = ?", job.to_yaml).where.not(id: delayed_job.id)
+    Delayed::Job.where("handler = ?", delayed_job.handler).where.not(id: delayed_job.id)
+  end
+
+  def self.clean_queue_of_duplicates
+    Delayed::Job.find_each do |dj|
+      sleep 0.1 # to avoid PG error https://github.com/rails/rails/issues/22408
+      duplicate_jobs_for(dj).delete_all
     end
   end
 end
