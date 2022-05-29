@@ -40,7 +40,7 @@ class ApplicationJob
 
   def self.clean_queue_of_duplicates
     Delayed::Job.find_each do |dj|
-      sleep 0.1 # to avoid PG error https://github.com/rails/rails/issues/22408
+      begin dj.reload rescue next end # el job ya fue eliminado porque estaba dupliacado
       duplicate_jobs_for(dj).delete_all
     end
   end
