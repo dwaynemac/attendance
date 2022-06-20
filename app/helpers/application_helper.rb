@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def link_to_contact_profile(contact)
-    link_to contact.name, "#{APP_CONFIG['crm-url']}/contacts/#{contact.padma_id}"
+    link_to truncate(contact.name, length: 20), "#{APP_CONFIG['crm-url']}/contacts/#{contact.padma_id}"
   end
 
   def breadcrum(text)
