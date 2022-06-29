@@ -1,6 +1,6 @@
 <li class="list-group-item <%= 'today' if date.today? %>" data-target="trialagenda.timeSlot" data-timeslot_id="<%= time_slot.id %>" data-date="<%= @ref_date %>">
   <header class='timeslot-head'><%= time_slot.name %></header>
-  <div class='timeslot-content'>
+  <div class='timeslot-content' data-controller='popover'>
     <div class='timeslot-description'>
       <p><%= timeslot_description(time_slot, nil) %></p>
       
@@ -8,7 +8,7 @@
       <%# future %>
       <span class='results-count-attendances'
             tabindex='0'
-            data-target="trialagenda.trialCount"
+            data-target="trialagenda.trialCount, popover.container"
             data-trial-ids="<%= trials.map(&:id).to_json %>"
             data-timeslot_id="<%= time_slot.id %>"
             data-date="<%= @ref_date %>"
@@ -39,7 +39,7 @@
         <% if assisted_trials.count > 0 %>
           <span class='results-count-attendances green'
                 tabindex='0'
-                data-target="trialagenda.trialCount"
+                data-target="trialagenda.trialCount, popover.container"
                 data-trial-ids="<%= assisted_trials.map(&:id).to_json %>"
                 data-timeslot_id="<%= time_slot.id %>"
                 data-date="<%= @ref_date %>"
@@ -70,7 +70,7 @@
         <% if absent_trials.count > 0 %>
           <span class='results-count-attendances red'
                 tabindex='0'
-                data-target="trialagenda.trialCount"
+                data-target="trialagenda.trialCount, popover.container"
                 data-trial-ids="<%= absent_trials.map(&:id).to_json %>"
                 data-timeslot_id="<%= time_slot.id %>"
                 data-date="<%= @ref_date %>"
