@@ -25,12 +25,12 @@ task :update_last_seens => :environment do
   end
 end
 
-desc "This task is called by the Heroku scheduler add-on it synchronizes recently updated contacts"
+desc "This task is called by the Heroku scheduler add-on every 10 minutes it synchronizes recently updated contacts"
 task :synchronize  => :environment do
   Account.order(:synchronized_at).all.each do |account|
     if account.padma && account.padma.enabled?
       puts "Synchronizing Padma Contacts for #{account.name}..."
-      PadmaContactsSynchronizer.new(account).sync(30.minutes)
+      PadmaContactsSynchronizer.new(account).sync(15.minutes)
       puts "done."
     end
   end
