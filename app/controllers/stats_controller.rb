@@ -16,9 +16,17 @@ class StatsController < ApplicationController
     if @stats.include_former_students
       @contacts.reject!{|c| c.status == 'former_student' && c.attendance_total == 0 }
     end
-    @teachers = CrmLegacyContact.search ids: @contacts.map(&:padma_id),
-      select: [:local_teacher],
-      account_name: current_user.current_account.name
+
+    @teachers = []
+    # HASTA RESOLVER PROBLEMA EN UNICORN DE CRM
+    #@teachers = CrmLegacyContact.search ids: @contacts.map(&:padma_id),
+    #  select: [:local_teacher],
+    #  account_name: current_user.current_account.name
+    @contacts.in_groups_of(10) do |group|
+      @teachers += CrmLegacyContact.search ids: group.map(&:padma_id),
+        select: [:local_teacher],
+        account_name: current_user.current_account.name
+    end
 
     @distribution = @stats.distribution
     @distribution_names = @stats.distribution_names
