@@ -18,7 +18,7 @@ class PadmaContactsSynchronizer
     loop do
       contacts_page = CrmLegacyContact.search(
         page: page,
-        per_page: 10,
+        per_page: 100,
         select: [:first_name,
           :last_name,
           :local_status,
