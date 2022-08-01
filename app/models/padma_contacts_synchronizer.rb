@@ -5,26 +5,34 @@ class PadmaContactsSynchronizer
     @account = account
   end
 
-  MAX_ATTEMPTS = 3
   def sync(wayback = nil)
     wayback ||= 2.days
 
     since = (@account.synchronized_at || Date.today) - wayback
+    if since < 3.months.ago
+      since = 3.months.ago
+    end
 
-    attempts = 0
-    padma_contacts = nil
-    while padma_contacts.nil? && attempts < MAX_ATTEMPTS do
-      # Get all contacts updated since last sync.
-      padma_contacts = CrmLegacyContact.batch_search(select: [:first_name,
-                                                    :last_name,
-                                                    :local_status,
-                                                    :local_statuses,
-                                                    :global_teacher_username],
-                                           where: {
-                                             updated_at: since.to_date
-                                           },
-                                           account_name: @account.name)
-      attempts += 1
+    padma_contacts = []
+    page = 1
+    loop do
+      contacts_page = CrmLegacyContact.search(
+        page: page,
+        per_page: 10,
+        select: [:first_name,
+          :last_name,
+          :local_status,
+          :local_statuses,
+          :global_teacher_username
+        ],
+        where: {
+          updated_after: since.to_date
+        },
+        account_name: @account.name
+      )
+      break if contacts_page.blank?
+      padma_contacts += contacts_page
+      page += 1
     end
 
     if padma_contacts
