@@ -21,7 +21,7 @@
     dist_array << to_current_encoding(number_with_precision(c.attendance_total || 0, 
                                                             precision: 0))
     
-    @distribution.each do |d|
+    @distribution.map{|u| u[:sql_username]}.each do |d|
   	  	dist_array << to_current_encoding(number_with_precision(c.send("sum_#{d}"), 
                                                                 precision: 0))
 
