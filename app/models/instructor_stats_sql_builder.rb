@@ -83,17 +83,17 @@ class InstructorStatsSQLBuilder
 	def instructor_queries
 		query = ""
 
-		distribution.each do |username|
+		distribution.each do |user|
 			query << %(
 				UNION
 				-- select contact attributes and count attendances on a time slot
-				SELECT DISTINCT contacts.*, MAX(accounts_contacts.padma_status) status, #{instructors_count_select username}
+				SELECT DISTINCT contacts.*, MAX(accounts_contacts.padma_status) status, #{instructors_count_select user[:sql_username]}
 				FROM contacts
 				INNER JOIN accounts_contacts ON contacts.id = accounts_contacts.contact_id
 				INNER JOIN attendance_contacts ON contacts.id = attendance_contacts.contact_id
 				INNER JOIN attendances ON attendance_contacts.attendance_id = attendances.id
 				INNER JOIN time_slots ON attendances.time_slot_id = time_slots.id
-				WHERE attendances.username = '#{username.tr("_",".").tr("$","@")}'
+				WHERE attendances.username = '#{user[:username]}'
 				AND #{account_condition}
 				AND #{attendance_between_dates_condition}
 				AND #{status_condition}
@@ -106,16 +106,16 @@ class InstructorStatsSQLBuilder
 	end
 
 	# select count for the specified instructor and 0 otherwise
-	def instructors_count_select username
+	def instructors_count_select sql_username
 		select = ""
 		distribution.each do |u|
-			if u == username
-				u_select = "COUNT(DISTINCT attendances.id) as #{username}"
+			if u == sql_username
+				u_select = "COUNT(DISTINCT attendances.id) as #{sql_username}"
 			else
-				u_select = "0 as #{u}"
+				u_select = "0 as #{u[:sql_username]}"
 			end
 
-			u_select << ", " unless u.tr("_", ".").tr("$","@") == distribution_names.last
+			u_select << ", " unless u[:username] == distribution_names.last
 
 			select << u_select
 		end
@@ -126,10 +126,10 @@ class InstructorStatsSQLBuilder
 	def instructors_sum_select
 		select = ""
 		total = ""
-		distribution.each do |username|
-			select << "SUM(#{username}) as sum_#{username}, "
-			total << "#{username}"
-			total << " + " unless username.tr("_",".").tr("$","@") == distribution_names.last
+		distribution.each do |user|
+			select << "SUM(#{user[:sql_username]}) as sum_#{user[:sql_username]}, "
+			total << "#{user[:sql_username]}"
+			total << " + " unless user[:username] == distribution_names.last
 		end
 		select << "SUM(#{total}) as attendance_total"
 		select
@@ -154,12 +154,13 @@ class InstructorStatsSQLBuilder
                                .group(:username)
                                .pluck(:username)
                                .compact
+                               .map{|username| {username: username, sql_username: sql_username(username)}}
         if @distribution.empty?
           # 0 attendances case
-          @distribution = account.usernames
+          @distribution = account.usernames.map{|username| {username: username, sql_username: sql_username(username)}}
         end
       else
-        @distribution = account.usernames
+        @distribution = account.usernames.map{|username| {username: username, sql_username: sql_username(username)}}
       end
     end
 
@@ -170,15 +171,19 @@ class InstructorStatsSQLBuilder
     # end
 
 
-		@distribution.collect {|username| username.tr(".", "_").tr("@","$")}
+		@distribution #.collect {|username| username.tr(".", "_").tr("@","$")}
 	end
 
   # usernames (in this case they are usernames)
 	def distribution_names
 		unless @distribution
-			@distribution = account.usernames
+			@distribution = account.usernames.map{|username| {username: username, sql_username: sql_username(username)}}
 		end
 
-		@distribution
+    @distribution.map{|u| u[:username]}.compact
 	end
+
+  def sql_username(username)
+    "_#{Digest::MD5.hexdigest(username)}"
+  end
 end
