@@ -109,7 +109,7 @@ class InstructorStatsSQLBuilder
 	def instructors_count_select sql_username
 		select = ""
 		distribution.each do |u|
-			if u == sql_username
+			if u[:sql_username] == sql_username
 				u_select = "COUNT(DISTINCT attendances.id) as #{sql_username}"
 			else
 				u_select = "0 as #{u[:sql_username]}"
