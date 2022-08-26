@@ -19,7 +19,7 @@ describe StatsController do
     let(:contact){create(:contact)}
 
     before do
-      allow(CrmLegacyContact).to receive(:search).and_return [user1]
+      allow(CrmLegacyContact).to receive(:search).and_return [user1.username]
       contact.accounts_contacts.create!(:account_id => @user.current_account.id, :padma_status => :student)
       attendance.contacts << contact
     end
