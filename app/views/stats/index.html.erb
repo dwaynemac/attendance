@@ -90,11 +90,11 @@
         <% @contacts.each do |contact| %>
         	<tr>
         	  <td><%= link_to contact.name, contact_path(:id => contact.padma_id) %></td>
-            <td><%= @teachers.select{ |c| c.id == contact.padma_id }.first.try :local_teacher %></td>
+            <td><%= @teachers.detect{ |c| c.id == contact.padma_id }.try :local_teacher %></td>
         	  <td><%= number_with_precision(contact.attendance_total || 0, precision: 0) %></td>
-            <% @distribution.map{|u| u[:sql_username]}.each do |name| %>
-        	  	<td><%= number_with_precision contact.send("sum_#{name}"), precision: 0 %></td>
-        	  	<td><%= number_to_percentage contact.attendance_total > 0 ? contact.send("sum_#{name}")/contact.attendance_total.to_f*100 : 0, :precision => 2, :strip_insignificant_zeros => true %></td>
+            <% @distribution.each do |u| %>
+        	  	<td><%= number_with_precision contact.send("sum_#{u[:sql_username]}"), precision: 0 %></td>
+        	  	<td><%= number_to_percentage contact.attendance_total > 0 ? contact.send("sum_#{u[:sql_username]}")/contact.attendance_total.to_f*100 : 0, :precision => 2, :strip_insignificant_zeros => true %></td>
         	  <% end %>
         	</tr>
         <% end %>
