@@ -41,7 +41,7 @@ class Contact < ActiveRecord::Base
 
     begin
       pc = CrmLegacyContact.new(id: padma_id)
-      pc.update({contact: {last_seen_at: last_seen_at},
+      pc.update({contact: {last_seen_at: last_seen_at, last_seen_at_source: "attendance"},
                        ignore_validation: true,
                        skip_broadcasts: true,
                        username: last_attendance.time_slot.padma_uid,
