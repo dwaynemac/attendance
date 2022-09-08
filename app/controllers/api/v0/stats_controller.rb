@@ -14,7 +14,7 @@ class Api::V0::StatsController < Api::V0::ApiController
       ret[c.padma_id] = {}
       ret[c.padma_id]["total"] = c.attendance_total.to_i
       @stats.distribution.each do |u|
-        ret[c.padma_id][u[:sql_username]] = c.send("sum_#{u[:sql_username]}")/c.attendance_total
+        ret[c.padma_id][u[:username]] = c.send("sum_#{u[:sql_username]}")/c.attendance_total
       end
     end
 
