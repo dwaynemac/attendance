@@ -66,7 +66,7 @@ gem 'cancan'
 gem 'logical_model', '0.7.1' 
 gem 'activity_stream_client', '0.1.0'
 gem 'contacts_client', '~> 0.1.0'
-gem 'accounts_client', '0.3.0'
+gem 'accounts_client', '0.3.3'
 gem 'messaging_client', '~> 0.3.0'
 
 #gem 'typhoeus', '0.6.4'
