@@ -21,13 +21,14 @@
     dist_array << to_current_encoding(number_with_precision(c.attendance_total || 0, 
                                                             precision: 0))
     
-    @distribution.map{|u| u[:sql_username]}.each do |d|
-  	  	dist_array << to_current_encoding(number_with_precision(c.send("sum_#{d}"), 
+    @distribution.each do |d|
+        sum_method = d.is_a?(Hash)? "sum_#{d[:sql_username]}" : "sum_#{d}"
+  	  	dist_array << to_current_encoding(number_with_precision(c.send(sum_method), 
                                                                 precision: 0))
 
         attendance_average = 0
         if c.attendance_total > 0
-          attendance_average = c.send("sum_#{d}")/c.attendance_total.to_f*100
+          attendance_average = c.send(sum_method)/c.attendance_total.to_f*100
         end
 
   	  	dist_array << to_current_encoding(
