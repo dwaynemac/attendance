@@ -13,11 +13,10 @@ class PadmaCrmApi
     }
     body = {
     }
-    if options[:account_name]
-      params[:account_name] = options.delete(:account_name)
-    end
-    if options[:ignore_validation]
-      params[:ignore_validation] = options.delete(:ignore_validation)
+    %i[account_name skip_broadcasts ignore_validation].each do |remote_option|
+      if options[remote_option]
+        params[remote_option] = options.delete(remote_option)
+      end
     end
     params[:contact] = attributes
     res = Typhoeus.put("#{crm_url}/contacts_api/v0/contacts/#{padma_id}", body: body, params: params)
