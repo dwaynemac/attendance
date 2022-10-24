@@ -25,7 +25,8 @@ class Api::V0::AttendanceContactsController < Api::V0::ApiController
       unless (@attendance_contact = AttendanceContact.where(attendance_id: @attendance.id, contact_id: @contact.id).first)
         @attendance_contact = AttendanceContact.create!(
           attendance_id: @attendance.id,
-          contact_id: @contact.id
+          contact_id: @contact.id,
+          source: "api"
         )
       end
 
