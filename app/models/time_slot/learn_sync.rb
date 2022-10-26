@@ -8,16 +8,21 @@ module TimeSlot::LearnSync
   end
 
   def get_from_learn
-    res = api.get(
-      "/posts.json",
-      {
-        scope: "all",
-        q: {
-          padma_time_slot_id_eq: id,
+    if defined? @got_from_learn
+      @got_from_learn
+    else
+      res = api.get(
+        "/posts.json",
+        {
+          scope: "all",
+          q: {
+            padma_time_slot_id_eq: id,
+          }
         }
-      }
-    )
-    res.try :first
+      )
+      @got_from_learn = res.try :first
+    end
+
   end
 
   def sync_to_learn

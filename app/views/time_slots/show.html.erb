@@ -3,6 +3,9 @@
 <% end -%>
 <%- breadcrum t("time_slots.show.title") -%>
 <div class='timeslot-container'>
+  <% unless @time_slot.get_from_learn %>
+    <%= link_to "Criar no Learn", sync_to_learn_time_slot_path(@time_slot), class: "btn btn-primary", style: "margin-bottom: 25px;" %>
+  <% end %>
   <header class='timeslot-head'>
     <legend>
       <%= @time_slot.name %> (<%= @time_slot.start_at.strftime('%H:%M') %> - <%= @time_slot.end_at.strftime('%H:%M') %>)
