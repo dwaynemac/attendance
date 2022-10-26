@@ -1,4 +1,5 @@
 class TimeSlot < ActiveRecord::Base
+  include LearnSync
 
   default_scope { where("deleted= :false OR deleted IS NULL", false: false).order('name ASC') }
 
