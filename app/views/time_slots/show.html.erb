@@ -3,7 +3,9 @@
 <% end -%>
 <%- breadcrum t("time_slots.show.title") -%>
 <div class='timeslot-container'>
-  <% unless @time_slot.get_from_learn %>
+  <% if @time_slot.get_from_learn %>
+    <%= link_to "Ver no Learn", "https://learn.derose.app/admin/in_person_lives/#{@time_slot.get_from_learn["id"]}", style: "margin-bottom: 25px;" %>
+  <% else %>
     <%= link_to "Criar no Learn", sync_to_learn_time_slot_path(@time_slot), class: "btn btn-primary", style: "margin-bottom: 25px;" %>
   <% end %>
   <header class='timeslot-head'>
