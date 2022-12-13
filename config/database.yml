@@ -17,3 +17,13 @@ test:
   database: attendance_test
   pool: 5
   timeout: 5000
+
+production:
+  adapter: postgresql
+  database: <%= ENV["PGDATABASE"] %>
+  pool: 5
+  timeout: 5000
+  user: <%= ENV["PGUSER"] %>
+  password: <%= ENV["PGPASSWORD"] %>
+  host: <%= ENV["PGHOST"] %>
+  port: <%= ENV["PGPORT"] %>
