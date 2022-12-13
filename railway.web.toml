@@ -1,0 +1,7 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "bundle exec rails s -p $PORT"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 5

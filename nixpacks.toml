@@ -1,0 +1,10 @@
+providers = ["ruby"]
+
+[phases.setup]
+#aptPkgs = ["...", "shared-mime-info"]
+
+[phases.install]
+cmds = ["bundle install --without development:test:heroku"]
+
+[phases.build]
+cmds = ["mkdir -p tmp/pids", "bundle exec rake db:migrate"]

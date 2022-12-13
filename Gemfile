@@ -129,7 +129,4 @@ end
 
 gem 'appsignal', '~> 2.8'
 
-group :production do
-  gem 'rails_12factor'
-  gem 'le' # logentries
-end
+gem "clockwork"
