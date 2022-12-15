@@ -2,6 +2,6 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "bundle exec rails s -p $PORT"
+startCommand = "bundle exec puma -C config/puma.rb"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 5
