@@ -11,7 +11,11 @@ class StatsController < ApplicationController
   		builder_clazz = TimeSlotStatsSQLBuilder
   	end
     @stats = builder_clazz.new stats_attributes
-    @contacts = Contact.find_by_sql(@stats.sql)
+    
+    # @stats.sql already orders by name, but there is a problem in production with latin characters
+    # sort_by is needed to correctly sort names with latin characters
+    # maybe on postgres update this can be discarded and SQL order used 
+    @contacts = Contact.find_by_sql(@stats.sql).sort_by{|c| c.name.parameterize }
 
     if @stats.include_former_students
       @contacts.reject!{|c| c.status == 'former_student' && c.attendance_total == 0 }
