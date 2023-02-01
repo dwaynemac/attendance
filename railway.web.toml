@@ -1,0 +1,7 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "bundle exec puma -C config/puma.rb"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 5

@@ -22,6 +22,15 @@ class TimeSlotsController < ApplicationController
     end
   end
 
+  def sync_to_learn
+    @time_slot = TimeSlot.find(params[:id])
+    if @time_slot.sync_to_learn
+      redirect_to @time_slot
+    else
+      redirect_to @time_slot
+    end
+  end
+
   def vacancies
     @time_slots = @time_slots.where(cultural_activity: false)
   end

@@ -75,7 +75,6 @@ gem 'fog', '~> 1.38.0'
 
 gem "daemons"
 gem 'delayed_job_active_record' # must be declared after 'protected_attributes' gem
-gem "workless", "~> 2.2.0"
 
 gem 'json', '1.8.6'
 # Use ActiveModel has_secure_password
@@ -129,7 +128,4 @@ end
 
 gem 'appsignal', '~> 2.8'
 
-group :production do
-  gem 'rails_12factor'
-  gem 'le' # logentries
-end
+gem "clockwork"

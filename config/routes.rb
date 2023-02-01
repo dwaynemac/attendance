@@ -28,6 +28,9 @@ Assistance::Application.routes.draw do
     collection do
       get :vacancies
     end
+    member do
+      get :sync_to_learn
+    end
   end
   resources :attendances
   resources :attendance_contacts, only: [:index]
