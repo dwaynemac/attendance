@@ -1,6 +1,16 @@
 <%- breadcrum t("time_slots.index.title") -%>
 <% content_for :title do t("time_slots.index.title") end -%>
 
+<div class="alert alert-info">
+  <p>
+    No <b>Learn DeROSE</b> tem uma app nova para marcar presenças mas com check-ins. Pode ver <%= link_to "aquí", "https://learn.derose.app/teacher_panel", target: "_blank" %>.
+    <br>
+    Recomendamos você passar a usar os check-ins do Learn no lugar das presenças. Fica bem mais prático e você tem mais opções nos relatórios. Você pode incluir ou não check-ins em videos. Você pode ver participação de seus alunos em aulas ou conteúdos de outras escolas. E muito mais!
+    <br>
+    Você pode fazer chamada de forma rápida com o app do Instrutor do Learn ou ainda melhor, ter os check-ins cadastrados de forma AUTOMÁTICA 😃. Veja mais <%= link_to "aquí", "https://deroseapp.notion.site/Check-ins-Presen-as-aprimoradas-e0175e32433149d88ba6aa8e475a581a", target: "_blank" %>
+  </p>
+</div>
+
 <div id="search-field-container" class='margin-bottom-20'>
   <input id="timeslots-filter" class='form-control' type='text' placeholder='<%= t('.filter_timeslots') %>' />
 </div>
