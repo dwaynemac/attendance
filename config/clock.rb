@@ -16,4 +16,5 @@ module Clockwork
   end
 
   every(10.minutes, "rake synchronize", skip_first_run: true)
+  every(1.day, "rake update_last_seens", skip_first_run: true)
 end
