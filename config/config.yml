@@ -18,7 +18,7 @@ test:
 production:
   <<: *defaults
   crm-url: https://crm.padm.am
-  accounts-url: http://accounts.padm.am
+  accounts-url: https://accounts.padm.am
   overmind-url: http://statistics.padm.am
   mailing-url: http://padma-mailing.herokuapp.com
   fnz-url: http://fnz.herokuapp.com

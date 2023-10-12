@@ -8,9 +8,7 @@ end
 
 module Accounts
   API_KEY = ENV['accounts_key'] || CONFIG['accounts_key']
-  if ENV['C9_USER']
-    HOST = APP_CONFIG['accounts-url'].gsub("http://",'')
-  end
+  HOST = APP_CONFIG['accounts-url'].gsub("https://",'')
 end
 
 module Contacts
