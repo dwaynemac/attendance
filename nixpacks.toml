@@ -7,4 +7,4 @@ providers = ["ruby"]
 cmds = ["bundle install --without development:test:heroku"]
 
 [phases.build]
-cmds = ["mkdir -p tmp/pids", "bundle exec rake db:migrate"]
+cmds = ["mkdir -p tmp/pids"]
