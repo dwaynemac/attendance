@@ -13,7 +13,7 @@ class PadmaCrmApi
     }
     body = {
     }
-    %i[account_name skip_broadcasts ignore_validation].each do |remote_option|
+    %i[account_name skip_broadcasts ignore_validation async].each do |remote_option|
       if options[remote_option]
         params[remote_option] = options.delete(remote_option)
       end
