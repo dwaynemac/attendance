@@ -12,3 +12,6 @@
     </div>
   <% end %>
 <% end %>
+<% unless current_user.current_account.padma.try(:attendance_enabled) %>
+  <div class="alert alert-danger">--- Attendance disabled ---</div>
+<% end %>

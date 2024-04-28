@@ -5,15 +5,17 @@ class LastSeenUpdater < ActiveRecord::Base
       Rails.logger.debug "Could not find students with account name: #{account_name}"
     else
       account = Account.find_by(name: account_name)
-      st.each do |student|
-        if (attendance = last_attendance_for_contact(student, account))
-          student.update({
-            contact: {last_seen_at: attendance.attendance_on},
-            ignore_validation: true,
-            async: true,
-            username: attendance.time_slot.nil? ? account.usernames.first : attendance.time_slot.padma_uid,
-            account_name: attendance.account.name
-          })
+      if account.padma.try(:attendance_enabled)
+        st.each do |student|
+          if (attendance = last_attendance_for_contact(student, account))
+            student.update({
+              contact: {last_seen_at: attendance.attendance_on},
+              ignore_validation: true,
+              async: true,
+              username: attendance.time_slot.nil? ? account.usernames.first : attendance.time_slot.padma_uid,
+              account_name: attendance.account.name
+            })
+          end
         end
       end
     end
