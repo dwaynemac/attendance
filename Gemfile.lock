@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.3.6)
-    accounts_client (0.3.3)
+    accounts_client (0.3.5)
       gravtastic
       logical_model (>= 0.7.1)
       railties (>= 3.1)
@@ -503,7 +503,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  accounts_client (= 0.3.3)
+  accounts_client (= 0.3.5)
   activerecord-session_store
   activity_stream_client (= 0.1.0)
   angularjs-rails
