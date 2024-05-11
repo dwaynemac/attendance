@@ -54,7 +54,11 @@ class ApplicationController < ActionController::Base
   # CAS user must have a PADMA account
   def require_padma_account
     if signed_in?
-      unless current_user.padma_enabled?
+      if current_user.padma_enabled?
+        unless current_user.current_account.padma.attendance_enabled
+          redirect_to APP_CONFIG['crm-url']
+        end
+      else
         render text: 'Access allowed to PADMA users only - Think this is a mistake? Maybe PADMA Authentication service is down.'
       end
     end
