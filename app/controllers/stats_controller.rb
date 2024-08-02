@@ -27,9 +27,8 @@ class StatsController < ApplicationController
     #  select: [:local_teacher],
     #  account_name: current_user.current_account.name
     @contacts.in_groups_of(10) do |group|
-      @teachers += CrmLegacyContact.search ids: group.compact.map(&:padma_id),
-        select: [:local_teacher],
-        account_name: current_user.current_account.name
+      @teachers += CrmLegacyContact.search(ids: group.compact.map(&:padma_id),
+                                           account_name: current_user.current_account.name).map{|c| c.local_teacher}
     end
 
     @distribution = @stats.distribution

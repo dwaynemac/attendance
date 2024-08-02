@@ -9,7 +9,7 @@ class Api::V0::TimeSlotsController < Api::V0::ApiController
   # @param account_name filters TimeSlots by account
   # @param include_recurrent_contacts
   def index
-    @scope = @scope.where(params[:where])
+    @scope = @scope.where(params[:where].try(:to_unsafe_h))
     @time_slots = @scope.includes(:account, :contacts).all
     render json: {
       collection: api_json_for_collection(@time_slots,
