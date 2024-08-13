@@ -19,7 +19,7 @@ module AttendancesHelper
   end
 
   def timeslot_description(timeslot, attendance=nil)
-	  "#{timeslot_period(timeslot)} (#{attendance.present? ? attendance.username : timeslot.padma_uid})"
+    "#{timeslot_period(timeslot)} (#{attendance.present? ? User.full_name_for(attendance.username) : User.full_name_for(timeslot.padma_uid)})"
   end
 
   def timeslot_period(timeslot)

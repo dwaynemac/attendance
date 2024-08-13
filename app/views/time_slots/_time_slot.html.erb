@@ -5,7 +5,7 @@
       <p>
         <%= time_slot.time_slot_days %><br/>
         <%= timeslot_period(time_slot) %><br/>
-        <%= time_slot.padma_uid %>
+        <%= User.full_name_for(time_slot.padma_uid) %>
       </p>
       
       <span class='results-count-attendances' tabindex='0' data-toggle='popover' data-container='body' data-placement='bottom' data-html='true' data-trigger='focus' data-content='

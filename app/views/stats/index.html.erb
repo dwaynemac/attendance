@@ -99,7 +99,7 @@
         <% @contacts.each do |contact| %>
         	<tr>
         	  <td><%= link_to contact.name, contact_path(:id => contact.padma_id) %></td>
-            <td><%= @teachers.detect{ |c| c.id == contact.padma_id }.try :local_teacher %></td>
+            <td><%= User.full_name_for(@teachers.detect{ |c| c.id == contact.padma_id }.try :local_teacher) %></td>
         	  <td><%= number_with_precision(contact.attendance_total || 0, precision: 0) %></td>
             <% @distribution.each do |u| %>
               <% sum_method = u.is_a?(Hash) ? "sum_#{u[:sql_username]}" : "sum_#{u}" %>

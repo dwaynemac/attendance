@@ -34,7 +34,10 @@
       <div class="form-group">
         <%= f.label :padma_uid, :class => 'control-label col-xs-5 col-md-4' %>
         <div class="col-xs-7 col-md-8 instrutor_select">
-          <%= f.select :padma_uid, current_user.current_account.usernames, {}, class: 'selectpicker' %>
+          <%= f.select :padma_uid,
+            current_user.current_account.usernames.map{|u| [User.full_name_for(u),u]}, 
+            {},
+            class: 'selectpicker' %>
         </div>
       </div>
 
