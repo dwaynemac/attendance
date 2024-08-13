@@ -17,7 +17,7 @@
 
     dist_array << to_current_encoding(c.name)
     dist_array << to_current_encoding(
-      @teachers.select{ |pc| pc.id == c.padma_id }.first.try :local_teacher)
+      User.full_name_for(@teachers.select{ |pc| pc.id == c.padma_id }.first.try :local_teacher))
     dist_array << to_current_encoding(number_with_precision(c.attendance_total || 0, 
                                                             precision: 0))
     
