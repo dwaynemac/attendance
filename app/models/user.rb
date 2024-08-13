@@ -31,4 +31,12 @@ class User < ActiveRecord::Base
     CrmLegacyContact.paginate(select: [:first_name, :last_name], where: {local_status: :student, local_teacher: self.padma_id}, username: self.padma_id, account_name: self.current_account.padma_id)
   end
 
+  def self.full_name_for(username)
+    return "" if username.blank?
+
+    Rails.cache.fetch("user/#{username}/full_name", expires_in: 1.day) do
+      find_by(username: username).try(:padma).try(:full_name).presence || username
+    end
+  end
+
 end
