@@ -23,7 +23,16 @@
         <div class='form-group'>
           <label class='control-label'><%= t('attendances.form.username') %></label>
           <div class='select'>
-            <%= f.select :username, options_for_select(current_user.current_account.usernames, :selected => @attendance.username || current_user.username), {:prompt => t('attendances.form.select_username')},{:class => 'form-control'} %>
+            <%= f.select :username,
+              options_for_select(
+                current_user.current_account.usernames.map{|u| [User.full_name_for(u),u]},
+                :selected => @attendance.username || current_user.username),
+                {
+                  :prompt => t('attendances.form.select_username')
+                },
+                {
+                  :class => 'form-control'
+                } %>
           </div>
         </div>
 
@@ -53,7 +62,7 @@
         <div class='form-group'>
           <label class='control-label'><%= t('attendances.form.select_contacts') %>:</label>
           <div class='select'>
-            <%= select_tag :padma_contacts_select, options_for_select({t('attendances.form.recurrents_contacts') => :recurrent_contacts, t('attendances.form.all_contacts') => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| [t('attendances.form.students_of', teacher: username), username].flatten}]) ), {:class => 'form-control'} %>
+            <%= select_tag :padma_contacts_select, options_for_select({t('attendances.form.recurrents_contacts') => :recurrent_contacts, t('attendances.form.all_contacts') => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| [t('attendances.form.students_of', teacher: User.full_name_for(username)), username].flatten}]) ), {:class => 'form-control'} %>
           </div>
           <span id="loader"><%= image_tag("ajax-loader.gif") %></span>
         </div>
