@@ -68,7 +68,7 @@
         </ul>
         <div class='text-center'>
           <div class='select'>
-            <%= select_tag :padma_contacts_select, options_for_select({t('attendances.form.recurrents_contacts') => :recurrent_contacts, t('attendances.form.all_contacts') => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| [t('attendances.form.students_of', teacher: username), username].flatten}]) ), {:class => 'selectpicker show-tick show-menu-arrow form-control'} %>
+            <%= select_tag :padma_contacts_select, options_for_select({t('attendances.form.recurrents_contacts') => :recurrent_contacts, t('attendances.form.all_contacts') => :all_students}.merge(Hash[current_user.current_account.usernames.map {|username| [t('attendances.form.students_of', teacher: User.full_name_for(username)), username].flatten}]) ), {:class => 'selectpicker show-tick show-menu-arrow form-control'} %>
           </div>
           <span id="loader"><%= image_tag("ajax-loader.gif") %></span>
         </div>
