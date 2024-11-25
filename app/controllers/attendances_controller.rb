@@ -2,6 +2,8 @@ class AttendancesController < ApplicationController
   before_action :load_attendance, only: [:create, :update, :new]
   load_and_authorize_resource
 
+  rescue_from ActionController::InvalidAuthenticityToken, with: :handle_invalid_authenticity_token
+
   def index
     @day_span = 7
 
@@ -109,6 +111,14 @@ class AttendancesController < ApplicationController
   end
   
   private
+
+  def handle_invalid_authenticity_token
+    Rails.logger.error "InvalidAuthenticityToken error raised"
+    Rails.logger.error "CSRF token: #{form_authenticity_token}"
+    Rails.logger.error "Session CSRF Token: #{session[:_csrf_token]}"
+
+    redirect_back fallback_location: root_path, alert: "Something went wrong. Please try again"
+  end
 
   def attendance_params_for_update
     permitted_params = attendance_params
