@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   def self.full_name_for(username)
     return "" if username.blank?
 
-    Rails.cache.fetch("user/#{username}/full_name", expires_in: 1.day) do
+    Rails.cache.fetch("user/#{username}/full_name", expires_in: 7.days) do
       find_by(username: username).try(:padma).try(:full_name).presence || username
     end
   end
