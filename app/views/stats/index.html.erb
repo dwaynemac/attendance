@@ -91,7 +91,7 @@
           <th><%= t('stats.table.instructor') %></th>
       	  <th><%= t('stats.table.total')%></th>
       	  <% @distribution_names.each do |name| %>
-      	  	<th colspan="2"><%= name %></th>
+      	  	<th colspan="2"><%= User.full_name_for(name) %></th>
       	  <% end %>
       	</tr>
       </thead>
