@@ -2,6 +2,6 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "bundle exec rake db:migrate && bundle exec puma -C config/puma.rb"
+startCommand = "bundle exec rake assets:precompile && bundle exec rake db:migrate && bundle exec puma -C config/puma.rb"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 5
