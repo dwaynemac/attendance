@@ -88,7 +88,7 @@ gem 'json', '1.8.6'
 
 # Use debugger
 
-gem 'rake', '< 12'
+gem 'rake', '< 13'
 gem 'pg', '0.21'
 
 group :test, :development do
