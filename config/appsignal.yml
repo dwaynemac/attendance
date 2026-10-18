@@ -7,6 +7,10 @@ default: &defaults
 
   ignore_actions:
     - PingController#ping
+    # High-volume actions (>40K requests in 30 days, reviewed 2026-10-18).
+    # Ignored actions do not report performance data or exceptions.
+    - Api::V0::ContactsController#sync_from_crm
+    - FetchCrmContactJob#perform
 
   # The cuttoff point in ms above which a request is considered slow, default is 200
   # slow_request_threshold: 200
