@@ -9,6 +9,10 @@ class Api::V0::ApiController < ActionController::Base
 
   APP_KEY = ENV['app_key']
 
+  def self.valid_app_key?(key)
+    key.present? && [APP_KEY, ENV['app_key_next']].include?(key)
+  end
+
   before_filter :require_app_key
 
   def current_ability
@@ -22,7 +26,7 @@ class Api::V0::ApiController < ActionController::Base
   private
 
   def require_app_key
-    if params[:app_key].blank? || params[:app_key] != APP_KEY
+    unless self.class.valid_app_key?(params[:app_key])
       render :text => "wrong app key", :status => 401
     end
   end

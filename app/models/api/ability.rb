@@ -3,11 +3,8 @@ class Api::Ability
 
   def initialize(app_key,account_name=nil)
     cannot(:manage, :all)
-    unless app_key.blank?
-      case app_key
-      when Api::V0::ApiController::APP_KEY
-        can(:manage,:all)
-      end
+    if Api::V0::ApiController.valid_app_key?(app_key)
+      can(:manage,:all)
     end
   end
                  
